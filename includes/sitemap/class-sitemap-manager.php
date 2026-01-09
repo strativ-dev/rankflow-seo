@@ -141,19 +141,20 @@ class AI_SEO_Pro_Sitemap_Manager
 			'top'
 		);
 
+		// Taxonomy sitemaps.
+		add_rewrite_rule(
+			'^([a-zA-Z0-9_-]+)-taxonomy-sitemap([0-9]*)\.xml$',
+			'index.php?ai_seo_sitemap=taxonomy&ai_seo_sitemap_type=$matches[1]&ai_seo_sitemap_page=$matches[2]',
+			'top'
+		);
+
 		// Post type sitemaps.
 		add_rewrite_rule(
-			'^([a-z0-9_-]+)-sitemap([0-9]*)\.xml$',
+			'^((?!taxonomy)[a-z0-9_-]+)-sitemap([0-9]*)\.xml$',
 			'index.php?ai_seo_sitemap=post_type&ai_seo_sitemap_type=$matches[1]&ai_seo_sitemap_page=$matches[2]',
 			'top'
 		);
 
-		// Taxonomy sitemaps.
-		add_rewrite_rule(
-			'^([a-z0-9_-]+)-taxonomy-sitemap([0-9]*)\.xml$',
-			'index.php?ai_seo_sitemap=taxonomy&ai_seo_sitemap_type=$matches[1]&ai_seo_sitemap_page=$matches[2]',
-			'top'
-		);
 
 		// Author sitemap.
 		add_rewrite_rule(
@@ -283,7 +284,7 @@ class AI_SEO_Pro_Sitemap_Manager
 			}
 		}
 
-		// Get enabled taxonomies.
+		// Get enabled taxonomies - FIXED: Added lastmod inside the loop
 		if ($this->is_taxonomy_sitemap_enabled()) {
 			$taxonomies = $this->get_enabled_taxonomies();
 
@@ -298,9 +299,16 @@ class AI_SEO_Pro_Sitemap_Manager
 
 				for ($page = 1; $page <= $pages; $page++) {
 					$page_suffix = ($page > 1) ? $page : '';
+					$lastmod = $this->get_taxonomy_lastmod($taxonomy); // Get lastmod for THIS taxonomy
 
 					echo "\t<sitemap>\n";
 					echo "\t\t<loc>" . esc_url(home_url($taxonomy . '-taxonomy-sitemap' . $page_suffix . '.xml')) . "</loc>\n";
+
+					// Add lastmod if available
+					if ($lastmod) {
+						echo "\t\t<lastmod>" . esc_html($lastmod) . "</lastmod>\n";
+					}
+
 					echo "\t</sitemap>\n";
 				}
 			}
@@ -483,9 +491,11 @@ class AI_SEO_Pro_Sitemap_Manager
 	private function render_taxonomy_sitemap($taxonomy, $page = 1)
 	{
 		// Validate taxonomy.
-		if (!taxonomy_exists($taxonomy) || !in_array($taxonomy, $this->get_enabled_taxonomies(), true)) {
-			status_header(404);
-			return;
+		if (
+			!taxonomy_exists($taxonomy)
+			|| !in_array($taxonomy, $this->get_enabled_taxonomies(), true)
+		) {
+			wp_die('', '', array('response' => 404));
 		}
 
 		$page = max(1, $page);
@@ -797,23 +807,47 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	public function get_enabled_taxonomies()
 	{
-		$saved = get_option('ai_seo_pro_sitemap_taxonomies', array());
+		$saved = get_option('ai_seo_pro_sitemap_taxonomies', null);
 
-		if (!empty($saved)) {
-			// Filter out excluded taxonomies from saved settings.
-			return array_values(array_diff($saved, $this->excluded_taxonomies));
+		// Always detect current public taxonomies
+		$public = get_taxonomies(
+			array('public' => true),
+			'names'
+		);
+
+		// Remove excluded taxonomies
+		$public = array_diff($public, $this->excluded_taxonomies);
+
+		/**
+		 * CASE 1:
+		 * Option does NOT exist yet
+		 * → Seed defaults (IMPORTANT)
+		 */
+		if ($saved === null) {
+			update_option(
+				'ai_seo_pro_sitemap_taxonomies',
+				array_values($public)
+			);
+			return array_values($public);
 		}
 
-		// Default to public taxonomies.
-		$taxonomies = get_taxonomies(array('public' => true), 'names');
-
-		// Remove excluded taxonomies.
-		foreach ($this->excluded_taxonomies as $excluded) {
-			unset($taxonomies[$excluded]);
+		/**
+		 * CASE 2:
+		 * Option exists but empty
+		 * → User disabled ALL taxonomies
+		 */
+		if (empty($saved) || !is_array($saved)) {
+			return array();
 		}
 
-		return array_values($taxonomies);
+		/**
+		 * CASE 3:
+		 * Option exists and user-selected
+		 * → STRICT allow-list (disable works!)
+		 */
+		return array_values(array_intersect($public, $saved));
 	}
+
 
 	/**
 	 * Get entries per page
@@ -904,6 +938,38 @@ class AI_SEO_Pro_Sitemap_Manager
 				ORDER BY post_modified_gmt DESC 
 				LIMIT 1",
 				$post_type
+			)
+		);
+
+		if ($date) {
+			return gmdate('c', strtotime($date));
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get taxonomy last modified date
+	 *
+	 * @param string $taxonomy Taxonomy name.
+	 * @return string|false
+	 */
+	private function get_taxonomy_lastmod($taxonomy)
+	{
+		global $wpdb;
+
+		// Get latest post from this taxonomy
+		$date = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT p.post_modified_gmt 
+            FROM {$wpdb->posts} p
+            INNER JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_ID
+            INNER JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+            WHERE tt.taxonomy = %s 
+            AND p.post_status = 'publish'
+            ORDER BY p.post_modified_gmt DESC 
+            LIMIT 1",
+				$taxonomy
 			)
 		);
 
