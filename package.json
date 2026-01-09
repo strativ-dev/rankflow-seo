@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/joyroynripen/ai-seo-pro.git"
+    "url": "https://github.com/strativ-dev/AI-SEO-Plugin.git"
   },
   "keywords": [
     "wordpress",
@@ -21,7 +21,7 @@
   "author": "Strativ AB",
   "license": "GPL-2.0-or-later",
   "bugs": {
-    "url": "https://github.com/joyroynripen/ai-seo-pro/issues"
+    "url": "https://github.com/strativ-dev/AI-SEO-Plugin/issues"
   },
-  "homepage": "https://github.com/joyroynripen/ai-seo-pro#readme"
+  "homepage": "https://github.com/strativ-dev/AI-SEO-Plugin#readme"
 }

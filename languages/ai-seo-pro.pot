@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AI SEO Pro 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/joyroynripen/ai-seo-pro/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/strativ-dev/AI-SEO-Plugin/issues\n"
 "POT-Creation-Date: 2025-12-11 00:00:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
