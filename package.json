@@ -1,0 +1,27 @@
+{
+  "name": "ai-seo-pro",
+  "version": "1.0.0",
+  "description": "Professional AI-powered SEO plugin for WordPress",
+  "main": "index.js",
+  "scripts": {
+    "test": "phpunit",
+    "build": "echo 'No build step required'",
+    "zip": "zip -r ai-seo-pro.zip . -x '*.git*' 'node_modules/*' 'vendor/*' 'tests/*'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joyroynripen/ai-seo-pro.git"
+  },
+  "keywords": [
+    "wordpress",
+    "seo",
+    "ai",
+    "plugin"
+  ],
+  "author": "Strativ AB",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/joyroynripen/ai-seo-pro/issues"
+  },
+  "homepage": "https://github.com/joyroynripen/ai-seo-pro#readme"
+}

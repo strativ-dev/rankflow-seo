@@ -1,0 +1,280 @@
+/**
+ * Settings page styles
+ *
+ * @package    AI_SEO_Pro
+ * @subpackage AI_SEO_Pro/assets/css
+ */
+
+.ai-seo-pro-settings {
+	max-width: 1200px;
+}
+
+/* Settings Header */
+.ai-seo-pro-settings h1 {
+	font-size: 28px;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+
+/* Tabs */
+.ai-seo-pro-settings .nav-tab-wrapper {
+	margin-bottom: 30px;
+	border-bottom: 1px solid #c3c4c7;
+}
+
+.ai-seo-pro-settings .nav-tab {
+	font-size: 15px;
+	font-weight: 500;
+	padding: 12px 20px;
+	margin-right: 5px;
+	color: #50575e;
+	text-decoration: none;
+	border: 1px solid transparent;
+	background: transparent;
+}
+
+.ai-seo-pro-settings .nav-tab:hover {
+	color: #2271b1;
+	background: #f6f7f7;
+}
+
+.ai-seo-pro-settings .nav-tab-active {
+	color: #2271b1;
+	border: 1px solid #c3c4c7;
+	border-bottom-color: #fff;
+	background: #fff;
+	margin-bottom: -1px;
+}
+
+/* Tab Content */
+.tab-content {
+	background: #fff;
+	padding: 30px;
+	border: 1px solid #c3c4c7;
+	border-top: none;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+/* Form Sections */
+.settings-section {
+	margin-bottom: 40px;
+}
+
+.settings-section h2 {
+	font-size: 20px;
+	margin-bottom: 15px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+/* API Key Field */
+.api-key-field {
+	position: relative;
+}
+
+.api-key-field input[type="password"],
+.api-key-field input[type="text"] {
+	padding-right: 80px;
+}
+
+.api-key-field .button {
+	position: absolute;
+	right: 5px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/* API Provider Instructions */
+.api-key-instructions {
+	background: #f9f9f9;
+	border-left: 4px solid #2271b1;
+	padding: 15px;
+	margin-top: 15px;
+}
+
+.provider-instructions {
+	list-style: none;
+	padding: 0;
+	margin: 10px 0 0 0;
+}
+
+.provider-instructions li {
+	padding: 8px 0;
+	font-size: 14px;
+}
+
+.provider-instructions strong {
+	color: #1d2327;
+}
+
+.provider-instructions a {
+	color: #2271b1;
+	text-decoration: none;
+}
+
+.provider-instructions a:hover {
+	text-decoration: underline;
+}
+
+/* Toggle Groups */
+.toggle-group {
+	background: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 15px;
+	margin-bottom: 15px;
+}
+
+.toggle-group label {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 0;
+	font-weight: 500;
+}
+
+.toggle-group input[type="checkbox"] {
+	width: 20px;
+	height: 20px;
+	margin: 0;
+}
+
+/* Post Type Checkboxes */
+.post-type-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 10px;
+}
+
+.post-type-list label {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.post-type-list label:hover {
+	border-color: #2271b1;
+	background: #f0f6fc;
+}
+
+.post-type-list input[type="checkbox"] {
+	margin: 0;
+}
+
+/* Danger Zone */
+.danger-zone {
+	background: #fff4f4;
+	border: 1px solid #dc3232;
+	border-radius: 4px;
+	padding: 20px;
+	margin-top: 30px;
+}
+
+.danger-zone h3 {
+	color: #dc3232;
+	margin-top: 0;
+}
+
+.danger-zone .button {
+	background: #dc3232;
+	color: #fff;
+	border-color: #dc3232;
+}
+
+.danger-zone .button:hover {
+	background: #a00;
+	border-color: #a00;
+}
+
+/* System Info */
+.system-info {
+	background: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 20px;
+}
+
+.system-info h3 {
+	margin-top: 0;
+}
+
+.system-info table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.system-info td {
+	padding: 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.system-info td:first-child {
+	font-weight: 600;
+	width: 40%;
+}
+
+.system-info tr:last-child td {
+	border-bottom: none;
+}
+
+/* Status Indicators */
+.status-indicator {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 13px;
+	padding: 3px 10px;
+	border-radius: 12px;
+}
+
+.status-indicator.active {
+	background: #d7f2d8;
+	color: #1e4620;
+}
+
+.status-indicator.inactive {
+	background: #f0f0f1;
+	color: #646970;
+}
+
+.status-indicator.error {
+	background: #ffe5e5;
+	color: #a94442;
+}
+
+/* Help Text */
+.help-text {
+	background: #e7f5fe;
+	border-left: 4px solid #2271b1;
+	padding: 15px;
+	margin: 15px 0;
+	font-size: 14px;
+}
+
+.help-text strong {
+	display: block;
+	margin-bottom: 8px;
+	color: #135e96;
+}
+
+/* Responsive */
+@media screen and (max-width: 782px) {
+	.tab-content {
+		padding: 15px;
+	}
+	
+	.post-type-list {
+		grid-template-columns: 1fr;
+	}
+	
+	.ai-seo-pro-settings .nav-tab {
+		display: block;
+		margin-bottom: 5px;
+	}
+}

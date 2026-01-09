@@ -1,0 +1,376 @@
+# Copyright (C) 2025 Strativ AB
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: AI SEO Pro 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/joyroynripen/ai-seo-pro/issues\n"
+"POT-Creation-Date: 2025-12-11 00:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Strativ AB\n"
+"Language-Team: LANGUAGE <nripendranath@strativ.se>\n"
+"X-Generator: WP-CLI\n"
+"X-Domain: ai-seo-pro\n"
+
+#: includes/class-activator.php
+msgid "AI SEO Pro requires PHP 7.4 or higher. Please upgrade your PHP version."
+msgstr ""
+
+#: includes/class-activator.php
+msgid "Plugin Activation Error"
+msgstr ""
+
+#: includes/class-activator.php
+msgid "AI SEO Pro requires WordPress 5.8 or higher. Please upgrade your WordPress installation."
+msgstr ""
+
+#: includes/core/class-readability.php
+msgid "5th grade (Very Easy)"
+msgstr ""
+
+#: includes/core/class-readability.php
+msgid "6th grade (Easy)"
+msgstr ""
+
+#: includes/core/class-readability.php
+msgid "7th grade (Fairly Easy)"
+msgstr ""
+
+#: includes/core/class-readability.php
+msgid "8th-9th grade (Standard)"
+msgstr ""
+
+#: includes/core/class-readability.php
+msgid "10th-12th grade (Fairly Difficult)"
+msgstr ""
+
+#: includes/core/class-readability.php
+msgid "College (Difficult)"
+msgstr ""
+
+#: includes/core/class-readability.php
+msgid "College Graduate (Very Difficult)"
+msgstr ""
+
+#. translators: %s: readability score number
+#: includes/core/class-readability.php
+msgid "Readability score is %s. Consider using shorter sentences and simpler words."
+msgstr ""
+
+#. translators: %s: average sentence length number
+#: includes/core/class-readability.php
+msgid "Average sentence length is %s words. Try to use shorter sentences (under 20 words)."
+msgstr ""
+
+#. translators: %d: number of long sentences
+#: includes/core/class-readability.php
+msgid "%d sentences are very long. Consider breaking them up."
+msgstr ""
+
+#: includes/core/class-readability.php
+msgid "Use more transition words to improve flow (however, therefore, furthermore, etc.)."
+msgstr ""
+
+#: includes/api/class-api-base.php
+msgid "Could not find JSON in API response. AI may have returned plain text instead of JSON."
+msgstr ""
+
+#: includes/api/class-api-base.php
+msgid "Invalid JSON in API response: "
+msgstr ""
+
+#: includes/api/class-api-base.php
+msgid "Missing required fields in API response: %s"
+msgstr ""
+
+#: includes/api/class-api-base.php
+msgid "API request failed with status code: %d"
+msgstr ""
+
+#: includes/api/class-anthropic-api.php
+msgid "Anthropic API key is not configured"
+msgstr ""
+
+#: includes/api/class-anthropic-api.php
+msgid "Content is empty"
+msgstr ""
+
+#: includes/api/class-anthropic-api.php
+msgid "Anthropic API request failed with status code: %d"
+msgstr ""
+
+#: includes/api/class-anthropic-api.php
+msgid "Failed to parse API response"
+msgstr ""
+
+#: includes/api/class-anthropic-api.php
+msgid "Invalid response structure from Anthropic"
+msgstr ""
+
+#: includes/api/class-anthropic-api.php
+msgid "No text content in API response"
+msgstr ""
+
+#: includes/api/class-gemini-api.php
+msgid "Google API key is not configured"
+msgstr ""
+
+#: includes/api/class-gemini-api.php
+msgid "Gemini API Error (%s): %s"
+msgstr ""
+
+#: includes/api/class-gemini-api.php
+msgid "Content was blocked by Gemini safety filters. Try different content."
+msgstr ""
+
+#: includes/api/class-gemini-api.php
+msgid "Invalid response from Google Gemini. Check WordPress error logs for details."
+msgstr ""
+
+#: includes/redirects/class-redirect-manager.php
+msgid "A redirect for this source URL already exists."
+msgstr ""
+
+#: includes/redirects/class-redirect-manager.php
+msgid "Failed to add redirect: "
+msgstr ""
+
+#: includes/redirects/class-redirect-manager.php
+msgid "Failed to update redirect."
+msgstr ""
+
+#: includes/redirects/class-redirect-manager.php
+msgid "Source URL is required."
+msgstr ""
+
+#: includes/redirects/class-redirect-manager.php
+msgid "Target URL is required."
+msgstr ""
+
+#: includes/redirects/class-redirect-manager.php
+msgid "Invalid redirect type. Must be 301, 302, 307, 410, or 451."
+msgstr ""
+
+#: includes/redirects/class-redirect-manager.php
+msgid "Invalid regular expression pattern."
+msgstr ""
+
+#: includes/redirects/class-redirect-handler.php
+msgid "This content has been permanently removed."
+msgstr ""
+
+#: includes/redirects/class-redirect-handler.php
+msgid "Gone"
+msgstr ""
+
+#: includes/redirects/class-redirect-handler.php
+msgid "This content is unavailable for legal reasons."
+msgstr ""
+
+#: includes/redirects/class-redirect-handler.php
+msgid "Unavailable For Legal Reasons"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "SEO"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Readability"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "SEO Score"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Generate with AI"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Generate Title"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Generate Description"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Generate Keywords"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Generate Now with AI"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Focus Keyphrase"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Enter focus keyphrase"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "SEO Title"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Enter SEO title"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Slug"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Meta Description"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Enter meta description"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Meta Keywords"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Enter keywords, comma separated"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Search Engine Preview"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "SEO Analysis"
+msgstr ""
+
+#. translators: %d: number of problems
+#: admin/views/metabox.php
+msgid "%d problem"
+msgid_plural "%d problems"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of good results
+#: admin/views/metabox.php
+msgid "%d good result"
+msgid_plural "%d good results"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/views/metabox.php
+msgid "Problems"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Good results"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Enter a focus keyphrase and save the post to see SEO analysis."
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Advanced Options"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Canonical, Robots, Social Tags"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Canonical URL"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Override the default canonical URL for this page"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Robots Meta"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Default (index, follow)"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "No Index"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "No Follow"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "No Index, No Follow"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Open Graph Title"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Leave blank to use SEO title"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Open Graph Description"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Leave blank to use meta description"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Twitter Title"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Twitter Description"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Readability Score"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Grade Level"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Readability Analysis"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Write some content to see readability analysis."
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Readability Tips"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Keep sentences under 20 words when possible"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Use transition words to improve flow"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Avoid passive voice"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Break up long paragraphs"
+msgstr ""
+
+#: admin/views/metabox.php
+msgid "Use simple, everyday words"
+msgstr ""

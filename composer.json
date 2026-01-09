@@ -1,0 +1,72 @@
+{
+  "name": "joyroy/ai-seo-pro",
+  "description": "Professional AI-powered SEO plugin for WordPress with advanced meta generation, content analysis, and schema markup",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Strativ AB",
+      "email": "nripendranath@strativ.se",
+      "homepage": "https://strativ.se/",
+      "role": "Developer"
+    }
+  ],
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "seo",
+    "ai",
+    "anthropic",
+    "meta-tags",
+    "schema",
+    "optimization"
+  ],
+  "homepage": "https://github.com/joyroynripen/ai-seo-pro",
+  "support": {
+    "issues": "https://github.com/joyroynripen/ai-seo-pro/issues",
+    "source": "https://github.com/joyroynripen/ai-seo-pro"
+  },
+  "require": {
+    "php": ">=7.4",
+    "composer/installers": "^1.0 || ^2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "wp-coding-standards/wpcs": "^2.3",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+    "phpcompatibility/php-compatibility": "^9.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "AI_SEO_Pro\\": "includes/"
+    },
+    "classmap": [
+      "includes/",
+      "admin/",
+      "public/"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AI_SEO_Pro\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "phpcs": "phpcs --standard=WordPress --extensions=php --ignore=*/vendor/*,*/node_modules/* .",
+    "phpcbf": "phpcbf --standard=WordPress --extensions=php --ignore=*/vendor/*,*/node_modules/* .",
+    "check-compatibility": "phpcs -p . --standard=PHPCompatibility --runtime-set testVersion 7.4-"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
