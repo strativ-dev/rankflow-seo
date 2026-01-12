@@ -9,6 +9,11 @@
  * @subpackage AI_SEO_Pro/includes
  * @author     Strativ AB
  */
+
+// Prevent direct access
+if (!defined('ABSPATH')) {
+	exit;
+}
 class AI_SEO_Pro_Loader
 {
 

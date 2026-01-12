@@ -11,12 +11,12 @@ if (!defined('ABSPATH')) {
 }
 
 // Get current settings for system status.
-$api_key = get_option('ai_seo_pro_api_key');
-$api_provider = get_option('ai_seo_pro_api_provider', 'anthropic');
-$sitemap_enabled = get_option('ai_seo_pro_sitemap_enabled', false);
-$schema_enabled = get_option('ai_seo_pro_schema_enabled', true);
-$robots_enabled = get_option('ai_seo_pro_robots_enabled', false);
-$schemas = get_option('ai_seo_pro_schemas', array());
+$ai_seo_pro_api_key = get_option('ai_seo_pro_api_key');
+$ai_seo_pro_api_provider = get_option('ai_seo_pro_api_provider', 'anthropic');
+$ai_seo_pro_sitemap_enabled = get_option('ai_seo_pro_sitemap_enabled', false);
+$ai_seo_pro_schema_enabled = get_option('ai_seo_pro_schema_enabled', true);
+$ai_seo_pro_robots_enabled = get_option('ai_seo_pro_robots_enabled', false);
+$ai_seo_pro_schemas = get_option('ai_seo_pro_schemas', array());
 ?>
 
 <div class="ai-seo-pro-help-sidebar">
@@ -71,8 +71,8 @@ $schemas = get_option('ai_seo_pro_schemas', array());
 			<tr>
 				<td><?php esc_html_e('AI Generation', 'ai-seo-pro'); ?></td>
 				<td>
-					<?php if (!empty($api_key)): ?>
-						<span class="status-on">✓ <?php echo esc_html(ucfirst($api_provider)); ?></span>
+					<?php if (!empty($ai_seo_pro_api_key)): ?>
+						<span class="status-on">✓ <?php echo esc_html(ucfirst($ai_seo_pro_api_provider)); ?></span>
 					<?php else: ?>
 						<span class="status-off">✗ <?php esc_html_e('Not configured', 'ai-seo-pro'); ?></span>
 					<?php endif; ?>
@@ -81,7 +81,7 @@ $schemas = get_option('ai_seo_pro_schemas', array());
 			<tr>
 				<td><?php esc_html_e('XML Sitemap', 'ai-seo-pro'); ?></td>
 				<td>
-					<?php if ($sitemap_enabled): ?>
+					<?php if ($ai_seo_pro_sitemap_enabled): ?>
 						<span class="status-on">✓ <?php esc_html_e('Enabled', 'ai-seo-pro'); ?></span>
 					<?php else: ?>
 						<span class="status-off">✗ <?php esc_html_e('Disabled', 'ai-seo-pro'); ?></span>
@@ -91,10 +91,10 @@ $schemas = get_option('ai_seo_pro_schemas', array());
 			<tr>
 				<td><?php esc_html_e('Schema Markup', 'ai-seo-pro'); ?></td>
 				<td>
-					<?php if ($schema_enabled && !empty($schemas)): ?>
-						<span class="status-on">✓ <?php echo esc_html(count($schemas)); ?>
+					<?php if ($ai_seo_pro_schema_enabled && !empty($ai_seo_pro_schemas)): ?>
+						<span class="status-on">✓ <?php echo esc_html(count($ai_seo_pro_schemas)); ?>
 							<?php esc_html_e('active', 'ai-seo-pro'); ?></span>
-					<?php elseif ($schema_enabled): ?>
+					<?php elseif ($ai_seo_pro_schema_enabled): ?>
 						<span class="status-warning">○ <?php esc_html_e('No schemas', 'ai-seo-pro'); ?></span>
 					<?php else: ?>
 						<span class="status-off">✗ <?php esc_html_e('Disabled', 'ai-seo-pro'); ?></span>
@@ -104,7 +104,7 @@ $schemas = get_option('ai_seo_pro_schemas', array());
 			<tr>
 				<td><?php esc_html_e('Robots.txt', 'ai-seo-pro'); ?></td>
 				<td>
-					<?php if ($robots_enabled): ?>
+					<?php if ($ai_seo_pro_robots_enabled): ?>
 						<span class="status-on">✓ <?php esc_html_e('Enabled', 'ai-seo-pro'); ?></span>
 					<?php else: ?>
 						<span class="status-off">✗ <?php esc_html_e('Disabled', 'ai-seo-pro'); ?></span>
@@ -137,7 +137,7 @@ $schemas = get_option('ai_seo_pro_schemas', array());
 	<div class="help-section">
 		<h3><?php esc_html_e('Your URLs', 'ai-seo-pro'); ?></h3>
 		<ul class="url-list">
-			<?php if ($sitemap_enabled): ?>
+			<?php if ($ai_seo_pro_sitemap_enabled): ?>
 				<li>
 					<span class="url-label"><?php esc_html_e('Sitemap:', 'ai-seo-pro'); ?></span>
 					<a href="<?php echo esc_url(home_url('/sitemap_index.xml')); ?>" target="_blank" rel="noopener">

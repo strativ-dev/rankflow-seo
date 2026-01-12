@@ -41,7 +41,7 @@ if ($ai_seo_pro_robots_enabled) {
 }
 
 // Define AI bots
-$ai_bots = array(
+$ai_seo_pro_ai_bots = array(
     'GPTBot' => 'OpenAI GPTBot',
     'ChatGPT-User' => 'ChatGPT User Agent',
     'Google-Extended' => 'Google Extended (AI Training)',
@@ -59,7 +59,7 @@ $ai_bots = array(
 );
 
 // Define bad bots
-$bad_bots = array(
+$ai_seo_pro_bad_bots = array(
     'AhrefsBot' => 'Ahrefs SEO Bot',
     'SemrushBot' => 'Semrush Bot',
     'MJ12bot' => 'Majestic SEO Bot',
@@ -185,14 +185,14 @@ $bad_bots = array(
                     </p>
 
                     <div class="bot-list ai-bot-list">
-                        <?php foreach ($ai_bots as $bot_key => $bot_name): ?>
+                        <?php foreach ($ai_seo_pro_ai_bots as $ai_seo_pro_bot_key => $ai_seo_pro_bot_name): ?>
                             <label class="ai-seo-pro-checkbox bot-checkbox">
                                 <input type="checkbox" 
                                        name="ai_seo_pro_robots_blocked_ai_bots[]" 
-                                       value="<?php echo esc_attr($bot_key); ?>"
+                                       value="<?php echo esc_attr($ai_seo_pro_bot_key); ?>"
                                        class="individual-ai-bot"
-                                       <?php checked(in_array($bot_key, $ai_seo_pro_blocked_ai_bots)); ?>>
-                                <span><?php echo esc_html($bot_name); ?> <code><?php echo esc_html($bot_key); ?></code></span>
+                                       <?php checked(in_array($ai_seo_pro_bot_key, $ai_seo_pro_blocked_ai_bots)); ?>>
+                                <span><?php echo esc_html($ai_seo_pro_bot_name); ?> <code><?php echo esc_html($ai_seo_pro_bot_key); ?></code></span>
                             </label>
                         <?php endforeach; ?>
                     </div>
@@ -213,14 +213,14 @@ $bad_bots = array(
                     </p>
 
                     <div class="bot-list bad-bot-list">
-                        <?php foreach ($bad_bots as $bot_key => $bot_name): ?>
+                        <?php foreach ($ai_seo_pro_bad_bots as $ai_seo_pro_bot_key => $ai_seo_pro_bot_name): ?>
                             <label class="ai-seo-pro-checkbox bot-checkbox">
                                 <input type="checkbox" 
                                        name="ai_seo_pro_robots_blocked_bad_bots[]" 
-                                       value="<?php echo esc_attr($bot_key); ?>"
+                                       value="<?php echo esc_attr($ai_seo_pro_bot_key); ?>"
                                        class="individual-bad-bot"
-                                       <?php checked(in_array($bot_key, $ai_seo_pro_blocked_bad_bots)); ?>>
-                                <span><?php echo esc_html($bot_name); ?> <code><?php echo esc_html($bot_key); ?></code></span>
+                                       <?php checked(in_array($ai_seo_pro_bot_key, $ai_seo_pro_blocked_bad_bots)); ?>>
+                                <span><?php echo esc_html($ai_seo_pro_bot_name); ?> <code><?php echo esc_html($ai_seo_pro_bot_key); ?></code></span>
                             </label>
                         <?php endforeach; ?>
                     </div>

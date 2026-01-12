@@ -9,6 +9,11 @@
  * @subpackage AI_SEO_Pro/includes
  * @author     Strativ AB
  */
+
+// Prevent direct access
+if (!defined('ABSPATH')) {
+	exit;
+}
 class AI_SEO_Pro
 {
 
@@ -42,7 +47,6 @@ class AI_SEO_Pro
 		$this->plugin_name = 'ai-seo-pro';
 
 		$this->load_dependencies();
-		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 	}
@@ -55,7 +59,6 @@ class AI_SEO_Pro
 
 		// Core classes
 		require_once AI_SEO_PRO_PLUGIN_DIR . 'includes/class-loader.php';
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'includes/class-i18n.php';
 
 		// Utility classes
 		require_once AI_SEO_PRO_PLUGIN_DIR . 'includes/utils/class-helper.php';
@@ -99,15 +102,6 @@ class AI_SEO_Pro
 		require_once AI_SEO_PRO_PLUGIN_DIR . 'public/class-schema-output.php';
 
 		$this->loader = new AI_SEO_Pro_Loader();
-	}
-
-	/**
-	 * Define the locale for this plugin for internationalization.
-	 */
-	private function set_locale()
-	{
-		$plugin_i18n = new AI_SEO_Pro_i18n();
-		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 	}
 
 	/**

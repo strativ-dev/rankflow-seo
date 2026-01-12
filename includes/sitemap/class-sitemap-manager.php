@@ -899,19 +899,23 @@ class AI_SEO_Pro_Sitemap_Manager
 	{
 		global $wpdb;
 
+		// Prepare the LIKE pattern with wildcards.
+		$noindex_pattern = '%' . $wpdb->esc_like('noindex') . '%';
+
 		// Count posts excluding those with noindex or exclude_sitemap.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom count with meta exclusions.
 		$count = $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(DISTINCT p.ID) 
-				FROM {$wpdb->posts} p
-				LEFT JOIN {$wpdb->postmeta} pm_robots ON (p.ID = pm_robots.post_id AND pm_robots.meta_key = '_ai_seo_robots')
-				LEFT JOIN {$wpdb->postmeta} pm_exclude ON (p.ID = pm_exclude.post_id AND pm_exclude.meta_key = '_ai_seo_exclude_sitemap')
-				WHERE p.post_type = %s 
-				AND p.post_status = 'publish'
-				AND (pm_robots.meta_value IS NULL OR pm_robots.meta_value NOT LIKE '%%noindex%%')
-				AND (pm_exclude.meta_value IS NULL OR pm_exclude.meta_value != '1')",
-				$post_type
+			FROM {$wpdb->posts} p
+			LEFT JOIN {$wpdb->postmeta} pm_robots ON (p.ID = pm_robots.post_id AND pm_robots.meta_key = '_ai_seo_robots')
+			LEFT JOIN {$wpdb->postmeta} pm_exclude ON (p.ID = pm_exclude.post_id AND pm_exclude.meta_key = '_ai_seo_exclude_sitemap')
+			WHERE p.post_type = %s 
+			AND p.post_status = 'publish'
+			AND (pm_robots.meta_value IS NULL OR pm_robots.meta_value NOT LIKE %s)
+			AND (pm_exclude.meta_value IS NULL OR pm_exclude.meta_value != '1')",
+				$post_type,
+				$noindex_pattern
 			)
 		);
 

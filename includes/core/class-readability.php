@@ -177,7 +177,7 @@ class AI_SEO_Pro_Readability
 		$paragraphs = array_filter(
 			$paragraphs,
 			function ($p) {
-				return trim(strip_tags($p)) !== '';
+				return trim(wp_strip_all_tags($p)) !== '';
 			}
 		);
 
