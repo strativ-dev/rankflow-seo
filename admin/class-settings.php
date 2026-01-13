@@ -479,6 +479,16 @@ class AI_SEO_Pro_Settings
 			)
 		);
 
+		register_setting(
+			'ai_seo_pro_site_connections',
+			'ai_seo_pro_gtm_id',
+			array(
+				'type' => 'string',
+				'sanitize_callback' => array($this, 'sanitize_gtm_id'),
+				'default' => '',
+			)
+		);
+
 		// Advanced settings.
 		register_setting(
 			'ai_seo_pro_advanced',
@@ -775,6 +785,34 @@ class AI_SEO_Pro_Settings
 	}
 
 	/**
+	 * Sanitize GTM Container ID.
+	 *
+	 * @param string $input The input value.
+	 * @return string Sanitized GTM ID with GTM- prefix.
+	 */
+	public function sanitize_gtm_id($input)
+	{
+		$input = trim($input);
+
+		if (empty($input)) {
+			return '';
+		}
+
+		if (preg_match('/GTM-([A-Z0-9]+)/i', $input, $matches)) {
+			return 'GTM-' . strtoupper(sanitize_text_field($matches[1]));
+		}
+
+		$input = preg_replace('/^GTM-/i', '', $input);
+		$clean_id = strtoupper(sanitize_text_field($input));
+
+		if (empty($clean_id)) {
+			return '';
+		}
+
+		return 'GTM-' . $clean_id;
+	}
+
+	/**
 	 * Output verification meta tags in frontend head.
 	 * Call this from wp_head hook.
 	 */
@@ -820,4 +858,47 @@ class AI_SEO_Pro_Settings
 			}
 		}
 	}
+
+	/**
+	 * Output Google Tag Manager head script.
+	 */
+	public static function output_gtm_head()
+	{
+		$gtm_id = get_option('ai_seo_pro_gtm_id', '');
+
+		if (empty($gtm_id) || is_admin()) {
+			return;
+		}
+		?>
+		<!-- Google Tag Manager -->
+		<script>(function (w, d, s, l, i) {
+				w[l] = w[l] || []; w[l].push({
+					'gtm.start':
+						new Date().getTime(), event: 'gtm.js'
+				}); var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+						'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+			})(window, document, 'script', 'dataLayer', '<?php echo esc_js($gtm_id); ?>');</script>
+		<!-- End Google Tag Manager -->
+		<?php
+	}
+
+	/**
+	 * Output Google Tag Manager noscript body tag.
+	 */
+	public static function output_gtm_body()
+	{
+		$gtm_id = get_option('ai_seo_pro_gtm_id', '');
+
+		if (empty($gtm_id) || is_admin()) {
+			return;
+		}
+		?>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo esc_attr($gtm_id); ?>" height="0"
+				width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		<?php
+	}
+
 }

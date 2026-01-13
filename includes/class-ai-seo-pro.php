@@ -165,6 +165,10 @@ class AI_SEO_Pro
 		// Site verification meta tags
 		$this->loader->add_action('wp_head', 'AI_SEO_Pro_Settings', 'output_verification_meta', 1);
 
+		// Google Tag Manager.
+		$this->loader->add_action('wp_head', 'AI_SEO_Pro_Settings', 'output_gtm_head', 1);
+		$this->loader->add_action('wp_body_open', 'AI_SEO_Pro_Settings', 'output_gtm_body', 1);
+
 		// Redirect handler
 		$redirect_handler = new AI_SEO_Pro_Redirect_Handler();
 		$redirect_handler->init();
