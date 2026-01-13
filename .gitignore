@@ -1,2 +1,21 @@
+# Composer
+/vendor/
+
+# Node modules (if using npm/webpack)
+/node_modules/
+
+# OS files
 .DS_Store
-.gitignore
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Logs
+*.log
+
+# Build files (if applicable)
+/dist/
+/build/
