@@ -201,7 +201,14 @@ class AI_SEO_Pro_Metabox
 
 			foreach ($meta_fields as $key => $field_name) {
 				if (isset($_POST[$field_name])) {
-					$value = $this->sanitize_meta_field(wp_unslash($_POST[$field_name]), $key);
+					// Sanitize directly based on type to satisfy security scanners
+					if ($key === 'description') {
+						$value = sanitize_textarea_field(wp_unslash($_POST[$field_name]));
+					} else {
+						// Handles title, keywords, focus_keyword
+						$value = sanitize_text_field(wp_unslash($_POST[$field_name]));
+					}
+
 					update_post_meta($post_id, '_' . $field_name, $value);
 				}
 			}
@@ -245,8 +252,8 @@ class AI_SEO_Pro_Metabox
 		check_ajax_referer('ai_seo_pro_nonce', 'nonce');
 
 		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
-		$title = isset($_POST['title']) ? wp_unslash($_POST['title']) : '';
-		$content = isset($_POST['content']) ? wp_unslash($_POST['content']) : '';
+		$title = isset($_POST['title']) ? sanitize_text_field(wp_unslash($_POST['title'])) : '';
+		$content = isset($_POST['content']) ? wp_kses_post(wp_unslash($_POST['content'])) : '';
 		$focus_keyword = isset($_POST['focus_keyword']) ? sanitize_text_field(wp_unslash($_POST['focus_keyword'])) : '';
 
 		// Get generation filters.
@@ -350,7 +357,7 @@ class AI_SEO_Pro_Metabox
 		check_ajax_referer('ai_seo_pro_nonce', 'nonce');
 
 		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
-		$content = isset($_POST['content']) ? wp_unslash($_POST['content']) : '';
+		$content = isset($_POST['content']) ? wp_kses_post(wp_unslash($_POST['content'])) : '';
 		$focus_keyword = isset($_POST['focus_keyword']) ? sanitize_text_field(wp_unslash($_POST['focus_keyword'])) : '';
 
 		if (!$post_id || !current_user_can('edit_post', $post_id)) {
@@ -400,8 +407,8 @@ class AI_SEO_Pro_Metabox
 		check_ajax_referer('ai_seo_pro_nonce', 'nonce');
 
 		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
-		$content = isset($_POST['content']) ? wp_unslash($_POST['content']) : '';
-		$title = isset($_POST['title']) ? wp_unslash($_POST['title']) : '';
+		$content = isset($_POST['content']) ? wp_kses_post(wp_unslash($_POST['content'])) : '';
+		$title = isset($_POST['title']) ? sanitize_text_field(wp_unslash($_POST['title'])) : '';
 		$focus_keyword = isset($_POST['focus_keyword']) ? sanitize_text_field(wp_unslash($_POST['focus_keyword'])) : '';
 		$meta_title = isset($_POST['meta_title']) ? sanitize_text_field(wp_unslash($_POST['meta_title'])) : '';
 		$meta_description = isset($_POST['meta_description']) ? sanitize_textarea_field(wp_unslash($_POST['meta_description'])) : '';

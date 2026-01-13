@@ -960,22 +960,32 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	private function get_taxonomy_lastmod($taxonomy)
 	{
-		global $wpdb;
+		// Check cache first.
+		$cache_key = 'lastmod_' . $taxonomy;
+		$cache_group = 'ai_seo_pro_sitemap';
+		$date = wp_cache_get($cache_key, $cache_group);
 
-		// Get latest post from this taxonomy
-		$date = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT p.post_modified_gmt 
-            FROM {$wpdb->posts} p
-            INNER JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_ID
-            INNER JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-            WHERE tt.taxonomy = %s 
-            AND p.post_status = 'publish'
-            ORDER BY p.post_modified_gmt DESC 
-            LIMIT 1",
-				$taxonomy
-			)
-		);
+		if (false === $date) {
+			global $wpdb;
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Optimized custom query for performance, cached below.
+			$date = $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT p.post_modified_gmt 
+                    FROM {$wpdb->posts} p
+                    INNER JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_ID
+                    INNER JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+                    WHERE tt.taxonomy = %s 
+                    AND p.post_status = 'publish'
+                    ORDER BY p.post_modified_gmt DESC 
+                    LIMIT 1",
+					$taxonomy
+				)
+			);
+
+			// Set cache for 1 hour.
+			wp_cache_set($cache_key, $date, $cache_group, HOUR_IN_SECONDS);
+		}
 
 		if ($date) {
 			return gmdate('c', strtotime($date));

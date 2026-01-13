@@ -11,8 +11,11 @@ if (!defined('ABSPATH')) {
 }
 
 // Get filter parameters.
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for display filters (days, paged, search).
 $ai_seo_pro_days = isset($_GET['days']) ? intval($_GET['days']) : 30;
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for display filters (days, paged, search).
 $ai_seo_pro_page = isset($_GET['paged']) ? max(1, intval($_GET['paged'])) : 1;
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for display filters (days, paged, search).
 $ai_seo_pro_search = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
 
 // Get statistics.
@@ -123,7 +126,8 @@ $ai_seo_pro_results = $this->monitor_404->get_404_logs(
 						<?php esc_html_e('Last 90 days', 'ai-seo-pro'); ?>
 					</option>
 					<option value="0" <?php selected($ai_seo_pro_days, 0); ?>>
-						<?php esc_html_e('All time', 'ai-seo-pro'); ?></option>
+						<?php esc_html_e('All time', 'ai-seo-pro'); ?>
+					</option>
 				</select>
 			</label>
 

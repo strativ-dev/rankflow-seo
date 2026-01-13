@@ -47,6 +47,7 @@ class AI_SEO_Pro_Settings
 	{
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for tab navigation (read-only display).
 		$this->active_tab = isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : 'general';
 	}
 

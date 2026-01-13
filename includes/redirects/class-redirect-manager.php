@@ -99,7 +99,7 @@ class AI_SEO_Pro_Redirect_Manager
         );
 
         // Insert into database.
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Inserting new redirect.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Inserting new redirect into custom table.
         $result = $wpdb->insert(
             $this->table_name,
             $insert_data,
@@ -144,7 +144,7 @@ class AI_SEO_Pro_Redirect_Manager
             'is_active' => isset($data['is_active']) ? (int) $data['is_active'] : 1,
         );
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Updating redirect.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Updating redirect in custom table.
         $result = $wpdb->update(
             $this->table_name,
             $update_data,
@@ -173,7 +173,7 @@ class AI_SEO_Pro_Redirect_Manager
     {
         global $wpdb;
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Deleting redirect.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Deleting redirect from custom table.
         $result = $wpdb->delete(
             $this->table_name,
             array('id' => $id),
@@ -196,10 +196,12 @@ class AI_SEO_Pro_Redirect_Manager
     {
         global $wpdb;
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Getting single redirect.
+        $table = $this->table_name;
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Fetching single redirect from custom table.
         return $wpdb->get_row(
             $wpdb->prepare(
-                "SELECT * FROM {$this->table_name} WHERE id = %d",
+                'SELECT * FROM `' . $table . '` WHERE id = %d', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
                 $id
             )
         );
@@ -226,14 +228,25 @@ class AI_SEO_Pro_Redirect_Manager
 
         $args = wp_parse_args($args, $defaults);
 
-        // Sanitize orderby to prevent SQL injection.
-        $allowed_orderby = array('id', 'source_url', 'target_url', 'redirect_type', 'hits', 'is_active', 'created_at', 'updated_at', 'last_accessed');
-        if (!in_array($args['orderby'], $allowed_orderby, true)) {
-            $args['orderby'] = 'id';
-        }
+        // Sanitize orderby using explicit mapping to prevent SQL injection.
+        $orderby_map = array(
+            'id' => 'id',
+            'source_url' => 'source_url',
+            'target_url' => 'target_url',
+            'redirect_type' => 'redirect_type',
+            'hits' => 'hits',
+            'is_active' => 'is_active',
+            'created_at' => 'created_at',
+            'updated_at' => 'updated_at',
+            'last_accessed' => 'last_accessed',
+        );
+
+        // Get safe orderby value from map, default to 'id'.
+        $orderby_key = isset($orderby_map[$args['orderby']]) ? $args['orderby'] : 'id';
+        $orderby_value = $orderby_map[$orderby_key];
 
         // Sanitize order.
-        $args['order'] = 'ASC' === strtoupper($args['order']) ? 'ASC' : 'DESC';
+        $order_value = 'ASC' === strtoupper($args['order']) ? 'ASC' : 'DESC';
 
         $where = array('1=1');
 
@@ -249,23 +262,42 @@ class AI_SEO_Pro_Redirect_Manager
         }
 
         $where_clause = implode(' AND ', $where);
+        $table = $this->table_name;
+
+        // Build ORDER BY clause with sanitized values.
+        $order_clause = 'ORDER BY `' . $orderby_value . '` ' . $order_value;
 
         // Count total.
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Dynamic WHERE clause built safely above.
-        $total = $wpdb->get_var("SELECT COUNT(*) FROM {$this->table_name} WHERE {$where_clause}");
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Counting redirects in custom table.
+        $total = $wpdb->get_var(
+            $wpdb->prepare(
+                'SELECT COUNT(*) FROM `' . $table . '` WHERE ' . $where_clause . ' AND %d=%d', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name safe from $wpdb->prefix, where_clause built with prepare().
+                1,
+                1
+            )
+        );
 
-        // Build query.
-        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Orderby and order are sanitized above.
-        $query = "SELECT * FROM {$this->table_name} WHERE {$where_clause} ORDER BY {$args['orderby']} {$args['order']}";
-
-        // Add LIMIT only if per_page is positive (not -1 for "all").
+        // Build query with pagination.
         if ($args['per_page'] > 0) {
             $offset = ($args['page'] - 1) * $args['per_page'];
-            $query = $wpdb->prepare($query . ' LIMIT %d OFFSET %d', $args['per_page'], $offset);
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Fetching redirects; orderby from explicit safe map.
+            $redirects = $wpdb->get_results(
+                $wpdb->prepare(
+                    'SELECT * FROM `' . $table . '` WHERE ' . $where_clause . ' ' . $order_clause . ' LIMIT %d OFFSET %d', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name safe from $wpdb->prefix, order_clause from safe map, where_clause built with prepare().
+                    $args['per_page'],
+                    $offset
+                )
+            );
+        } else {
+            // No pagination - fetch all.
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Fetching all redirects; orderby from explicit safe map.
+            $redirects = $wpdb->get_results(
+                $wpdb->prepare(
+                    'SELECT * FROM `' . $table . '` WHERE ' . $where_clause . ' ' . $order_clause . ' LIMIT %d', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name safe from $wpdb->prefix, order_clause from safe map, where_clause built with prepare().
+                    PHP_INT_MAX
+                )
+            );
         }
-
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared -- Query prepared conditionally above.
-        $redirects = $wpdb->get_results($query);
 
         // Calculate pages.
         $pages = ($args['per_page'] > 0) ? ceil($total / $args['per_page']) : 1;
@@ -309,12 +341,16 @@ class AI_SEO_Pro_Redirect_Manager
             }
         }
 
+        $table = $this->table_name;
+
         // Get all active non-regex redirects.
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Getting redirects for matching.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Fetching active non-regex redirects from custom table.
         $all_redirects = $wpdb->get_results(
-            "SELECT * FROM {$this->table_name} 
-			WHERE is_active = 1 
-			AND is_regex = 0"
+            $wpdb->prepare(
+                'SELECT * FROM `' . $table . '` WHERE is_active = %d AND is_regex = %d', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
+                1,
+                0
+            )
         );
 
         // Check each redirect by normalizing its source_url.
@@ -334,12 +370,13 @@ class AI_SEO_Pro_Redirect_Manager
         }
 
         // Try regex matches.
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Getting regex redirects for matching.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Fetching active regex redirects from custom table.
         $regex_redirects = $wpdb->get_results(
-            "SELECT * FROM {$this->table_name} 
-			WHERE is_active = 1 
-			AND is_regex = 1
-			ORDER BY id ASC"
+            $wpdb->prepare(
+                'SELECT * FROM `' . $table . '` WHERE is_active = %d AND is_regex = %d ORDER BY id ASC', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
+                1,
+                1
+            )
         );
 
         foreach ($regex_redirects as $regex_redirect) {
@@ -367,13 +404,12 @@ class AI_SEO_Pro_Redirect_Manager
     {
         global $wpdb;
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Updating hit counter.
+        $table = $this->table_name;
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Updating hit counter in custom table.
         $wpdb->query(
             $wpdb->prepare(
-                "UPDATE {$this->table_name} 
-				SET hits = hits + 1, 
-				last_accessed = NOW() 
-				WHERE id = %d",
+                'UPDATE `' . $table . '` SET hits = hits + 1, last_accessed = NOW() WHERE id = %d', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
                 $id
             )
         );
@@ -426,11 +462,12 @@ class AI_SEO_Pro_Redirect_Manager
         global $wpdb;
 
         $normalized = $this->normalize_url($source_url);
+        $table = $this->table_name;
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Checking for duplicate redirect.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Checking for existing redirect in custom table.
         $count = $wpdb->get_var(
             $wpdb->prepare(
-                "SELECT COUNT(*) FROM {$this->table_name} WHERE source_url = %s",
+                'SELECT COUNT(*) FROM `' . $table . '` WHERE source_url = %s', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
                 $normalized
             )
         );

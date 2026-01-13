@@ -79,13 +79,13 @@ class AI_SEO_Pro_404_Monitor
         $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '';
         $ip_address = $this->get_client_ip();
 
+        $table = $this->table_name;
+
         // Check if URL already logged today.
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Checking for existing 404 log.
         $existing = $wpdb->get_row(
             $wpdb->prepare(
-                "SELECT id, hits FROM {$this->table_name} 
-				WHERE url = %s 
-				AND DATE(created_at) = CURDATE()",
+                'SELECT id, hits FROM `' . $table . '` WHERE url = %s AND DATE(created_at) = CURDATE()', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
                 $url
             )
         );
@@ -144,14 +144,22 @@ class AI_SEO_Pro_404_Monitor
 
         $args = wp_parse_args($args, $defaults);
 
-        // Sanitize orderby to prevent SQL injection.
-        $allowed_orderby = array('id', 'url', 'hits', 'referrer', 'created_at', 'updated_at');
-        if (!in_array($args['orderby'], $allowed_orderby, true)) {
-            $args['orderby'] = 'hits';
-        }
+        // Sanitize orderby using explicit mapping to prevent SQL injection.
+        $orderby_map = array(
+            'id' => 'id',
+            'url' => 'url',
+            'hits' => 'hits',
+            'referrer' => 'referrer',
+            'created_at' => 'created_at',
+            'updated_at' => 'updated_at',
+        );
+
+        // Get safe orderby value from map, default to 'hits'.
+        $orderby_key = isset($orderby_map[$args['orderby']]) ? $args['orderby'] : 'hits';
+        $orderby_value = $orderby_map[$orderby_key];
 
         // Sanitize order.
-        $args['order'] = 'ASC' === strtoupper($args['order']) ? 'ASC' : 'DESC';
+        $order_value = 'ASC' === strtoupper($args['order']) ? 'ASC' : 'DESC';
 
         $where = array('1=1');
 
@@ -174,23 +182,42 @@ class AI_SEO_Pro_404_Monitor
         }
 
         $where_clause = implode(' AND ', $where);
+        $table = $this->table_name;
+
+        // Build ORDER BY clause with sanitized values.
+        $order_clause = 'ORDER BY `' . $orderby_value . '` ' . $order_value;
 
         // Count total.
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Dynamic WHERE clause built safely above.
-        $total = $wpdb->get_var("SELECT COUNT(*) FROM {$this->table_name} WHERE {$where_clause}");
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Counting 404 logs in custom table.
+        $total = $wpdb->get_var(
+            $wpdb->prepare(
+                'SELECT COUNT(*) FROM `' . $table . '` WHERE ' . $where_clause . ' AND %d=%d', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name safe from $wpdb->prefix, where_clause built with prepare().
+                1,
+                1
+            )
+        );
 
-        // Build query.
-        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Orderby and order are sanitized above.
-        $query = "SELECT * FROM {$this->table_name} WHERE {$where_clause} ORDER BY {$args['orderby']} {$args['order']}";
-
-        // Add LIMIT only if per_page is positive (not -1 for "all").
+        // Build query with pagination.
         if ($args['per_page'] > 0) {
             $offset = ($args['page'] - 1) * $args['per_page'];
-            $query = $wpdb->prepare($query . ' LIMIT %d OFFSET %d', $args['per_page'], $offset);
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Fetching 404 logs; orderby from explicit safe map.
+            $logs = $wpdb->get_results(
+                $wpdb->prepare(
+                    'SELECT * FROM `' . $table . '` WHERE ' . $where_clause . ' ' . $order_clause . ' LIMIT %d OFFSET %d', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name safe from $wpdb->prefix, order_clause from safe map, where_clause built with prepare().
+                    $args['per_page'],
+                    $offset
+                )
+            );
+        } else {
+            // No pagination - fetch all.
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Fetching all 404 logs; orderby from explicit safe map.
+            $logs = $wpdb->get_results(
+                $wpdb->prepare(
+                    'SELECT * FROM `' . $table . '` WHERE ' . $where_clause . ' ' . $order_clause . ' LIMIT %d', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name safe from $wpdb->prefix, order_clause from safe map, where_clause built with prepare().
+                    PHP_INT_MAX
+                )
+            );
         }
-
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared -- Query prepared conditionally above.
-        $logs = $wpdb->get_results($query);
 
         // Calculate pages.
         $pages = ($args['per_page'] > 0) ? ceil($total / $args['per_page']) : 1;
@@ -212,41 +239,42 @@ class AI_SEO_Pro_404_Monitor
     {
         global $wpdb;
 
-        $date_condition = $wpdb->prepare(
-            'created_at >= DATE_SUB(NOW(), INTERVAL %d DAY)',
-            $days
-        );
+        $table = $this->table_name;
 
         // Total 404s.
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Date condition prepared above.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Getting total 404 hits from custom table.
         $total_404s = $wpdb->get_var(
-            "SELECT SUM(hits) FROM {$this->table_name} WHERE {$date_condition}"
+            $wpdb->prepare(
+                'SELECT SUM(hits) FROM `' . $table . '` WHERE created_at >= DATE_SUB(NOW(), INTERVAL %d DAY)', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
+                $days
+            )
         );
 
         // Unique URLs.
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Date condition prepared above.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Getting unique 404 URLs from custom table.
         $unique_urls = $wpdb->get_var(
-            "SELECT COUNT(DISTINCT url) FROM {$this->table_name} WHERE {$date_condition}"
+            $wpdb->prepare(
+                'SELECT COUNT(DISTINCT url) FROM `' . $table . '` WHERE created_at >= DATE_SUB(NOW(), INTERVAL %d DAY)', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
+                $days
+            )
         );
 
         // Top 404s.
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Date condition prepared above.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Getting top 404 URLs from custom table.
         $top_404s = $wpdb->get_results(
-            "SELECT url, SUM(hits) as total_hits 
-			FROM {$this->table_name} 
-			WHERE {$date_condition}
-			GROUP BY url 
-			ORDER BY total_hits DESC 
-			LIMIT 10"
+            $wpdb->prepare(
+                'SELECT url, SUM(hits) as total_hits FROM `' . $table . '` WHERE created_at >= DATE_SUB(NOW(), INTERVAL %d DAY) GROUP BY url ORDER BY total_hits DESC LIMIT 10', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
+                $days
+            )
         );
 
         // Recent 404s.
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Date condition prepared above.
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Getting recent 404s from custom table.
         $recent_404s = $wpdb->get_results(
-            "SELECT * FROM {$this->table_name} 
-			WHERE {$date_condition}
-			ORDER BY created_at DESC 
-			LIMIT 10"
+            $wpdb->prepare(
+                'SELECT * FROM `' . $table . '` WHERE created_at >= DATE_SUB(NOW(), INTERVAL %d DAY) ORDER BY created_at DESC LIMIT 10', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
+                $days
+            )
         );
 
         return array(
@@ -284,8 +312,15 @@ class AI_SEO_Pro_404_Monitor
     {
         global $wpdb;
 
+        $table = $this->table_name;
+
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Truncating 404 logs table.
-        return false !== $wpdb->query("TRUNCATE TABLE {$this->table_name}");
+        return false !== $wpdb->query(
+            $wpdb->prepare(
+                'TRUNCATE TABLE `' . $table . '` /* %s */', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
+                ''
+            )
+        );
     }
 
     /**
@@ -301,12 +336,12 @@ class AI_SEO_Pro_404_Monitor
         }
 
         $retention_days = get_option('ai_seo_pro_404_retention', 30);
+        $table = $this->table_name;
 
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Cleaning up old 404 logs.
         $wpdb->query(
             $wpdb->prepare(
-                "DELETE FROM {$this->table_name} 
-				WHERE created_at < DATE_SUB(NOW(), INTERVAL %d DAY)",
+                'DELETE FROM `' . $table . '` WHERE created_at < DATE_SUB(NOW(), INTERVAL %d DAY)', // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Table name is safe, from $wpdb->prefix.
                 $retention_days
             )
         );
@@ -360,12 +395,14 @@ class AI_SEO_Pro_404_Monitor
      */
     public function export_to_csv($days = 30)
     {
-        $logs = $this->get_404_logs(array(
-            'per_page' => -1,  // Get all records.
-            'days' => $days,
-            'orderby' => 'hits',
-            'order' => 'DESC',
-        ));
+        $logs = $this->get_404_logs(
+            array(
+                'per_page' => -1,  // Get all records.
+                'days' => $days,
+                'orderby' => 'hits',
+                'order' => 'DESC',
+            )
+        );
 
         $csv = "URL,Hits,Referrer,Created At\n";
 

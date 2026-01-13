@@ -1,12 +1,16 @@
 === AI SEO Pro ===
 Contributors: joyroy
-Tags: seo, ai, claude, meta tags, schema, optimization
+Tags: seo, ai, meta tags, schema, optimization
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Professional AI SEO plugin with advanced meta generation, content analysis, schema markup, sitemaps, redirects, and robots.txt editor.
+
+== Description ==
 
 # AI SEO Pro
 
@@ -154,13 +158,11 @@ Smart paste detection - extracts verification codes from full meta tags.
 
 ## Screenshots
 
-| Feature | Description |
-|---------|-------------|
-| Meta Box | AI-powered meta generation with preview |
-| SEO Analysis | 17 checks with color-coded scores |
-| Schema Generator | Repeater interface with display rules |
-| Robots.txt Editor | Live preview with copy function |
-| Redirect Manager | 301/302 redirects with 404 monitor |
+1. **Meta Box** - AI-powered meta generation with preview
+2. **SEO Analysis** - 17 checks with color-coded scores
+3. **Schema Generator** - Repeater interface with display rules
+4. **Robots.txt Editor** - Live preview with copy function
+5. **Redirect Manager** - 301/302 redirects with 404 monitor
 
 ## Frequently Asked Questions
 
@@ -200,7 +202,3 @@ This plugin is licensed under the GPLv2 or later.
 ## Credits
 
 Developed by Joy Roy
-
----
-
-**AI SEO Pro** - Your complete AI-powered SEO solution for WordPress.

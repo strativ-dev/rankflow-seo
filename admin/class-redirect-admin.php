@@ -61,7 +61,9 @@ class AI_SEO_Pro_Redirect_Admin
 	 */
 	public function display_redirects_page()
 	{
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for display action parameter.
 		$ai_seo_pro_action = isset($_GET['action']) ? sanitize_text_field(wp_unslash($_GET['action'])) : 'list';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for display ID parameter.
 		$ai_seo_pro_redirect_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 		?>
@@ -111,7 +113,9 @@ class AI_SEO_Pro_Redirect_Admin
 	 */
 	private function render_redirects_list()
 	{
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for pagination parameter.
 		$ai_seo_pro_page = isset($_GET['paged']) ? max(1, intval($_GET['paged'])) : 1;
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for search parameter.
 		$ai_seo_pro_search = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
 
 		$ai_seo_pro_results = $this->redirect_manager->get_redirects(
@@ -173,6 +177,7 @@ class AI_SEO_Pro_Redirect_Admin
 	public function handle_redirect_actions()
 	{
 		// Only run on our redirect pages.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification happens later for specific actions.
 		if (
 			!isset($_GET['page']) ||
 			(sanitize_text_field(wp_unslash($_GET['page'])) !== $this->plugin_name . '-redirects')
@@ -212,22 +217,41 @@ class AI_SEO_Pro_Redirect_Admin
 		if (isset($_POST['action']) && 'import_csv' === $_POST['action']) {
 			check_admin_referer('import_redirects', 'ai_seo_redirect_nonce');
 
-			if (isset($_FILES['csv_file']) && UPLOAD_ERR_OK === $_FILES['csv_file']['error']) {
-				$ai_seo_pro_import_results = $this->redirect_manager->import_from_csv($_FILES['csv_file']['tmp_name']);
+			// Validate file upload.
+			if (
+				isset($_FILES['csv_file']) &&
+				isset($_FILES['csv_file']['error']) &&
+				isset($_FILES['csv_file']['tmp_name']) &&
+				UPLOAD_ERR_OK === intval($_FILES['csv_file']['error'])
+			) {
+				// Sanitize the temporary file path.
+				$ai_seo_pro_tmp_file = sanitize_text_field(wp_unslash($_FILES['csv_file']['tmp_name']));
 
-				$ai_seo_pro_message = sprintf(
-					/* translators: 1: number of successful imports, 2: number of failed imports */
-					__('Import complete: %1$d succeeded, %2$d failed.', 'ai-seo-pro'),
-					$ai_seo_pro_import_results['success'],
-					$ai_seo_pro_import_results['failed']
-				);
+				// Additional security: verify it's actually a valid uploaded file.
+				if (is_uploaded_file($ai_seo_pro_tmp_file)) {
+					$ai_seo_pro_import_results = $this->redirect_manager->import_from_csv($ai_seo_pro_tmp_file);
 
-				add_settings_error(
-					'ai_seo_redirects',
-					'import_complete',
-					$ai_seo_pro_message,
-					$ai_seo_pro_import_results['failed'] > 0 ? 'warning' : 'success'
-				);
+					$ai_seo_pro_message = sprintf(
+						/* translators: 1: number of successful imports, 2: number of failed imports */
+						__('Import complete: %1$d succeeded, %2$d failed.', 'ai-seo-pro'),
+						$ai_seo_pro_import_results['success'],
+						$ai_seo_pro_import_results['failed']
+					);
+
+					add_settings_error(
+						'ai_seo_redirects',
+						'import_complete',
+						$ai_seo_pro_message,
+						$ai_seo_pro_import_results['failed'] > 0 ? 'warning' : 'success'
+					);
+				} else {
+					add_settings_error(
+						'ai_seo_redirects',
+						'import_error',
+						__('Invalid file upload.', 'ai-seo-pro'),
+						'error'
+					);
+				}
 			} else {
 				add_settings_error(
 					'ai_seo_redirects',
@@ -346,6 +370,7 @@ class AI_SEO_Pro_Redirect_Admin
 	public function handle_404_actions()
 	{
 		// Only run on our 404 monitor page.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification happens later for specific actions.
 		if (
 			!isset($_GET['page']) ||
 			(sanitize_text_field(wp_unslash($_GET['page'])) !== $this->plugin_name . '-404-monitor')
@@ -447,8 +472,9 @@ class AI_SEO_Pro_Redirect_Admin
 				);
 			} else {
 				// Delete the 404 log.
-				if (isset($_POST['log_id']) && $_POST['log_id']) {
-					$this->monitor_404->delete_log(intval($_POST['log_id']));
+				if (isset($_POST['log_id']) && !empty($_POST['log_id'])) {
+					$ai_seo_pro_log_id = intval(wp_unslash($_POST['log_id']));
+					$this->monitor_404->delete_log($ai_seo_pro_log_id);
 				}
 
 				add_settings_error(

@@ -101,13 +101,15 @@ function ai_seo_pro_delete_post_meta()
 	// Build placeholders for prepared statement.
 	$placeholders = implode(', ', array_fill(0, count($meta_keys), '%s'));
 
+	// Build the SQL query string.
+	$sql = "DELETE FROM {$wpdb->postmeta} WHERE meta_key IN ({$placeholders})";
+
 	// Single optimized query with IN clause.
 	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Uninstall cleanup.
 	$wpdb->query(
 		$wpdb->prepare(
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Placeholders are safely generated.
-			"DELETE FROM {$wpdb->postmeta} WHERE meta_key IN ({$placeholders})",
-			$meta_keys
+			$sql, // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			...$meta_keys
 		)
 	);
 }
