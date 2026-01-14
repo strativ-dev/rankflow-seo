@@ -201,11 +201,9 @@ class AI_SEO_Pro_Metabox
 
 			foreach ($meta_fields as $key => $field_name) {
 				if (isset($_POST[$field_name])) {
-					// Sanitize directly based on type to satisfy security scanners
 					if ($key === 'description') {
 						$value = sanitize_textarea_field(wp_unslash($_POST[$field_name]));
 					} else {
-						// Handles title, keywords, focus_keyword
 						$value = sanitize_text_field(wp_unslash($_POST[$field_name]));
 					}
 
@@ -219,6 +217,10 @@ class AI_SEO_Pro_Metabox
 			}
 			if (isset($_POST['ai_seo_og_description'])) {
 				update_post_meta($post_id, '_ai_seo_og_description', sanitize_textarea_field(wp_unslash($_POST['ai_seo_og_description'])));
+			}
+			// Save Open Graph Image
+			if (isset($_POST['ai_seo_og_image'])) {
+				update_post_meta($post_id, '_ai_seo_og_image', esc_url_raw(wp_unslash($_POST['ai_seo_og_image'])));
 			}
 
 			// Save Twitter Card data.
@@ -240,7 +242,12 @@ class AI_SEO_Pro_Metabox
 			}
 		}
 
-		// Recalculate SEO score.
+		// IMPORTANT: Clear meta cache before recalculating score
+		// This ensures the score calculation uses the NEW values
+		wp_cache_delete($post_id, 'post_meta');
+		clean_post_cache($post_id);
+
+		// Recalculate SEO score with fresh data
 		$this->calculate_and_save_score($post_id);
 	}
 

@@ -51,8 +51,8 @@ class AI_SEO_Pro_Activator
 		// Set activation flag for redirect
 		set_transient('ai_seo_pro_activation_redirect', true, 30);
 
-		// Flush rewrite rules
-		flush_rewrite_rules();
+		// Set flag to flush rewrite rules on next page load
+		update_option('ai_seo_pro_flush_rewrite_rules', true);
 	}
 
 	/**
@@ -86,8 +86,8 @@ class AI_SEO_Pro_Activator
 			'sitemap_include_taxonomies' => true,
 			'sitemap_include_authors' => false,
 			'sitemap_ping_search_engines' => true,
-			'sitemap_post_types' => array(),
-			'sitemap_taxonomies' => array(),
+			'sitemap_post_types' => array('post', 'page'),
+			'sitemap_taxonomies' => array('category', 'product_cat'),
 		);
 
 		foreach ($defaults as $key => $value) {

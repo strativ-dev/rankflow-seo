@@ -22,10 +22,10 @@
     "schema",
     "optimization"
   ],
-  "homepage": "https://github.com/strativ-dev/AI-SEO-Plugin",
+  "homepage": "https://github.com/strativ-dev/ai-seo-pro",
   "support": {
-    "issues": "https://github.com/strativ-dev/AI-SEO-Plugin/issues",
-    "source": "https://github.com/strativ-dev/AI-SEO-Plugin"
+    "issues": "https://github.com/strativ-dev/ai-seo-pro/issues",
+    "source": "https://github.com/strativ-dev/ai-seo-pro"
   },
   "require": {
     "php": ">=7.4",

@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: AI SEO Pro
- * Plugin URI: https://github.com/strativ-dev/AI-SEO-Plugin
+ * Plugin URI: https://github.com/strativ-dev/ai-seo-pro
  * Description: AI-powered SEO plugin with meta generation, content analysis, redirects, and 404 monitoring.
  * Version: 1.0.0
  * Author: Strativ AB
- * Author URI: https://github.com/strativ-dev/AI-SEO-Plugin
+ * Author URI: https://github.com/strativ-dev/ai-seo-pro
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: ai-seo-pro

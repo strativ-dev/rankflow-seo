@@ -141,6 +141,8 @@ class AI_SEO_Pro_Admin
 				)
 			);
 		}
+		// Ensure media uploader is available
+		wp_enqueue_media();
 	}
 
 	/**

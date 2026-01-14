@@ -22,25 +22,202 @@ $ai_seo_pro_ping_search_engines = get_option('ai_seo_pro_sitemap_ping_search_eng
 $ai_seo_pro_saved_post_types = get_option('ai_seo_pro_sitemap_post_types', array());
 $ai_seo_pro_saved_taxonomies = get_option('ai_seo_pro_sitemap_taxonomies', array());
 
-// Get available post types.
+// Get available post types (public ones only).
 $ai_seo_pro_post_types = get_post_types(array('public' => true), 'objects');
-unset($ai_seo_pro_post_types['attachment']);
-unset($ai_seo_pro_post_types['elementor_library']);
 
-// Get available taxonomies.
-$ai_seo_pro_taxonomies = get_taxonomies(array('public' => true), 'objects');
-unset($ai_seo_pro_taxonomies['post_format']);
-unset($ai_seo_pro_taxonomies['elementor_library_type']);
-unset($ai_seo_pro_taxonomies['elementor_library_category']);
+// Exclude page builder and internal post types (no public frontend pages).
+$ai_seo_pro_excluded_post_types = array(
+	'attachment',
+	// Elementor.
+	'elementor_library',
+	'elementor_template',
+	'elementor-thhf',
+	'elementor_icons',
+	'e-landing-page',
+	'e-floating-buttons',
+	// Divi.
+	'et_pb_layout',
+	'et_header_layout',
+	'et_body_layout',
+	'et_footer_layout',
+	'et_template',
+	'et_code_snippet',
+	// Beaver Builder.
+	'fl-builder-template',
+	'fl-theme-layout',
+	// WPBakery.
+	'vc_grid_item',
+	// Brizy.
+	'brizy_template',
+	'brizy-global-block',
+	'brizy-saved-block',
+	// Oxygen.
+	'ct_template',
+	'oxy_user_library',
+	// Thrive.
+	'tcb_lightbox',
+	'tve_form_type',
+	'tve_lead_shortcode',
+	'tve_lead_2s_lightbox',
+	// Fusion Builder (Avada).
+	'fusion_template',
+	'fusion_tb_layout',
+	'fusion_tb_section',
+	'fusion_element',
+	'fusion_icons',
+	'slide',
+	'awb_off_canvas',
+	// SeedProd.
+	'seedprod',
+	// OptimizePress.
+	'op_page',
+	// GenerateBlocks.
+	'gblocks_templates',
+	'gblocks_global_style',
+	// Spectra.
+	'spectra-popup',
+	'uag-library',
+	// Kadence.
+	'kadence_element',
+	'kadence_form',
+	// Stackable.
+	'stackable_template',
+	// JetEngine.
+	'jet-engine',
+	'jet-menu',
+	'jet-popup',
+	'jet-smart-filters',
+	'jet-theme-core',
+	// Jepack.
+	'jp_pay_order',
+	'jp_pay_product',
+	'feedback',
+	// WooCommerce internal.
+	'shop_order',
+	'shop_coupon',
+	'shop_order_refund',
+	'product_variation',
+	// ACF.
+	'acf-field-group',
+	'acf-field',
+	'acf-post-type',
+	'acf-taxonomy',
+	'acf-ui-options-page',
+	// WPForms.
+	'wpforms',
+	'wpforms_log',
+	// Gravity Forms.
+	'gravityview',
+	// Formidable Forms.
+	'frm_form_actions',
+	// Contact Form 7.
+	'wpcf7_contact_form',
+	// Custom CSS & JS.
+	'custom-css-js',
+	// Popup Maker.
+	'popup',
+	'popup_theme',
+	// MailPoet.
+	'mailpoet_page',
+	// Redirection.
+	'redirection_item',
+	// Polylang.
+	'polylang_mo',
+	// WPML.
+	'wpml_string',
+	// Yoast SEO.
+	'yoast_seo_link',
+	// Rank Math.
+	'rm_content_ai',
+	// MonsterInsights.
+	'mi_log',
+	// Wordfence.
+	'wfsn',
+	// UpdraftPlus.
+	'updraft_jobdata',
+	// TablePress.
+	'tablepress_table',
+	// Revision & internal WordPress types.
+	'revision',
+	'nav_menu_item',
+	'custom_css',
+	'customize_changeset',
+	'oembed_cache',
+	'user_request',
+	'wp_block',
+	'wp_template',
+	'wp_template_part',
+	'wp_global_styles',
+	'wp_navigation',
+	'wp_font_family',
+	'wp_font_face',
+);
 
-// Default post types if not set.
-if (empty($ai_seo_pro_saved_post_types)) {
-	$ai_seo_pro_saved_post_types = array_keys($ai_seo_pro_post_types);
+foreach ($ai_seo_pro_excluded_post_types as $ai_seo_pro_excluded) {
+	unset($ai_seo_pro_post_types[$ai_seo_pro_excluded]);
 }
 
-// Default taxonomies if not set.
+// Get available taxonomies (public ones only).
+$ai_seo_pro_taxonomies = get_taxonomies(array('public' => true), 'objects');
+
+// Exclude page builder and internal taxonomies.
+$ai_seo_pro_excluded_taxonomies = array(
+	'post_format',
+	// Elementor.
+	'elementor_library_type',
+	'elementor_library_category',
+	'elementor_library_doc_type',
+	'elementor_font_type',
+	// Divi.
+	'et_pb_scope',
+	'et_pb_layout_type',
+	'et_pb_layout_category',
+	// Beaver Builder.
+	'fl-builder-template-type',
+	'fl-builder-template-category',
+	// WPBakery.
+	'vc_grid_item_cat',
+	// Oxygen.
+	'ct_template_category',
+	// Brizy.
+	'brizy_template_type',
+	// Fusion Builder (Avada).
+	'fusion_tb_category',
+	'element_category',
+	'template_category',
+	// JetEngine.
+	'jet-engine-type',
+	'jet-popup-type',
+	// WooCommerce internal.
+	'product_visibility',
+	'product_shipping_class',
+	'product_type',
+	// ACF.
+	'acf-field-group-category',
+	// WPML.
+	'translation_priority',
+	// Action Scheduler.
+	'action-group',
+	// Navigation & internal WordPress taxonomies.
+	'nav_menu',
+	'link_category',
+	'wp_theme',
+	'wp_template_part_area',
+	'wp_pattern_category',
+);
+
+foreach ($ai_seo_pro_excluded_taxonomies as $ai_seo_pro_excluded) {
+	unset($ai_seo_pro_taxonomies[$ai_seo_pro_excluded]);
+}
+
+// Default post types: only 'post' and 'page' enabled by default.
+if (empty($ai_seo_pro_saved_post_types)) {
+	$ai_seo_pro_saved_post_types = array('post', 'page');
+}
+
+// Default taxonomies: only 'category' and 'product_cat' enabled by default.
 if (empty($ai_seo_pro_saved_taxonomies)) {
-	$ai_seo_pro_saved_taxonomies = array_keys($ai_seo_pro_taxonomies);
+	$ai_seo_pro_saved_taxonomies = array('category', 'product_cat');
 }
 
 $ai_seo_pro_sitemap_url = home_url('sitemap_index.xml');
@@ -173,10 +350,17 @@ $ai_seo_pro_sitemap_url = home_url('sitemap_index.xml');
 
 			<table class="form-table">
 				<?php foreach ($ai_seo_pro_post_types as $ai_seo_pro_post_type): ?>
+					<?php
+					$ai_seo_pro_is_default = in_array($ai_seo_pro_post_type->name, array('post', 'page'), true);
+					?>
 					<tr>
 						<th scope="row">
 							<label for="sitemap_pt_<?php echo esc_attr($ai_seo_pro_post_type->name); ?>">
 								<?php echo esc_html($ai_seo_pro_post_type->labels->name); ?>
+								<?php if ($ai_seo_pro_is_default): ?>
+									<span
+										class="ai-seo-pro-recommended"><?php esc_html_e('(recommended)', 'ai-seo-pro'); ?></span>
+								<?php endif; ?>
 							</label>
 						</th>
 						<td>
@@ -192,12 +376,10 @@ $ai_seo_pro_sitemap_url = home_url('sitemap_index.xml');
 							?>
 							<span class="post-count">
 								<?php
-								echo esc_html(
-									sprintf(
-										/* translators: %d: number of published posts */
-										__('%d published', 'ai-seo-pro'),
-										$ai_seo_pro_published
-									)
+								printf(
+									/* translators: %d: number of published posts */
+									esc_html__('%d published', 'ai-seo-pro'),
+									esc_html($ai_seo_pro_published)
 								);
 								?>
 							</span>
@@ -234,10 +416,17 @@ $ai_seo_pro_sitemap_url = home_url('sitemap_index.xml');
 			<div class="taxonomy-list" <?php echo !$ai_seo_pro_include_taxonomies ? 'style="display:none;"' : ''; ?>>
 				<table class="form-table">
 					<?php foreach ($ai_seo_pro_taxonomies as $ai_seo_pro_taxonomy): ?>
+						<?php
+						$ai_seo_pro_is_default = in_array($ai_seo_pro_taxonomy->name, array('category', 'product_cat'), true);
+						?>
 						<tr>
 							<th scope="row">
 								<label for="sitemap_tax_<?php echo esc_attr($ai_seo_pro_taxonomy->name); ?>">
 									<?php echo esc_html($ai_seo_pro_taxonomy->labels->name); ?>
+									<?php if ($ai_seo_pro_is_default): ?>
+										<span
+											class="ai-seo-pro-recommended"><?php esc_html_e('(recommended)', 'ai-seo-pro'); ?></span>
+									<?php endif; ?>
 								</label>
 							</th>
 							<td>
@@ -249,19 +438,19 @@ $ai_seo_pro_sitemap_url = home_url('sitemap_index.xml');
 									<span class="slider"></span>
 								</label>
 								<?php
-								$ai_seo_pro_term_count = wp_count_terms(array(
-									'taxonomy' => $ai_seo_pro_taxonomy->name,
-									'hide_empty' => true,
-								));
+								$ai_seo_pro_term_count = wp_count_terms(
+									array(
+										'taxonomy' => $ai_seo_pro_taxonomy->name,
+										'hide_empty' => true,
+									)
+								);
 								?>
 								<span class="post-count">
 									<?php
-									echo esc_html(
-										sprintf(
-											/* translators: %d: number of terms */
-											__('%d terms', 'ai-seo-pro'),
-											is_wp_error($ai_seo_pro_term_count) ? 0 : $ai_seo_pro_term_count
-										)
+									printf(
+										/* translators: %d: number of terms */
+										esc_html__('%d terms', 'ai-seo-pro'),
+										esc_html(is_wp_error($ai_seo_pro_term_count) ? 0 : $ai_seo_pro_term_count)
 									);
 									?>
 								</span>
@@ -293,19 +482,21 @@ $ai_seo_pro_sitemap_url = home_url('sitemap_index.xml');
 							<?php esc_html_e('Include author archive pages in the sitemap.', 'ai-seo-pro'); ?>
 						</p>
 						<?php
-						$ai_seo_pro_author_count = count(get_users(array(
-							'has_published_posts' => true,
-							'fields' => 'ID',
-						)));
+						$ai_seo_pro_author_count = count(
+							get_users(
+								array(
+									'has_published_posts' => true,
+									'fields' => 'ID',
+								)
+							)
+						);
 						?>
 						<span class="post-count">
 							<?php
-							echo esc_html(
-								sprintf(
-									/* translators: %d: number of authors */
-									__('%d authors with published posts', 'ai-seo-pro'),
-									$ai_seo_pro_author_count
-								)
+							printf(
+								/* translators: %d: number of authors */
+								esc_html__('%d authors with published posts', 'ai-seo-pro'),
+								esc_html($ai_seo_pro_author_count)
 							);
 							?>
 						</span>
@@ -451,6 +642,13 @@ $ai_seo_pro_sitemap_url = home_url('sitemap_index.xml');
 	#flush-sitemap-cache {
 		margin-left: 10px;
 	}
+
+	.ai-seo-pro-recommended {
+		color: #2271b1;
+		font-size: 12px;
+		font-weight: normal;
+		margin-left: 5px;
+	}
 </style>
 
 <script>
@@ -458,14 +656,6 @@ $ai_seo_pro_sitemap_url = home_url('sitemap_index.xml');
 		// Toggle taxonomy list visibility.
 		$('#ai_seo_pro_sitemap_include_taxonomies').on('change', function () {
 			$('.taxonomy-list').toggle(this.checked);
-		});
-
-		// Copy sitemap URL.
-		$('#copy-sitemap-url').on('click', function () {
-			var url = $(this).data('url');
-			navigator.clipboard.writeText(url).then(function () {
-				alert('<?php echo esc_js(__('Sitemap URL copied to clipboard!', 'ai-seo-pro')); ?>');
-			});
 		});
 
 		// Flush sitemap cache.

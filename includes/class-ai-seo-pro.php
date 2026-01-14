@@ -156,6 +156,9 @@ class AI_SEO_Pro
 	{
 		$plugin_public = new AI_SEO_Pro_Public($this->get_plugin_name(), $this->get_version());
 
+		// Flush rewrite rules after activation (for sitemap)
+		$this->loader->add_action('init', $this, 'maybe_flush_rewrite_rules', 999);
+
 		// Meta tags output
 		$this->loader->add_action('wp_head', $plugin_public, 'output_meta_tags', 1);
 
@@ -225,5 +228,16 @@ class AI_SEO_Pro
 	public function get_version()
 	{
 		return $this->version;
+	}
+
+	/**
+	 * Maybe flush rewrite rules after activation.
+	 */
+	public function maybe_flush_rewrite_rules()
+	{
+		if (get_option('ai_seo_pro_flush_rewrite_rules')) {
+			flush_rewrite_rules();
+			delete_option('ai_seo_pro_flush_rewrite_rules');
+		}
 	}
 }
