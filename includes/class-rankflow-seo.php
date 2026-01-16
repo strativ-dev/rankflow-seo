@@ -172,6 +172,10 @@ class RankFlow_SEO
 		$this->loader->add_action('wp_head', 'RankFlow_SEO_Settings', 'output_gtm_head', 1);
 		$this->loader->add_action('wp_body_open', 'RankFlow_SEO_Settings', 'output_gtm_body', 1);
 
+		// Ahrefs Analytics.
+		$this->loader->add_action('wp_enqueue_scripts', 'RankFlow_SEO_Settings', 'enqueue_ahrefs_analytics');
+		$this->loader->add_filter('script_loader_tag', 'RankFlow_SEO_Settings', 'add_ahrefs_script_attributes', 10, 3);
+
 		// Redirect handler
 		$redirect_handler = new RankFlow_SEO_Redirect_Handler();
 		$redirect_handler->init();

@@ -137,7 +137,6 @@ class RankFlow_SEO_Settings
 			$this->plugin_name . '-help',
 			array($this, 'display_help_page')
 		);
-
 	}
 
 	/**
@@ -153,13 +152,13 @@ class RankFlow_SEO_Settings
 	 */
 	public function display_redirects_page()
 	{
-		// Get or create redirect admin instance
+		// Get or create redirect admin instance.
 		if (!isset($this->redirect_admin)) {
 			require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/class-redirect-admin.php';
 			$this->redirect_admin = new RankFlow_SEO_Redirect_Admin($this->plugin_name);
 		}
 
-		// Call the redirect admin display method
+		// Call the redirect admin display method.
 		$this->redirect_admin->display_redirects_page();
 	}
 
@@ -168,13 +167,13 @@ class RankFlow_SEO_Settings
 	 */
 	public function display_404_monitor_page()
 	{
-		// Get or create redirect admin instance
+		// Get or create redirect admin instance.
 		if (!isset($this->redirect_admin)) {
 			require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/class-redirect-admin.php';
 			$this->redirect_admin = new RankFlow_SEO_Redirect_Admin($this->plugin_name);
 		}
 
-		// Call the redirect admin display method
+		// Call the redirect admin display method.
 		$this->redirect_admin->display_404_monitor_page();
 	}
 
@@ -424,7 +423,7 @@ class RankFlow_SEO_Settings
 			'rankflow_seo_ahrefs_verification',
 			array(
 				'type' => 'string',
-				'sanitize_callback' => array($this, 'sanitize_verification_code'),
+				'sanitize_callback' => array($this, 'sanitize_ahrefs_key'),
 				'default' => '',
 			)
 		);
@@ -540,8 +539,6 @@ class RankFlow_SEO_Settings
 			)
 		);
 	}
-
-
 
 	/**
 	 * Display the plugin settings page.
@@ -741,9 +738,6 @@ class RankFlow_SEO_Settings
 		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-advanced.php';
 	}
 
-
-
-
 	/**
 	 * Sanitize post types array.
 	 *
@@ -785,6 +779,31 @@ class RankFlow_SEO_Settings
 	}
 
 	/**
+	 * Sanitize Ahrefs analytics key.
+	 *
+	 * Extracts the data-key value if full script tag is pasted.
+	 *
+	 * @param string $input The input value.
+	 * @return string Sanitized Ahrefs key.
+	 */
+	public function sanitize_ahrefs_key($input)
+	{
+		$input = trim($input);
+
+		if (empty($input)) {
+			return '';
+		}
+
+		// If user pasted full script tag, extract the data-key value.
+		if (preg_match('/data-key=["\']([^"\']+)["\']/i', $input, $rankflow_seo_matches)) {
+			return sanitize_text_field($rankflow_seo_matches[1]);
+		}
+
+		// Otherwise just sanitize and return.
+		return sanitize_text_field($input);
+	}
+
+	/**
 	 * Sanitize GTM Container ID.
 	 *
 	 * @param string $input The input value.
@@ -813,6 +832,67 @@ class RankFlow_SEO_Settings
 	}
 
 	/**
+	 * Enqueue Ahrefs analytics script on frontend.
+	 * Call this from wp_enqueue_scripts hook.
+	 */
+	public static function enqueue_ahrefs_analytics()
+	{
+		// Only on frontend.
+		if (is_admin()) {
+			return;
+		}
+
+		// Only on homepage/front page.
+		if (!is_front_page() && !is_home()) {
+			return;
+		}
+
+		$ahrefs_key = get_option('rankflow_seo_ahrefs_verification', '');
+
+		if (empty($ahrefs_key)) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'rankflow-seo-ahrefs-analytics',
+			'https://analytics.ahrefs.com/analytics.js',
+			array(),
+			'1.0.0',
+			false // Load in head.
+		);
+	}
+
+	/**
+	 * Add data-key and async attributes to Ahrefs script.
+	 *
+	 * @param string $tag    The script tag.
+	 * @param string $handle The script handle.
+	 * @param string $src    The script source.
+	 * @return string Modified script tag.
+	 */
+	public static function add_ahrefs_script_attributes($tag, $handle, $src)
+	{
+		if ('rankflow-seo-ahrefs-analytics' !== $handle) {
+			return $tag;
+		}
+
+		$ahrefs_key = get_option('rankflow_seo_ahrefs_verification', '');
+
+		if (empty($ahrefs_key)) {
+			return $tag;
+		}
+
+		// Add data-key and async attributes.
+		$tag = str_replace(
+			' src=',
+			' data-key="' . esc_attr($ahrefs_key) . '" async src=',
+			$tag
+		);
+
+		return $tag;
+	}
+
+	/**
 	 * Output verification meta tags in frontend head.
 	 * Call this from wp_head hook.
 	 */
@@ -823,11 +903,7 @@ class RankFlow_SEO_Settings
 			return;
 		}
 
-		// Ahrefs Analytics (script, not meta)
-		$rankflow_seo_ahrefs_key = get_option('rankflow_seo_ahrefs_verification', '');
-		if (!empty($rankflow_seo_ahrefs_key)) {
-			echo '<script src="https://analytics.ahrefs.com/analytics.js" data-key="' . esc_attr($rankflow_seo_ahrefs_key) . '" async></script>' . "\n";
-		}
+		// Note: Ahrefs is now handled via enqueue_ahrefs_analytics() method.
 
 		$rankflow_seo_verifications = array(
 			'baidu' => array(
@@ -902,5 +978,4 @@ class RankFlow_SEO_Settings
 		<!-- End Google Tag Manager (noscript) -->
 		<?php
 	}
-
 }

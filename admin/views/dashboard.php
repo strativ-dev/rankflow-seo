@@ -38,7 +38,10 @@ $rankflow_seo_avg_score = $wpdb->get_var(
 		<div class="dashboard-main">
 			<div class="stats-grid">
 				<div class="stat-card">
-					<div class="stat-icon">📝</div>
+					<div class="stat-icon">
+						<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/published-posts-icon.png'); ?>"
+							alt="Published Posts" style="width: 45px;">
+					</div>
 					<div class="stat-content">
 						<h3><?php echo esc_html(number_format($rankflow_seo_total_posts->publish)); ?></h3>
 						<p><?php esc_html_e('Published Posts', 'rankflow-seo'); ?></p>
@@ -46,7 +49,10 @@ $rankflow_seo_avg_score = $wpdb->get_var(
 				</div>
 
 				<div class="stat-card">
-					<div class="stat-icon">✅</div>
+					<div class="stat-icon">
+						<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/optimized-posts-icon.png'); ?>"
+							alt="Optimized Posts" style="width: 45px;">
+					</div>
 					<div class="stat-content">
 						<h3><?php echo esc_html(number_format($rankflow_seo_posts_with_meta)); ?></h3>
 						<p><?php esc_html_e('Optimized Posts', 'rankflow-seo'); ?></p>
@@ -54,7 +60,10 @@ $rankflow_seo_avg_score = $wpdb->get_var(
 				</div>
 
 				<div class="stat-card">
-					<div class="stat-icon">📊</div>
+					<div class="stat-icon">
+						<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/avarage-seo-score-icon.png'); ?>"
+							alt="Average SEO Score" style="width: 45px;">
+					</div>
 					<div class="stat-content">
 						<h3><?php echo esc_html(round($rankflow_seo_avg_score ?? 0)); ?>/100</h3>
 						<p><?php esc_html_e('Average SEO Score', 'rankflow-seo'); ?></p>
@@ -62,7 +71,10 @@ $rankflow_seo_avg_score = $wpdb->get_var(
 				</div>
 
 				<div class="stat-card">
-					<div class="stat-icon">🤖</div>
+					<div class="stat-icon">
+						<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/ai-icon.png'); ?>"
+							alt="AI Provider" style="width: 45px;">
+					</div>
 					<div class="stat-content">
 						<h3><?php echo esc_html(RankFlow_SEO_Helper::get_provider_name(get_option('rankflow_seo_api_provider', 'gemini'))); ?>
 						</h3>

@@ -559,6 +559,99 @@ class RankFlow_SEO_Schema_Admin
 					),
 				),
 			),
+			'Service' => array(
+				'label' => __('Service', 'rankflow-seo'),
+				'fields' => array(
+					'name' => array(
+						'label' => __('Service Name', 'rankflow-seo'),
+						'type' => 'text',
+						'required' => true,
+					),
+					'description' => array(
+						'label' => __('Description', 'rankflow-seo'),
+						'type' => 'textarea',
+					),
+					'image' => array(
+						'label' => __('Image URL', 'rankflow-seo'),
+						'type' => 'image',
+					),
+					'serviceType' => array(
+						'label' => __('Service Type', 'rankflow-seo'),
+						'type' => 'text',
+						'placeholder' => __('e.g., Web Development, Consulting', 'rankflow-seo'),
+					),
+					'providerName' => array(
+						'label' => __('Provider Name', 'rankflow-seo'),
+						'type' => 'text',
+					),
+					'providerType' => array(
+						'label' => __('Provider Type', 'rankflow-seo'),
+						'type' => 'select',
+						'options' => array(
+							'Organization' => __('Organization', 'rankflow-seo'),
+							'Person' => __('Person', 'rankflow-seo'),
+						),
+					),
+					'providerUrl' => array(
+						'label' => __('Provider URL', 'rankflow-seo'),
+						'type' => 'url',
+					),
+					'areaServed' => array(
+						'label' => __('Area Served', 'rankflow-seo'),
+						'type' => 'text',
+						'placeholder' => __('e.g., New York, United States, Worldwide', 'rankflow-seo'),
+					),
+					'audience' => array(
+						'label' => __('Target Audience', 'rankflow-seo'),
+						'type' => 'text',
+						'placeholder' => __('e.g., Small Businesses, Homeowners', 'rankflow-seo'),
+					),
+					'category' => array(
+						'label' => __('Category', 'rankflow-seo'),
+						'type' => 'text',
+					),
+					'offerCatalog' => array(
+						'label' => __('Offer Catalog', 'rankflow-seo'),
+						'type' => 'offer_catalog_repeater',
+						'description' => __('Add service categories and their offerings.', 'rankflow-seo'),
+					),
+					'price' => array(
+						'label' => __('Base Price (if no catalog)', 'rankflow-seo'),
+						'type' => 'text',
+						'placeholder' => __('e.g., 99.00 or From 50.00', 'rankflow-seo'),
+					),
+					'priceCurrency' => array(
+						'label' => __('Currency', 'rankflow-seo'),
+						'type' => 'text',
+						'placeholder' => 'USD',
+					),
+					'url' => array(
+						'label' => __('Service URL', 'rankflow-seo'),
+						'type' => 'url',
+					),
+					'telephone' => array(
+						'label' => __('Contact Phone', 'rankflow-seo'),
+						'type' => 'tel',
+					),
+					'email' => array(
+						'label' => __('Contact Email', 'rankflow-seo'),
+						'type' => 'email',
+					),
+					'ratingValue' => array(
+						'label' => __('Rating Value', 'rankflow-seo'),
+						'type' => 'text',
+					),
+					'reviewCount' => array(
+						'label' => __('Review Count', 'rankflow-seo'),
+						'type' => 'number',
+					),
+					'sameAs' => array(
+						'label' => __('Related URLs (Same As)', 'rankflow-seo'),
+						'type' => 'textarea',
+						'placeholder' => __('One URL per line', 'rankflow-seo'),
+					),
+				),
+			),
 			'FAQPage' => array(
 				'label' => __('FAQ Page', 'rankflow-seo'),
 				'fields' => array(
@@ -1023,6 +1116,9 @@ class RankFlow_SEO_Schema_Admin
 			case 'Product':
 				return $this->generate_product($data);
 
+			case 'Service':
+				return $this->generate_service($data);
+
 			case 'FAQPage':
 				return $this->generate_faq($data);
 
@@ -1405,6 +1501,169 @@ class RankFlow_SEO_Schema_Admin
 		}
 
 		return $schema;
+	}
+
+	/**
+	 * Generate Service schema
+	 */
+	private function generate_service($data)
+	{
+		$schema = array(
+			'@context' => 'https://schema.org',
+			'@type' => 'Service',
+		);
+
+		// Simple fields.
+		$simple_fields = array('name', 'description', 'image', 'serviceType', 'category', 'url');
+		foreach ($simple_fields as $field) {
+			if (!empty($data[$field])) {
+				$schema[$field] = $data[$field];
+			}
+		}
+
+		// Provider.
+		if (!empty($data['providerName'])) {
+			$provider_type = !empty($data['providerType']) ? $data['providerType'] : 'Organization';
+			$schema['provider'] = array(
+				'@type' => $provider_type,
+				'name' => $data['providerName'],
+			);
+			if (!empty($data['providerUrl'])) {
+				$schema['provider']['url'] = $data['providerUrl'];
+			}
+			if (!empty($data['telephone'])) {
+				$schema['provider']['telephone'] = $data['telephone'];
+			}
+			if (!empty($data['email'])) {
+				$schema['provider']['email'] = $data['email'];
+			}
+		}
+
+		// Area served.
+		if (!empty($data['areaServed'])) {
+			$schema['areaServed'] = $data['areaServed'];
+		}
+
+		// Audience.
+		if (!empty($data['audience'])) {
+			$schema['audience'] = array(
+				'@type' => 'Audience',
+				'audienceType' => $data['audience'],
+			);
+		}
+
+		// Offer Catalog (advanced nested structure).
+		if (!empty($data['offerCatalog']) && is_array($data['offerCatalog'])) {
+			$catalog = $this->generate_offer_catalog($data['offerCatalog']);
+			if ($catalog) {
+				$schema['hasOfferCatalog'] = $catalog;
+			}
+		} elseif (!empty($data['price'])) {
+			// Simple offer if no catalog.
+			$schema['offers'] = array(
+				'@type' => 'Offer',
+				'price' => $data['price'],
+				'priceCurrency' => !empty($data['priceCurrency']) ? $data['priceCurrency'] : 'USD',
+			);
+		}
+
+		// Aggregate rating.
+		if (!empty($data['ratingValue']) && !empty($data['reviewCount'])) {
+			$schema['aggregateRating'] = array(
+				'@type' => 'AggregateRating',
+				'ratingValue' => $data['ratingValue'],
+				'reviewCount' => (int) $data['reviewCount'],
+			);
+		}
+
+		// Same As (related URLs).
+		if (!empty($data['sameAs'])) {
+			$urls = array_filter(array_map('trim', explode("\n", $data['sameAs'])));
+			if (!empty($urls)) {
+				$schema['sameAs'] = $urls;
+			}
+		}
+
+		return $schema;
+	}
+
+	/**
+	 * Generate Offer Catalog structure
+	 *
+	 * @param array $catalog_data Catalog data from form.
+	 * @return array|null Offer catalog schema.
+	 */
+	private function generate_offer_catalog($catalog_data)
+	{
+		if (empty($catalog_data['name'])) {
+			return null;
+		}
+
+		$catalog = array(
+			'@type' => 'OfferCatalog',
+			'name' => $catalog_data['name'],
+		);
+
+		// Process categories.
+		if (!empty($catalog_data['categories']) && is_array($catalog_data['categories'])) {
+			$catalog['itemListElement'] = array();
+
+			foreach ($catalog_data['categories'] as $category) {
+				if (empty($category['name'])) {
+					continue;
+				}
+
+				$category_item = array(
+					'@type' => 'OfferCatalog',
+					'name' => $category['name'],
+				);
+
+				// Process services within category.
+				if (!empty($category['services']) && is_array($category['services'])) {
+					$category_item['itemListElement'] = array();
+
+					foreach ($category['services'] as $service) {
+						if (empty($service['name'])) {
+							continue;
+						}
+
+						$offer = array(
+							'@type' => 'Offer',
+							'itemOffered' => array(
+								'@type' => 'Service',
+								'name' => $service['name'],
+							),
+						);
+
+						// Add optional service fields.
+						if (!empty($service['description'])) {
+							$offer['itemOffered']['description'] = $service['description'];
+						}
+
+						if (!empty($service['price'])) {
+							$offer['price'] = $service['price'];
+							$offer['priceCurrency'] = !empty($service['priceCurrency']) ? $service['priceCurrency'] : 'USD';
+						}
+
+						if (!empty($service['url'])) {
+							$offer['itemOffered']['url'] = $service['url'];
+						}
+
+						$category_item['itemListElement'][] = $offer;
+					}
+				}
+
+				if (!empty($category_item['itemListElement'])) {
+					$catalog['itemListElement'][] = $category_item;
+				}
+			}
+		}
+
+		if (empty($catalog['itemListElement'])) {
+			return null;
+		}
+
+		return $catalog;
 	}
 
 	/**

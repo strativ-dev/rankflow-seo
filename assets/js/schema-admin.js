@@ -107,6 +107,26 @@
                 self.updateBreadcrumbNumbers($(this).closest('.breadcrumb-repeater'));
             });
 
+            // Add offer catalog category
+            $(document).on('click', '.add-category-btn', function () {
+                self.addCategoryRow($(this).closest('.offer-catalog-repeater'));
+            });
+
+            // Remove offer catalog category
+            $(document).on('click', '.remove-category-btn', function () {
+                $(this).closest('.category-item').remove();
+            });
+
+            // Add service to category
+            $(document).on('click', '.add-service-btn', function () {
+                self.addServiceRow($(this).closest('.category-item'));
+            });
+
+            // Remove service from category
+            $(document).on('click', '.remove-service-btn', function () {
+                $(this).closest('.service-item').remove();
+            });
+
             // Update title when name field changes
             $(document).on('input', '.schema-fields input[name*="[name]"]:first, .schema-fields input[name*="[headline]"]:first', function () {
                 var $item = $(this).closest('.schema-item');
@@ -310,6 +330,10 @@
                     html += '</div>';
                     break;
 
+                case 'offer_catalog_repeater':
+                    html = this.generateOfferCatalogRepeater(name, id);
+                    break;
+
                 default:
                     html = '<input type="' + field.type + '" id="' + id + '" name="' + name + '" class="widefat" placeholder="' + placeholder + '">';
             }
@@ -406,6 +430,65 @@
             $container.find('.breadcrumb-row').each(function (index) {
                 $(this).find('.breadcrumb-number').text(index + 1);
             });
+        },
+
+        generateOfferCatalogRepeater: function (name, id) {
+            var html = '<div class="offer-catalog-repeater" data-name="' + name + '">';
+            html += '<div class="catalog-name-field">';
+            html += '<label>Catalog Name</label>';
+            html += '<input type="text" name="' + name + '[name]" class="widefat catalog-name-input" placeholder="e.g., Our Services">';
+            html += '</div>';
+            html += '<div class="catalog-categories">';
+            html += '<h4>Service Categories</h4>';
+            html += '<div class="categories-list"></div>';
+            html += '<button type="button" class="button add-category-btn"><span class="dashicons dashicons-plus-alt2"></span> Add Category</button>';
+            html += '</div>';
+            html += '</div>';
+            return html;
+        },
+
+        addCategoryRow: function ($container) {
+            var name = $container.data('name');
+            var $categoriesList = $container.find('.categories-list');
+            var catIndex = $categoriesList.find('.category-item').length;
+
+            var html = '<div class="category-item" data-category-index="' + catIndex + '">';
+            html += '<div class="category-header">';
+            html += '<input type="text" name="' + name + '[categories][' + catIndex + '][name]" class="widefat category-name" placeholder="Category Name (e.g., House Cleaning)">';
+            html += '<button type="button" class="button remove-category-btn" title="Remove Category"><span class="dashicons dashicons-trash"></span></button>';
+            html += '</div>';
+            html += '<div class="category-services">';
+            html += '<div class="services-list"></div>';
+            html += '<button type="button" class="button button-small add-service-btn"><span class="dashicons dashicons-plus"></span> Add Service</button>';
+            html += '</div>';
+            html += '</div>';
+
+            $categoriesList.append(html);
+        },
+
+        addServiceRow: function ($categoryItem) {
+            var $container = $categoryItem.closest('.offer-catalog-repeater');
+            var name = $container.data('name');
+            var catIndex = $categoryItem.data('category-index');
+            var $servicesList = $categoryItem.find('.services-list');
+            var svcIndex = $servicesList.find('.service-item').length;
+
+            var baseName = name + '[categories][' + catIndex + '][services][' + svcIndex + ']';
+
+            var html = '<div class="service-item" data-service-index="' + svcIndex + '">';
+            html += '<div class="service-fields">';
+            html += '<input type="text" name="' + baseName + '[name]" class="widefat service-name" placeholder="Service Name">';
+            html += '<input type="text" name="' + baseName + '[description]" class="widefat service-description" placeholder="Description (optional)">';
+            html += '<div class="service-price-row">';
+            html += '<input type="text" name="' + baseName + '[price]" class="service-price" placeholder="Price">';
+            html += '<input type="text" name="' + baseName + '[priceCurrency]" class="service-currency" placeholder="USD" value="USD">';
+            html += '<input type="url" name="' + baseName + '[url]" class="service-url" placeholder="Service URL (optional)">';
+            html += '</div>';
+            html += '</div>';
+            html += '<button type="button" class="button button-small remove-service-btn" title="Remove Service"><span class="dashicons dashicons-no-alt"></span></button>';
+            html += '</div>';
+
+            $servicesList.append(html);
         },
 
         reindexSchemas: function () {

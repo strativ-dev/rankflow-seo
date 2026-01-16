@@ -100,84 +100,120 @@ if (!defined('ABSPATH')) {
 
 				<div class="features-grid">
 					<div class="feature-card">
-						<span class="feature-icon">🤖</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/ai-meta-generator-icon.png'); ?>"
+								alt="AI Meta Generation" style="width: 35px;">
+						</span>
 						<h4><?php esc_html_e('AI Meta Generation', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Generate SEO-optimized meta titles and descriptions using Anthropic Claude or Google Gemini AI.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="feature-card">
-						<span class="feature-icon">📊</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/seo-analysis-icon.png'); ?>"
+								alt="SEO Analysis" style="width: 32px;">
+						</span>
 						<h4><?php esc_html_e('SEO Analysis', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('17 comprehensive SEO checks with color-coded scores and actionable recommendations.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="feature-card">
-						<span class="feature-icon">📖</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/readyblity-analysis-icon.png'); ?>"
+								alt="Readability Analysis" style="width: 32px;">
+						</span>
 						<h4><?php esc_html_e('Readability Analysis', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('8 readability checks including sentence length, paragraph structure, and passive voice.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="feature-card">
-						<span class="feature-icon">🗺️</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/xml-sitemap-icon.png'); ?>"
+								alt="XML Sitemap" style="width: 32px;">
+						</span>
 						<h4><?php esc_html_e('XML Sitemap', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Automatic sitemap generation with post, page, and category sitemaps. Auto-ping search engines.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="feature-card">
-						<span class="feature-icon">🔄</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/redirect-manager-icon.png'); ?>"
+								alt="Redirect Manager" style="width: 32px;">
+						</span>
 						<h4><?php esc_html_e('Redirect Manager', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Create 301/302 redirects, monitor 404 errors, and fix broken links with one click.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="feature-card">
-						<span class="feature-icon">🤖</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/robots-txt-editor-icon.png'); ?>"
+								alt="Robots.txt Editor" style="width: 32px;">
+						</span>
 						<h4><?php esc_html_e('Robots.txt Editor', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Virtual robots.txt with one-click AI crawler blocking and custom rules editor.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="feature-card">
-						<span class="feature-icon">📋</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/schema-generator-icon.png'); ?>"
+								alt="Schema Generator" style="width: 32px;">
+						</span>
 						<h4><?php esc_html_e('Schema Generator', 'rankflow-seo'); ?></h4>
-						<p><?php esc_html_e('13 schema types with display rules. Target specific pages, post types, or exclude pages.', 'rankflow-seo'); ?>
+						<p><?php esc_html_e('14 schema types with display rules. Target specific pages, post types, or exclude pages.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="feature-card">
-						<span class="feature-icon">🔗</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/site-conneciton-icon.png'); ?>"
+								alt="Site Connections" style="width: 32px;">
+						</span>
 						<h4><?php esc_html_e('Site Connections', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Verify ownership with Google, Bing, Baidu, Yandex, Pinterest, and Ahrefs.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="feature-card">
-						<span class="feature-icon">📱</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/social-media-tags-icon.png'); ?>"
+								alt="Social Media Tags" style="width: 32px;">
+						</span>
 						<h4><?php esc_html_e('Social Media Tags', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Open Graph and Twitter Card meta tags for better social sharing.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="feature-card">
-						<span class="feature-icon">👁️</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/search-preview-icon.png'); ?>"
+								alt="Search Preview" style="width: 32px;">
+						</span>
 						<h4><?php esc_html_e('Search Preview', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('See how your content will appear in Google search results before publishing.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="feature-card">
-						<span class="feature-icon">⚙️</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/advanced-options-icon.png'); ?>"
+								alt="Advanced Options" style="width: 32px;">
+						</span>
 						<h4><?php esc_html_e('Advanced Options', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Per-post noindex, nofollow, canonical URL, and exclude from sitemap options.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="feature-card">
-						<span class="feature-icon">📦</span>
+						<span class="feature-icon">
+							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/custom-post-type-icon.png'); ?>"
+								alt="Custom Post Types" style="width: 32px;">
+						</span>
 						<h4><?php esc_html_e('Custom Post Types', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Works with any public post type including WooCommerce products and portfolios.', 'rankflow-seo'); ?>
 						</p>
@@ -193,76 +229,82 @@ if (!defined('ABSPATH')) {
 
 				<div class="schema-types-grid">
 					<div class="schema-type-card">
-						<h4>🏢 <?php esc_html_e('Local Business', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Local Business', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Name, address, hours, phone, geo coordinates, price range, map URL', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>🏛️ <?php esc_html_e('Organization', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Organization', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Company name, logo, contact info, founding date, social profiles', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>👤 <?php esc_html_e('Person', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Person', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Name, job title, works for, bio, photo, social profiles', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>🌐 <?php esc_html_e('Website', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Website', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Site name, search action, language, alternate name', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>📰 <?php esc_html_e('Article', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Article', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Headline, author, publisher, dates, word count, image', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>🛒 <?php esc_html_e('Product', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Product', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Name, price, availability, brand, SKU, ratings, reviews', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>❓ <?php esc_html_e('FAQ Page', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Service', 'rankflow-seo'); ?></h4>
+						<p><?php esc_html_e('Name, description, provider, area served, price, offer catalog, ratings', 'rankflow-seo'); ?>
+						</p>
+					</div>
+
+					<div class="schema-type-card">
+						<h4><?php esc_html_e('FAQ Page', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Question and answer pairs with repeater interface', 'rankflow-seo'); ?></p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>📝 <?php esc_html_e('How To', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('How To', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Steps, tools, supplies, estimated time and cost', 'rankflow-seo'); ?></p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>📅 <?php esc_html_e('Event', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Event', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Date, venue, tickets, performer, organizer, online/offline', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>🍳 <?php esc_html_e('Recipe', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Recipe', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Ingredients, instructions, cook time, nutrition, ratings', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>🎬 <?php esc_html_e('Video', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Video', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Title, description, thumbnail, duration, upload date', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>🔗 <?php esc_html_e('Breadcrumb', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Breadcrumb', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Navigation path with name and URL for each level', 'rankflow-seo'); ?></p>
 					</div>
 
 					<div class="schema-type-card">
-						<h4>💻 <?php esc_html_e('Software App', 'rankflow-seo'); ?></h4>
+						<h4><?php esc_html_e('Software App', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('App name, category, OS, price, ratings, download URL', 'rankflow-seo'); ?>
 						</p>
 					</div>
