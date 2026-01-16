@@ -2,11 +2,11 @@
 /**
  * Base API class for all AI providers
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/api
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/api
  * @author     Strativ AB
  */
-abstract class AI_SEO_Pro_API_Base
+abstract class RankFlow_SEO_API_Base
 {
 
 	/**
@@ -112,7 +112,7 @@ abstract class AI_SEO_Pro_API_Base
 		preg_match('/\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/s', $response, $matches);
 
 		if (empty($matches[0])) {
-			return new WP_Error('invalid_response', __('Could not find JSON in API response. AI may have returned plain text instead of JSON.', 'ai-seo-pro'));
+			return new WP_Error('invalid_response', __('Could not find JSON in API response. AI may have returned plain text instead of JSON.', 'rankflow-seo'));
 		}
 
 		$json_string = $matches[0];
@@ -124,7 +124,7 @@ abstract class AI_SEO_Pro_API_Base
 				'json_error',
 				sprintf(
 					/* translators: %s: JSON error message */
-					__('Invalid JSON in API response: %s', 'ai-seo-pro'),
+					__('Invalid JSON in API response: %s', 'rankflow-seo'),
 					json_last_error_msg()
 				)
 			);
@@ -145,7 +145,7 @@ abstract class AI_SEO_Pro_API_Base
 				'missing_fields',
 				sprintf(
 					/* translators: %s: comma-separated list of missing field names */
-					__('Missing required fields in API response: %s', 'ai-seo-pro'),
+					__('Missing required fields in API response: %s', 'rankflow-seo'),
 					implode(', ', $missing_fields)
 				)
 			);
@@ -197,10 +197,10 @@ abstract class AI_SEO_Pro_API_Base
 			$error_message = isset($error_data['error']['message'])
 				? $error_data['error']['message']
 				: sprintf(
-					/* translators: %d: HTTP status code */
-					__('API request failed with status code: %d', 'ai-seo-pro'),
-					$status_code
-				);
+				/* translators: %d: HTTP status code */
+				__('API request failed with status code: %d', 'rankflow-seo'),
+				$status_code
+			);
 
 			return new WP_Error('api_error', $error_message);
 		}

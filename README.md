@@ -1,4 +1,4 @@
-=== AI SEO Pro ===
+=== RankFlow SEO ===
 Contributors: joyroy
 Tags: seo, ai, meta tags, schema, optimization
 Requires at least: 5.8
@@ -12,7 +12,7 @@ Professional AI SEO plugin with advanced meta generation, content analysis, sche
 
 == Description ==
 
-# AI SEO Pro
+# RankFlow SEO
 
 Professional AI-powered SEO plugin for WordPress with advanced meta generation, content analysis, schema markup, XML sitemaps, redirects, and robots.txt editor.
 
@@ -119,9 +119,9 @@ Smart paste detection - extracts verification codes from full meta tags.
 
 ## Installation
 
-1. Upload the plugin files to `/wp-content/plugins/ai-seo-pro/`
+1. Upload the plugin files to `/wp-content/plugins/rankflow-seo/`
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Go to **AI SEO Pro → Settings**
+3. Go to **RankFlow SEO → Settings**
 4. Configure your AI API key
 5. Start optimizing your content!
 
@@ -129,21 +129,21 @@ Smart paste detection - extracts verification codes from full meta tags.
 
 ### AI Provider Setup
 
-1. Navigate to **AI SEO Pro → Settings**
+1. Navigate to **RankFlow SEO → Settings**
 2. Select your AI provider (Anthropic or Google)
 3. Enter your API key
 4. Save settings
 
 ### Sitemap Configuration
 
-1. Go to **AI SEO Pro → Settings → Sitemap**
+1. Go to **RankFlow SEO → Settings → Sitemap**
 2. Enable/disable sitemap generation
 3. Configure included post types
 4. Set posts per sitemap page
 
 ### Schema Setup
 
-1. Go to **AI SEO Pro → Schema**
+1. Go to **RankFlow SEO → Schema**
 2. Click **"Add Schema"**
 3. Select schema type from dropdown
 4. Fill in the dynamic fields
@@ -173,7 +173,7 @@ Yes, for AI features. Other features (sitemap, redirects, schema) work without a
 Both work excellently. Claude excels at natural language, Gemini is Google's powerful offering.
 
 **Does it work with custom post types?**
-Yes! Enable AI SEO Pro for any public post type.
+Yes! Enable RankFlow SEO for any public post type.
 
 **Will it conflict with other SEO plugins?**
 We recommend deactivating other SEO plugins to avoid conflicts.
@@ -201,4 +201,4 @@ This plugin is licensed under the GPLv2 or later.
 
 ## Credits
 
-Developed by Joy Roy
+Developed by Strativ

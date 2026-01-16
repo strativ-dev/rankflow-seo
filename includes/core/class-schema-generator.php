@@ -2,11 +2,11 @@
 /**
  * Schema markup generator.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/core
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/core
  * @author     Strativ AB
  */
-class AI_SEO_Pro_Schema_Generator
+class RankFlow_SEO_Schema_Generator
 {
 
 	/**
@@ -49,7 +49,7 @@ class AI_SEO_Pro_Schema_Generator
 		}
 
 		// Add description
-		$description = get_post_meta($post_id, '_ai_seo_description', true);
+		$description = get_post_meta($post_id, '_rankflow_seo_description', true);
 		if (!empty($description)) {
 			$schema['description'] = $description;
 		}
@@ -74,7 +74,7 @@ class AI_SEO_Pro_Schema_Generator
 			'dateModified' => get_the_modified_date('c', $post_id),
 		);
 
-		$description = get_post_meta($post_id, '_ai_seo_description', true);
+		$description = get_post_meta($post_id, '_rankflow_seo_description', true);
 		if (!empty($description)) {
 			$schema['description'] = $description;
 		}
@@ -117,7 +117,7 @@ class AI_SEO_Pro_Schema_Generator
 			array(
 				'@type' => 'ListItem',
 				'position' => 1,
-				'name' => __('Home', 'ai-seo-pro'),
+				'name' => __('Home', 'rankflow-seo'),
 				'item' => home_url(),
 			),
 		);

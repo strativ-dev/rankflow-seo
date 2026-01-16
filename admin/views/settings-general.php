@@ -2,67 +2,67 @@
 /**
  * General settings tab.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/admin/views
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/admin/views
  */
 
 if (!defined('ABSPATH')) {
 	exit;
 }
 
-$ai_seo_pro_enabled_post_types = get_option('ai_seo_pro_post_types', array('post', 'page'));
-$ai_seo_pro_title_separator = get_option('ai_seo_pro_title_separator', '-');
-$ai_seo_pro_homepage_title = get_option('ai_seo_pro_homepage_title', get_bloginfo('name'));
-$ai_seo_pro_homepage_description = get_option('ai_seo_pro_homepage_description', get_bloginfo('description'));
+$rankflow_seo_enabled_post_types = get_option('rankflow_seo_post_types', array('post', 'page'));
+$rankflow_seo_title_separator = get_option('rankflow_seo_title_separator', '-');
+$rankflow_seo_homepage_title = get_option('rankflow_seo_homepage_title', get_bloginfo('name'));
+$rankflow_seo_homepage_description = get_option('rankflow_seo_homepage_description', get_bloginfo('description'));
 ?>
 
 <form method="post" action="options.php">
-	<?php settings_fields('ai_seo_pro_general'); ?>
+	<?php settings_fields('rankflow_seo_general'); ?>
 
-	<h2><?php esc_html_e('Post Type Settings', 'ai-seo-pro'); ?></h2>
+	<h2><?php esc_html_e('Post Type Settings', 'rankflow-seo'); ?></h2>
 
 	<table class="form-table">
 		<tr>
 			<th scope="row">
-				<label><?php esc_html_e('Enable for Post Types', 'ai-seo-pro'); ?></label>
+				<label><?php esc_html_e('Enable for Post Types', 'rankflow-seo'); ?></label>
 			</th>
 			<td>
 				<div class="post-type-list">
 					<?php
-					$ai_seo_pro_post_types = get_post_types(array('public' => true), 'objects');
+					$rankflow_seo_post_types = get_post_types(array('public' => true), 'objects');
 
-					foreach ($ai_seo_pro_post_types as $ai_seo_pro_post_type) {
-						if ('attachment' === $ai_seo_pro_post_type->name) {
+					foreach ($rankflow_seo_post_types as $rankflow_seo_post_type) {
+						if ('attachment' === $rankflow_seo_post_type->name) {
 							continue;
 						}
 						?>
 						<label>
-							<input type="checkbox" name="ai_seo_pro_post_types[]"
-								value="<?php echo esc_attr($ai_seo_pro_post_type->name); ?>" <?php checked(in_array($ai_seo_pro_post_type->name, $ai_seo_pro_enabled_post_types, true)); ?>>
-							<span><?php echo esc_html($ai_seo_pro_post_type->label); ?></span>
+							<input type="checkbox" name="rankflow_seo_post_types[]"
+								value="<?php echo esc_attr($rankflow_seo_post_type->name); ?>" <?php checked(in_array($rankflow_seo_post_type->name, $rankflow_seo_enabled_post_types, true)); ?>>
+							<span><?php echo esc_html($rankflow_seo_post_type->label); ?></span>
 						</label>
 						<?php
 					}
 					?>
 				</div>
 				<p class="description">
-					<?php esc_html_e('Select which post types should have AI SEO meta boxes', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Select which post types should have AI SEO meta boxes', 'rankflow-seo'); ?>
 				</p>
 			</td>
 		</tr>
 	</table>
 
-	<h2><?php esc_html_e('Title Settings', 'ai-seo-pro'); ?></h2>
+	<h2><?php esc_html_e('Title Settings', 'rankflow-seo'); ?></h2>
 
 	<table class="form-table">
 		<tr>
 			<th scope="row">
-				<label for="title_separator"><?php esc_html_e('Title Separator', 'ai-seo-pro'); ?></label>
+				<label for="title_separator"><?php esc_html_e('Title Separator', 'rankflow-seo'); ?></label>
 			</th>
 			<td>
-				<select name="ai_seo_pro_title_separator" id="title_separator" class="regular-text">
+				<select name="rankflow_seo_title_separator" id="title_separator" class="regular-text">
 					<?php
-					$ai_seo_pro_separators = array(
+					$rankflow_seo_separators = array(
 						'-' => '- (dash)',
 						'–' => '– (ndash)',
 						'—' => '— (mdash)',
@@ -73,24 +73,24 @@ $ai_seo_pro_homepage_description = get_option('ai_seo_pro_homepage_description',
 						'>' => '> (greater than)',
 					);
 
-					foreach ($ai_seo_pro_separators as $ai_seo_pro_sep => $ai_seo_pro_label) {
+					foreach ($rankflow_seo_separators as $rankflow_seo_sep => $rankflow_seo_label) {
 						?>
-						<option value="<?php echo esc_attr($ai_seo_pro_sep); ?>" <?php selected($ai_seo_pro_title_separator, $ai_seo_pro_sep); ?>>
-							<?php echo esc_html($ai_seo_pro_label); ?>
+						<option value="<?php echo esc_attr($rankflow_seo_sep); ?>" <?php selected($rankflow_seo_title_separator, $rankflow_seo_sep); ?>>
+							<?php echo esc_html($rankflow_seo_label); ?>
 						</option>
 						<?php
 					}
 					?>
 				</select>
 				<p class="description">
-					<?php esc_html_e('Choose the separator to use in page titles (e.g., "Post Title - Site Name")', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Choose the separator to use in page titles (e.g., "Post Title - Site Name")', 'rankflow-seo'); ?>
 				</p>
 
 				<div class="title-preview"
 					style="margin-top: 15px; padding: 10px; background: #f9f9f9; border-left: 4px solid #2271b1;">
-					<strong><?php esc_html_e('Preview:', 'ai-seo-pro'); ?></strong><br>
+					<strong><?php esc_html_e('Preview:', 'rankflow-seo'); ?></strong><br>
 					<span id="title-preview-text">
-						<?php echo esc_html('Your Post Title ' . $ai_seo_pro_title_separator . ' ' . get_bloginfo('name')); ?>
+						<?php echo esc_html('Your Post Title ' . $rankflow_seo_title_separator . ' ' . get_bloginfo('name')); ?>
 					</span>
 				</div>
 			</td>
@@ -98,91 +98,91 @@ $ai_seo_pro_homepage_description = get_option('ai_seo_pro_homepage_description',
 
 		<tr>
 			<th scope="row">
-				<label for="homepage_title"><?php esc_html_e('Homepage Title', 'ai-seo-pro'); ?></label>
+				<label for="homepage_title"><?php esc_html_e('Homepage Title', 'rankflow-seo'); ?></label>
 			</th>
 			<td>
-				<input type="text" id="homepage_title" name="ai_seo_pro_homepage_title"
-					value="<?php echo esc_attr($ai_seo_pro_homepage_title); ?>" class="large-text"
+				<input type="text" id="homepage_title" name="rankflow_seo_homepage_title"
+					value="<?php echo esc_attr($rankflow_seo_homepage_title); ?>" class="large-text"
 					placeholder="<?php echo esc_attr(get_bloginfo('name')); ?>">
 				<p class="description">
-					<?php esc_html_e('The title that will be used for your homepage', 'ai-seo-pro'); ?>
+					<?php esc_html_e('The title that will be used for your homepage', 'rankflow-seo'); ?>
 				</p>
 			</td>
 		</tr>
 
 		<tr>
 			<th scope="row">
-				<label for="homepage_description"><?php esc_html_e('Homepage Description', 'ai-seo-pro'); ?></label>
+				<label for="homepage_description"><?php esc_html_e('Homepage Description', 'rankflow-seo'); ?></label>
 			</th>
 			<td>
-				<textarea id="homepage_description" name="ai_seo_pro_homepage_description" rows="3" class="large-text"
-					placeholder="<?php echo esc_attr(get_bloginfo('description')); ?>"><?php echo esc_textarea($ai_seo_pro_homepage_description); ?></textarea>
+				<textarea id="homepage_description" name="rankflow_seo_homepage_description" rows="3" class="large-text"
+					placeholder="<?php echo esc_attr(get_bloginfo('description')); ?>"><?php echo esc_textarea($rankflow_seo_homepage_description); ?></textarea>
 				<p class="description">
-					<?php esc_html_e('The description that will be used for your homepage', 'ai-seo-pro'); ?>
+					<?php esc_html_e('The description that will be used for your homepage', 'rankflow-seo'); ?>
 				</p>
 			</td>
 		</tr>
 	</table>
 
-	<h2><?php esc_html_e('Knowledge Graph', 'ai-seo-pro'); ?></h2>
+	<h2><?php esc_html_e('Knowledge Graph', 'rankflow-seo'); ?></h2>
 
 	<table class="form-table">
 		<tr>
 			<th scope="row">
-				<label for="site_represents"><?php esc_html_e('Site Represents', 'ai-seo-pro'); ?></label>
+				<label for="site_represents"><?php esc_html_e('Site Represents', 'rankflow-seo'); ?></label>
 			</th>
 			<td>
-				<select name="ai_seo_pro_site_represents" id="site_represents" class="regular-text">
-					<option value="organization" <?php selected(get_option('ai_seo_pro_site_represents', 'organization'), 'organization'); ?>>
-						<?php esc_html_e('Organization', 'ai-seo-pro'); ?>
+				<select name="rankflow_seo_site_represents" id="site_represents" class="regular-text">
+					<option value="organization" <?php selected(get_option('rankflow_seo_site_represents', 'organization'), 'organization'); ?>>
+						<?php esc_html_e('Organization', 'rankflow-seo'); ?>
 					</option>
-					<option value="person" <?php selected(get_option('ai_seo_pro_site_represents'), 'person'); ?>>
-						<?php esc_html_e('Person', 'ai-seo-pro'); ?>
+					<option value="person" <?php selected(get_option('rankflow_seo_site_represents'), 'person'); ?>>
+						<?php esc_html_e('Person', 'rankflow-seo'); ?>
 					</option>
 				</select>
 				<p class="description">
-					<?php esc_html_e('Does this site represent an organization or a person?', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Does this site represent an organization or a person?', 'rankflow-seo'); ?>
 				</p>
 			</td>
 		</tr>
 
 		<tr id="organization_name_row">
 			<th scope="row">
-				<label for="organization_name"><?php esc_html_e('Organization Name', 'ai-seo-pro'); ?></label>
+				<label for="organization_name"><?php esc_html_e('Organization Name', 'rankflow-seo'); ?></label>
 			</th>
 			<td>
-				<input type="text" id="organization_name" name="ai_seo_pro_organization_name"
-					value="<?php echo esc_attr(get_option('ai_seo_pro_organization_name', get_bloginfo('name'))); ?>"
+				<input type="text" id="organization_name" name="rankflow_seo_organization_name"
+					value="<?php echo esc_attr(get_option('rankflow_seo_organization_name', get_bloginfo('name'))); ?>"
 					class="regular-text">
 				<p class="description">
-					<?php esc_html_e('The name of your organization', 'ai-seo-pro'); ?>
+					<?php esc_html_e('The name of your organization', 'rankflow-seo'); ?>
 				</p>
 			</td>
 		</tr>
 
 		<tr id="person_name_row" style="display: none;">
 			<th scope="row">
-				<label for="person_name"><?php esc_html_e('Person Name', 'ai-seo-pro'); ?></label>
+				<label for="person_name"><?php esc_html_e('Person Name', 'rankflow-seo'); ?></label>
 			</th>
 			<td>
-				<input type="text" id="person_name" name="ai_seo_pro_person_name"
-					value="<?php echo esc_attr(get_option('ai_seo_pro_person_name')); ?>" class="regular-text">
+				<input type="text" id="person_name" name="rankflow_seo_person_name"
+					value="<?php echo esc_attr(get_option('rankflow_seo_person_name')); ?>" class="regular-text">
 				<p class="description">
-					<?php esc_html_e('Your name', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Your name', 'rankflow-seo'); ?>
 				</p>
 			</td>
 		</tr>
 
 		<tr>
 			<th scope="row">
-				<label for="site_logo"><?php esc_html_e('Site Logo URL', 'ai-seo-pro'); ?></label>
+				<label for="site_logo"><?php esc_html_e('Site Logo URL', 'rankflow-seo'); ?></label>
 			</th>
 			<td>
-				<input type="url" id="site_logo" name="ai_seo_pro_site_logo"
-					value="<?php echo esc_url(get_option('ai_seo_pro_site_logo', get_site_icon_url())); ?>"
+				<input type="url" id="site_logo" name="rankflow_seo_site_logo"
+					value="<?php echo esc_url(get_option('rankflow_seo_site_logo', get_site_icon_url())); ?>"
 					class="regular-text">
 				<p class="description">
-					<?php esc_html_e('URL of your site logo (recommended: 600x60px)', 'ai-seo-pro'); ?>
+					<?php esc_html_e('URL of your site logo (recommended: 600x60px)', 'rankflow-seo'); ?>
 				</p>
 			</td>
 		</tr>

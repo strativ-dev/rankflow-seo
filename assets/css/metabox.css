@@ -1,11 +1,11 @@
 /**
  * Meta box styles with Tabs and Analysis
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/assets/css
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/assets/css
  */
 
-.ai-seo-pro-metabox {
+.rankflow-seo-metabox {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 	padding: 0;
 }
@@ -205,7 +205,7 @@
 	font-size: 13px;
 }
 
-#ai_seo_generate_now {
+#rankflow_seo_generate_now {
 	background: #2271b1;
 	color: #fff;
 	border: none;
@@ -220,19 +220,19 @@
 	transition: all 0.3s;
 }
 
-#ai_seo_generate_now:hover {
+#rankflow_seo_generate_now:hover {
 	background: #135e96;
 	transform: translateY(-1px);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-#ai_seo_generate_now:disabled {
+#rankflow_seo_generate_now:disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
 	transform: none;
 }
 
-#ai_seo_generate_now .dashicons {
+#rankflow_seo_generate_now .dashicons {
 	font-size: 18px;
 	width: 18px;
 	height: 18px;
@@ -663,7 +663,7 @@
 		gap: 10px;
 	}
 
-	#ai_seo_generate_now {
+	#rankflow_seo_generate_now {
 		width: 100%;
 		justify-content: center;
 	}

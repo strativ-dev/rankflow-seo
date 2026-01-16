@@ -2,8 +2,8 @@
 /**
  * Cache utility.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/utils
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/utils
  * @author     Strativ AB
  */
 
@@ -13,15 +13,15 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class AI_SEO_Pro_Cache
+ * Class RankFlow_SEO_Cache
  */
-class AI_SEO_Pro_Cache
+class RankFlow_SEO_Cache
 {
 
 	/**
 	 * Cache prefix.
 	 */
-	const PREFIX = 'ai_seo_pro_';
+	const PREFIX = 'rankflow_seo_';
 
 	/**
 	 * Default expiration (24 hours).

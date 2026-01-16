@@ -2,8 +2,8 @@
 /**
  * Sitemap Manager - Core sitemap functionality
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/sitemap
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/sitemap
  * @author     Strativ AB
  */
 
@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class AI_SEO_Pro_Sitemap_Manager
+ * Class RankFlow_SEO_Sitemap_Manager
  */
-class AI_SEO_Pro_Sitemap_Manager
+class RankFlow_SEO_Sitemap_Manager
 {
 
 	/**
@@ -85,7 +85,7 @@ class AI_SEO_Pro_Sitemap_Manager
 		add_filter('robots_txt', array($this, 'add_sitemap_to_robots'), 10, 2);
 
 		// Flush rewrite rules on settings save.
-		add_action('update_option_ai_seo_pro_sitemap_enabled', array($this, 'flush_rewrite_rules'));
+		add_action('update_option_rankflow_seo_sitemap_enabled', array($this, 'flush_rewrite_rules'));
 	}
 
 	/**
@@ -95,7 +95,7 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	public function is_enabled()
 	{
-		return (bool) get_option('ai_seo_pro_sitemap_enabled', true);
+		return (bool) get_option('rankflow_seo_sitemap_enabled', true);
 	}
 
 	/**
@@ -105,19 +105,19 @@ class AI_SEO_Pro_Sitemap_Manager
 	{
 		// Post types provider.
 		$this->providers['post_type'] = array(
-			'class' => 'AI_SEO_Pro_Sitemap_Post_Type',
+			'class' => 'RankFlow_SEO_Sitemap_Post_Type',
 			'file' => 'class-sitemap-post-type.php',
 		);
 
 		// Taxonomy provider.
 		$this->providers['taxonomy'] = array(
-			'class' => 'AI_SEO_Pro_Sitemap_Taxonomy',
+			'class' => 'RankFlow_SEO_Sitemap_Taxonomy',
 			'file' => 'class-sitemap-taxonomy.php',
 		);
 
 		// Author provider.
 		$this->providers['author'] = array(
-			'class' => 'AI_SEO_Pro_Sitemap_Author',
+			'class' => 'RankFlow_SEO_Sitemap_Author',
 			'file' => 'class-sitemap-author.php',
 		);
 	}
@@ -130,28 +130,28 @@ class AI_SEO_Pro_Sitemap_Manager
 		// Redirect sitemap.xml to sitemap_index.xml.
 		add_rewrite_rule(
 			'^sitemap\.xml$',
-			'index.php?ai_seo_sitemap=redirect',
+			'index.php?rankflow_seo_sitemap=redirect',
 			'top'
 		);
 
 		// Main sitemap index.
 		add_rewrite_rule(
 			'^sitemap_index\.xml$',
-			'index.php?ai_seo_sitemap=index',
+			'index.php?rankflow_seo_sitemap=index',
 			'top'
 		);
 
 		// Taxonomy sitemaps.
 		add_rewrite_rule(
 			'^([a-zA-Z0-9_-]+)-taxonomy-sitemap([0-9]*)\.xml$',
-			'index.php?ai_seo_sitemap=taxonomy&ai_seo_sitemap_type=$matches[1]&ai_seo_sitemap_page=$matches[2]',
+			'index.php?rankflow_seo_sitemap=taxonomy&rankflow_seo_sitemap_type=$matches[1]&rankflow_seo_sitemap_page=$matches[2]',
 			'top'
 		);
 
 		// Post type sitemaps.
 		add_rewrite_rule(
 			'^((?!taxonomy)[a-z0-9_-]+)-sitemap([0-9]*)\.xml$',
-			'index.php?ai_seo_sitemap=post_type&ai_seo_sitemap_type=$matches[1]&ai_seo_sitemap_page=$matches[2]',
+			'index.php?rankflow_seo_sitemap=post_type&rankflow_seo_sitemap_type=$matches[1]&rankflow_seo_sitemap_page=$matches[2]',
 			'top'
 		);
 
@@ -159,14 +159,14 @@ class AI_SEO_Pro_Sitemap_Manager
 		// Author sitemap.
 		add_rewrite_rule(
 			'^author-sitemap([0-9]*)\.xml$',
-			'index.php?ai_seo_sitemap=author&ai_seo_sitemap_page=$matches[1]',
+			'index.php?rankflow_seo_sitemap=author&rankflow_seo_sitemap_page=$matches[1]',
 			'top'
 		);
 
 		// XSL stylesheet.
 		add_rewrite_rule(
 			'^sitemap\.xsl$',
-			'index.php?ai_seo_sitemap=xsl',
+			'index.php?rankflow_seo_sitemap=xsl',
 			'top'
 		);
 	}
@@ -179,9 +179,9 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	public function add_query_vars($vars)
 	{
-		$vars[] = 'ai_seo_sitemap';
-		$vars[] = 'ai_seo_sitemap_type';
-		$vars[] = 'ai_seo_sitemap_page';
+		$vars[] = 'rankflow_seo_sitemap';
+		$vars[] = 'rankflow_seo_sitemap_type';
+		$vars[] = 'rankflow_seo_sitemap_page';
 		return $vars;
 	}
 
@@ -190,7 +190,7 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	public function handle_sitemap_request()
 	{
-		$sitemap = get_query_var('ai_seo_sitemap');
+		$sitemap = get_query_var('rankflow_seo_sitemap');
 
 		if (empty($sitemap)) {
 			return;
@@ -211,19 +211,19 @@ class AI_SEO_Pro_Sitemap_Manager
 				break;
 
 			case 'post_type':
-				$type = get_query_var('ai_seo_sitemap_type');
-				$page = (int) get_query_var('ai_seo_sitemap_page', 1);
+				$type = get_query_var('rankflow_seo_sitemap_type');
+				$page = (int) get_query_var('rankflow_seo_sitemap_page', 1);
 				$this->render_post_type_sitemap($type, $page);
 				break;
 
 			case 'taxonomy':
-				$type = get_query_var('ai_seo_sitemap_type');
-				$page = (int) get_query_var('ai_seo_sitemap_page', 1);
+				$type = get_query_var('rankflow_seo_sitemap_type');
+				$page = (int) get_query_var('rankflow_seo_sitemap_page', 1);
 				$this->render_taxonomy_sitemap($type, $page);
 				break;
 
 			case 'author':
-				$page = (int) get_query_var('ai_seo_sitemap_page', 1);
+				$page = (int) get_query_var('rankflow_seo_sitemap_page', 1);
 				$this->render_author_sitemap($page);
 				break;
 
@@ -367,11 +367,11 @@ class AI_SEO_Pro_Sitemap_Manager
 				array(
 					'relation' => 'OR',
 					array(
-						'key' => '_ai_seo_robots',
+						'key' => '_rankflow_seo_robots',
 						'compare' => 'NOT EXISTS',
 					),
 					array(
-						'key' => '_ai_seo_robots',
+						'key' => '_rankflow_seo_robots',
 						'value' => 'noindex',
 						'compare' => 'NOT LIKE',
 					),
@@ -380,11 +380,11 @@ class AI_SEO_Pro_Sitemap_Manager
 				array(
 					'relation' => 'OR',
 					array(
-						'key' => '_ai_seo_exclude_sitemap',
+						'key' => '_rankflow_seo_exclude_sitemap',
 						'compare' => 'NOT EXISTS',
 					),
 					array(
-						'key' => '_ai_seo_exclude_sitemap',
+						'key' => '_rankflow_seo_exclude_sitemap',
 						'value' => '1',
 						'compare' => '!=',
 					),
@@ -707,7 +707,7 @@ class AI_SEO_Pro_Sitemap_Manager
 <body>
 <div class="container">
 	<h1>XML Sitemap</h1>
-	<p class="description">This is the XML sitemap for <strong>' . esc_html(get_bloginfo('name')) . '</strong>, generated by AI SEO Pro.</p>
+	<p class="description">This is the XML sitemap for <strong>' . esc_html(get_bloginfo('name')) . '</strong>, generated by RankFlow SEO.</p>
 
 	<xsl:choose>
 		<xsl:when test="sitemap:sitemapindex">
@@ -767,7 +767,7 @@ class AI_SEO_Pro_Sitemap_Manager
 		</xsl:otherwise>
 	</xsl:choose>
 
-	<p class="brand">Generated by AI SEO Pro for WordPress</p>
+	<p class="brand">Generated by RankFlow SEO for WordPress</p>
 </div>
 </body>
 </html>
@@ -782,7 +782,7 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	public function get_enabled_post_types()
 	{
-		$saved = get_option('ai_seo_pro_sitemap_post_types', array());
+		$saved = get_option('rankflow_seo_sitemap_post_types', array());
 
 		if (!empty($saved)) {
 			// Filter out excluded post types from saved settings.
@@ -807,7 +807,7 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	public function get_enabled_taxonomies()
 	{
-		$saved = get_option('ai_seo_pro_sitemap_taxonomies', null);
+		$saved = get_option('rankflow_seo_sitemap_taxonomies', null);
 
 		// Always detect current public taxonomies
 		$public = get_taxonomies(
@@ -825,7 +825,7 @@ class AI_SEO_Pro_Sitemap_Manager
 		 */
 		if ($saved === null) {
 			update_option(
-				'ai_seo_pro_sitemap_taxonomies',
+				'rankflow_seo_sitemap_taxonomies',
 				array_values($public)
 			);
 			return array_values($public);
@@ -856,7 +856,7 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	public function get_entries_per_page()
 	{
-		return (int) get_option('ai_seo_pro_sitemap_entries_per_page', 1000);
+		return (int) get_option('rankflow_seo_sitemap_entries_per_page', 1000);
 	}
 
 	/**
@@ -866,7 +866,7 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	public function is_taxonomy_sitemap_enabled()
 	{
-		return (bool) get_option('ai_seo_pro_sitemap_include_taxonomies', true);
+		return (bool) get_option('rankflow_seo_sitemap_include_taxonomies', true);
 	}
 
 	/**
@@ -876,7 +876,7 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	public function is_author_sitemap_enabled()
 	{
-		return (bool) get_option('ai_seo_pro_sitemap_include_authors', false);
+		return (bool) get_option('rankflow_seo_sitemap_include_authors', false);
 	}
 
 	/**
@@ -886,7 +886,7 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	public function is_image_sitemap_enabled()
 	{
-		return (bool) get_option('ai_seo_pro_sitemap_include_images', true);
+		return (bool) get_option('rankflow_seo_sitemap_include_images', true);
 	}
 
 	/**
@@ -908,8 +908,8 @@ class AI_SEO_Pro_Sitemap_Manager
 			$wpdb->prepare(
 				"SELECT COUNT(DISTINCT p.ID) 
 			FROM {$wpdb->posts} p
-			LEFT JOIN {$wpdb->postmeta} pm_robots ON (p.ID = pm_robots.post_id AND pm_robots.meta_key = '_ai_seo_robots')
-			LEFT JOIN {$wpdb->postmeta} pm_exclude ON (p.ID = pm_exclude.post_id AND pm_exclude.meta_key = '_ai_seo_exclude_sitemap')
+			LEFT JOIN {$wpdb->postmeta} pm_robots ON (p.ID = pm_robots.post_id AND pm_robots.meta_key = '_rankflow_seo_robots')
+			LEFT JOIN {$wpdb->postmeta} pm_exclude ON (p.ID = pm_exclude.post_id AND pm_exclude.meta_key = '_rankflow_seo_exclude_sitemap')
 			WHERE p.post_type = %s 
 			AND p.post_status = 'publish'
 			AND (pm_robots.meta_value IS NULL OR pm_robots.meta_value NOT LIKE %s)
@@ -962,7 +962,7 @@ class AI_SEO_Pro_Sitemap_Manager
 	{
 		// Check cache first.
 		$cache_key = 'lastmod_' . $taxonomy;
-		$cache_group = 'ai_seo_pro_sitemap';
+		$cache_group = 'rankflow_seo_sitemap';
 		$date = wp_cache_get($cache_key, $cache_group);
 
 		if (false === $date) {
@@ -1059,12 +1059,12 @@ class AI_SEO_Pro_Sitemap_Manager
 	public function add_sitemap_to_robots($output, $public)
 	{
 		// Don't add if robots.txt editor is enabled - it will handle the sitemap.
-		if (get_option('ai_seo_pro_robots_enabled', false)) {
+		if (get_option('rankflow_seo_robots_enabled', false)) {
 			return $output;
 		}
 
 		// Don't add if sitemap is disabled.
-		if (!get_option('ai_seo_pro_sitemap_enabled', false)) {
+		if (!get_option('rankflow_seo_sitemap_enabled', false)) {
 			return $output;
 		}
 
@@ -1072,7 +1072,7 @@ class AI_SEO_Pro_Sitemap_Manager
 			// Remove WordPress default sitemap and add ours instead.
 			$output = preg_replace('/Sitemap:\s*' . preg_quote(home_url('wp-sitemap.xml'), '/') . '\s*\n?/i', '', $output);
 
-			$output .= "\n# AI SEO Pro Sitemap\n";
+			$output .= "\n# RankFlow SEO Sitemap\n";
 			$output .= 'Sitemap: ' . home_url('sitemap_index.xml') . "\n";
 		}
 
@@ -1086,12 +1086,12 @@ class AI_SEO_Pro_Sitemap_Manager
 	 */
 	public function ping_search_engines($post_id = 0)
 	{
-		if (!get_option('ai_seo_pro_sitemap_ping_search_engines', true)) {
+		if (!get_option('rankflow_seo_sitemap_ping_search_engines', true)) {
 			return;
 		}
 
 		// Only ping once per hour.
-		$last_ping = get_transient('ai_seo_pro_sitemap_last_ping');
+		$last_ping = get_transient('rankflow_seo_sitemap_last_ping');
 		if ($last_ping) {
 			return;
 		}
@@ -1113,7 +1113,7 @@ class AI_SEO_Pro_Sitemap_Manager
 		));
 
 		// Set transient to prevent excessive pinging.
-		set_transient('ai_seo_pro_sitemap_last_ping', time(), HOUR_IN_SECONDS);
+		set_transient('rankflow_seo_sitemap_last_ping', time(), HOUR_IN_SECONDS);
 	}
 
 	/**

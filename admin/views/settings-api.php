@@ -2,55 +2,55 @@
 /**
  * API settings tab.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/admin/views
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/admin/views
  */
 
 if (!defined('ABSPATH')) {
 	exit;
 }
 
-$ai_seo_pro_current_provider = get_option('ai_seo_pro_api_provider', 'gemini');
-$ai_seo_pro_api_key = get_option('ai_seo_pro_api_key', '');
-$ai_seo_pro_auto_generate = get_option('ai_seo_pro_auto_generate', false);
+$rankflow_seo_current_provider = get_option('rankflow_seo_api_provider', 'gemini');
+$rankflow_seo_api_key = get_option('rankflow_seo_api_key', '');
+$rankflow_seo_auto_generate = get_option('rankflow_seo_auto_generate', false);
 ?>
 
 <form method="post" action="options.php">
-	<?php settings_fields('ai_seo_pro_api'); ?>
+	<?php settings_fields('rankflow_seo_api'); ?>
 
 	<table class="form-table">
 		<tr>
 			<th scope="row">
-				<label for="api_provider"><?php esc_html_e('AI Provider', 'ai-seo-pro'); ?></label>
+				<label for="api_provider"><?php esc_html_e('AI Provider', 'rankflow-seo'); ?></label>
 			</th>
 			<td>
-				<select name="ai_seo_pro_api_provider" id="api_provider" class="regular-text">
-					<option value="anthropic" <?php selected($ai_seo_pro_current_provider, 'anthropic'); ?>>
+				<select name="rankflow_seo_api_provider" id="api_provider" class="regular-text">
+					<option value="anthropic" <?php selected($rankflow_seo_current_provider, 'anthropic'); ?>>
 						Anthropic (Claude)
 					</option>
-					<option value="gemini" <?php selected($ai_seo_pro_current_provider, 'gemini'); ?>>
+					<option value="gemini" <?php selected($rankflow_seo_current_provider, 'gemini'); ?>>
 						Google (Gemini)
 					</option>
 				</select>
 				<p class="description">
-					<?php esc_html_e('Choose which AI provider to use for generating meta tags', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Choose which AI provider to use for generating meta tags', 'rankflow-seo'); ?>
 				</p>
 			</td>
 		</tr>
 
 		<tr>
 			<th scope="row">
-				<label for="api_key"><?php esc_html_e('API Key', 'ai-seo-pro'); ?></label>
+				<label for="api_key"><?php esc_html_e('API Key', 'rankflow-seo'); ?></label>
 			</th>
 			<td>
-				<input type="password" id="api_key" name="ai_seo_pro_api_key"
-					value="<?php echo esc_attr($ai_seo_pro_api_key); ?>" class="regular-text">
+				<input type="password" id="api_key" name="rankflow_seo_api_key"
+					value="<?php echo esc_attr($rankflow_seo_api_key); ?>" class="regular-text">
 				<p class="description">
-					<?php esc_html_e('Enter your API key from your chosen provider', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Enter your API key from your chosen provider', 'rankflow-seo'); ?>
 				</p>
 
 				<div class="api-key-instructions" style="margin-top: 15px;">
-					<p><strong><?php esc_html_e('How to get your API key:', 'ai-seo-pro'); ?></strong></p>
+					<p><strong><?php esc_html_e('How to get your API key:', 'rankflow-seo'); ?></strong></p>
 					<ul class="provider-instructions">
 						<li data-provider="anthropic">
 							<strong>Anthropic:</strong>
@@ -71,15 +71,15 @@ $ai_seo_pro_auto_generate = get_option('ai_seo_pro_auto_generate', false);
 
 		<tr>
 			<th scope="row">
-				<?php esc_html_e('Auto-generate', 'ai-seo-pro'); ?>
+				<?php esc_html_e('Auto-generate', 'rankflow-seo'); ?>
 			</th>
 			<td>
 				<label>
-					<input type="checkbox" name="ai_seo_pro_auto_generate" value="1" <?php checked($ai_seo_pro_auto_generate, true); ?>>
-					<?php esc_html_e('Automatically generate meta tags for new posts', 'ai-seo-pro'); ?>
+					<input type="checkbox" name="rankflow_seo_auto_generate" value="1" <?php checked($rankflow_seo_auto_generate, true); ?>>
+					<?php esc_html_e('Automatically generate meta tags for new posts', 'rankflow-seo'); ?>
 				</label>
 				<p class="description">
-					<?php esc_html_e('When enabled, meta tags will be generated automatically when you publish a new post', 'ai-seo-pro'); ?>
+					<?php esc_html_e('When enabled, meta tags will be generated automatically when you publish a new post', 'rankflow-seo'); ?>
 				</p>
 			</td>
 		</tr>

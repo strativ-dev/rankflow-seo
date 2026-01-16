@@ -1,16 +1,16 @@
 {
-  "name": "ai-seo-pro",
+  "name": "rankflow-seo",
   "version": "1.0.0",
   "description": "Professional AI-powered SEO plugin for WordPress",
   "main": "index.js",
   "scripts": {
     "test": "phpunit",
     "build": "echo 'No build step required'",
-    "zip": "zip -r ai-seo-pro.zip . -x '*.git*' 'node_modules/*' 'vendor/*' 'tests/*'"
+    "zip": "zip -r rankflow-seo.zip . -x '*.git*' 'node_modules/*' 'vendor/*' 'tests/*'"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/strativ-dev/ai-seo-pro.git"
+    "url": "https://github.com/strativ-dev/rankflow-seo.git"
   },
   "keywords": [
     "wordpress",
@@ -21,7 +21,7 @@
   "author": "Strativ AB",
   "license": "GPL-2.0-or-later",
   "bugs": {
-    "url": "https://github.com/strativ-dev/ai-seo-pro/issues"
+    "url": "https://github.com/strativ-dev/rankflow-seo/issues"
   },
-  "homepage": "https://github.com/strativ-dev/ai-seo-pro#readme"
+  "homepage": "https://github.com/strativ-dev/rankflow-seo#readme"
 }

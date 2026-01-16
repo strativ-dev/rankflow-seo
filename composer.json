@@ -1,5 +1,5 @@
 {
-  "name": "joyroy/ai-seo-pro",
+  "name": "joyroy/rankflow-seo",
   "description": "Professional AI-powered SEO plugin for WordPress with advanced meta generation, content analysis, and schema markup",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
@@ -22,10 +22,10 @@
     "schema",
     "optimization"
   ],
-  "homepage": "https://github.com/strativ-dev/ai-seo-pro",
+  "homepage": "https://github.com/strativ-dev/rankflow-seo",
   "support": {
-    "issues": "https://github.com/strativ-dev/ai-seo-pro/issues",
-    "source": "https://github.com/strativ-dev/ai-seo-pro"
+    "issues": "https://github.com/strativ-dev/rankflow-seo/issues",
+    "source": "https://github.com/strativ-dev/rankflow-seo"
   },
   "require": {
     "php": ">=7.4",
@@ -39,7 +39,7 @@
   },
   "autoload": {
     "psr-4": {
-      "AI_SEO_Pro\\": "includes/"
+      "RankFlow_SEO\\": "includes/"
     },
     "classmap": [
       "includes/",
@@ -49,7 +49,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "AI_SEO_Pro\\Tests\\": "tests/"
+      "RankFlow_SEO\\Tests\\": "tests/"
     }
   },
   "scripts": {

@@ -2,8 +2,8 @@
 /**
  * Redirect Manager - Core redirect functionality
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/redirects
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/redirects
  * @author     Strativ AB
  */
 
@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class AI_SEO_Pro_Redirect_Manager
+ * Class RankFlow_SEO_Redirect_Manager
  */
-class AI_SEO_Pro_Redirect_Manager
+class RankFlow_SEO_Redirect_Manager
 {
 
     /**
@@ -31,7 +31,7 @@ class AI_SEO_Pro_Redirect_Manager
     public function __construct()
     {
         global $wpdb;
-        $this->table_name = $wpdb->prefix . 'ai_seo_redirects';
+        $this->table_name = $wpdb->prefix . 'rankflow_seo_redirects';
     }
 
     /**
@@ -86,7 +86,7 @@ class AI_SEO_Pro_Redirect_Manager
 
         // Check for duplicates (only for non-regex).
         if (empty($data['is_regex']) && $this->redirect_exists($source_normalized)) {
-            return new WP_Error('duplicate_redirect', __('A redirect for this source URL already exists.', 'ai-seo-pro'));
+            return new WP_Error('duplicate_redirect', __('A redirect for this source URL already exists.', 'rankflow-seo'));
         }
 
         // Prepare data.
@@ -109,7 +109,7 @@ class AI_SEO_Pro_Redirect_Manager
         // Check for errors.
         if (false === $result) {
             $error = $wpdb->last_error;
-            return new WP_Error('db_error', __('Failed to add redirect: ', 'ai-seo-pro') . $error);
+            return new WP_Error('db_error', __('Failed to add redirect: ', 'rankflow-seo') . $error);
         }
 
         // Clear cache.
@@ -154,7 +154,7 @@ class AI_SEO_Pro_Redirect_Manager
         );
 
         if (false === $result) {
-            return new WP_Error('db_error', __('Failed to update redirect.', 'ai-seo-pro'));
+            return new WP_Error('db_error', __('Failed to update redirect.', 'rankflow-seo'));
         }
 
         // Clear cache.
@@ -323,7 +323,7 @@ class AI_SEO_Pro_Redirect_Manager
 
         // Try cache first.
         $cache_key = 'redirect_' . md5($normalized_url);
-        $cached = wp_cache_get($cache_key, 'ai_seo_pro');
+        $cached = wp_cache_get($cache_key, 'rankflow_seo');
 
         if (false !== $cached) {
             return $cached;
@@ -363,7 +363,7 @@ class AI_SEO_Pro_Redirect_Manager
                     $normalized_source === $url_variant ||
                     rtrim($normalized_source, '/') === rtrim($url_variant, '/')
                 ) {
-                    wp_cache_set($cache_key, $redirect, 'ai_seo_pro', 3600);
+                    wp_cache_set($cache_key, $redirect, 'rankflow_seo', 3600);
                     return $redirect;
                 }
             }
@@ -384,14 +384,14 @@ class AI_SEO_Pro_Redirect_Manager
 
             foreach ($url_variations as $url_variant) {
                 if (@preg_match($normalized_regex_source, $url_variant)) {
-                    wp_cache_set($cache_key, $regex_redirect, 'ai_seo_pro', 3600);
+                    wp_cache_set($cache_key, $regex_redirect, 'rankflow_seo', 3600);
                     return $regex_redirect;
                 }
             }
         }
 
         // No match found.
-        wp_cache_set($cache_key, null, 'ai_seo_pro', 3600);
+        wp_cache_set($cache_key, null, 'rankflow_seo', 3600);
         return null;
     }
 
@@ -425,26 +425,26 @@ class AI_SEO_Pro_Redirect_Manager
     {
         // Check source URL.
         if (empty($data['source_url'])) {
-            return new WP_Error('missing_source', __('Source URL is required.', 'ai-seo-pro'));
+            return new WP_Error('missing_source', __('Source URL is required.', 'rankflow-seo'));
         }
 
         // Check target URL (not required for 410 and 451).
         $redirect_type = isset($data['redirect_type']) ? $data['redirect_type'] : '301';
         if (!in_array($redirect_type, array('410', '451'), true) && empty($data['target_url'])) {
-            return new WP_Error('missing_target', __('Target URL is required.', 'ai-seo-pro'));
+            return new WP_Error('missing_target', __('Target URL is required.', 'rankflow-seo'));
         }
 
         // Validate redirect type.
         $valid_types = array('301', '302', '307', '410', '451');
         if (!in_array($redirect_type, $valid_types, true)) {
-            return new WP_Error('invalid_type', __('Invalid redirect type. Must be 301, 302, 307, 410, or 451.', 'ai-seo-pro'));
+            return new WP_Error('invalid_type', __('Invalid redirect type. Must be 301, 302, 307, 410, or 451.', 'rankflow-seo'));
         }
 
         // Validate regex if enabled.
         if (!empty($data['is_regex'])) {
             $test = @preg_match($data['source_url'], '');
             if (false === $test) {
-                return new WP_Error('invalid_regex', __('Invalid regular expression pattern.', 'ai-seo-pro'));
+                return new WP_Error('invalid_regex', __('Invalid regular expression pattern.', 'rankflow-seo'));
             }
         }
 
@@ -525,7 +525,7 @@ class AI_SEO_Pro_Redirect_Manager
      */
     private function clear_cache()
     {
-        wp_cache_delete('ai_seo_pro_redirects', 'ai_seo_pro');
+        wp_cache_delete('rankflow_seo_redirects', 'rankflow_seo');
     }
 
     /**

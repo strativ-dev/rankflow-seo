@@ -2,8 +2,8 @@
 /**
  * Sitemap Admin - Handle sitemap settings
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/admin
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/admin
  * @author     Strativ AB
  */
 
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-class AI_SEO_Pro_Sitemap_Admin
+class RankFlow_SEO_Sitemap_Admin
 {
 
 	/**
@@ -21,9 +21,9 @@ class AI_SEO_Pro_Sitemap_Admin
 	public function init()
 	{
 		add_action('admin_init', array($this, 'register_settings'));
-		add_action('wp_ajax_ai_seo_pro_flush_sitemap', array($this, 'ajax_flush_sitemap'));
-		add_action('update_option_ai_seo_pro_sitemap_enabled', array($this, 'on_settings_saved'), 10, 2);
-		add_action('update_option_ai_seo_pro_sitemap_post_types', array($this, 'on_settings_saved'), 10, 2);
+		add_action('wp_ajax_rankflow_seo_flush_sitemap', array($this, 'ajax_flush_sitemap'));
+		add_action('update_option_rankflow_seo_sitemap_enabled', array($this, 'on_settings_saved'), 10, 2);
+		add_action('update_option_rankflow_seo_sitemap_post_types', array($this, 'on_settings_saved'), 10, 2);
 	}
 
 	/**
@@ -33,8 +33,8 @@ class AI_SEO_Pro_Sitemap_Admin
 	{
 		// Register setting group
 		register_setting(
-			'ai_seo_pro_sitemap_settings',
-			'ai_seo_pro_sitemap_enabled',
+			'rankflow_seo_sitemap_settings',
+			'rankflow_seo_sitemap_enabled',
 			array(
 				'type' => 'boolean',
 				'sanitize_callback' => 'rest_sanitize_boolean',
@@ -43,8 +43,8 @@ class AI_SEO_Pro_Sitemap_Admin
 		);
 
 		register_setting(
-			'ai_seo_pro_sitemap_settings',
-			'ai_seo_pro_sitemap_entries_per_page',
+			'rankflow_seo_sitemap_settings',
+			'rankflow_seo_sitemap_entries_per_page',
 			array(
 				'type' => 'integer',
 				'sanitize_callback' => 'absint',
@@ -53,8 +53,8 @@ class AI_SEO_Pro_Sitemap_Admin
 		);
 
 		register_setting(
-			'ai_seo_pro_sitemap_settings',
-			'ai_seo_pro_sitemap_include_images',
+			'rankflow_seo_sitemap_settings',
+			'rankflow_seo_sitemap_include_images',
 			array(
 				'type' => 'boolean',
 				'sanitize_callback' => 'rest_sanitize_boolean',
@@ -63,8 +63,8 @@ class AI_SEO_Pro_Sitemap_Admin
 		);
 
 		register_setting(
-			'ai_seo_pro_sitemap_settings',
-			'ai_seo_pro_sitemap_include_taxonomies',
+			'rankflow_seo_sitemap_settings',
+			'rankflow_seo_sitemap_include_taxonomies',
 			array(
 				'type' => 'boolean',
 				'sanitize_callback' => 'rest_sanitize_boolean',
@@ -73,8 +73,8 @@ class AI_SEO_Pro_Sitemap_Admin
 		);
 
 		register_setting(
-			'ai_seo_pro_sitemap_settings',
-			'ai_seo_pro_sitemap_include_authors',
+			'rankflow_seo_sitemap_settings',
+			'rankflow_seo_sitemap_include_authors',
 			array(
 				'type' => 'boolean',
 				'sanitize_callback' => 'rest_sanitize_boolean',
@@ -83,8 +83,8 @@ class AI_SEO_Pro_Sitemap_Admin
 		);
 
 		register_setting(
-			'ai_seo_pro_sitemap_settings',
-			'ai_seo_pro_sitemap_ping_search_engines',
+			'rankflow_seo_sitemap_settings',
+			'rankflow_seo_sitemap_ping_search_engines',
 			array(
 				'type' => 'boolean',
 				'sanitize_callback' => 'rest_sanitize_boolean',
@@ -93,8 +93,8 @@ class AI_SEO_Pro_Sitemap_Admin
 		);
 
 		register_setting(
-			'ai_seo_pro_sitemap_settings',
-			'ai_seo_pro_sitemap_post_types',
+			'rankflow_seo_sitemap_settings',
+			'rankflow_seo_sitemap_post_types',
 			array(
 				'type' => 'array',
 				'sanitize_callback' => array($this, 'sanitize_post_types'),
@@ -103,8 +103,8 @@ class AI_SEO_Pro_Sitemap_Admin
 		);
 
 		register_setting(
-			'ai_seo_pro_sitemap_settings',
-			'ai_seo_pro_sitemap_taxonomies',
+			'rankflow_seo_sitemap_settings',
+			'rankflow_seo_sitemap_taxonomies',
 			array(
 				'type' => 'array',
 				'sanitize_callback' => array($this, 'sanitize_taxonomies'),
@@ -150,19 +150,19 @@ class AI_SEO_Pro_Sitemap_Admin
 	 */
 	public function ajax_flush_sitemap()
 	{
-		check_ajax_referer('ai_seo_pro_sitemap', 'nonce');
+		check_ajax_referer('rankflow_seo_sitemap', 'nonce');
 
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(array('message' => __('Permission denied.', 'ai-seo-pro')));
+			wp_send_json_error(array('message' => __('Permission denied.', 'rankflow-seo')));
 		}
 
 		// Flush rewrite rules
 		flush_rewrite_rules();
 
 		// Clear any cached sitemaps
-		delete_transient('ai_seo_pro_sitemap_last_ping');
+		delete_transient('rankflow_seo_sitemap_last_ping');
 
-		wp_send_json_success(array('message' => __('Sitemap cache flushed.', 'ai-seo-pro')));
+		wp_send_json_success(array('message' => __('Sitemap cache flushed.', 'rankflow-seo')));
 	}
 
 	/**

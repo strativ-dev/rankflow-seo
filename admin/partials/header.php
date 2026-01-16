@@ -2,8 +2,8 @@
 /**
  * Admin page header partial.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/admin/partials
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/admin/partials
  */
 
 if (!defined('ABSPATH')) {
@@ -11,16 +11,16 @@ if (!defined('ABSPATH')) {
 }
 ?>
 
-<div class="ai-seo-pro-header">
-	<div class="ai-seo-pro-header-logo">
-		<img src="<?php echo esc_url(AI_SEO_PRO_PLUGIN_URL . 'assets/images/logo.png'); ?>" alt="AI SEO Pro"
-			style="height: 40px;">
+<div class="rankflow-seo-header">
+	<div class="rankflow-seo-header-logo">
+		<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/logo-icon-orange.png'); ?>"
+			alt="RankFlow SEO" style="height: 40px;">
 		<h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 	</div>
 </div>
 
 <style>
-	.ai-seo-pro-header {
+	.rankflow-seo-header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -29,18 +29,18 @@ if (!defined('ABSPATH')) {
 		margin-bottom: 20px;
 	}
 
-	.ai-seo-pro-header-logo {
+	.rankflow-seo-header-logo {
 		display: flex;
 		align-items: center;
 		gap: 15px;
 	}
 
-	.ai-seo-pro-header-logo h1 {
+	.rankflow-seo-header-logo h1 {
 		margin: 0;
 		font-size: 24px;
 	}
 
-	.ai-seo-pro-header-actions {
+	.rankflow-seo-header-actions {
 		display: flex;
 		gap: 10px;
 	}

@@ -2,8 +2,8 @@
 /**
  * Fired during plugin deactivation.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes
  * @author     Strativ AB
  */
 
@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class AI_SEO_Pro_Deactivator
+ * Class RankFlow_SEO_Deactivator
  */
-class AI_SEO_Pro_Deactivator
+class RankFlow_SEO_Deactivator
 {
 
 	/**
@@ -27,7 +27,7 @@ class AI_SEO_Pro_Deactivator
 	{
 
 		// Clear scheduled hooks (if any).
-		wp_clear_scheduled_hook('ai_seo_pro_daily_cleanup');
+		wp_clear_scheduled_hook('rankflow_seo_daily_cleanup');
 
 		// Flush rewrite rules.
 		flush_rewrite_rules();
@@ -54,8 +54,8 @@ class AI_SEO_Pro_Deactivator
 				"SELECT option_name FROM {$wpdb->options} 
 				WHERE option_name LIKE %s 
 				OR option_name LIKE %s",
-				'_transient_ai_seo_pro_%',
-				'_transient_timeout_ai_seo_pro_%'
+				'_transient_rankflow_seo_%',
+				'_transient_timeout_rankflow_seo_%'
 			)
 		);
 

@@ -1,8 +1,8 @@
 /**
  * Meta box functionality with Tabs and Analysis
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/assets/js
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/assets/js
  */
 
 (function ($) {
@@ -25,16 +25,16 @@
 			$('.accordion-toggle').on('click', (e) => this.toggleAccordion(e));
 
 			// Generate button click
-			$('#ai_seo_generate_now').on('click', (e) => this.generateMeta(e));
+			$('#rankflow_seo_generate_now').on('click', (e) => this.generateMeta(e));
 
 			// Auto-generate toggle
-			$('#ai_seo_auto_generate').on('change', (e) => this.handleAutoGenerateToggle(e));
+			$('#rankflow_seo_auto_generate').on('change', (e) => this.handleAutoGenerateToggle(e));
 
 			// Update preview on input
-			$('#ai_seo_title, #ai_seo_description').on('input', () => this.updatePreview());
+			$('#rankflow_seo_title, #rankflow_seo_description').on('input', () => this.updatePreview());
 
 			// Focus keyword analysis
-			$('#ai_seo_focus_keyword').on('blur', () => this.analyzeFocusKeyword());
+			$('#rankflow_seo_focus_keyword').on('blur', () => this.analyzeFocusKeyword());
 
 			// Real-time analysis on content change
 			this.initRealTimeAnalysis();
@@ -165,7 +165,7 @@
 				return;
 			}
 
-			const button = $('#ai_seo_generate_now');
+			const button = $('#rankflow_seo_generate_now');
 			const spinner = button.next('.spinner');
 
 			const title = this.getPostTitle();
@@ -185,15 +185,15 @@
 			let confirmNeeded = false;
 			let fieldsToReplace = [];
 
-			if (generateTitle && $('#ai_seo_title').val()) {
+			if (generateTitle && $('#rankflow_seo_title').val()) {
 				confirmNeeded = true;
 				fieldsToReplace.push('title');
 			}
-			if (generateDescription && $('#ai_seo_description').val()) {
+			if (generateDescription && $('#rankflow_seo_description').val()) {
 				confirmNeeded = true;
 				fieldsToReplace.push('description');
 			}
-			if (generateKeywords && $('#ai_seo_keywords').val()) {
+			if (generateKeywords && $('#rankflow_seo_keywords').val()) {
 				confirmNeeded = true;
 				fieldsToReplace.push('keywords');
 			}
@@ -205,7 +205,7 @@
 				}
 			}
 
-			const focusKeyword = $('#ai_seo_focus_keyword').val();
+			const focusKeyword = $('#rankflow_seo_focus_keyword').val();
 
 			// Show loading state
 			this.generating = true;
@@ -217,7 +217,7 @@
 				url: aiSeoProData.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'ai_seo_generate_meta',
+					action: 'rankflow_seo_generate_meta',
 					nonce: aiSeoProData.nonce,
 					post_id: aiSeoProData.postId,
 					title: title,
@@ -232,17 +232,17 @@
 						const data = response.data.data || response.data;
 
 						if (generateTitle && data.title) {
-							$('#ai_seo_title').val(data.title);
+							$('#rankflow_seo_title').val(data.title);
 						}
 						if (generateDescription && data.description) {
-							$('#ai_seo_description').val(data.description);
+							$('#rankflow_seo_description').val(data.description);
 						}
 						if (generateKeywords && data.keywords) {
-							$('#ai_seo_keywords').val(data.keywords);
+							$('#rankflow_seo_keywords').val(data.keywords);
 						}
 
 						// Update character counters
-						$('#ai_seo_title, #ai_seo_description').trigger('input');
+						$('#rankflow_seo_title, #rankflow_seo_description').trigger('input');
 
 						// Update preview
 						this.updatePreview();
@@ -274,13 +274,13 @@
 		 */
 		handleAutoGenerateToggle(e) {
 			const checked = $(e.target).is(':checked');
-			const title = $('#ai_seo_title').val();
+			const title = $('#rankflow_seo_title').val();
 
 			if (checked && !title) {
 				const confirmMsg = 'Auto-generate is enabled. Meta tags will be generated automatically when you save. Would you like to generate them now instead?';
 
 				if (confirm(confirmMsg)) {
-					$('#ai_seo_generate_now').click();
+					$('#rankflow_seo_generate_now').click();
 				}
 			}
 		}
@@ -289,8 +289,8 @@
 		 * Update search preview
 		 */
 		updatePreview() {
-			const title = $('#ai_seo_title').val() || this.getPostTitle() || 'Page Title';
-			const description = $('#ai_seo_description').val() || 'Your page description will appear here...';
+			const title = $('#rankflow_seo_title').val() || this.getPostTitle() || 'Page Title';
+			const description = $('#rankflow_seo_description').val() || 'Your page description will appear here...';
 
 			$('.preview-title').text(title);
 			$('.preview-description').text(description);
@@ -300,7 +300,7 @@
 		 * Analyze focus keyword
 		 */
 		analyzeFocusKeyword() {
-			const keyword = $('#ai_seo_focus_keyword').val();
+			const keyword = $('#rankflow_seo_focus_keyword').val();
 			if (!keyword) return;
 
 			this.triggerAnalysisUpdate();
@@ -346,7 +346,7 @@
 			}
 
 			// For focus keyword and meta fields
-			$('#ai_seo_focus_keyword, #ai_seo_title, #ai_seo_description').on('input', debouncedAnalysis);
+			$('#rankflow_seo_focus_keyword, #rankflow_seo_title, #rankflow_seo_description').on('input', debouncedAnalysis);
 		}
 
 		/**
@@ -354,11 +354,11 @@
 		 */
 		triggerAnalysisUpdate() {
 			const postId = aiSeoProData.postId;
-			const focusKeyword = $('#ai_seo_focus_keyword').val();
+			const focusKeyword = $('#rankflow_seo_focus_keyword').val();
 			const content = this.getEditorContent();
 			const title = this.getPostTitle();
-			const metaTitle = $('#ai_seo_title').val();
-			const metaDescription = $('#ai_seo_description').val();
+			const metaTitle = $('#rankflow_seo_title').val();
+			const metaDescription = $('#rankflow_seo_description').val();
 			const slug = $('input[name="post_name"]').val() || '';
 
 			if (!postId) return;
@@ -367,7 +367,7 @@
 				url: aiSeoProData.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'ai_seo_update_analysis',
+					action: 'rankflow_seo_update_analysis',
 					nonce: aiSeoProData.nonce,
 					post_id: postId,
 					focus_keyword: focusKeyword,
@@ -553,7 +553,7 @@
 		 * Show notice
 		 */
 		showNotice(message, type) {
-			$('.ai-seo-pro-metabox .notice').remove();
+			$('.rankflow-seo-metabox .notice').remove();
 
 			const notice = $('<div>')
 				.addClass('notice notice-' + type + ' is-dismissible')
@@ -563,7 +563,7 @@
 					'padding': '10px 15px'
 				});
 
-			$('.ai-seo-pro-metabox').prepend(notice);
+			$('.rankflow-seo-metabox').prepend(notice);
 
 			if (type === 'success') {
 				setTimeout(() => {
@@ -586,9 +586,9 @@
 	 * Initialize on document ready
 	 */
 	$(document).ready(function () {
-		if ($('.ai-seo-pro-metabox').length) {
+		if ($('.rankflow-seo-metabox').length) {
 			new MetaBoxHandler();
-			console.log('AI SEO Pro metabox with tabs initialized');
+			console.log('RankFlow SEO metabox with tabs initialized');
 		}
 	});
 

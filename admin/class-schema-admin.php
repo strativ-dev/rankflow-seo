@@ -4,8 +4,8 @@
  *
  * Manages schema markup generation and admin interface
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/admin
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/admin
  * @author     Strativ AB
  */
 
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-class AI_SEO_Pro_Schema_Admin
+class RankFlow_SEO_Schema_Admin
 {
 
 	/**
@@ -36,7 +36,7 @@ class AI_SEO_Pro_Schema_Admin
 	 *
 	 * @param string $plugin_name The plugin name.
 	 */
-	public function __construct($plugin_name = 'ai-seo-pro')
+	public function __construct($plugin_name = 'rankflow-seo')
 	{
 		$this->plugin_name = $plugin_name;
 		$this->schema_types = array(); // Initialize empty, load on demand.
@@ -48,8 +48,8 @@ class AI_SEO_Pro_Schema_Admin
 	public function register_settings()
 	{
 		register_setting(
-			'ai_seo_pro_schema',
-			'ai_seo_pro_schemas',
+			'rankflow_seo_schema',
+			'rankflow_seo_schemas',
 			array(
 				'type' => 'array',
 				'sanitize_callback' => array($this, 'sanitize_schemas'),
@@ -58,8 +58,8 @@ class AI_SEO_Pro_Schema_Admin
 		);
 
 		register_setting(
-			'ai_seo_pro_schema',
-			'ai_seo_pro_schema_enabled',
+			'rankflow_seo_schema',
+			'rankflow_seo_schema_enabled',
 			array(
 				'type' => 'boolean',
 				'sanitize_callback' => 'rest_sanitize_boolean',
@@ -75,7 +75,7 @@ class AI_SEO_Pro_Schema_Admin
 	 */
 	public function enqueue_scripts($hook)
 	{
-		if ('ai-seo-pro_page_ai-seo-pro-schema' !== $hook) {
+		if ('rankflow-seo_page_rankflow-seo-schema' !== $hook) {
 			return;
 		}
 
@@ -84,36 +84,36 @@ class AI_SEO_Pro_Schema_Admin
 		// Enqueue Select2 for better dropdowns.
 		wp_enqueue_style(
 			'select2',
-			AI_SEO_PRO_PLUGIN_URL . 'assets/vendor/select2/select2.min.css',
+			RANKFLOW_SEO_PLUGIN_URL . 'assets/vendor/select2/select2.min.css',
 			array(),
 			'4.1.0'
 		);
 
 		wp_enqueue_script(
 			'select2',
-			AI_SEO_PRO_PLUGIN_URL . 'assets/vendor/select2/select2.min.js',
+			RANKFLOW_SEO_PLUGIN_URL . 'assets/vendor/select2/select2.min.js',
 			array('jquery'),
 			'4.1.0',
 			true
 		);
 
 		wp_enqueue_script(
-			'ai-seo-pro-schema-admin',
-			AI_SEO_PRO_PLUGIN_URL . 'assets/js/schema-admin.js',
+			'rankflow-seo-schema-admin',
+			RANKFLOW_SEO_PLUGIN_URL . 'assets/js/schema-admin.js',
 			array('jquery', 'jquery-ui-sortable', 'select2'),
-			AI_SEO_PRO_VERSION,
+			RANKFLOW_SEO_VERSION,
 			true
 		);
 
 		wp_localize_script(
-			'ai-seo-pro-schema-admin',
+			'rankflow-seo-schema-admin',
 			'aiSeoProSchema',
 			array(
 				'schemaTypes' => $this->get_schema_types(),
-				'nonce' => wp_create_nonce('ai_seo_pro_schema_nonce'),
-				'confirmDelete' => __('Are you sure you want to delete this schema?', 'ai-seo-pro'),
-				'selectImage' => __('Select Image', 'ai-seo-pro'),
-				'useImage' => __('Use this image', 'ai-seo-pro'),
+				'nonce' => wp_create_nonce('rankflow_seo_schema_nonce'),
+				'confirmDelete' => __('Are you sure you want to delete this schema?', 'rankflow-seo'),
+				'selectImage' => __('Select Image', 'rankflow-seo'),
+				'useImage' => __('Use this image', 'rankflow-seo'),
 				'pages' => $this->get_all_pages(),
 				'posts' => $this->get_all_posts(),
 				'postTypes' => $this->get_post_types(),
@@ -218,659 +218,659 @@ class AI_SEO_Pro_Schema_Admin
 	{
 		return array(
 			'LocalBusiness' => array(
-				'label' => __('Local Business', 'ai-seo-pro'),
+				'label' => __('Local Business', 'rankflow-seo'),
 				'fields' => array(
 					'name' => array(
-						'label' => __('Business Name', 'ai-seo-pro'),
+						'label' => __('Business Name', 'rankflow-seo'),
 						'type' => 'text',
 						'required' => true,
 					),
 					'description' => array(
-						'label' => __('Description', 'ai-seo-pro'),
+						'label' => __('Description', 'rankflow-seo'),
 						'type' => 'textarea',
 					),
 					'logo' => array(
-						'label' => __('Logo URL', 'ai-seo-pro'),
+						'label' => __('Logo URL', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'image' => array(
-						'label' => __('Image URL', 'ai-seo-pro'),
+						'label' => __('Image URL', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'telephone' => array(
-						'label' => __('Telephone', 'ai-seo-pro'),
+						'label' => __('Telephone', 'rankflow-seo'),
 						'type' => 'tel',
 					),
 					'email' => array(
-						'label' => __('Email', 'ai-seo-pro'),
+						'label' => __('Email', 'rankflow-seo'),
 						'type' => 'email',
 					),
 					'url' => array(
-						'label' => __('Website URL', 'ai-seo-pro'),
+						'label' => __('Website URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 					'streetAddress' => array(
-						'label' => __('Street Address', 'ai-seo-pro'),
+						'label' => __('Street Address', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'city' => array(
-						'label' => __('City', 'ai-seo-pro'),
+						'label' => __('City', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'state' => array(
-						'label' => __('State/Region', 'ai-seo-pro'),
+						'label' => __('State/Region', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'postalCode' => array(
-						'label' => __('Zip/Postal Code', 'ai-seo-pro'),
+						'label' => __('Zip/Postal Code', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'country' => array(
-						'label' => __('Country', 'ai-seo-pro'),
+						'label' => __('Country', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'latitude' => array(
-						'label' => __('Latitude', 'ai-seo-pro'),
+						'label' => __('Latitude', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'longitude' => array(
-						'label' => __('Longitude', 'ai-seo-pro'),
+						'label' => __('Longitude', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'mapUrl' => array(
-						'label' => __('Google Maps URL', 'ai-seo-pro'),
+						'label' => __('Google Maps URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 					'priceRange' => array(
-						'label' => __('Price Range', 'ai-seo-pro'),
+						'label' => __('Price Range', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => '$$ - $$$',
 					),
 					'openingHours' => array(
-						'label' => __('Opening Hours', 'ai-seo-pro'),
+						'label' => __('Opening Hours', 'rankflow-seo'),
 						'type' => 'hours',
 					),
 					'sameAs' => array(
-						'label' => __('Social Profiles (Same As)', 'ai-seo-pro'),
+						'label' => __('Social Profiles (Same As)', 'rankflow-seo'),
 						'type' => 'textarea',
-						'placeholder' => __('One URL per line', 'ai-seo-pro'),
+						'placeholder' => __('One URL per line', 'rankflow-seo'),
 					),
 				),
 			),
 			'Organization' => array(
-				'label' => __('Organization', 'ai-seo-pro'),
+				'label' => __('Organization', 'rankflow-seo'),
 				'fields' => array(
 					'name' => array(
-						'label' => __('Organization Name', 'ai-seo-pro'),
+						'label' => __('Organization Name', 'rankflow-seo'),
 						'type' => 'text',
 						'required' => true,
 					),
 					'description' => array(
-						'label' => __('Description', 'ai-seo-pro'),
+						'label' => __('Description', 'rankflow-seo'),
 						'type' => 'textarea',
 					),
 					'logo' => array(
-						'label' => __('Logo URL', 'ai-seo-pro'),
+						'label' => __('Logo URL', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'url' => array(
-						'label' => __('Website URL', 'ai-seo-pro'),
+						'label' => __('Website URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 					'telephone' => array(
-						'label' => __('Telephone', 'ai-seo-pro'),
+						'label' => __('Telephone', 'rankflow-seo'),
 						'type' => 'tel',
 					),
 					'email' => array(
-						'label' => __('Email', 'ai-seo-pro'),
+						'label' => __('Email', 'rankflow-seo'),
 						'type' => 'email',
 					),
 					'streetAddress' => array(
-						'label' => __('Street Address', 'ai-seo-pro'),
+						'label' => __('Street Address', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'city' => array(
-						'label' => __('City', 'ai-seo-pro'),
+						'label' => __('City', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'state' => array(
-						'label' => __('State/Region', 'ai-seo-pro'),
+						'label' => __('State/Region', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'postalCode' => array(
-						'label' => __('Zip/Postal Code', 'ai-seo-pro'),
+						'label' => __('Zip/Postal Code', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'country' => array(
-						'label' => __('Country', 'ai-seo-pro'),
+						'label' => __('Country', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'foundingDate' => array(
-						'label' => __('Founding Date', 'ai-seo-pro'),
+						'label' => __('Founding Date', 'rankflow-seo'),
 						'type' => 'date',
 					),
 					'founders' => array(
-						'label' => __('Founders', 'ai-seo-pro'),
+						'label' => __('Founders', 'rankflow-seo'),
 						'type' => 'text',
-						'placeholder' => __('Comma separated names', 'ai-seo-pro'),
+						'placeholder' => __('Comma separated names', 'rankflow-seo'),
 					),
 					'sameAs' => array(
-						'label' => __('Social Profiles (Same As)', 'ai-seo-pro'),
+						'label' => __('Social Profiles (Same As)', 'rankflow-seo'),
 						'type' => 'textarea',
-						'placeholder' => __('One URL per line', 'ai-seo-pro'),
+						'placeholder' => __('One URL per line', 'rankflow-seo'),
 					),
 				),
 			),
 			'Person' => array(
-				'label' => __('Person', 'ai-seo-pro'),
+				'label' => __('Person', 'rankflow-seo'),
 				'fields' => array(
 					'name' => array(
-						'label' => __('Full Name', 'ai-seo-pro'),
+						'label' => __('Full Name', 'rankflow-seo'),
 						'type' => 'text',
 						'required' => true,
 					),
 					'givenName' => array(
-						'label' => __('First Name', 'ai-seo-pro'),
+						'label' => __('First Name', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'familyName' => array(
-						'label' => __('Last Name', 'ai-seo-pro'),
+						'label' => __('Last Name', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'description' => array(
-						'label' => __('Bio/Description', 'ai-seo-pro'),
+						'label' => __('Bio/Description', 'rankflow-seo'),
 						'type' => 'textarea',
 					),
 					'image' => array(
-						'label' => __('Photo URL', 'ai-seo-pro'),
+						'label' => __('Photo URL', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'jobTitle' => array(
-						'label' => __('Job Title', 'ai-seo-pro'),
+						'label' => __('Job Title', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'worksFor' => array(
-						'label' => __('Works For (Company)', 'ai-seo-pro'),
+						'label' => __('Works For (Company)', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'url' => array(
-						'label' => __('Website URL', 'ai-seo-pro'),
+						'label' => __('Website URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 					'email' => array(
-						'label' => __('Email', 'ai-seo-pro'),
+						'label' => __('Email', 'rankflow-seo'),
 						'type' => 'email',
 					),
 					'telephone' => array(
-						'label' => __('Telephone', 'ai-seo-pro'),
+						'label' => __('Telephone', 'rankflow-seo'),
 						'type' => 'tel',
 					),
 					'birthDate' => array(
-						'label' => __('Birth Date', 'ai-seo-pro'),
+						'label' => __('Birth Date', 'rankflow-seo'),
 						'type' => 'date',
 					),
 					'sameAs' => array(
-						'label' => __('Social Profiles (Same As)', 'ai-seo-pro'),
+						'label' => __('Social Profiles (Same As)', 'rankflow-seo'),
 						'type' => 'textarea',
-						'placeholder' => __('One URL per line', 'ai-seo-pro'),
+						'placeholder' => __('One URL per line', 'rankflow-seo'),
 					),
 				),
 			),
 			'Website' => array(
-				'label' => __('Website', 'ai-seo-pro'),
+				'label' => __('Website', 'rankflow-seo'),
 				'fields' => array(
 					'name' => array(
-						'label' => __('Website Name', 'ai-seo-pro'),
+						'label' => __('Website Name', 'rankflow-seo'),
 						'type' => 'text',
 						'required' => true,
 					),
 					'alternateName' => array(
-						'label' => __('Alternate Name', 'ai-seo-pro'),
+						'label' => __('Alternate Name', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'description' => array(
-						'label' => __('Description', 'ai-seo-pro'),
+						'label' => __('Description', 'rankflow-seo'),
 						'type' => 'textarea',
 					),
 					'url' => array(
-						'label' => __('URL', 'ai-seo-pro'),
+						'label' => __('URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 					'searchUrl' => array(
-						'label' => __('Search URL Template', 'ai-seo-pro'),
+						'label' => __('Search URL Template', 'rankflow-seo'),
 						'type' => 'url',
 						'placeholder' => home_url('?s={search_term_string}'),
 					),
 					'inLanguage' => array(
-						'label' => __('Language', 'ai-seo-pro'),
+						'label' => __('Language', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'en-US',
 					),
 				),
 			),
 			'Article' => array(
-				'label' => __('Article', 'ai-seo-pro'),
+				'label' => __('Article', 'rankflow-seo'),
 				'fields' => array(
 					'headline' => array(
-						'label' => __('Headline', 'ai-seo-pro'),
+						'label' => __('Headline', 'rankflow-seo'),
 						'type' => 'text',
 						'required' => true,
 					),
 					'description' => array(
-						'label' => __('Description', 'ai-seo-pro'),
+						'label' => __('Description', 'rankflow-seo'),
 						'type' => 'textarea',
 					),
 					'image' => array(
-						'label' => __('Image URL', 'ai-seo-pro'),
+						'label' => __('Image URL', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'authorName' => array(
-						'label' => __('Author Name', 'ai-seo-pro'),
+						'label' => __('Author Name', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'authorUrl' => array(
-						'label' => __('Author URL', 'ai-seo-pro'),
+						'label' => __('Author URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 					'publisherName' => array(
-						'label' => __('Publisher Name', 'ai-seo-pro'),
+						'label' => __('Publisher Name', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'publisherLogo' => array(
-						'label' => __('Publisher Logo', 'ai-seo-pro'),
+						'label' => __('Publisher Logo', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'datePublished' => array(
-						'label' => __('Date Published', 'ai-seo-pro'),
+						'label' => __('Date Published', 'rankflow-seo'),
 						'type' => 'date',
 					),
 					'dateModified' => array(
-						'label' => __('Date Modified', 'ai-seo-pro'),
+						'label' => __('Date Modified', 'rankflow-seo'),
 						'type' => 'date',
 					),
 					'articleSection' => array(
-						'label' => __('Article Section/Category', 'ai-seo-pro'),
+						'label' => __('Article Section/Category', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'wordCount' => array(
-						'label' => __('Word Count', 'ai-seo-pro'),
+						'label' => __('Word Count', 'rankflow-seo'),
 						'type' => 'number',
 					),
 				),
 			),
 			'Product' => array(
-				'label' => __('Product', 'ai-seo-pro'),
+				'label' => __('Product', 'rankflow-seo'),
 				'fields' => array(
 					'name' => array(
-						'label' => __('Product Name', 'ai-seo-pro'),
+						'label' => __('Product Name', 'rankflow-seo'),
 						'type' => 'text',
 						'required' => true,
 					),
 					'description' => array(
-						'label' => __('Description', 'ai-seo-pro'),
+						'label' => __('Description', 'rankflow-seo'),
 						'type' => 'textarea',
 					),
 					'image' => array(
-						'label' => __('Image URL', 'ai-seo-pro'),
+						'label' => __('Image URL', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'brand' => array(
-						'label' => __('Brand', 'ai-seo-pro'),
+						'label' => __('Brand', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'sku' => array(
-						'label' => __('SKU', 'ai-seo-pro'),
+						'label' => __('SKU', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'gtin' => array(
-						'label' => __('GTIN/UPC/EAN', 'ai-seo-pro'),
+						'label' => __('GTIN/UPC/EAN', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'price' => array(
-						'label' => __('Price', 'ai-seo-pro'),
+						'label' => __('Price', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'priceCurrency' => array(
-						'label' => __('Currency', 'ai-seo-pro'),
+						'label' => __('Currency', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'USD',
 					),
 					'availability' => array(
-						'label' => __('Availability', 'ai-seo-pro'),
+						'label' => __('Availability', 'rankflow-seo'),
 						'type' => 'select',
 						'options' => array(
-							'InStock' => __('In Stock', 'ai-seo-pro'),
-							'OutOfStock' => __('Out of Stock', 'ai-seo-pro'),
-							'PreOrder' => __('Pre-Order', 'ai-seo-pro'),
-							'Discontinued' => __('Discontinued', 'ai-seo-pro'),
+							'InStock' => __('In Stock', 'rankflow-seo'),
+							'OutOfStock' => __('Out of Stock', 'rankflow-seo'),
+							'PreOrder' => __('Pre-Order', 'rankflow-seo'),
+							'Discontinued' => __('Discontinued', 'rankflow-seo'),
 						),
 					),
 					'ratingValue' => array(
-						'label' => __('Rating Value', 'ai-seo-pro'),
+						'label' => __('Rating Value', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'reviewCount' => array(
-						'label' => __('Review Count', 'ai-seo-pro'),
+						'label' => __('Review Count', 'rankflow-seo'),
 						'type' => 'number',
 					),
 					'url' => array(
-						'label' => __('Product URL', 'ai-seo-pro'),
+						'label' => __('Product URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 				),
 			),
 			'FAQPage' => array(
-				'label' => __('FAQ Page', 'ai-seo-pro'),
+				'label' => __('FAQ Page', 'rankflow-seo'),
 				'fields' => array(
 					'faqs' => array(
-						'label' => __('FAQ Items', 'ai-seo-pro'),
+						'label' => __('FAQ Items', 'rankflow-seo'),
 						'type' => 'faq_repeater',
 					),
 				),
 			),
 			'HowTo' => array(
-				'label' => __('How To', 'ai-seo-pro'),
+				'label' => __('How To', 'rankflow-seo'),
 				'fields' => array(
 					'name' => array(
-						'label' => __('Title', 'ai-seo-pro'),
+						'label' => __('Title', 'rankflow-seo'),
 						'type' => 'text',
 						'required' => true,
 					),
 					'description' => array(
-						'label' => __('Description', 'ai-seo-pro'),
+						'label' => __('Description', 'rankflow-seo'),
 						'type' => 'textarea',
 					),
 					'image' => array(
-						'label' => __('Image URL', 'ai-seo-pro'),
+						'label' => __('Image URL', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'totalTime' => array(
-						'label' => __('Total Time', 'ai-seo-pro'),
+						'label' => __('Total Time', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'PT30M (30 minutes)',
 					),
 					'estimatedCost' => array(
-						'label' => __('Estimated Cost', 'ai-seo-pro'),
+						'label' => __('Estimated Cost', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'supply' => array(
-						'label' => __('Supplies/Materials', 'ai-seo-pro'),
+						'label' => __('Supplies/Materials', 'rankflow-seo'),
 						'type' => 'textarea',
-						'placeholder' => __('One item per line', 'ai-seo-pro'),
+						'placeholder' => __('One item per line', 'rankflow-seo'),
 					),
 					'tool' => array(
-						'label' => __('Tools Required', 'ai-seo-pro'),
+						'label' => __('Tools Required', 'rankflow-seo'),
 						'type' => 'textarea',
-						'placeholder' => __('One tool per line', 'ai-seo-pro'),
+						'placeholder' => __('One tool per line', 'rankflow-seo'),
 					),
 					'steps' => array(
-						'label' => __('Steps', 'ai-seo-pro'),
+						'label' => __('Steps', 'rankflow-seo'),
 						'type' => 'steps_repeater',
 					),
 				),
 			),
 			'Event' => array(
-				'label' => __('Event', 'ai-seo-pro'),
+				'label' => __('Event', 'rankflow-seo'),
 				'fields' => array(
 					'name' => array(
-						'label' => __('Event Name', 'ai-seo-pro'),
+						'label' => __('Event Name', 'rankflow-seo'),
 						'type' => 'text',
 						'required' => true,
 					),
 					'description' => array(
-						'label' => __('Description', 'ai-seo-pro'),
+						'label' => __('Description', 'rankflow-seo'),
 						'type' => 'textarea',
 					),
 					'image' => array(
-						'label' => __('Image URL', 'ai-seo-pro'),
+						'label' => __('Image URL', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'startDate' => array(
-						'label' => __('Start Date & Time', 'ai-seo-pro'),
+						'label' => __('Start Date & Time', 'rankflow-seo'),
 						'type' => 'datetime-local',
 					),
 					'endDate' => array(
-						'label' => __('End Date & Time', 'ai-seo-pro'),
+						'label' => __('End Date & Time', 'rankflow-seo'),
 						'type' => 'datetime-local',
 					),
 					'eventStatus' => array(
-						'label' => __('Event Status', 'ai-seo-pro'),
+						'label' => __('Event Status', 'rankflow-seo'),
 						'type' => 'select',
 						'options' => array(
-							'EventScheduled' => __('Scheduled', 'ai-seo-pro'),
-							'EventCancelled' => __('Cancelled', 'ai-seo-pro'),
-							'EventPostponed' => __('Postponed', 'ai-seo-pro'),
-							'EventRescheduled' => __('Rescheduled', 'ai-seo-pro'),
-							'EventMovedOnline' => __('Moved Online', 'ai-seo-pro'),
+							'EventScheduled' => __('Scheduled', 'rankflow-seo'),
+							'EventCancelled' => __('Cancelled', 'rankflow-seo'),
+							'EventPostponed' => __('Postponed', 'rankflow-seo'),
+							'EventRescheduled' => __('Rescheduled', 'rankflow-seo'),
+							'EventMovedOnline' => __('Moved Online', 'rankflow-seo'),
 						),
 					),
 					'eventAttendanceMode' => array(
-						'label' => __('Attendance Mode', 'ai-seo-pro'),
+						'label' => __('Attendance Mode', 'rankflow-seo'),
 						'type' => 'select',
 						'options' => array(
-							'OfflineEventAttendanceMode' => __('Offline (In Person)', 'ai-seo-pro'),
-							'OnlineEventAttendanceMode' => __('Online', 'ai-seo-pro'),
-							'MixedEventAttendanceMode' => __('Mixed (Online & Offline)', 'ai-seo-pro'),
+							'OfflineEventAttendanceMode' => __('Offline (In Person)', 'rankflow-seo'),
+							'OnlineEventAttendanceMode' => __('Online', 'rankflow-seo'),
+							'MixedEventAttendanceMode' => __('Mixed (Online & Offline)', 'rankflow-seo'),
 						),
 					),
 					'locationName' => array(
-						'label' => __('Venue Name', 'ai-seo-pro'),
+						'label' => __('Venue Name', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'streetAddress' => array(
-						'label' => __('Street Address', 'ai-seo-pro'),
+						'label' => __('Street Address', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'city' => array(
-						'label' => __('City', 'ai-seo-pro'),
+						'label' => __('City', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'country' => array(
-						'label' => __('Country', 'ai-seo-pro'),
+						'label' => __('Country', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'onlineUrl' => array(
-						'label' => __('Online Event URL', 'ai-seo-pro'),
+						'label' => __('Online Event URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 					'organizerName' => array(
-						'label' => __('Organizer Name', 'ai-seo-pro'),
+						'label' => __('Organizer Name', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'organizerUrl' => array(
-						'label' => __('Organizer URL', 'ai-seo-pro'),
+						'label' => __('Organizer URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 					'performerName' => array(
-						'label' => __('Performer Name', 'ai-seo-pro'),
+						'label' => __('Performer Name', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'price' => array(
-						'label' => __('Ticket Price', 'ai-seo-pro'),
+						'label' => __('Ticket Price', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'priceCurrency' => array(
-						'label' => __('Currency', 'ai-seo-pro'),
+						'label' => __('Currency', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'USD',
 					),
 					'ticketUrl' => array(
-						'label' => __('Ticket URL', 'ai-seo-pro'),
+						'label' => __('Ticket URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 				),
 			),
 			'Recipe' => array(
-				'label' => __('Recipe', 'ai-seo-pro'),
+				'label' => __('Recipe', 'rankflow-seo'),
 				'fields' => array(
 					'name' => array(
-						'label' => __('Recipe Name', 'ai-seo-pro'),
+						'label' => __('Recipe Name', 'rankflow-seo'),
 						'type' => 'text',
 						'required' => true,
 					),
 					'description' => array(
-						'label' => __('Description', 'ai-seo-pro'),
+						'label' => __('Description', 'rankflow-seo'),
 						'type' => 'textarea',
 					),
 					'image' => array(
-						'label' => __('Image URL', 'ai-seo-pro'),
+						'label' => __('Image URL', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'authorName' => array(
-						'label' => __('Author Name', 'ai-seo-pro'),
+						'label' => __('Author Name', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'prepTime' => array(
-						'label' => __('Prep Time', 'ai-seo-pro'),
+						'label' => __('Prep Time', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'PT15M (15 minutes)',
 					),
 					'cookTime' => array(
-						'label' => __('Cook Time', 'ai-seo-pro'),
+						'label' => __('Cook Time', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'PT30M (30 minutes)',
 					),
 					'totalTime' => array(
-						'label' => __('Total Time', 'ai-seo-pro'),
+						'label' => __('Total Time', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'PT45M (45 minutes)',
 					),
 					'recipeYield' => array(
-						'label' => __('Yield/Servings', 'ai-seo-pro'),
+						'label' => __('Yield/Servings', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => '4 servings',
 					),
 					'recipeCategory' => array(
-						'label' => __('Category', 'ai-seo-pro'),
+						'label' => __('Category', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'Dessert, Main Course, etc.',
 					),
 					'recipeCuisine' => array(
-						'label' => __('Cuisine', 'ai-seo-pro'),
+						'label' => __('Cuisine', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'Italian, Mexican, etc.',
 					),
 					'keywords' => array(
-						'label' => __('Keywords', 'ai-seo-pro'),
+						'label' => __('Keywords', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'calories' => array(
-						'label' => __('Calories', 'ai-seo-pro'),
+						'label' => __('Calories', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'recipeIngredient' => array(
-						'label' => __('Ingredients', 'ai-seo-pro'),
+						'label' => __('Ingredients', 'rankflow-seo'),
 						'type' => 'textarea',
-						'placeholder' => __('One ingredient per line', 'ai-seo-pro'),
+						'placeholder' => __('One ingredient per line', 'rankflow-seo'),
 					),
 					'recipeInstructions' => array(
-						'label' => __('Instructions', 'ai-seo-pro'),
+						'label' => __('Instructions', 'rankflow-seo'),
 						'type' => 'textarea',
-						'placeholder' => __('One step per line', 'ai-seo-pro'),
+						'placeholder' => __('One step per line', 'rankflow-seo'),
 					),
 					'ratingValue' => array(
-						'label' => __('Rating Value', 'ai-seo-pro'),
+						'label' => __('Rating Value', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'reviewCount' => array(
-						'label' => __('Review Count', 'ai-seo-pro'),
+						'label' => __('Review Count', 'rankflow-seo'),
 						'type' => 'number',
 					),
 				),
 			),
 			'VideoObject' => array(
-				'label' => __('Video', 'ai-seo-pro'),
+				'label' => __('Video', 'rankflow-seo'),
 				'fields' => array(
 					'name' => array(
-						'label' => __('Video Title', 'ai-seo-pro'),
+						'label' => __('Video Title', 'rankflow-seo'),
 						'type' => 'text',
 						'required' => true,
 					),
 					'description' => array(
-						'label' => __('Description', 'ai-seo-pro'),
+						'label' => __('Description', 'rankflow-seo'),
 						'type' => 'textarea',
 					),
 					'thumbnailUrl' => array(
-						'label' => __('Thumbnail URL', 'ai-seo-pro'),
+						'label' => __('Thumbnail URL', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'contentUrl' => array(
-						'label' => __('Video File URL', 'ai-seo-pro'),
+						'label' => __('Video File URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 					'embedUrl' => array(
-						'label' => __('Embed URL', 'ai-seo-pro'),
+						'label' => __('Embed URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 					'uploadDate' => array(
-						'label' => __('Upload Date', 'ai-seo-pro'),
+						'label' => __('Upload Date', 'rankflow-seo'),
 						'type' => 'date',
 					),
 					'duration' => array(
-						'label' => __('Duration', 'ai-seo-pro'),
+						'label' => __('Duration', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'PT5M30S (5 min 30 sec)',
 					),
 				),
 			),
 			'BreadcrumbList' => array(
-				'label' => __('Breadcrumb', 'ai-seo-pro'),
+				'label' => __('Breadcrumb', 'rankflow-seo'),
 				'fields' => array(
 					'autoBreadcrumb' => array(
-						'label' => __('Enable Auto Breadcrumb', 'ai-seo-pro'),
+						'label' => __('Enable Auto Breadcrumb', 'rankflow-seo'),
 						'type' => 'checkbox',
-						'description' => __('Automatically generates breadcrumb based on page hierarchy.', 'ai-seo-pro'),
+						'description' => __('Automatically generates breadcrumb based on page hierarchy.', 'rankflow-seo'),
 					),
 					'breadcrumbs' => array(
-						'label' => __('Custom Breadcrumb Items', 'ai-seo-pro'),
+						'label' => __('Custom Breadcrumb Items', 'rankflow-seo'),
 						'type' => 'breadcrumb_repeater',
 					),
 				),
 			),
 			'SoftwareApplication' => array(
-				'label' => __('Software Application', 'ai-seo-pro'),
+				'label' => __('Software Application', 'rankflow-seo'),
 				'fields' => array(
 					'name' => array(
-						'label' => __('App Name', 'ai-seo-pro'),
+						'label' => __('App Name', 'rankflow-seo'),
 						'type' => 'text',
 						'required' => true,
 					),
 					'description' => array(
-						'label' => __('Description', 'ai-seo-pro'),
+						'label' => __('Description', 'rankflow-seo'),
 						'type' => 'textarea',
 					),
 					'image' => array(
-						'label' => __('Screenshot/Image URL', 'ai-seo-pro'),
+						'label' => __('Screenshot/Image URL', 'rankflow-seo'),
 						'type' => 'image',
 					),
 					'applicationCategory' => array(
-						'label' => __('Category', 'ai-seo-pro'),
+						'label' => __('Category', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'GameApplication, BusinessApplication, etc.',
 					),
 					'operatingSystem' => array(
-						'label' => __('Operating System', 'ai-seo-pro'),
+						'label' => __('Operating System', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'price' => array(
-						'label' => __('Price', 'ai-seo-pro'),
+						'label' => __('Price', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'priceCurrency' => array(
-						'label' => __('Currency', 'ai-seo-pro'),
+						'label' => __('Currency', 'rankflow-seo'),
 						'type' => 'text',
 						'placeholder' => 'USD',
 					),
 					'ratingValue' => array(
-						'label' => __('Rating Value', 'ai-seo-pro'),
+						'label' => __('Rating Value', 'rankflow-seo'),
 						'type' => 'text',
 					),
 					'reviewCount' => array(
-						'label' => __('Review Count', 'ai-seo-pro'),
+						'label' => __('Review Count', 'rankflow-seo'),
 						'type' => 'number',
 					),
 					'downloadUrl' => array(
-						'label' => __('Download URL', 'ai-seo-pro'),
+						'label' => __('Download URL', 'rankflow-seo'),
 						'type' => 'url',
 					),
 				),
@@ -968,13 +968,13 @@ class AI_SEO_Pro_Schema_Admin
 	 */
 	public function ajax_preview_schema()
 	{
-		check_ajax_referer('ai_seo_pro_schema_nonce', 'nonce');
+		check_ajax_referer('rankflow_seo_schema_nonce', 'nonce');
 
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(array('message' => __('Permission denied.', 'ai-seo-pro')));
+			wp_send_json_error(array('message' => __('Permission denied.', 'rankflow-seo')));
 		}
 
-		$schemas = get_option('ai_seo_pro_schemas', array());
+		$schemas = get_option('rankflow_seo_schemas', array());
 		$output = array();
 
 		foreach ($schemas as $schema) {

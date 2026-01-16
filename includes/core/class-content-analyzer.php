@@ -2,11 +2,11 @@
 /**
  * Content analyzer.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/core
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/core
  * @author     Strativ AB
  */
-class AI_SEO_Pro_Content_Analyzer
+class RankFlow_SEO_Content_Analyzer
 {
 
 	/**
@@ -252,13 +252,13 @@ class AI_SEO_Pro_Content_Analyzer
 			$analysis['recommendations'][] = array(
 				'type' => 'warning',
 				/* translators: 1: keyword density percentage, 2: focus keyword */
-				'message' => sprintf(__('Keyword density is low (%1$.2f%%). Try to include "%2$s" more naturally in your content.', 'ai-seo-pro'), $analysis['keyword_density'], $keyword),
+				'message' => sprintf(__('Keyword density is low (%1$.2f%%). Try to include "%2$s" more naturally in your content.', 'rankflow-seo'), $analysis['keyword_density'], $keyword),
 			);
 		} elseif ($analysis['keyword_density'] > 2.5) {
 			$analysis['recommendations'][] = array(
 				'type' => 'error',
 				/* translators: %s: keyword density percentage */
-				'message' => sprintf(__('Keyword density is too high (%s%%). This might be seen as keyword stuffing.', 'ai-seo-pro'), number_format($analysis['keyword_density'], 2)),
+				'message' => sprintf(__('Keyword density is too high (%s%%). This might be seen as keyword stuffing.', 'rankflow-seo'), number_format($analysis['keyword_density'], 2)),
 			);
 		}
 
@@ -266,7 +266,7 @@ class AI_SEO_Pro_Content_Analyzer
 			$analysis['recommendations'][] = array(
 				'type' => 'warning',
 				/* translators: %s: focus keyword */
-				'message' => sprintf(__('Focus keyword "%s" not found in any headings. Use it in at least one heading.', 'ai-seo-pro'), $keyword),
+				'message' => sprintf(__('Focus keyword "%s" not found in any headings. Use it in at least one heading.', 'rankflow-seo'), $keyword),
 			);
 		}
 
@@ -285,7 +285,7 @@ class AI_SEO_Pro_Content_Analyzer
 			$analysis['recommendations'][] = array(
 				'type' => 'warning',
 				/* translators: %d: word count */
-				'message' => sprintf(__('Content is short (%d words). Aim for at least 300 words for better SEO.', 'ai-seo-pro'), $analysis['word_count']),
+				'message' => sprintf(__('Content is short (%d words). Aim for at least 300 words for better SEO.', 'rankflow-seo'), $analysis['word_count']),
 			);
 		}
 
@@ -293,7 +293,7 @@ class AI_SEO_Pro_Content_Analyzer
 			$analysis['recommendations'][] = array(
 				'type' => 'info',
 				/* translators: %s: readability score */
-				'message' => sprintf(__('Readability score is %s. Consider using shorter sentences and simpler words.', 'ai-seo-pro'), number_format($analysis['readability_score'], 1)),
+				'message' => sprintf(__('Readability score is %s. Consider using shorter sentences and simpler words.', 'rankflow-seo'), number_format($analysis['readability_score'], 1)),
 			);
 		}
 
@@ -301,14 +301,14 @@ class AI_SEO_Pro_Content_Analyzer
 			$analysis['recommendations'][] = array(
 				'type' => 'warning',
 				/* translators: %d: number of images missing alt text */
-				'message' => sprintf(__('%d image(s) missing alt text. Add descriptive alt text to all images.', 'ai-seo-pro'), $analysis['image_alt_tags']['without_alt']),
+				'message' => sprintf(__('%d image(s) missing alt text. Add descriptive alt text to all images.', 'rankflow-seo'), $analysis['image_alt_tags']['without_alt']),
 			);
 		}
 
 		if ($analysis['internal_links'] === 0) {
 			$analysis['recommendations'][] = array(
 				'type' => 'info',
-				'message' => __('No internal links found. Link to related content on your site.', 'ai-seo-pro'),
+				'message' => __('No internal links found. Link to related content on your site.', 'rankflow-seo'),
 			);
 		}
 

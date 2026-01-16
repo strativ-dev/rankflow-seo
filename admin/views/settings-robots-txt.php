@@ -2,8 +2,8 @@
 /**
  * Robots.txt Settings View
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/admin/views
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/admin/views
  * @author     Strativ AB
  */
 
@@ -13,35 +13,35 @@ if (!defined('ABSPATH')) {
 }
 
 // Get current settings.
-$ai_seo_pro_robots_enabled = get_option('ai_seo_pro_robots_enabled', false);
-$ai_seo_pro_custom_rules = get_option('ai_seo_pro_robots_custom_rules', '');
-$ai_seo_pro_include_sitemap = get_option('ai_seo_pro_robots_include_sitemap', true);
-$ai_seo_pro_block_ai = get_option('ai_seo_pro_robots_block_ai', false);
-$ai_seo_pro_block_bad_bots = get_option('ai_seo_pro_robots_block_bad_bots', false);
-$ai_seo_pro_disallow_wp_admin = get_option('ai_seo_pro_robots_disallow_wp_admin', true);
-$ai_seo_pro_disallow_wp_includes = get_option('ai_seo_pro_robots_disallow_wp_includes', false);
-$ai_seo_pro_allow_ajax = get_option('ai_seo_pro_robots_allow_ajax', true);
-$ai_seo_pro_disallow_search = get_option('ai_seo_pro_robots_disallow_search', true);
-$ai_seo_pro_sitemap_urls = get_option('ai_seo_pro_robots_sitemap_urls', '');
+$rankflow_seo_robots_enabled = get_option('rankflow_seo_robots_enabled', false);
+$rankflow_seo_custom_rules = get_option('rankflow_seo_robots_custom_rules', '');
+$rankflow_seo_include_sitemap = get_option('rankflow_seo_robots_include_sitemap', true);
+$rankflow_seo_block_ai = get_option('rankflow_seo_robots_block_ai', false);
+$rankflow_seo_block_bad_bots = get_option('rankflow_seo_robots_block_bad_bots', false);
+$rankflow_seo_disallow_wp_admin = get_option('rankflow_seo_robots_disallow_wp_admin', true);
+$rankflow_seo_disallow_wp_includes = get_option('rankflow_seo_robots_disallow_wp_includes', false);
+$rankflow_seo_allow_ajax = get_option('rankflow_seo_robots_allow_ajax', true);
+$rankflow_seo_disallow_search = get_option('rankflow_seo_robots_disallow_search', true);
+$rankflow_seo_sitemap_urls = get_option('rankflow_seo_robots_sitemap_urls', '');
 
 // Get individual bot blocking settings
-$ai_seo_pro_blocked_ai_bots = get_option('ai_seo_pro_robots_blocked_ai_bots', array());
-$ai_seo_pro_blocked_bad_bots = get_option('ai_seo_pro_robots_blocked_bad_bots', array());
+$rankflow_seo_blocked_ai_bots = get_option('rankflow_seo_robots_blocked_ai_bots', array());
+$rankflow_seo_blocked_bad_bots = get_option('rankflow_seo_robots_blocked_bad_bots', array());
 
 // Check for physical robots.txt file.
-$ai_seo_pro_robots_handler = new AI_SEO_Pro_Robots_Txt();
-$ai_seo_pro_physical_file_exists = $ai_seo_pro_robots_handler->physical_file_exists();
-$ai_seo_pro_physical_file_content = $ai_seo_pro_robots_handler->get_physical_file_content();
+$rankflow_seo_robots_handler = new RankFlow_SEO_Robots_Txt();
+$rankflow_seo_physical_file_exists = $rankflow_seo_robots_handler->physical_file_exists();
+$rankflow_seo_physical_file_content = $rankflow_seo_robots_handler->get_physical_file_content();
 
 // Generate preview based on enabled status.
-if ($ai_seo_pro_robots_enabled) {
-    $ai_seo_pro_preview_content = $ai_seo_pro_robots_handler->generate_robots_txt();
+if ($rankflow_seo_robots_enabled) {
+    $rankflow_seo_preview_content = $rankflow_seo_robots_handler->generate_robots_txt();
 } else {
-    $ai_seo_pro_preview_content = $ai_seo_pro_robots_handler->get_default_robots_txt();
+    $rankflow_seo_preview_content = $rankflow_seo_robots_handler->get_default_robots_txt();
 }
 
 // Define AI bots
-$ai_seo_pro_ai_bots = array(
+$rankflow_seo_ai_bots = array(
     'GPTBot' => 'OpenAI GPTBot',
     'ChatGPT-User' => 'ChatGPT User Agent',
     'Google-Extended' => 'Google Extended (AI Training)',
@@ -59,7 +59,7 @@ $ai_seo_pro_ai_bots = array(
 );
 
 // Define bad bots
-$ai_seo_pro_bad_bots = array(
+$rankflow_seo_bad_bots = array(
     'AhrefsBot' => 'Ahrefs SEO Bot',
     'SemrushBot' => 'Semrush Bot',
     'MJ12bot' => 'Majestic SEO Bot',
@@ -82,50 +82,50 @@ $ai_seo_pro_bad_bots = array(
 );
 ?>
 
-<div class="wrap ai-seo-pro-robots-txt">
+<div class="wrap rankflow-seo-robots-txt">
     <h1>
         <span class="dashicons dashicons-media-code" style="margin-right: 10px;"></span>
-        <?php esc_html_e('Robots.txt Editor', 'ai-seo-pro'); ?>
+        <?php esc_html_e('Robots.txt Editor', 'rankflow-seo'); ?>
     </h1>
 
     <p class="description" style="font-size: 14px; margin-bottom: 20px;">
-        <?php esc_html_e('Control how search engines crawl your website. The robots.txt file tells web crawlers which pages or sections of your site should not be processed or scanned.', 'ai-seo-pro'); ?>
+        <?php esc_html_e('Control how search engines crawl your website. The robots.txt file tells web crawlers which pages or sections of your site should not be processed or scanned.', 'rankflow-seo'); ?>
     </p>
 
-    <?php if ($ai_seo_pro_physical_file_exists): ?>
-        <div class="notice notice-warning">
-            <p>
-                <strong><?php esc_html_e('Warning:', 'ai-seo-pro'); ?></strong>
-                <?php esc_html_e('A physical robots.txt file exists in your WordPress root directory. This file will take precedence over the virtual robots.txt generated by this plugin. You need to delete or rename the physical file for these settings to work.', 'ai-seo-pro'); ?>
-            </p>
-            <p>
-                <strong><?php esc_html_e('File location:', 'ai-seo-pro'); ?></strong>
-                <code><?php echo esc_html(ABSPATH . 'robots.txt'); ?></code>
-            </p>
-        </div>
+    <?php if ($rankflow_seo_physical_file_exists): ?>
+                <div class="notice notice-warning">
+                    <p>
+                        <strong><?php esc_html_e('Warning:', 'rankflow-seo'); ?></strong>
+                        <?php esc_html_e('A physical robots.txt file exists in your WordPress root directory. This file will take precedence over the virtual robots.txt generated by this plugin. You need to delete or rename the physical file for these settings to work.', 'rankflow-seo'); ?>
+                    </p>
+                    <p>
+                        <strong><?php esc_html_e('File location:', 'rankflow-seo'); ?></strong>
+                        <code><?php echo esc_html(ABSPATH . 'robots.txt'); ?></code>
+                    </p>
+                </div>
     <?php endif; ?>
 
-    <?php settings_errors('ai_seo_pro_robots_txt'); ?>
+    <?php settings_errors('rankflow_seo_robots_txt'); ?>
 
-    <div class="ai-seo-pro-robots-container">
+    <div class="rankflow-seo-robots-container">
         <!-- Settings Column -->
-        <div class="ai-seo-pro-robots-settings">
-            <form method="post" action="options.php" id="ai-seo-pro-robots-form">
-                <?php settings_fields('ai_seo_pro_robots_txt'); ?>
+        <div class="rankflow-seo-robots-settings">
+            <form method="post" action="options.php" id="rankflow-seo-robots-form">
+                <?php settings_fields('rankflow_seo_robots_txt'); ?>
 
                 <!-- Enable Toggle -->
-                <div class="ai-seo-pro-card">
-                    <h2><?php esc_html_e('Enable Virtual Robots.txt', 'ai-seo-pro'); ?></h2>
-                    <label class="ai-seo-pro-toggle">
-                        <input type="checkbox" name="ai_seo_pro_robots_enabled" value="1" <?php checked($ai_seo_pro_robots_enabled); ?>>
+                <div class="rankflow-seo-card">
+                    <h2><?php esc_html_e('Enable Virtual Robots.txt', 'rankflow-seo'); ?></h2>
+                    <label class="rankflow-seo-toggle">
+                        <input type="checkbox" name="rankflow_seo_robots_enabled" value="1" <?php checked($rankflow_seo_robots_enabled); ?>>
                         <span class="toggle-slider"></span>
-                        <span class="toggle-label"><?php esc_html_e('Enable custom robots.txt', 'ai-seo-pro'); ?></span>
+                        <span class="toggle-label"><?php esc_html_e('Enable custom robots.txt', 'rankflow-seo'); ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('When enabled, WordPress will serve the virtual robots.txt file generated by these settings.', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('When enabled, WordPress will serve the virtual robots.txt file generated by these settings.', 'rankflow-seo'); ?>
                     </p>
                     <p class="robots-url">
-                        <strong><?php esc_html_e('Your robots.txt URL:', 'ai-seo-pro'); ?></strong>
+                        <strong><?php esc_html_e('Your robots.txt URL:', 'rankflow-seo'); ?></strong>
                         <a href="<?php echo esc_url(home_url('robots.txt')); ?>" target="_blank">
                             <?php echo esc_url(home_url('robots.txt')); ?>
                             <span class="dashicons dashicons-external"></span>
@@ -134,270 +134,270 @@ $ai_seo_pro_bad_bots = array(
                 </div>
 
                 <!-- WordPress Defaults -->
-                <div class="ai-seo-pro-card">
-                    <h2><?php esc_html_e('WordPress Defaults', 'ai-seo-pro'); ?></h2>
+                <div class="rankflow-seo-card">
+                    <h2><?php esc_html_e('WordPress Defaults', 'rankflow-seo'); ?></h2>
 
-                    <label class="ai-seo-pro-checkbox">
-                        <input type="checkbox" name="ai_seo_pro_robots_disallow_wp_admin" value="1" <?php checked($ai_seo_pro_disallow_wp_admin); ?>>
-                        <span><?php esc_html_e('Disallow /wp-admin/', 'ai-seo-pro'); ?></span>
+                    <label class="rankflow-seo-checkbox">
+                        <input type="checkbox" name="rankflow_seo_robots_disallow_wp_admin" value="1" <?php checked($rankflow_seo_disallow_wp_admin); ?>>
+                        <span><?php esc_html_e('Disallow /wp-admin/', 'rankflow-seo'); ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('Block crawlers from accessing the WordPress admin area.', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Block crawlers from accessing the WordPress admin area.', 'rankflow-seo'); ?>
                     </p>
 
-                    <label class="ai-seo-pro-checkbox">
-                        <input type="checkbox" name="ai_seo_pro_robots_allow_ajax" value="1" <?php checked($ai_seo_pro_allow_ajax); ?>>
-                        <span><?php esc_html_e('Allow /wp-admin/admin-ajax.php', 'ai-seo-pro'); ?></span>
+                    <label class="rankflow-seo-checkbox">
+                        <input type="checkbox" name="rankflow_seo_robots_allow_ajax" value="1" <?php checked($rankflow_seo_allow_ajax); ?>>
+                        <span><?php esc_html_e('Allow /wp-admin/admin-ajax.php', 'rankflow-seo'); ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('Allow access to admin-ajax.php for themes/plugins that use it.', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Allow access to admin-ajax.php for themes/plugins that use it.', 'rankflow-seo'); ?>
                     </p>
 
-                    <label class="ai-seo-pro-checkbox">
-                        <input type="checkbox" name="ai_seo_pro_robots_disallow_wp_includes" value="1" <?php checked($ai_seo_pro_disallow_wp_includes); ?>>
-                        <span><?php esc_html_e('Disallow /wp-includes/', 'ai-seo-pro'); ?></span>
+                    <label class="rankflow-seo-checkbox">
+                        <input type="checkbox" name="rankflow_seo_robots_disallow_wp_includes" value="1" <?php checked($rankflow_seo_disallow_wp_includes); ?>>
+                        <span><?php esc_html_e('Disallow /wp-includes/', 'rankflow-seo'); ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('Block crawlers from accessing WordPress core files. Note: This may affect rendering.', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Block crawlers from accessing WordPress core files. Note: This may affect rendering.', 'rankflow-seo'); ?>
                     </p>
 
-                    <label class="ai-seo-pro-checkbox">
-                        <input type="checkbox" name="ai_seo_pro_robots_disallow_search" value="1" <?php checked($ai_seo_pro_disallow_search); ?>>
-                        <span><?php esc_html_e('Disallow search results pages', 'ai-seo-pro'); ?></span>
+                    <label class="rankflow-seo-checkbox">
+                        <input type="checkbox" name="rankflow_seo_robots_disallow_search" value="1" <?php checked($rankflow_seo_disallow_search); ?>>
+                        <span><?php esc_html_e('Disallow search results pages', 'rankflow-seo'); ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('Block crawlers from indexing internal search results (?s= and /search/).', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Block crawlers from indexing internal search results (?s= and /search/).', 'rankflow-seo'); ?>
                     </p>
                 </div>
 
                 <!-- AI Crawler Blocking -->
-                <div class="ai-seo-pro-card">
-                    <h2><?php esc_html_e('AI Crawler Blocking', 'ai-seo-pro'); ?></h2>
+                <div class="rankflow-seo-card">
+                    <h2><?php esc_html_e('AI Crawler Blocking', 'rankflow-seo'); ?></h2>
 
-                    <label class="ai-seo-pro-checkbox parent-checkbox">
-                        <input type="checkbox" name="ai_seo_pro_robots_block_ai" value="1" 
+                    <label class="rankflow-seo-checkbox parent-checkbox">
+                        <input type="checkbox" name="rankflow_seo_robots_block_ai" value="1" 
                                id="block-all-ai" 
-                               <?php checked($ai_seo_pro_block_ai); ?>>
-                        <span><strong><?php esc_html_e('Block all AI crawlers', 'ai-seo-pro'); ?></strong></span>
+                               <?php checked($rankflow_seo_block_ai); ?>>
+                        <span><strong><?php esc_html_e('Block all AI crawlers', 'rankflow-seo'); ?></strong></span>
                     </label>
                     <p class="description" style="margin-bottom: 10px;">
-                        <?php esc_html_e('Block all AI training crawlers at once, or select individual bots below.', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Block all AI training crawlers at once, or select individual bots below.', 'rankflow-seo'); ?>
                     </p>
 
                     <div class="bot-list ai-bot-list">
-                        <?php foreach ($ai_seo_pro_ai_bots as $ai_seo_pro_bot_key => $ai_seo_pro_bot_name): ?>
-                            <label class="ai-seo-pro-checkbox bot-checkbox">
-                                <input type="checkbox" 
-                                       name="ai_seo_pro_robots_blocked_ai_bots[]" 
-                                       value="<?php echo esc_attr($ai_seo_pro_bot_key); ?>"
-                                       class="individual-ai-bot"
-                                       <?php checked(in_array($ai_seo_pro_bot_key, $ai_seo_pro_blocked_ai_bots)); ?>>
-                                <span><?php echo esc_html($ai_seo_pro_bot_name); ?> <code><?php echo esc_html($ai_seo_pro_bot_key); ?></code></span>
-                            </label>
+                        <?php foreach ($rankflow_seo_ai_bots as $rankflow_seo_bot_key => $rankflow_seo_bot_name): ?>
+                                    <label class="rankflow-seo-checkbox bot-checkbox">
+                                        <input type="checkbox" 
+                                               name="rankflow_seo_robots_blocked_ai_bots[]" 
+                                               value="<?php echo esc_attr($rankflow_seo_bot_key); ?>"
+                                               class="individual-ai-bot"
+                                               <?php checked(in_array($rankflow_seo_bot_key, $rankflow_seo_blocked_ai_bots)); ?>>
+                                        <span><?php echo esc_html($rankflow_seo_bot_name); ?> <code><?php echo esc_html($rankflow_seo_bot_key); ?></code></span>
+                                    </label>
                         <?php endforeach; ?>
                     </div>
                 </div>
 
                 <!-- Bad Bot Blocking -->
-                <div class="ai-seo-pro-card">
-                    <h2><?php esc_html_e('Aggressive SEO Crawler Blocking', 'ai-seo-pro'); ?></h2>
+                <div class="rankflow-seo-card">
+                    <h2><?php esc_html_e('Aggressive SEO Crawler Blocking', 'rankflow-seo'); ?></h2>
 
-                    <label class="ai-seo-pro-checkbox parent-checkbox">
-                        <input type="checkbox" name="ai_seo_pro_robots_block_bad_bots" value="1" 
+                    <label class="rankflow-seo-checkbox parent-checkbox">
+                        <input type="checkbox" name="rankflow_seo_robots_block_bad_bots" value="1" 
                                id="block-all-bad-bots"
-                               <?php checked($ai_seo_pro_block_bad_bots); ?>>
-                        <span><strong><?php esc_html_e('Block all aggressive SEO crawlers', 'ai-seo-pro'); ?></strong></span>
+                               <?php checked($rankflow_seo_block_bad_bots); ?>>
+                        <span><strong><?php esc_html_e('Block all aggressive SEO crawlers', 'rankflow-seo'); ?></strong></span>
                     </label>
                     <p class="description" style="margin-bottom: 10px;">
-                        <?php esc_html_e('Block all aggressive SEO tool crawlers at once, or select individual bots below. These can slow down your server.', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Block all aggressive SEO tool crawlers at once, or select individual bots below. These can slow down your server.', 'rankflow-seo'); ?>
                     </p>
 
                     <div class="bot-list bad-bot-list">
-                        <?php foreach ($ai_seo_pro_bad_bots as $ai_seo_pro_bot_key => $ai_seo_pro_bot_name): ?>
-                            <label class="ai-seo-pro-checkbox bot-checkbox">
-                                <input type="checkbox" 
-                                       name="ai_seo_pro_robots_blocked_bad_bots[]" 
-                                       value="<?php echo esc_attr($ai_seo_pro_bot_key); ?>"
-                                       class="individual-bad-bot"
-                                       <?php checked(in_array($ai_seo_pro_bot_key, $ai_seo_pro_blocked_bad_bots)); ?>>
-                                <span><?php echo esc_html($ai_seo_pro_bot_name); ?> <code><?php echo esc_html($ai_seo_pro_bot_key); ?></code></span>
-                            </label>
+                        <?php foreach ($rankflow_seo_bad_bots as $rankflow_seo_bot_key => $rankflow_seo_bot_name): ?>
+                                    <label class="rankflow-seo-checkbox bot-checkbox">
+                                        <input type="checkbox" 
+                                               name="rankflow_seo_robots_blocked_bad_bots[]" 
+                                               value="<?php echo esc_attr($rankflow_seo_bot_key); ?>"
+                                               class="individual-bad-bot"
+                                               <?php checked(in_array($rankflow_seo_bot_key, $rankflow_seo_blocked_bad_bots)); ?>>
+                                        <span><?php echo esc_html($rankflow_seo_bot_name); ?> <code><?php echo esc_html($rankflow_seo_bot_key); ?></code></span>
+                                    </label>
                         <?php endforeach; ?>
                     </div>
                 </div>
 
                 <!-- Sitemap Settings -->
-                <div class="ai-seo-pro-card">
-                    <h2><?php esc_html_e('Sitemap', 'ai-seo-pro'); ?></h2>
+                <div class="rankflow-seo-card">
+                    <h2><?php esc_html_e('Sitemap', 'rankflow-seo'); ?></h2>
 
-                    <label class="ai-seo-pro-checkbox">
-                        <input type="checkbox" name="ai_seo_pro_robots_include_sitemap" value="1" <?php checked($ai_seo_pro_include_sitemap); ?>>
-                        <span><?php esc_html_e('Include AI SEO Pro sitemap', 'ai-seo-pro'); ?></span>
+                    <label class="rankflow-seo-checkbox">
+                        <input type="checkbox" name="rankflow_seo_robots_include_sitemap" value="1" <?php checked($rankflow_seo_include_sitemap); ?>>
+                        <span><?php esc_html_e('Include RankFlow SEO sitemap', 'rankflow-seo'); ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('Automatically add the AI SEO Pro sitemap URL if the sitemap feature is enabled.', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Automatically add the RankFlow SEO sitemap URL if the sitemap feature is enabled.', 'rankflow-seo'); ?>
                     </p>
 
-                    <label for="ai_seo_pro_robots_sitemap_urls">
-                        <strong><?php esc_html_e('Additional Sitemap URLs', 'ai-seo-pro'); ?></strong>
+                    <label for="rankflow_seo_robots_sitemap_urls">
+                        <strong><?php esc_html_e('Additional Sitemap URLs', 'rankflow-seo'); ?></strong>
                     </label>
-                    <textarea id="ai_seo_pro_robots_sitemap_urls" name="ai_seo_pro_robots_sitemap_urls" rows="3"
+                    <textarea id="rankflow_seo_robots_sitemap_urls" name="rankflow_seo_robots_sitemap_urls" rows="3"
                         class="widefat code"
-                        placeholder="https://example.com/sitemap.xml&#10;https://example.com/news-sitemap.xml"><?php echo esc_textarea($ai_seo_pro_sitemap_urls); ?></textarea>
+                        placeholder="https://example.com/sitemap.xml&#10;https://example.com/news-sitemap.xml"><?php echo esc_textarea($rankflow_seo_sitemap_urls); ?></textarea>
                     <p class="description">
-                        <?php esc_html_e('Enter additional sitemap URLs, one per line. These will be added to the robots.txt file.', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Enter additional sitemap URLs, one per line. These will be added to the robots.txt file.', 'rankflow-seo'); ?>
                     </p>
                 </div>
 
                 <!-- Custom Rules -->
-                <div class="ai-seo-pro-card">
-                    <h2><?php esc_html_e('Custom Rules', 'ai-seo-pro'); ?></h2>
+                <div class="rankflow-seo-card">
+                    <h2><?php esc_html_e('Custom Rules', 'rankflow-seo'); ?></h2>
                     <p class="description" style="margin-bottom: 10px;">
-                        <?php esc_html_e('Add custom robots.txt rules. These will be added after the default rules.', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Add custom robots.txt rules. These will be added after the default rules.', 'rankflow-seo'); ?>
                     </p>
 
-                    <textarea id="ai_seo_pro_robots_custom_rules" name="ai_seo_pro_robots_custom_rules" rows="8"
+                    <textarea id="rankflow_seo_robots_custom_rules" name="rankflow_seo_robots_custom_rules" rows="8"
                         class="widefat code"
-                        placeholder="# Example custom rules&#10;User-agent: Googlebot&#10;Allow: /important-page/&#10;&#10;User-agent: Bingbot&#10;Crawl-delay: 10"><?php echo esc_textarea($ai_seo_pro_custom_rules); ?></textarea>
+                        placeholder="# Example custom rules&#10;User-agent: Googlebot&#10;Allow: /important-page/&#10;&#10;User-agent: Bingbot&#10;Crawl-delay: 10"><?php echo esc_textarea($rankflow_seo_custom_rules); ?></textarea>
 
                     <!-- Syntax Help -->
                     <div class="syntax-help">
-                        <h4><?php esc_html_e('Syntax Reference', 'ai-seo-pro'); ?></h4>
+                        <h4><?php esc_html_e('Syntax Reference', 'rankflow-seo'); ?></h4>
                         <table class="syntax-table">
                             <tr>
                                 <td><code>User-agent: *</code></td>
-                                <td><?php esc_html_e('Applies to all crawlers', 'ai-seo-pro'); ?></td>
+                                <td><?php esc_html_e('Applies to all crawlers', 'rankflow-seo'); ?></td>
                             </tr>
                             <tr>
                                 <td><code>User-agent: Googlebot</code></td>
-                                <td><?php esc_html_e('Applies only to Googlebot', 'ai-seo-pro'); ?></td>
+                                <td><?php esc_html_e('Applies only to Googlebot', 'rankflow-seo'); ?></td>
                             </tr>
                             <tr>
                                 <td><code>Disallow: /folder/</code></td>
-                                <td><?php esc_html_e('Block access to a folder', 'ai-seo-pro'); ?></td>
+                                <td><?php esc_html_e('Block access to a folder', 'rankflow-seo'); ?></td>
                             </tr>
                             <tr>
                                 <td><code>Allow: /folder/page.html</code></td>
-                                <td><?php esc_html_e('Allow access to a specific page', 'ai-seo-pro'); ?></td>
+                                <td><?php esc_html_e('Allow access to a specific page', 'rankflow-seo'); ?></td>
                             </tr>
                             <tr>
                                 <td><code>Disallow: /*.pdf$</code></td>
-                                <td><?php esc_html_e('Block all PDF files ($ = end of URL)', 'ai-seo-pro'); ?></td>
+                                <td><?php esc_html_e('Block all PDF files ($ = end of URL)', 'rankflow-seo'); ?></td>
                             </tr>
                             <tr>
                                 <td><code>Disallow: /folder/*.php</code></td>
-                                <td><?php esc_html_e('Block PHP files in folder (* = wildcard)', 'ai-seo-pro'); ?>
+                                <td><?php esc_html_e('Block PHP files in folder (* = wildcard)', 'rankflow-seo'); ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td><code># Comment</code></td>
-                                <td><?php esc_html_e('Add a comment (ignored by crawlers)', 'ai-seo-pro'); ?></td>
+                                <td><?php esc_html_e('Add a comment (ignored by crawlers)', 'rankflow-seo'); ?></td>
                             </tr>
                         </table>
                     </div>
                 </div>
 
                 <!-- Submit Buttons -->
-                <div class="ai-seo-pro-card submit-card">
-                    <?php submit_button(__('Save Settings', 'ai-seo-pro'), 'primary', 'submit', false); ?>
-                    <button type="button" id="ai-seo-pro-reset-robots" class="button button-secondary">
-                        <?php esc_html_e('Reset to Defaults', 'ai-seo-pro'); ?>
+                <div class="rankflow-seo-card submit-card">
+                    <?php submit_button(__('Save Settings', 'rankflow-seo'), 'primary', 'submit', false); ?>
+                    <button type="button" id="rankflow-seo-reset-robots" class="button button-secondary">
+                        <?php esc_html_e('Reset to Defaults', 'rankflow-seo'); ?>
                     </button>
-                    <button type="button" id="ai-seo-pro-preview-robots" class="button button-secondary">
+                    <button type="button" id="rankflow-seo-preview-robots" class="button button-secondary">
                         <span class="dashicons dashicons-visibility"></span>
-                        <?php esc_html_e('Refresh Preview', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Refresh Preview', 'rankflow-seo'); ?>
                     </button>
                 </div>
             </form>
         </div>
 
         <!-- Preview Column -->
-        <div class="ai-seo-pro-robots-preview">
-            <div class="ai-seo-pro-card preview-card">
+        <div class="rankflow-seo-robots-preview">
+            <div class="rankflow-seo-card preview-card">
                 <h2>
                     <span class="dashicons dashicons-visibility"></span>
-                    <?php esc_html_e('Robots.txt Preview', 'ai-seo-pro'); ?>
+                    <?php esc_html_e('Robots.txt Preview', 'rankflow-seo'); ?>
                 </h2>
                 <p class="description">
-                    <?php esc_html_e('This is a preview of your generated robots.txt file. Save settings to apply changes.', 'ai-seo-pro'); ?>
+                    <?php esc_html_e('This is a preview of your generated robots.txt file. Save settings to apply changes.', 'rankflow-seo'); ?>
                 </p>
                 <div class="preview-content">
-                    <pre id="robots-preview-content"><?php echo esc_html($ai_seo_pro_preview_content); ?></pre>
+                    <pre id="robots-preview-content"><?php echo esc_html($rankflow_seo_preview_content); ?></pre>
                 </div>
                 <div class="preview-actions">
                     <button type="button" id="copy-robots-txt" class="button">
                         <span class="dashicons dashicons-clipboard"></span>
-                        <?php esc_html_e('Copy to Clipboard', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Copy to Clipboard', 'rankflow-seo'); ?>
                     </button>
                     <a href="<?php echo esc_url(home_url('robots.txt')); ?>" target="_blank" class="button">
                         <span class="dashicons dashicons-external"></span>
-                        <?php esc_html_e('View Live', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('View Live', 'rankflow-seo'); ?>
                     </a>
                 </div>
             </div>
 
             <!-- Info Card -->
-            <div class="ai-seo-pro-card info-card">
+            <div class="rankflow-seo-card info-card">
                 <h3>
                     <span class="dashicons dashicons-info"></span>
-                    <?php esc_html_e('About Robots.txt', 'ai-seo-pro'); ?>
+                    <?php esc_html_e('About Robots.txt', 'rankflow-seo'); ?>
                 </h3>
                 <ul>
-                    <li><?php esc_html_e('Robots.txt is a standard way to tell crawlers which URLs they can access on your site.', 'ai-seo-pro'); ?>
+                    <li><?php esc_html_e('Robots.txt is a standard way to tell crawlers which URLs they can access on your site.', 'rankflow-seo'); ?>
                     </li>
-                    <li><?php esc_html_e('It does NOT prevent pages from being indexed. Use noindex meta tag for that.', 'ai-seo-pro'); ?>
+                    <li><?php esc_html_e('It does NOT prevent pages from being indexed. Use noindex meta tag for that.', 'rankflow-seo'); ?>
                     </li>
-                    <li><?php esc_html_e('Changes take effect immediately but crawlers may cache old rules for up to 24 hours.', 'ai-seo-pro'); ?>
+                    <li><?php esc_html_e('Changes take effect immediately but crawlers may cache old rules for up to 24 hours.', 'rankflow-seo'); ?>
                     </li>
-                    <li><?php esc_html_e('Test your robots.txt with Google Search Console\'s robots.txt Tester.', 'ai-seo-pro'); ?>
+                    <li><?php esc_html_e('Test your robots.txt with Google Search Console\'s robots.txt Tester.', 'rankflow-seo'); ?>
                     </li>
                 </ul>
                 <p>
                     <a href="https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"
                         target="_blank" rel="noopener noreferrer">
-                        <?php esc_html_e('Learn more about robots.txt →', 'ai-seo-pro'); ?>
+                        <?php esc_html_e('Learn more about robots.txt →', 'rankflow-seo'); ?>
                     </a>
                 </p>
             </div>
 
             <!-- Common Crawlers -->
-            <div class="ai-seo-pro-card crawlers-card">
+            <div class="rankflow-seo-card crawlers-card">
                 <h3>
                     <span class="dashicons dashicons-admin-users"></span>
-                    <?php esc_html_e('Common Crawlers', 'ai-seo-pro'); ?>
+                    <?php esc_html_e('Common Crawlers', 'rankflow-seo'); ?>
                 </h3>
                 <table class="crawlers-table">
                     <tr>
                         <td><code>Googlebot</code></td>
-                        <td><?php esc_html_e('Google Search', 'ai-seo-pro'); ?></td>
+                        <td><?php esc_html_e('Google Search', 'rankflow-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>Bingbot</code></td>
-                        <td><?php esc_html_e('Bing Search', 'ai-seo-pro'); ?></td>
+                        <td><?php esc_html_e('Bing Search', 'rankflow-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>Slurp</code></td>
-                        <td><?php esc_html_e('Yahoo Search', 'ai-seo-pro'); ?></td>
+                        <td><?php esc_html_e('Yahoo Search', 'rankflow-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>DuckDuckBot</code></td>
-                        <td><?php esc_html_e('DuckDuckGo', 'ai-seo-pro'); ?></td>
+                        <td><?php esc_html_e('DuckDuckGo', 'rankflow-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>facebookexternalhit</code></td>
-                        <td><?php esc_html_e('Facebook', 'ai-seo-pro'); ?></td>
+                        <td><?php esc_html_e('Facebook', 'rankflow-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>Twitterbot</code></td>
-                        <td><?php esc_html_e('X/Twitter', 'ai-seo-pro'); ?></td>
+                        <td><?php esc_html_e('X/Twitter', 'rankflow-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>GPTBot</code></td>
-                        <td><?php esc_html_e('OpenAI', 'ai-seo-pro'); ?></td>
+                        <td><?php esc_html_e('OpenAI', 'rankflow-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>ClaudeBot</code></td>
-                        <td><?php esc_html_e('Anthropic', 'ai-seo-pro'); ?></td>
+                        <td><?php esc_html_e('Anthropic', 'rankflow-seo'); ?></td>
                     </tr>
                 </table>
             </div>
@@ -406,11 +406,11 @@ $ai_seo_pro_bad_bots = array(
 </div>
 
 <style>
-    .ai-seo-pro-robots-txt {
+    .rankflow-seo-robots-txt {
         max-width: 1400px;
     }
 
-    .ai-seo-pro-robots-container {
+    .rankflow-seo-robots-container {
         display: grid;
         grid-template-columns: 1fr 400px;
         gap: 20px;
@@ -418,12 +418,12 @@ $ai_seo_pro_bad_bots = array(
     }
 
     @media (max-width: 1200px) {
-        .ai-seo-pro-robots-container {
+        .rankflow-seo-robots-container {
             grid-template-columns: 1fr;
         }
     }
 
-    .ai-seo-pro-card {
+    .rankflow-seo-card {
         background: #fff;
         border: 1px solid #ddd;
         border-radius: 8px;
@@ -431,7 +431,7 @@ $ai_seo_pro_bad_bots = array(
         margin-bottom: 20px;
     }
 
-    .ai-seo-pro-card h2 {
+    .rankflow-seo-card h2 {
         margin: 0 0 15px 0;
         padding: 0 0 10px 0;
         border-bottom: 1px solid #eee;
@@ -441,7 +441,7 @@ $ai_seo_pro_bad_bots = array(
         gap: 8px;
     }
 
-    .ai-seo-pro-card h3 {
+    .rankflow-seo-card h3 {
         margin: 0 0 15px 0;
         font-size: 14px;
         display: flex;
@@ -450,7 +450,7 @@ $ai_seo_pro_bad_bots = array(
     }
 
     /* Toggle Switch */
-    .ai-seo-pro-toggle {
+    .rankflow-seo-toggle {
         display: flex;
         align-items: center;
         gap: 12px;
@@ -458,7 +458,7 @@ $ai_seo_pro_bad_bots = array(
         margin-bottom: 10px;
     }
 
-    .ai-seo-pro-toggle input {
+    .rankflow-seo-toggle input {
         display: none;
     }
 
@@ -484,11 +484,11 @@ $ai_seo_pro_bad_bots = array(
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
-    .ai-seo-pro-toggle input:checked+.toggle-slider {
+    .rankflow-seo-toggle input:checked+.toggle-slider {
         background: #2271b1;
     }
 
-    .ai-seo-pro-toggle input:checked+.toggle-slider::after {
+    .rankflow-seo-toggle input:checked+.toggle-slider::after {
         transform: translateX(24px);
     }
 
@@ -497,7 +497,7 @@ $ai_seo_pro_bad_bots = array(
     }
 
     /* Checkboxes */
-    .ai-seo-pro-checkbox {
+    .rankflow-seo-checkbox {
         display: flex;
         align-items: center;
         gap: 8px;
@@ -505,14 +505,14 @@ $ai_seo_pro_bad_bots = array(
         margin-bottom: 5px;
     }
 
-    .ai-seo-pro-checkbox input[type="checkbox"] {
+    .rankflow-seo-checkbox input[type="checkbox"] {
         width: 18px;
         height: 18px;
         margin: 0;
         flex-shrink: 0;
     }
 
-    .ai-seo-pro-checkbox+.description {
+    .rankflow-seo-checkbox+.description {
         margin-left: 26px;
         margin-bottom: 15px;
     }
@@ -746,7 +746,7 @@ $ai_seo_pro_bad_bots = array(
                 document.execCommand('copy');
                 showCopySuccess($btn);
             } catch (err) {
-                alert('<?php esc_html_e('Failed to copy. Please select and copy manually.', 'ai-seo-pro'); ?>');
+                alert('<?php esc_html_e('Failed to copy. Please select and copy manually.', 'rankflow-seo'); ?>');
             }
 
             $temp.remove();
@@ -755,14 +755,14 @@ $ai_seo_pro_bad_bots = array(
         // Show success message.
         function showCopySuccess($btn) {
             var originalText = $btn.html();
-            $btn.html('<span class="dashicons dashicons-yes"></span> <?php esc_html_e('Copied!', 'ai-seo-pro'); ?>');
+            $btn.html('<span class="dashicons dashicons-yes"></span> <?php esc_html_e('Copied!', 'rankflow-seo'); ?>');
             setTimeout(function () {
                 $btn.html(originalText);
             }, 2000);
         }
 
         // Refresh preview.
-        $('#ai-seo-pro-preview-robots').on('click', function () {
+        $('#rankflow-seo-preview-robots').on('click', function () {
             var $btn = $(this);
             $btn.prop('disabled', true);
 
@@ -770,8 +770,8 @@ $ai_seo_pro_bad_bots = array(
                 url: ajaxurl,
                 type: 'POST',
                 data: {
-                    action: 'ai_seo_pro_preview_robots',
-                    nonce: '<?php echo esc_js(wp_create_nonce('ai_seo_pro_robots_nonce')); ?>'
+                    action: 'rankflow_seo_preview_robots',
+                    nonce: '<?php echo esc_js(wp_create_nonce('rankflow_seo_robots_nonce')); ?>'
                 },
                 success: function (response) {
                     if (response.success) {
@@ -786,8 +786,8 @@ $ai_seo_pro_bad_bots = array(
         });
 
         // Reset to defaults.
-        $('#ai-seo-pro-reset-robots').on('click', function () {
-            if (!confirm('<?php esc_html_e('Are you sure you want to reset all robots.txt settings to defaults?', 'ai-seo-pro'); ?>')) {
+        $('#rankflow-seo-reset-robots').on('click', function () {
+            if (!confirm('<?php esc_html_e('Are you sure you want to reset all robots.txt settings to defaults?', 'rankflow-seo'); ?>')) {
                 return;
             }
 
@@ -798,8 +798,8 @@ $ai_seo_pro_bad_bots = array(
                 url: ajaxurl,
                 type: 'POST',
                 data: {
-                    action: 'ai_seo_pro_reset_robots',
-                    nonce: '<?php echo esc_js(wp_create_nonce('ai_seo_pro_robots_nonce')); ?>'
+                    action: 'rankflow_seo_reset_robots',
+                    nonce: '<?php echo esc_js(wp_create_nonce('rankflow_seo_robots_nonce')); ?>'
                 },
                 success: function (response) {
                     if (response.success) {

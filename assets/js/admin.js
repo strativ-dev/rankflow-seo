@@ -1,11 +1,11 @@
 /**
  * Admin functionality
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/assets/js
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/assets/js
  */
 
-(function($) {
+(function ($) {
 	'use strict';
 
 	/**
@@ -19,13 +19,13 @@
 		init() {
 			// Dismiss notices
 			$(document).on('click', '.notice-dismiss', (e) => this.dismissNotice(e));
-			
+
 			// Confirm actions
 			this.setupConfirmActions();
-			
+
 			// Tooltips
 			this.initTooltips();
-			
+
 			// Collapsible sections
 			this.initCollapsible();
 		}
@@ -41,7 +41,7 @@
 		 * Setup confirm actions
 		 */
 		setupConfirmActions() {
-			$('[data-confirm]').on('click', function(e) {
+			$('[data-confirm]').on('click', function (e) {
 				const message = $(this).data('confirm');
 				if (!confirm(message)) {
 					e.preventDefault();
@@ -54,11 +54,11 @@
 		 * Initialize tooltips
 		 */
 		initTooltips() {
-			$('[data-tooltip]').each(function() {
+			$('[data-tooltip]').each(function () {
 				const tooltip = $('<span>')
 					.addClass('ai-seo-tooltip')
 					.text($(this).data('tooltip'));
-				
+
 				$(this).append(tooltip);
 			});
 		}
@@ -67,7 +67,7 @@
 		 * Initialize collapsible sections
 		 */
 		initCollapsible() {
-			$('.collapsible-header').on('click', function() {
+			$('.collapsible-header').on('click', function () {
 				$(this).toggleClass('active');
 				$(this).next('.collapsible-content').slideToggle();
 			});
@@ -85,7 +85,7 @@
 						<p>${message}</p>
 					</div>
 				`);
-			
+
 			$('body').append(overlay);
 		}
 
@@ -107,7 +107,7 @@
 			temp.val(text).select();
 			document.execCommand('copy');
 			temp.remove();
-			
+
 			this.showToast('Copied to clipboard!', 'success');
 		}
 
@@ -118,13 +118,13 @@
 			const toast = $('<div>')
 				.addClass('ai-seo-toast toast-' + type)
 				.text(message);
-			
+
 			$('body').append(toast);
-			
+
 			setTimeout(() => {
 				toast.addClass('show');
 			}, 10);
-			
+
 			setTimeout(() => {
 				toast.removeClass('show');
 				setTimeout(() => toast.remove(), 300);
@@ -136,19 +136,19 @@
 	 * Utility functions
 	 */
 	window.AISeoPro = window.AISeoPro || {};
-	
+
 	window.AISeoPro.Utils = {
 		/**
 		 * Format number with commas
 		 */
-		formatNumber: function(num) {
+		formatNumber: function (num) {
 			return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		},
 
 		/**
 		 * Truncate text
 		 */
-		truncate: function(text, length, suffix = '...') {
+		truncate: function (text, length, suffix = '...') {
 			if (text.length <= length) return text;
 			return text.substring(0, length) + suffix;
 		},
@@ -156,7 +156,7 @@
 		/**
 		 * Debounce function
 		 */
-		debounce: function(func, wait) {
+		debounce: function (func, wait) {
 			let timeout;
 			return function executedFunction(...args) {
 				const later = () => {
@@ -171,7 +171,7 @@
 		/**
 		 * Validate email
 		 */
-		validateEmail: function(email) {
+		validateEmail: function (email) {
 			const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 			return re.test(email);
 		},
@@ -179,7 +179,7 @@
 		/**
 		 * Validate URL
 		 */
-		validateUrl: function(url) {
+		validateUrl: function (url) {
 			try {
 				new URL(url);
 				return true;
@@ -192,7 +192,7 @@
 	/**
 	 * Initialize on document ready
 	 */
-	$(document).ready(function() {
+	$(document).ready(function () {
 		window.AISeoPro.Admin = new AdminHandler();
 	});
 

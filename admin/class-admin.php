@@ -2,11 +2,11 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/admin
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/admin
  * @author     Strativ AB
  */
-class AI_SEO_Pro_Admin
+class RankFlow_SEO_Admin
 {
 
 	/**
@@ -46,12 +46,12 @@ class AI_SEO_Pro_Admin
 		// Load on all post edit screens and plugin settings page.
 		if (
 			in_array($hook, array('post.php', 'post-new.php'), true) ||
-			strpos($hook, 'ai-seo-pro') !== false
+			strpos($hook, 'rankflow-seo') !== false
 		) {
 
 			wp_enqueue_style(
 				$this->plugin_name . '-admin',
-				AI_SEO_PRO_PLUGIN_URL . 'assets/css/admin.css',
+				RANKFLOW_SEO_PLUGIN_URL . 'assets/css/admin.css',
 				array(),
 				$this->version,
 				'all'
@@ -59,7 +59,7 @@ class AI_SEO_Pro_Admin
 
 			wp_enqueue_style(
 				$this->plugin_name . '-metabox',
-				AI_SEO_PRO_PLUGIN_URL . 'assets/css/metabox.css',
+				RANKFLOW_SEO_PLUGIN_URL . 'assets/css/metabox.css',
 				array(),
 				$this->version,
 				'all'
@@ -79,7 +79,7 @@ class AI_SEO_Pro_Admin
 
 			wp_enqueue_script(
 				$this->plugin_name . '-character-counter',
-				AI_SEO_PRO_PLUGIN_URL . 'assets/js/character-counter.js',
+				RANKFLOW_SEO_PLUGIN_URL . 'assets/js/character-counter.js',
 				array('jquery'),
 				$this->version,
 				true
@@ -87,7 +87,7 @@ class AI_SEO_Pro_Admin
 
 			wp_enqueue_script(
 				$this->plugin_name . '-metabox',
-				AI_SEO_PRO_PLUGIN_URL . 'assets/js/metabox.js',
+				RANKFLOW_SEO_PLUGIN_URL . 'assets/js/metabox.js',
 				array('jquery', $this->plugin_name . '-character-counter'),
 				$this->version,
 				true
@@ -95,7 +95,7 @@ class AI_SEO_Pro_Admin
 
 			wp_enqueue_script(
 				$this->plugin_name . '-admin',
-				AI_SEO_PRO_PLUGIN_URL . 'assets/js/admin.js',
+				RANKFLOW_SEO_PLUGIN_URL . 'assets/js/admin.js',
 				array('jquery', 'wp-util'),
 				$this->version,
 				true
@@ -108,24 +108,24 @@ class AI_SEO_Pro_Admin
 				'aiSeoProData',
 				array(
 					'ajaxUrl' => admin_url('admin-ajax.php'),
-					'nonce' => wp_create_nonce('ai_seo_pro_nonce'),
+					'nonce' => wp_create_nonce('rankflow_seo_nonce'),
 					'postId' => $post_id ? $post_id : 0,
 					'strings' => array(
-						'generating' => __('Generating...', 'ai-seo-pro'),
-						'analyzing' => __('Analyzing content...', 'ai-seo-pro'),
-						'success' => __('Successfully generated!', 'ai-seo-pro'),
-						'error' => __('An error occurred. Please try again.', 'ai-seo-pro'),
-						'noContent' => __('Please add content first.', 'ai-seo-pro'),
-						'confirmRegenerate' => __('This will replace existing meta tags. Continue?', 'ai-seo-pro'),
+						'generating' => __('Generating...', 'rankflow-seo'),
+						'analyzing' => __('Analyzing content...', 'rankflow-seo'),
+						'success' => __('Successfully generated!', 'rankflow-seo'),
+						'error' => __('An error occurred. Please try again.', 'rankflow-seo'),
+						'noContent' => __('Please add content first.', 'rankflow-seo'),
+						'confirmRegenerate' => __('This will replace existing meta tags. Continue?', 'rankflow-seo'),
 					),
 				)
 			);
 		}
 
-		if (strpos($hook, 'ai-seo-pro') !== false) {
+		if (strpos($hook, 'rankflow-seo') !== false) {
 			wp_enqueue_script(
 				$this->plugin_name . '-settings',
-				AI_SEO_PRO_PLUGIN_URL . 'assets/js/settings.js',
+				RANKFLOW_SEO_PLUGIN_URL . 'assets/js/settings.js',
 				array('jquery'),
 				$this->version,
 				true
@@ -137,7 +137,7 @@ class AI_SEO_Pro_Admin
 				'aiSeoProData',
 				array(
 					'ajaxUrl' => admin_url('admin-ajax.php'),
-					'nonce' => wp_create_nonce('ai_seo_pro_nonce'),
+					'nonce' => wp_create_nonce('rankflow_seo_nonce'),
 				)
 			);
 		}
@@ -155,8 +155,8 @@ class AI_SEO_Pro_Admin
 	{
 		$settings_link = sprintf(
 			'<a href="%s">%s</a>',
-			admin_url('admin.php?page=ai-seo-pro'),
-			__('Settings', 'ai-seo-pro')
+			admin_url('admin.php?page=rankflow-seo'),
+			__('Settings', 'rankflow-seo')
 		);
 
 		array_unshift($links, $settings_link);
@@ -170,28 +170,28 @@ class AI_SEO_Pro_Admin
 	public function show_admin_notices()
 	{
 		// Check if API key is configured.
-		$api_key = get_option('ai_seo_pro_api_key');
+		$api_key = get_option('rankflow_seo_api_key');
 
 		if (empty($api_key) && current_user_can('manage_options')) {
 			$this->render_notice(
 				sprintf(
 					/* translators: %s: URL to the API settings page */
-					__('AI SEO Pro requires an API key to function. <a href="%s">Configure it now</a>.', 'ai-seo-pro'),
-					admin_url('admin.php?page=ai-seo-pro&tab=api')
+					__('RankFlow SEO requires an API key to function. <a href="%s">Configure it now</a>.', 'rankflow-seo'),
+					admin_url('admin.php?page=rankflow-seo&tab=api')
 				),
 				'warning'
 			);
 		}
 
 		// Show activation notice.
-		if (get_transient('ai_seo_pro_activation_redirect')) {
-			delete_transient('ai_seo_pro_activation_redirect');
+		if (get_transient('rankflow_seo_activation_redirect')) {
+			delete_transient('rankflow_seo_activation_redirect');
 
 			$this->render_notice(
 				sprintf(
 					/* translators: %s: URL to the plugin settings page */
-					__('Thank you for installing AI SEO Pro! <a href="%s">Get started</a> by configuring your settings.', 'ai-seo-pro'),
-					admin_url('admin.php?page=ai-seo-pro')
+					__('Thank you for installing RankFlow SEO! <a href="%s">Get started</a> by configuring your settings.', 'rankflow-seo'),
+					admin_url('admin.php?page=rankflow-seo')
 				),
 				'success',
 				true
@@ -247,7 +247,7 @@ class AI_SEO_Pro_Admin
 			$this->render_notice(
 				sprintf(
 					/* translators: %s: comma-separated list of conflicting plugin names */
-					__('AI SEO Pro has detected conflicting SEO plugins: %s. For best results, please deactivate them.', 'ai-seo-pro'),
+					__('RankFlow SEO has detected conflicting SEO plugins: %s. For best results, please deactivate them.', 'rankflow-seo'),
 					implode(', ', $conflicts)
 				),
 				'warning',

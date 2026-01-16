@@ -2,8 +2,8 @@
 /**
  * Readability Analyzer - Returns structured analysis with problems and good results.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/core
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/core
  * @author     Strativ AB
  */
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-class AI_SEO_Pro_Readability_Analyzer
+class RankFlow_SEO_Readability_Analyzer
 {
 
 	/**
@@ -197,8 +197,8 @@ class AI_SEO_Pro_Readability_Analyzer
 			return array(
 				'problems' => array(
 					array(
-						'title' => __('Content length', 'ai-seo-pro'),
-						'message' => __('Add more content to analyze readability.', 'ai-seo-pro'),
+						'title' => __('Content length', 'rankflow-seo'),
+						'message' => __('Add more content to analyze readability.', 'rankflow-seo'),
 					),
 				),
 				'good' => array(),
@@ -220,19 +220,19 @@ class AI_SEO_Pro_Readability_Analyzer
 
 		if ($long_sentence_percentage <= 25) {
 			$good[] = array(
-				'title' => __('Sentence length', 'ai-seo-pro'),
+				'title' => __('Sentence length', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: percentage of sentences with more than 20 words */
-					__('%s%% of the sentences contain more than 20 words, which is less than or equal to the recommended maximum of 25%%. Good job!', 'ai-seo-pro'),
+					__('%s%% of the sentences contain more than 20 words, which is less than or equal to the recommended maximum of 25%%. Good job!', 'rankflow-seo'),
 					number_format($long_sentence_percentage, 1)
 				),
 			);
 		} else {
 			$problems[] = array(
-				'title' => __('Sentence length', 'ai-seo-pro'),
+				'title' => __('Sentence length', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: percentage of sentences with more than 20 words */
-					__('%s%% of the sentences contain more than 20 words, which is more than the recommended maximum of 25%%. Try to shorten the sentences.', 'ai-seo-pro'),
+					__('%s%% of the sentences contain more than 20 words, which is more than the recommended maximum of 25%%. Try to shorten the sentences.', 'rankflow-seo'),
 					number_format($long_sentence_percentage, 1)
 				),
 			);
@@ -245,15 +245,15 @@ class AI_SEO_Pro_Readability_Analyzer
 
 		if ($long_paragraphs === 0) {
 			$good[] = array(
-				'title' => __('Paragraph length', 'ai-seo-pro'),
-				'message' => __('None of the paragraphs are too long. Good job!', 'ai-seo-pro'),
+				'title' => __('Paragraph length', 'rankflow-seo'),
+				'message' => __('None of the paragraphs are too long. Good job!', 'rankflow-seo'),
 			);
 		} else {
 			$problems[] = array(
-				'title' => __('Paragraph length', 'ai-seo-pro'),
+				'title' => __('Paragraph length', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %d: number of paragraphs with more than 150 words */
-					__('%d of the paragraphs contain more than 150 words. Shorten them!', 'ai-seo-pro'),
+					__('%d of the paragraphs contain more than 150 words. Shorten them!', 'rankflow-seo'),
 					$long_paragraphs
 				),
 			);
@@ -266,17 +266,17 @@ class AI_SEO_Pro_Readability_Analyzer
 
 		if ($subheading_analysis['status'] === 'good') {
 			$good[] = array(
-				'title' => __('Subheading distribution', 'ai-seo-pro'),
-				'message' => __('You are using subheadings properly and the text structure looks great!', 'ai-seo-pro'),
+				'title' => __('Subheading distribution', 'rankflow-seo'),
+				'message' => __('You are using subheadings properly and the text structure looks great!', 'rankflow-seo'),
 			);
 		} elseif ($subheading_analysis['status'] === 'warning') {
 			$problems[] = array(
-				'title' => __('Subheading distribution', 'ai-seo-pro'),
+				'title' => __('Subheading distribution', 'rankflow-seo'),
 				'message' => $subheading_analysis['message'],
 			);
 		} else {
 			$problems[] = array(
-				'title' => __('Subheading distribution', 'ai-seo-pro'),
+				'title' => __('Subheading distribution', 'rankflow-seo'),
 				'message' => $subheading_analysis['message'],
 			);
 		}
@@ -288,28 +288,28 @@ class AI_SEO_Pro_Readability_Analyzer
 
 		if ($transition_percentage >= 30) {
 			$good[] = array(
-				'title' => __('Transition words', 'ai-seo-pro'),
+				'title' => __('Transition words', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: percentage of sentences containing transition words */
-					__('%s%% of the sentences contain transition words, which is great!', 'ai-seo-pro'),
+					__('%s%% of the sentences contain transition words, which is great!', 'rankflow-seo'),
 					number_format($transition_percentage, 1)
 				),
 			);
 		} elseif ($transition_percentage >= 20) {
 			$problems[] = array(
-				'title' => __('Transition words', 'ai-seo-pro'),
+				'title' => __('Transition words', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: percentage of sentences containing transition words */
-					__('Only %s%% of the sentences contain transition words, which is not enough. Use more of them.', 'ai-seo-pro'),
+					__('Only %s%% of the sentences contain transition words, which is not enough. Use more of them.', 'rankflow-seo'),
 					number_format($transition_percentage, 1)
 				),
 			);
 		} else {
 			$problems[] = array(
-				'title' => __('Transition words', 'ai-seo-pro'),
+				'title' => __('Transition words', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: percentage of sentences containing transition words */
-					__('Only %s%% of the sentences contain transition words. This is far below the recommended 30%%. Add more to improve flow.', 'ai-seo-pro'),
+					__('Only %s%% of the sentences contain transition words. This is far below the recommended 30%%. Add more to improve flow.', 'rankflow-seo'),
 					number_format($transition_percentage, 1)
 				),
 			);
@@ -322,19 +322,19 @@ class AI_SEO_Pro_Readability_Analyzer
 
 		if ($passive_percentage <= 10) {
 			$good[] = array(
-				'title' => __('Passive voice', 'ai-seo-pro'),
+				'title' => __('Passive voice', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: percentage of sentences containing passive voice */
-					__('%s%% of the sentences contain passive voice, which is below the recommended maximum of 10%%. Good job!', 'ai-seo-pro'),
+					__('%s%% of the sentences contain passive voice, which is below the recommended maximum of 10%%. Good job!', 'rankflow-seo'),
 					number_format($passive_percentage, 1)
 				),
 			);
 		} else {
 			$problems[] = array(
-				'title' => __('Passive voice', 'ai-seo-pro'),
+				'title' => __('Passive voice', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: percentage of sentences containing passive voice */
-					__('%s%% of the sentences contain passive voice, which is more than the recommended maximum of 10%%. Try to use their active counterparts.', 'ai-seo-pro'),
+					__('%s%% of the sentences contain passive voice, which is more than the recommended maximum of 10%%. Try to use their active counterparts.', 'rankflow-seo'),
 					number_format($passive_percentage, 1)
 				),
 			);
@@ -347,15 +347,15 @@ class AI_SEO_Pro_Readability_Analyzer
 
 		if ($consecutive_analysis['max_consecutive'] <= 2) {
 			$good[] = array(
-				'title' => __('Consecutive sentences', 'ai-seo-pro'),
-				'message' => __('There is enough variety in your sentences. Good job!', 'ai-seo-pro'),
+				'title' => __('Consecutive sentences', 'rankflow-seo'),
+				'message' => __('There is enough variety in your sentences. Good job!', 'rankflow-seo'),
 			);
 		} else {
 			$problems[] = array(
-				'title' => __('Consecutive sentences', 'ai-seo-pro'),
+				'title' => __('Consecutive sentences', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %d: number of consecutive sentences starting with the same word */
-					__('%d consecutive sentences start with the same word. Mix it up!', 'ai-seo-pro'),
+					__('%d consecutive sentences start with the same word. Mix it up!', 'rankflow-seo'),
 					$consecutive_analysis['max_consecutive']
 				),
 			);
@@ -368,19 +368,19 @@ class AI_SEO_Pro_Readability_Analyzer
 
 		if ($complex_word_percentage <= 10) {
 			$good[] = array(
-				'title' => __('Word complexity', 'ai-seo-pro'),
+				'title' => __('Word complexity', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: percentage of complex words in the text */
-					__('%s%% of the words in your text are considered complex. Good job!', 'ai-seo-pro'),
+					__('%s%% of the words in your text are considered complex. Good job!', 'rankflow-seo'),
 					number_format($complex_word_percentage, 1)
 				),
 			);
 		} else {
 			$problems[] = array(
-				'title' => __('Word complexity', 'ai-seo-pro'),
+				'title' => __('Word complexity', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: percentage of complex words in the text */
-					__('%s%% of the words in your text are considered complex. Try to use simpler alternatives.', 'ai-seo-pro'),
+					__('%s%% of the words in your text are considered complex. Try to use simpler alternatives.', 'rankflow-seo'),
 					number_format($complex_word_percentage, 1)
 				),
 			);
@@ -391,28 +391,28 @@ class AI_SEO_Pro_Readability_Analyzer
 		// ========================================
 		if ($flesch_score >= 60) {
 			$good[] = array(
-				'title' => __('Flesch Reading Ease', 'ai-seo-pro'),
+				'title' => __('Flesch Reading Ease', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: Flesch Reading Ease score */
-					__('The copy scores %s in the Flesch Reading Ease test, which is considered good. Good job!', 'ai-seo-pro'),
+					__('The copy scores %s in the Flesch Reading Ease test, which is considered good. Good job!', 'rankflow-seo'),
 					number_format($flesch_score, 1)
 				),
 			);
 		} elseif ($flesch_score >= 30) {
 			$problems[] = array(
-				'title' => __('Flesch Reading Ease', 'ai-seo-pro'),
+				'title' => __('Flesch Reading Ease', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: Flesch Reading Ease score */
-					__('The copy scores %s in the Flesch Reading Ease test, which is considered fairly difficult to read. Try to make shorter sentences and use simpler words.', 'ai-seo-pro'),
+					__('The copy scores %s in the Flesch Reading Ease test, which is considered fairly difficult to read. Try to make shorter sentences and use simpler words.', 'rankflow-seo'),
 					number_format($flesch_score, 1)
 				),
 			);
 		} else {
 			$problems[] = array(
-				'title' => __('Flesch Reading Ease', 'ai-seo-pro'),
+				'title' => __('Flesch Reading Ease', 'rankflow-seo'),
 				'message' => sprintf(
 					/* translators: %s: Flesch Reading Ease score */
-					__('The copy scores %s in the Flesch Reading Ease test, which is considered very difficult to read. Simplify your text considerably.', 'ai-seo-pro'),
+					__('The copy scores %s in the Flesch Reading Ease test, which is considered very difficult to read. Simplify your text considerably.', 'rankflow-seo'),
 					number_format($flesch_score, 1)
 				),
 			);
@@ -520,19 +520,19 @@ class AI_SEO_Pro_Readability_Analyzer
 	private function get_grade_level($score)
 	{
 		if ($score >= 90) {
-			return __('5th grade (Very Easy)', 'ai-seo-pro');
+			return __('5th grade (Very Easy)', 'rankflow-seo');
 		} elseif ($score >= 80) {
-			return __('6th grade (Easy)', 'ai-seo-pro');
+			return __('6th grade (Easy)', 'rankflow-seo');
 		} elseif ($score >= 70) {
-			return __('7th grade (Fairly Easy)', 'ai-seo-pro');
+			return __('7th grade (Fairly Easy)', 'rankflow-seo');
 		} elseif ($score >= 60) {
-			return __('8th-9th grade (Standard)', 'ai-seo-pro');
+			return __('8th-9th grade (Standard)', 'rankflow-seo');
 		} elseif ($score >= 50) {
-			return __('10th-12th grade (Fairly Difficult)', 'ai-seo-pro');
+			return __('10th-12th grade (Fairly Difficult)', 'rankflow-seo');
 		} elseif ($score >= 30) {
-			return __('College (Difficult)', 'ai-seo-pro');
+			return __('College (Difficult)', 'rankflow-seo');
 		} else {
-			return __('College Graduate (Very Difficult)', 'ai-seo-pro');
+			return __('College Graduate (Very Difficult)', 'rankflow-seo');
 		}
 	}
 
@@ -607,14 +607,14 @@ class AI_SEO_Pro_Readability_Analyzer
 		if ($word_count < 300) {
 			return array(
 				'status' => 'good',
-				'message' => __('Text is short, subheadings are optional.', 'ai-seo-pro'),
+				'message' => __('Text is short, subheadings are optional.', 'rankflow-seo'),
 			);
 		}
 
 		if (empty($subheadings)) {
 			return array(
 				'status' => 'problem',
-				'message' => __('You are not using any subheadings, although your text is long enough. This makes the text harder to scan.', 'ai-seo-pro'),
+				'message' => __('You are not using any subheadings, although your text is long enough. This makes the text harder to scan.', 'rankflow-seo'),
 			);
 		}
 
@@ -633,7 +633,7 @@ class AI_SEO_Pro_Readability_Analyzer
 				'status' => 'warning',
 				'message' => sprintf(
 					/* translators: %d: number of text sections with more than 300 words */
-					__('%d section(s) of your text have more than 300 words without a subheading. Add more subheadings to break up the text.', 'ai-seo-pro'),
+					__('%d section(s) of your text have more than 300 words without a subheading. Add more subheadings to break up the text.', 'rankflow-seo'),
 					$long_sections
 				),
 			);
@@ -641,7 +641,7 @@ class AI_SEO_Pro_Readability_Analyzer
 
 		return array(
 			'status' => 'good',
-			'message' => __('Great subheading distribution!', 'ai-seo-pro'),
+			'message' => __('Great subheading distribution!', 'rankflow-seo'),
 		);
 	}
 

@@ -1,4 +1,4 @@
-# AI SEO Pro - Tabbed Analysis Feature
+# RankFlow SEO - Tabbed Analysis Feature
 
 ## New Files to Add
 
@@ -26,7 +26,7 @@
 Copy the following files to your plugin:
 
 ```
-ai-seo-pro/
+rankflow-seo/
 ├── admin/
 │   ├── class-metabox.php (replace existing)
 │   └── views/
@@ -48,8 +48,8 @@ In your main plugin file or bootstrap, add the includes for the new analyzer cla
 
 ```php
 // Add these includes in your plugin loader/bootstrap
-require_once AI_SEO_PRO_PLUGIN_DIR . 'includes/core/class-seo-analyzer.php';
-require_once AI_SEO_PRO_PLUGIN_DIR . 'includes/core/class-readability-analyzer.php';
+require_once RANKFLOW_SEO_PLUGIN_DIR . 'includes/core/class-seo-analyzer.php';
+require_once RANKFLOW_SEO_PLUGIN_DIR . 'includes/core/class-readability-analyzer.php';
 ```
 
 ### Step 3: Register New AJAX Hook
@@ -57,8 +57,8 @@ require_once AI_SEO_PRO_PLUGIN_DIR . 'includes/core/class-readability-analyzer.p
 Make sure to register the new AJAX action in your hooks setup:
 
 ```php
-// In class-ai-seo-pro.php or wherever you define hooks
-add_action('wp_ajax_ai_seo_update_analysis', array($metabox_instance, 'ajax_update_analysis'));
+// In class-rankflow-seo.php or wherever you define hooks
+add_action('wp_ajax_rankflow_seo_update_analysis', array($metabox_instance, 'ajax_update_analysis'));
 ```
 
 Or call the `register_ajax_hooks()` method from the metabox class.
@@ -129,12 +129,12 @@ Or call the `register_ajax_hooks()` method from the metabox class.
 ## AJAX Endpoints
 
 ### Existing
-- `ai_seo_generate_meta` - Generate meta with AI
-- `ai_seo_analyze_content` - Analyze content
-- `ai_seo_calculate_score` - Calculate SEO score
+- `rankflow_seo_generate_meta` - Generate meta with AI
+- `rankflow_seo_analyze_content` - Analyze content
+- `rankflow_seo_calculate_score` - Calculate SEO score
 
 ### New
-- `ai_seo_update_analysis` - Real-time analysis update (both SEO and Readability)
+- `rankflow_seo_update_analysis` - Real-time analysis update (both SEO and Readability)
 
 ---
 

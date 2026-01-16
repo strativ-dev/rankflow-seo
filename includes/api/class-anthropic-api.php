@@ -2,11 +2,11 @@
 /**
  * Anthropic (Claude) API implementation - FIXED
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/api
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/api
  * @author     Strativ AB
  */
-class AI_SEO_Pro_Anthropic_API extends AI_SEO_Pro_API_Base
+class RankFlow_SEO_Anthropic_API extends RankFlow_SEO_API_Base
 {
 
 	/**
@@ -35,14 +35,14 @@ class AI_SEO_Pro_Anthropic_API extends AI_SEO_Pro_API_Base
 	{
 
 		if (empty($this->api_key)) {
-			return new WP_Error('no_api_key', __('Anthropic API key is not configured', 'ai-seo-pro'));
+			return new WP_Error('no_api_key', __('Anthropic API key is not configured', 'rankflow-seo'));
 		}
 
 		// Prepare content.
 		$clean_content = $this->prepare_content($content);
 
 		if (empty($clean_content)) {
-			return new WP_Error('no_content', __('Content is empty', 'ai-seo-pro'));
+			return new WP_Error('no_content', __('Content is empty', 'rankflow-seo'));
 		}
 
 		// Build prompt.
@@ -97,17 +97,17 @@ class AI_SEO_Pro_Anthropic_API extends AI_SEO_Pro_API_Base
 				if (isset($error['type']) && isset($error['message'])) {
 					$error_message = sprintf(
 						/* translators: 1: error type, 2: error message */
-						__('Anthropic API Error (%1$s): %2$s', 'ai-seo-pro'),
+						__('Anthropic API Error (%1$s): %2$s', 'rankflow-seo'),
 						$error['type'],
 						$error['message']
 					);
 				} else {
-					$error_message = isset($error['message']) ? $error['message'] : __('Unknown API error', 'ai-seo-pro');
+					$error_message = isset($error['message']) ? $error['message'] : __('Unknown API error', 'rankflow-seo');
 				}
 			} else {
 				$error_message = sprintf(
 					/* translators: %d: HTTP status code */
-					__('Anthropic API request failed with status code: %d', 'ai-seo-pro'),
+					__('Anthropic API request failed with status code: %d', 'rankflow-seo'),
 					$status_code
 				);
 			}
@@ -118,12 +118,12 @@ class AI_SEO_Pro_Anthropic_API extends AI_SEO_Pro_API_Base
 		$data = json_decode($response_body, true);
 
 		if (JSON_ERROR_NONE !== json_last_error()) {
-			return new WP_Error('json_error', __('Failed to parse API response', 'ai-seo-pro'));
+			return new WP_Error('json_error', __('Failed to parse API response', 'rankflow-seo'));
 		}
 
 		// Extract content from response - Anthropic format.
 		if (!isset($data['content']) || !is_array($data['content']) || empty($data['content'])) {
-			return new WP_Error('invalid_response', __('Invalid response structure from Anthropic', 'ai-seo-pro'));
+			return new WP_Error('invalid_response', __('Invalid response structure from Anthropic', 'rankflow-seo'));
 		}
 
 		// Get text from first content block.
@@ -136,7 +136,7 @@ class AI_SEO_Pro_Anthropic_API extends AI_SEO_Pro_API_Base
 		}
 
 		if (empty($content_text)) {
-			return new WP_Error('no_content', __('No text content in API response', 'ai-seo-pro'));
+			return new WP_Error('no_content', __('No text content in API response', 'rankflow-seo'));
 		}
 
 

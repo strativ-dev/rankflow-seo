@@ -4,8 +4,8 @@
  *
  * Outputs schema markup on the frontend
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/public
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/public
  * @author     Strativ AB
  */
 
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-class AI_SEO_Pro_Schema_Output
+class RankFlow_SEO_Schema_Output
 {
 
 	/**
@@ -23,22 +23,22 @@ class AI_SEO_Pro_Schema_Output
 	public function output_schema()
 	{
 		// Check if schema is enabled.
-		if (!get_option('ai_seo_pro_schema_enabled', true)) {
+		if (!get_option('rankflow_seo_schema_enabled', true)) {
 			return;
 		}
 
-		$schemas = get_option('ai_seo_pro_schemas', array());
+		$schemas = get_option('rankflow_seo_schemas', array());
 
 		if (empty($schemas)) {
 			return;
 		}
 
 		// Load the admin class for generation methods.
-		if (!class_exists('AI_SEO_Pro_Schema_Admin')) {
-			require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/class-schema-admin.php';
+		if (!class_exists('RankFlow_SEO_Schema_Admin')) {
+			require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/class-schema-admin.php';
 		}
 
-		$schema_admin = new AI_SEO_Pro_Schema_Admin();
+		$schema_admin = new RankFlow_SEO_Schema_Admin();
 
 		foreach ($schemas as $schema) {
 			// Check if schema is enabled.
@@ -54,7 +54,7 @@ class AI_SEO_Pro_Schema_Output
 			$markup = $schema_admin->generate_schema_markup($schema);
 
 			if ($markup) {
-				echo "\n<!-- AI SEO Pro Schema: " . esc_html($schema['type']) . " -->\n";
+				echo "\n<!-- RankFlow SEO Schema: " . esc_html($schema['type']) . " -->\n";
 				echo '<script type="application/ld+json">' . "\n";
 				echo wp_json_encode($markup, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 				echo "\n</script>\n";

@@ -2,11 +2,11 @@
 /**
  * Input validation.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/utils
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/utils
  * @author     Strativ AB
  */
-class AI_SEO_Pro_Validator
+class RankFlow_SEO_Validator
 {
 
 	/**
@@ -21,15 +21,15 @@ class AI_SEO_Pro_Validator
 		$length = strlen($title);
 
 		if (empty($title)) {
-			$errors[] = __('Title cannot be empty', 'ai-seo-pro');
+			$errors[] = __('Title cannot be empty', 'rankflow-seo');
 		}
 
 		if ($length < 30) {
-			$errors[] = __('Title is too short (minimum 30 characters)', 'ai-seo-pro');
+			$errors[] = __('Title is too short (minimum 30 characters)', 'rankflow-seo');
 		}
 
 		if ($length > 60) {
-			$errors[] = __('Title is too long (maximum 60 characters)', 'ai-seo-pro');
+			$errors[] = __('Title is too long (maximum 60 characters)', 'rankflow-seo');
 		}
 
 		return array(
@@ -50,15 +50,15 @@ class AI_SEO_Pro_Validator
 		$length = strlen($description);
 
 		if (empty($description)) {
-			$errors[] = __('Description cannot be empty', 'ai-seo-pro');
+			$errors[] = __('Description cannot be empty', 'rankflow-seo');
 		}
 
 		if ($length < 120) {
-			$errors[] = __('Description is too short (minimum 120 characters)', 'ai-seo-pro');
+			$errors[] = __('Description is too short (minimum 120 characters)', 'rankflow-seo');
 		}
 
 		if ($length > 160) {
-			$errors[] = __('Description is too long (maximum 160 characters)', 'ai-seo-pro');
+			$errors[] = __('Description is too long (maximum 160 characters)', 'rankflow-seo');
 		}
 
 		return array(

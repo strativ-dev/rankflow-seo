@@ -1,11 +1,11 @@
 /**
  * Content analyzer functionality
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/assets/js
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/assets/js
  */
 
-(function($) {
+(function ($) {
 	'use strict';
 
 	/**
@@ -30,7 +30,7 @@
 				url: aiSeoProData.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'ai_seo_analyze_content',
+					action: 'rankflow_seo_analyze_content',
 					nonce: aiSeoProData.nonce,
 					post_id: postId,
 					content: content,

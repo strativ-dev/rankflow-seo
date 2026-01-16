@@ -5,8 +5,8 @@
  * Maintain a list of all hooks that are registered throughout
  * the plugin, and register them with WordPress.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes
  * @author     Strativ AB
  */
 
@@ -14,7 +14,7 @@
 if (!defined('ABSPATH')) {
 	exit;
 }
-class AI_SEO_Pro_Loader
+class RankFlow_SEO_Loader
 {
 
 	/**

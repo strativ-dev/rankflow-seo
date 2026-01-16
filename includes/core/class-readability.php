@@ -2,8 +2,8 @@
 /**
  * Readability analyzer.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/core
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/core
  * @author     Strativ AB
  */
 
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-class AI_SEO_Pro_Readability
+class RankFlow_SEO_Readability
 {
 
 	/**
@@ -250,19 +250,19 @@ class AI_SEO_Pro_Readability
 	private function get_grade_level($score)
 	{
 		if ($score >= 90) {
-			return __('5th grade (Very Easy)', 'ai-seo-pro');
+			return __('5th grade (Very Easy)', 'rankflow-seo');
 		} elseif ($score >= 80) {
-			return __('6th grade (Easy)', 'ai-seo-pro');
+			return __('6th grade (Easy)', 'rankflow-seo');
 		} elseif ($score >= 70) {
-			return __('7th grade (Fairly Easy)', 'ai-seo-pro');
+			return __('7th grade (Fairly Easy)', 'rankflow-seo');
 		} elseif ($score >= 60) {
-			return __('8th-9th grade (Standard)', 'ai-seo-pro');
+			return __('8th-9th grade (Standard)', 'rankflow-seo');
 		} elseif ($score >= 50) {
-			return __('10th-12th grade (Fairly Difficult)', 'ai-seo-pro');
+			return __('10th-12th grade (Fairly Difficult)', 'rankflow-seo');
 		} elseif ($score >= 30) {
-			return __('College (Difficult)', 'ai-seo-pro');
+			return __('College (Difficult)', 'rankflow-seo');
 		} else {
-			return __('College Graduate (Very Difficult)', 'ai-seo-pro');
+			return __('College Graduate (Very Difficult)', 'rankflow-seo');
 		}
 	}
 
@@ -286,7 +286,7 @@ class AI_SEO_Pro_Readability
 				'type' => 'warning',
 				'message' => sprintf(
 					/* translators: %s: readability score number */
-					esc_html__('Readability score is %s. Consider using shorter sentences and simpler words.', 'ai-seo-pro'),
+					esc_html__('Readability score is %s. Consider using shorter sentences and simpler words.', 'rankflow-seo'),
 					$score
 				),
 			);
@@ -299,7 +299,7 @@ class AI_SEO_Pro_Readability
 				'type' => 'warning',
 				'message' => sprintf(
 					/* translators: %s: average sentence length number */
-					esc_html__('Average sentence length is %s words. Try to use shorter sentences (under 20 words).', 'ai-seo-pro'),
+					esc_html__('Average sentence length is %s words. Try to use shorter sentences (under 20 words).', 'rankflow-seo'),
 					$sentence_length
 				),
 			);
@@ -311,7 +311,7 @@ class AI_SEO_Pro_Readability
 				'type' => 'info',
 				'message' => sprintf(
 					/* translators: %d: number of long sentences */
-					esc_html__('%d sentences are very long. Consider breaking them up.', 'ai-seo-pro'),
+					esc_html__('%d sentences are very long. Consider breaking them up.', 'rankflow-seo'),
 					$analysis['long_sentences']
 				),
 			);
@@ -321,7 +321,7 @@ class AI_SEO_Pro_Readability
 		if ($analysis['transition_words'] < 2) {
 			$recommendations[] = array(
 				'type' => 'info',
-				'message' => __('Use more transition words to improve flow (however, therefore, furthermore, etc.).', 'ai-seo-pro'),
+				'message' => __('Use more transition words to improve flow (however, therefore, furthermore, etc.).', 'rankflow-seo'),
 			);
 		}
 

@@ -2,28 +2,28 @@
 /**
  * Admin notice partial.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/admin/partials
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/admin/partials
  *
- * @var string $ai_seo_pro_notice_type        Notice type (success, error, warning, info).
- * @var string $ai_seo_pro_notice_message     Notice message.
- * @var bool   $ai_seo_pro_notice_dismissible Whether notice is dismissible.
+ * @var string $rankflow_seo_notice_type        Notice type (success, error, warning, info).
+ * @var string $rankflow_seo_notice_message     Notice message.
+ * @var bool   $rankflow_seo_notice_dismissible Whether notice is dismissible.
  */
 
 if (!defined('ABSPATH')) {
 	exit;
 }
 
-$ai_seo_pro_notice_type = isset($ai_seo_pro_notice_type) ? $ai_seo_pro_notice_type : 'info';
-$ai_seo_pro_notice_message = isset($ai_seo_pro_notice_message) ? $ai_seo_pro_notice_message : '';
-$ai_seo_pro_notice_dismissible = isset($ai_seo_pro_notice_dismissible) ? $ai_seo_pro_notice_dismissible : true;
+$rankflow_seo_notice_type = isset($rankflow_seo_notice_type) ? $rankflow_seo_notice_type : 'info';
+$rankflow_seo_notice_message = isset($rankflow_seo_notice_message) ? $rankflow_seo_notice_message : '';
+$rankflow_seo_notice_dismissible = isset($rankflow_seo_notice_dismissible) ? $rankflow_seo_notice_dismissible : true;
 
-$ai_seo_pro_notice_classes = array('notice', 'notice-' . $ai_seo_pro_notice_type);
-if ($ai_seo_pro_notice_dismissible) {
-	$ai_seo_pro_notice_classes[] = 'is-dismissible';
+$rankflow_seo_notice_classes = array('notice', 'notice-' . $rankflow_seo_notice_type);
+if ($rankflow_seo_notice_dismissible) {
+	$rankflow_seo_notice_classes[] = 'is-dismissible';
 }
 ?>
 
-<div class="<?php echo esc_attr(implode(' ', $ai_seo_pro_notice_classes)); ?>">
-	<p><?php echo wp_kses_post($ai_seo_pro_notice_message); ?></p>
+<div class="<?php echo esc_attr(implode(' ', $rankflow_seo_notice_classes)); ?>">
+	<p><?php echo wp_kses_post($rankflow_seo_notice_message); ?></p>
 </div>

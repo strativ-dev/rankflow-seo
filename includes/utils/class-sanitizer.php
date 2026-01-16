@@ -2,11 +2,11 @@
 /**
  * Data sanitization.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/utils
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/utils
  * @author     Strativ AB
  */
-class AI_SEO_Pro_Sanitizer
+class RankFlow_SEO_Sanitizer
 {
 
 	/**

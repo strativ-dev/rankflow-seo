@@ -2,11 +2,11 @@
 /**
  * Google Gemini API implementation
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/api
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/api
  * @author     Strativ AB
  */
-class AI_SEO_Pro_Gemini_API extends AI_SEO_Pro_API_Base
+class RankFlow_SEO_Gemini_API extends RankFlow_SEO_API_Base
 {
 
 	/**
@@ -28,14 +28,14 @@ class AI_SEO_Pro_Gemini_API extends AI_SEO_Pro_API_Base
 	{
 
 		if (empty($this->api_key)) {
-			return new WP_Error('no_api_key', __('Google API key is not configured', 'ai-seo-pro'));
+			return new WP_Error('no_api_key', __('Google API key is not configured', 'rankflow-seo'));
 		}
 
 		// Prepare content.
 		$clean_content = $this->prepare_content($content);
 
 		if (empty($clean_content)) {
-			return new WP_Error('no_content', __('Content is empty', 'ai-seo-pro'));
+			return new WP_Error('no_content', __('Content is empty', 'rankflow-seo'));
 		}
 
 		// Build prompt.
@@ -76,7 +76,7 @@ class AI_SEO_Pro_Gemini_API extends AI_SEO_Pro_API_Base
 				'gemini_api_error',
 				sprintf(
 					/* translators: 1: error code, 2: error message */
-					__('Gemini API Error (%1$s): %2$s', 'ai-seo-pro'),
+					__('Gemini API Error (%1$s): %2$s', 'rankflow-seo'),
 					$response['error']['code'] ?? 'unknown',
 					$response['error']['message'] ?? 'Unknown error'
 				)
@@ -90,7 +90,7 @@ class AI_SEO_Pro_Gemini_API extends AI_SEO_Pro_API_Base
 		) {
 			return new WP_Error(
 				'safety_blocked',
-				__('Content was blocked by Gemini safety filters. Try different content.', 'ai-seo-pro')
+				__('Content was blocked by Gemini safety filters. Try different content.', 'rankflow-seo')
 			);
 		}
 
@@ -99,7 +99,7 @@ class AI_SEO_Pro_Gemini_API extends AI_SEO_Pro_API_Base
 			// More detailed error.
 			return new WP_Error(
 				'invalid_response',
-				__('Invalid response from Google Gemini. Check WordPress error logs for details.', 'ai-seo-pro')
+				__('Invalid response from Google Gemini. Check WordPress error logs for details.', 'rankflow-seo')
 			);
 		}
 

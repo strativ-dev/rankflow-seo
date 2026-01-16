@@ -2,8 +2,8 @@
 /**
  * Schema Settings View
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/admin/views
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/admin/views
  * @author     Strativ AB
  */
 
@@ -13,120 +13,121 @@ if (!defined('ABSPATH')) {
 }
 
 // Get current settings.
-$ai_seo_pro_schema_enabled = get_option('ai_seo_pro_schema_enabled', true);
-$ai_seo_pro_schemas = get_option('ai_seo_pro_schemas', array());
-$ai_seo_pro_schema_admin = new AI_SEO_Pro_Schema_Admin();
-$ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
+$rankflow_seo_schema_enabled = get_option('rankflow_seo_schema_enabled', true);
+$rankflow_seo_schemas = get_option('rankflow_seo_schemas', array());
+$rankflow_seo_schema_admin = new RankFlow_SEO_Schema_Admin();
+$rankflow_seo_schema_types = $rankflow_seo_schema_admin->get_schema_types();
 ?>
 
-<div class="wrap ai-seo-pro-schema">
+<div class="wrap rankflow-seo-schema">
 	<h1>
 		<span class="dashicons dashicons-editor-code" style="margin-right: 10px;"></span>
-		<?php esc_html_e('Schema Generator', 'ai-seo-pro'); ?>
+		<?php esc_html_e('Schema Generator', 'rankflow-seo'); ?>
 	</h1>
 
 	<p class="description" style="font-size: 14px; margin-bottom: 20px;">
-		<?php esc_html_e('Generate structured data (schema markup) for your website to help search engines understand your content better and display rich results.', 'ai-seo-pro'); ?>
+		<?php esc_html_e('Generate structured data (schema markup) for your website to help search engines understand your content better and display rich results.', 'rankflow-seo'); ?>
 	</p>
 
-	<?php settings_errors('ai_seo_pro_schema'); ?>
+	<?php settings_errors('rankflow_seo_schema'); ?>
 
-	<form method="post" action="options.php" id="ai-seo-pro-schema-form">
-		<?php settings_fields('ai_seo_pro_schema'); ?>
+	<form method="post" action="options.php" id="rankflow-seo-schema-form">
+		<?php settings_fields('rankflow_seo_schema'); ?>
 
 		<!-- Enable Toggle -->
-		<div class="ai-seo-pro-card">
-			<h2><?php esc_html_e('Schema Settings', 'ai-seo-pro'); ?></h2>
-			<label class="ai-seo-pro-toggle">
-				<input type="checkbox" name="ai_seo_pro_schema_enabled" value="1" <?php checked($ai_seo_pro_schema_enabled); ?>>
+		<div class="rankflow-seo-card">
+			<h2><?php esc_html_e('Schema Settings', 'rankflow-seo'); ?></h2>
+			<label class="rankflow-seo-toggle">
+				<input type="checkbox" name="rankflow_seo_schema_enabled" value="1" <?php checked($rankflow_seo_schema_enabled); ?>>
 				<span class="toggle-slider"></span>
-				<span class="toggle-label"><?php esc_html_e('Enable Schema Markup Output', 'ai-seo-pro'); ?></span>
+				<span class="toggle-label"><?php esc_html_e('Enable Schema Markup Output', 'rankflow-seo'); ?></span>
 			</label>
 			<p class="description">
-				<?php esc_html_e('When enabled, schema markup will be added to your website\'s head section.', 'ai-seo-pro'); ?>
+				<?php esc_html_e('When enabled, schema markup will be added to your website\'s head section.', 'rankflow-seo'); ?>
 			</p>
 		</div>
 
 		<!-- Schema Repeater -->
-		<div class="ai-seo-pro-card">
+		<div class="rankflow-seo-card">
 			<div class="card-header">
-				<h2><?php esc_html_e('Schema Markup', 'ai-seo-pro'); ?></h2>
+				<h2><?php esc_html_e('Schema Markup', 'rankflow-seo'); ?></h2>
 				<button type="button" id="add-schema" class="button button-primary">
 					<span class="dashicons dashicons-plus-alt2"></span>
-					<?php esc_html_e('Add Schema', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Add Schema', 'rankflow-seo'); ?>
 				</button>
 			</div>
 
 			<div id="schema-repeater" class="schema-repeater">
-				<?php if (!empty($ai_seo_pro_schemas)): ?>
-					<?php foreach ($ai_seo_pro_schemas as $ai_seo_pro_index => $ai_seo_pro_schema): ?>
-						<div class="schema-item" data-index="<?php echo esc_attr($ai_seo_pro_index); ?>">
+				<?php if (!empty($rankflow_seo_schemas)): ?>
+					<?php foreach ($rankflow_seo_schemas as $rankflow_seo_index => $rankflow_seo_schema): ?>
+						<div class="schema-item" data-index="<?php echo esc_attr($rankflow_seo_index); ?>">
 							<div class="schema-header">
 								<span class="schema-drag-handle dashicons dashicons-menu"></span>
 								<label class="schema-enable">
 									<input type="checkbox"
-										name="ai_seo_pro_schemas[<?php echo esc_attr($ai_seo_pro_index); ?>][enabled]" value="1"
-										<?php checked(!empty($ai_seo_pro_schema['enabled'])); ?>>
+										name="rankflow_seo_schemas[<?php echo esc_attr($rankflow_seo_index); ?>][enabled]"
+										value="1" <?php checked(!empty($rankflow_seo_schema['enabled'])); ?>>
 								</label>
 								<select class="schema-type-select"
-									name="ai_seo_pro_schemas[<?php echo esc_attr($ai_seo_pro_index); ?>][type]">
-									<option value=""><?php esc_html_e('— Select Schema Type —', 'ai-seo-pro'); ?></option>
-									<?php foreach ($ai_seo_pro_schema_types as $ai_seo_pro_type => $ai_seo_pro_config): ?>
-										<option value="<?php echo esc_attr($ai_seo_pro_type); ?>" <?php selected($ai_seo_pro_schema['type'], $ai_seo_pro_type); ?>>
-											<?php echo esc_html($ai_seo_pro_config['label']); ?>
+									name="rankflow_seo_schemas[<?php echo esc_attr($rankflow_seo_index); ?>][type]">
+									<option value=""><?php esc_html_e('— Select Schema Type —', 'rankflow-seo'); ?></option>
+									<?php foreach ($rankflow_seo_schema_types as $rankflow_seo_type => $rankflow_seo_config): ?>
+										<option value="<?php echo esc_attr($rankflow_seo_type); ?>" <?php selected($rankflow_seo_schema['type'], $rankflow_seo_type); ?>>
+											<?php echo esc_html($rankflow_seo_config['label']); ?>
 										</option>
 									<?php endforeach; ?>
 								</select>
 								<span
-									class="schema-title"><?php echo !empty($ai_seo_pro_schema['data']['name']) ? esc_html($ai_seo_pro_schema['data']['name']) : ''; ?></span>
+									class="schema-title"><?php echo !empty($rankflow_seo_schema['data']['name']) ? esc_html($rankflow_seo_schema['data']['name']) : ''; ?></span>
 								<button type="button" class="schema-toggle"
-									title="<?php esc_attr_e('Toggle', 'ai-seo-pro'); ?>">
+									title="<?php esc_attr_e('Toggle', 'rankflow-seo'); ?>">
 									<span class="dashicons dashicons-arrow-down-alt2"></span>
 								</button>
 								<button type="button" class="schema-delete"
-									title="<?php esc_attr_e('Delete', 'ai-seo-pro'); ?>">
+									title="<?php esc_attr_e('Delete', 'rankflow-seo'); ?>">
 									<span class="dashicons dashicons-trash"></span>
 								</button>
 							</div>
 							<div class="schema-content" style="display: none;">
 								<!-- Display Rules Section -->
 								<div class="schema-display-rules">
-									<h4><?php esc_html_e('Display Rules', 'ai-seo-pro'); ?></h4>
+									<h4><?php esc_html_e('Display Rules', 'rankflow-seo'); ?></h4>
 
 									<div class="display-rule-row">
-										<label><?php esc_html_e('Show on:', 'ai-seo-pro'); ?></label>
+										<label><?php esc_html_e('Show on:', 'rankflow-seo'); ?></label>
 										<select class="display-mode-select"
-											name="ai_seo_pro_schemas[<?php echo esc_attr($ai_seo_pro_index); ?>][display_mode]">
-											<option value="all" <?php selected($ai_seo_pro_schema['display_mode'] ?? 'all', 'all'); ?>><?php esc_html_e('All Pages', 'ai-seo-pro'); ?></option>
-											<option value="homepage" <?php selected($ai_seo_pro_schema['display_mode'] ?? '', 'homepage'); ?>><?php esc_html_e('Homepage Only', 'ai-seo-pro'); ?></option>
-											<option value="post_types" <?php selected($ai_seo_pro_schema['display_mode'] ?? '', 'post_types'); ?>><?php esc_html_e('Specific Post Types', 'ai-seo-pro'); ?>
+											name="rankflow_seo_schemas[<?php echo esc_attr($rankflow_seo_index); ?>][display_mode]">
+											<option value="all" <?php selected($rankflow_seo_schema['display_mode'] ?? 'all', 'all'); ?>><?php esc_html_e('All Pages', 'rankflow-seo'); ?></option>
+											<option value="homepage" <?php selected($rankflow_seo_schema['display_mode'] ?? '', 'homepage'); ?>><?php esc_html_e('Homepage Only', 'rankflow-seo'); ?></option>
+											<option value="post_types" <?php selected($rankflow_seo_schema['display_mode'] ?? '', 'post_types'); ?>>
+												<?php esc_html_e('Specific Post Types', 'rankflow-seo'); ?>
 											</option>
-											<option value="include" <?php selected($ai_seo_pro_schema['display_mode'] ?? '', 'include'); ?>>
-												<?php esc_html_e('Only Specific Pages/Posts', 'ai-seo-pro'); ?>
+											<option value="include" <?php selected($rankflow_seo_schema['display_mode'] ?? '', 'include'); ?>>
+												<?php esc_html_e('Only Specific Pages/Posts', 'rankflow-seo'); ?>
 											</option>
-											<option value="exclude" <?php selected($ai_seo_pro_schema['display_mode'] ?? '', 'exclude'); ?>>
-												<?php esc_html_e('All Except Specific Pages/Posts', 'ai-seo-pro'); ?>
+											<option value="exclude" <?php selected($rankflow_seo_schema['display_mode'] ?? '', 'exclude'); ?>>
+												<?php esc_html_e('All Except Specific Pages/Posts', 'rankflow-seo'); ?>
 											</option>
 										</select>
 									</div>
 
 									<!-- Post Types Selection -->
 									<div class="display-rule-row post-types-row"
-										style="<?php echo ($ai_seo_pro_schema['display_mode'] ?? '') === 'post_types' ? '' : 'display:none;'; ?>">
-										<label><?php esc_html_e('Post Types:', 'ai-seo-pro'); ?></label>
+										style="<?php echo ($rankflow_seo_schema['display_mode'] ?? '') === 'post_types' ? '' : 'display:none;'; ?>">
+										<label><?php esc_html_e('Post Types:', 'rankflow-seo'); ?></label>
 										<select class="post-types-select"
-											name="ai_seo_pro_schemas[<?php echo esc_attr($ai_seo_pro_index); ?>][post_types][]"
+											name="rankflow_seo_schemas[<?php echo esc_attr($rankflow_seo_index); ?>][post_types][]"
 											multiple>
 											<?php
-											$ai_seo_pro_post_types = get_post_types(array('public' => true), 'objects');
-											$ai_seo_pro_selected_types = $ai_seo_pro_schema['post_types'] ?? array();
-											foreach ($ai_seo_pro_post_types as $ai_seo_pro_pt):
-												if ('attachment' === $ai_seo_pro_pt->name) {
+											$rankflow_seo_post_types = get_post_types(array('public' => true), 'objects');
+											$rankflow_seo_selected_types = $rankflow_seo_schema['post_types'] ?? array();
+											foreach ($rankflow_seo_post_types as $rankflow_seo_pt):
+												if ('attachment' === $rankflow_seo_pt->name) {
 													continue;
 												}
 												?>
-												<option value="<?php echo esc_attr($ai_seo_pro_pt->name); ?>" <?php selected(in_array($ai_seo_pro_pt->name, $ai_seo_pro_selected_types, true), true); ?>>
-													<?php echo esc_html($ai_seo_pro_pt->label); ?>
+												<option value="<?php echo esc_attr($rankflow_seo_pt->name); ?>" <?php selected(in_array($rankflow_seo_pt->name, $rankflow_seo_selected_types, true), true); ?>>
+													<?php echo esc_html($rankflow_seo_pt->label); ?>
 												</option>
 											<?php endforeach; ?>
 										</select>
@@ -134,25 +135,25 @@ $ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
 
 									<!-- Include Pages/Posts -->
 									<div class="display-rule-row include-row"
-										style="<?php echo ($ai_seo_pro_schema['display_mode'] ?? '') === 'include' ? '' : 'display:none;'; ?>">
-										<label><?php esc_html_e('Include:', 'ai-seo-pro'); ?></label>
+										style="<?php echo ($rankflow_seo_schema['display_mode'] ?? '') === 'include' ? '' : 'display:none;'; ?>">
+										<label><?php esc_html_e('Include:', 'rankflow-seo'); ?></label>
 										<select class="include-select"
-											name="ai_seo_pro_schemas[<?php echo esc_attr($ai_seo_pro_index); ?>][include_ids][]"
+											name="rankflow_seo_schemas[<?php echo esc_attr($rankflow_seo_index); ?>][include_ids][]"
 											multiple>
 											<?php
-											$ai_seo_pro_include_ids = $ai_seo_pro_schema['include_ids'] ?? array();
-											$ai_seo_pro_all_content = get_posts(array(
+											$rankflow_seo_include_ids = $rankflow_seo_schema['include_ids'] ?? array();
+											$rankflow_seo_all_content = get_posts(array(
 												'post_type' => array('post', 'page'),
 												'posts_per_page' => -1,
 												'post_status' => 'publish',
 												'orderby' => 'title',
 												'order' => 'ASC',
 											));
-											foreach ($ai_seo_pro_all_content as $ai_seo_pro_content):
+											foreach ($rankflow_seo_all_content as $rankflow_seo_content):
 												?>
-												<option value="<?php echo esc_attr($ai_seo_pro_content->ID); ?>" <?php selected(in_array($ai_seo_pro_content->ID, $ai_seo_pro_include_ids, true), true); ?>>
-													<?php echo esc_html($ai_seo_pro_content->post_title); ?>
-													(<?php echo esc_html(ucfirst($ai_seo_pro_content->post_type)); ?>)
+												<option value="<?php echo esc_attr($rankflow_seo_content->ID); ?>" <?php selected(in_array($rankflow_seo_content->ID, $rankflow_seo_include_ids, true), true); ?>>
+													<?php echo esc_html($rankflow_seo_content->post_title); ?>
+													(<?php echo esc_html(ucfirst($rankflow_seo_content->post_type)); ?>)
 												</option>
 											<?php endforeach; ?>
 										</select>
@@ -160,18 +161,18 @@ $ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
 
 									<!-- Exclude Pages/Posts -->
 									<div class="display-rule-row exclude-row"
-										style="<?php echo ($ai_seo_pro_schema['display_mode'] ?? '') === 'exclude' ? '' : 'display:none;'; ?>">
-										<label><?php esc_html_e('Exclude:', 'ai-seo-pro'); ?></label>
+										style="<?php echo ($rankflow_seo_schema['display_mode'] ?? '') === 'exclude' ? '' : 'display:none;'; ?>">
+										<label><?php esc_html_e('Exclude:', 'rankflow-seo'); ?></label>
 										<select class="exclude-select"
-											name="ai_seo_pro_schemas[<?php echo esc_attr($ai_seo_pro_index); ?>][exclude_ids][]"
+											name="rankflow_seo_schemas[<?php echo esc_attr($rankflow_seo_index); ?>][exclude_ids][]"
 											multiple>
 											<?php
-											$ai_seo_pro_exclude_ids = $ai_seo_pro_schema['exclude_ids'] ?? array();
-											foreach ($ai_seo_pro_all_content as $ai_seo_pro_content):
+											$rankflow_seo_exclude_ids = $rankflow_seo_schema['exclude_ids'] ?? array();
+											foreach ($rankflow_seo_all_content as $rankflow_seo_content):
 												?>
-												<option value="<?php echo esc_attr($ai_seo_pro_content->ID); ?>" <?php selected(in_array($ai_seo_pro_content->ID, $ai_seo_pro_exclude_ids, true), true); ?>>
-													<?php echo esc_html($ai_seo_pro_content->post_title); ?>
-													(<?php echo esc_html(ucfirst($ai_seo_pro_content->post_type)); ?>)
+												<option value="<?php echo esc_attr($rankflow_seo_content->ID); ?>" <?php selected(in_array($rankflow_seo_content->ID, $rankflow_seo_exclude_ids, true), true); ?>>
+													<?php echo esc_html($rankflow_seo_content->post_title); ?>
+													(<?php echo esc_html(ucfirst($rankflow_seo_content->post_type)); ?>)
 												</option>
 											<?php endforeach; ?>
 										</select>
@@ -180,72 +181,72 @@ $ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
 
 								<div class="schema-fields">
 									<?php
-									if (!empty($ai_seo_pro_schema['type']) && isset($ai_seo_pro_schema_types[$ai_seo_pro_schema['type']])) {
-										$ai_seo_pro_fields = $ai_seo_pro_schema_types[$ai_seo_pro_schema['type']]['fields'];
-										foreach ($ai_seo_pro_fields as $ai_seo_pro_field_key => $ai_seo_pro_field_config) {
-											$ai_seo_pro_field_value = isset($ai_seo_pro_schema['data'][$ai_seo_pro_field_key]) ? $ai_seo_pro_schema['data'][$ai_seo_pro_field_key] : '';
-											$ai_seo_pro_field_name = 'ai_seo_pro_schemas[' . esc_attr($ai_seo_pro_index) . '][data][' . esc_attr($ai_seo_pro_field_key) . ']';
-											$ai_seo_pro_field_id = 'schema_' . esc_attr($ai_seo_pro_index) . '_' . esc_attr($ai_seo_pro_field_key);
+									if (!empty($rankflow_seo_schema['type']) && isset($rankflow_seo_schema_types[$rankflow_seo_schema['type']])) {
+										$rankflow_seo_fields = $rankflow_seo_schema_types[$rankflow_seo_schema['type']]['fields'];
+										foreach ($rankflow_seo_fields as $rankflow_seo_field_key => $rankflow_seo_field_config) {
+											$rankflow_seo_field_value = isset($rankflow_seo_schema['data'][$rankflow_seo_field_key]) ? $rankflow_seo_schema['data'][$rankflow_seo_field_key] : '';
+											$rankflow_seo_field_name = 'rankflow_seo_schemas[' . esc_attr($rankflow_seo_index) . '][data][' . esc_attr($rankflow_seo_field_key) . ']';
+											$rankflow_seo_field_id = 'schema_' . esc_attr($rankflow_seo_index) . '_' . esc_attr($rankflow_seo_field_key);
 
 											echo '<div class="schema-field">';
-											echo '<label for="' . esc_attr($ai_seo_pro_field_id) . '">';
-											echo esc_html($ai_seo_pro_field_config['label']);
-											if (!empty($ai_seo_pro_field_config['required'])) {
+											echo '<label for="' . esc_attr($rankflow_seo_field_id) . '">';
+											echo esc_html($rankflow_seo_field_config['label']);
+											if (!empty($rankflow_seo_field_config['required'])) {
 												echo ' <span class="required">*</span>';
 											}
 											echo '</label>';
 
-											switch ($ai_seo_pro_field_config['type']) {
+											switch ($rankflow_seo_field_config['type']) {
 												case 'textarea':
-													echo '<textarea id="' . esc_attr($ai_seo_pro_field_id) . '" ';
-													echo 'name="' . esc_attr($ai_seo_pro_field_name) . '" ';
+													echo '<textarea id="' . esc_attr($rankflow_seo_field_id) . '" ';
+													echo 'name="' . esc_attr($rankflow_seo_field_name) . '" ';
 													echo 'rows="4" class="widefat" ';
-													if (!empty($ai_seo_pro_field_config['placeholder'])) {
-														echo 'placeholder="' . esc_attr($ai_seo_pro_field_config['placeholder']) . '"';
+													if (!empty($rankflow_seo_field_config['placeholder'])) {
+														echo 'placeholder="' . esc_attr($rankflow_seo_field_config['placeholder']) . '"';
 													}
-													echo '>' . esc_textarea($ai_seo_pro_field_value) . '</textarea>';
+													echo '>' . esc_textarea($rankflow_seo_field_value) . '</textarea>';
 													break;
 
 												case 'select':
-													echo '<select id="' . esc_attr($ai_seo_pro_field_id) . '" ';
-													echo 'name="' . esc_attr($ai_seo_pro_field_name) . '" class="widefat">';
-													echo '<option value="">' . esc_html__('— Select —', 'ai-seo-pro') . '</option>';
-													foreach ($ai_seo_pro_field_config['options'] as $ai_seo_pro_opt_value => $ai_seo_pro_opt_label) {
-														echo '<option value="' . esc_attr($ai_seo_pro_opt_value) . '" ' . selected($ai_seo_pro_field_value, $ai_seo_pro_opt_value, false) . '>';
-														echo esc_html($ai_seo_pro_opt_label) . '</option>';
+													echo '<select id="' . esc_attr($rankflow_seo_field_id) . '" ';
+													echo 'name="' . esc_attr($rankflow_seo_field_name) . '" class="widefat">';
+													echo '<option value="">' . esc_html__('— Select —', 'rankflow-seo') . '</option>';
+													foreach ($rankflow_seo_field_config['options'] as $rankflow_seo_opt_value => $rankflow_seo_opt_label) {
+														echo '<option value="' . esc_attr($rankflow_seo_opt_value) . '" ' . selected($rankflow_seo_field_value, $rankflow_seo_opt_value, false) . '>';
+														echo esc_html($rankflow_seo_opt_label) . '</option>';
 													}
 													echo '</select>';
 													break;
 
 												case 'image':
 													echo '<div class="image-field-wrapper">';
-													echo '<input type="url" id="' . esc_attr($ai_seo_pro_field_id) . '" ';
-													echo 'name="' . esc_attr($ai_seo_pro_field_name) . '" ';
-													echo 'value="' . esc_attr($ai_seo_pro_field_value) . '" class="widefat image-url-input">';
-													echo '<button type="button" class="button select-image">' . esc_html__('Select Image', 'ai-seo-pro') . '</button>';
+													echo '<input type="url" id="' . esc_attr($rankflow_seo_field_id) . '" ';
+													echo 'name="' . esc_attr($rankflow_seo_field_name) . '" ';
+													echo 'value="' . esc_attr($rankflow_seo_field_value) . '" class="widefat image-url-input">';
+													echo '<button type="button" class="button select-image">' . esc_html__('Select Image', 'rankflow-seo') . '</button>';
 													echo '</div>';
 													break;
 
 												case 'checkbox':
 													echo '<label class="checkbox-label">';
-													echo '<input type="checkbox" id="' . esc_attr($ai_seo_pro_field_id) . '" ';
-													echo 'name="' . esc_attr($ai_seo_pro_field_name) . '" value="1" ';
-													checked($ai_seo_pro_field_value, '1');
+													echo '<input type="checkbox" id="' . esc_attr($rankflow_seo_field_id) . '" ';
+													echo 'name="' . esc_attr($rankflow_seo_field_name) . '" value="1" ';
+													checked($rankflow_seo_field_value, '1');
 													echo '>';
-													if (!empty($ai_seo_pro_field_config['description'])) {
-														echo ' ' . esc_html($ai_seo_pro_field_config['description']);
+													if (!empty($rankflow_seo_field_config['description'])) {
+														echo ' ' . esc_html($rankflow_seo_field_config['description']);
 													}
 													echo '</label>';
 													break;
 
 												case 'hours':
-													echo '<div class="hours-repeater" data-name="' . esc_attr($ai_seo_pro_field_name) . '">';
-													if (!empty($ai_seo_pro_field_value) && is_array($ai_seo_pro_field_value)) {
-														foreach ($ai_seo_pro_field_value as $ai_seo_pro_h_index => $ai_seo_pro_hour) {
-															$ai_seo_pro_h_index_safe = intval($ai_seo_pro_h_index);
+													echo '<div class="hours-repeater" data-name="' . esc_attr($rankflow_seo_field_name) . '">';
+													if (!empty($rankflow_seo_field_value) && is_array($rankflow_seo_field_value)) {
+														foreach ($rankflow_seo_field_value as $rankflow_seo_h_index => $rankflow_seo_hour) {
+															$rankflow_seo_h_index_safe = intval($rankflow_seo_h_index);
 															echo '<div class="hour-row">';
-															echo '<select name="' . esc_attr($ai_seo_pro_field_name) . '[' . esc_attr($ai_seo_pro_h_index_safe) . '][days][]" multiple class="days-select">';
-															$ai_seo_pro_days = array(
+															echo '<select name="' . esc_attr($rankflow_seo_field_name) . '[' . esc_attr($rankflow_seo_h_index_safe) . '][days][]" multiple class="days-select">';
+															$rankflow_seo_days = array(
 																'Mo' => 'Monday',
 																'Tu' => 'Tuesday',
 																'We' => 'Wednesday',
@@ -254,79 +255,79 @@ $ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
 																'Sa' => 'Saturday',
 																'Su' => 'Sunday',
 															);
-															foreach ($ai_seo_pro_days as $ai_seo_pro_d_val => $ai_seo_pro_d_label) {
-																$ai_seo_pro_is_selected = isset($ai_seo_pro_hour['days']) && in_array($ai_seo_pro_d_val, $ai_seo_pro_hour['days'], true);
-																echo '<option value="' . esc_attr($ai_seo_pro_d_val) . '" ' . selected($ai_seo_pro_is_selected, true, false) . '>' . esc_html($ai_seo_pro_d_label) . '</option>';
+															foreach ($rankflow_seo_days as $rankflow_seo_d_val => $rankflow_seo_d_label) {
+																$rankflow_seo_is_selected = isset($rankflow_seo_hour['days']) && in_array($rankflow_seo_d_val, $rankflow_seo_hour['days'], true);
+																echo '<option value="' . esc_attr($rankflow_seo_d_val) . '" ' . selected($rankflow_seo_is_selected, true, false) . '>' . esc_html($rankflow_seo_d_label) . '</option>';
 															}
 															echo '</select>';
-															echo '<input type="time" name="' . esc_attr($ai_seo_pro_field_name) . '[' . esc_attr($ai_seo_pro_h_index_safe) . '][open]" value="' . esc_attr($ai_seo_pro_hour['open'] ?? '') . '" placeholder="Open">';
-															echo '<input type="time" name="' . esc_attr($ai_seo_pro_field_name) . '[' . esc_attr($ai_seo_pro_h_index_safe) . '][close]" value="' . esc_attr($ai_seo_pro_hour['close'] ?? '') . '" placeholder="Close">';
+															echo '<input type="time" name="' . esc_attr($rankflow_seo_field_name) . '[' . esc_attr($rankflow_seo_h_index_safe) . '][open]" value="' . esc_attr($rankflow_seo_hour['open'] ?? '') . '" placeholder="Open">';
+															echo '<input type="time" name="' . esc_attr($rankflow_seo_field_name) . '[' . esc_attr($rankflow_seo_h_index_safe) . '][close]" value="' . esc_attr($rankflow_seo_hour['close'] ?? '') . '" placeholder="Close">';
 															echo '<button type="button" class="button remove-hour">×</button>';
 															echo '</div>';
 														}
 													}
-													echo '<button type="button" class="button add-hour">' . esc_html__('Add Hours', 'ai-seo-pro') . '</button>';
+													echo '<button type="button" class="button add-hour">' . esc_html__('Add Hours', 'rankflow-seo') . '</button>';
 													echo '</div>';
 													break;
 
 												case 'faq_repeater':
-													echo '<div class="faq-repeater" data-name="' . esc_attr($ai_seo_pro_field_name) . '">';
-													if (!empty($ai_seo_pro_field_value) && is_array($ai_seo_pro_field_value)) {
-														foreach ($ai_seo_pro_field_value as $ai_seo_pro_f_index => $ai_seo_pro_faq) {
-															$ai_seo_pro_f_index_safe = intval($ai_seo_pro_f_index);
+													echo '<div class="faq-repeater" data-name="' . esc_attr($rankflow_seo_field_name) . '">';
+													if (!empty($rankflow_seo_field_value) && is_array($rankflow_seo_field_value)) {
+														foreach ($rankflow_seo_field_value as $rankflow_seo_f_index => $rankflow_seo_faq) {
+															$rankflow_seo_f_index_safe = intval($rankflow_seo_f_index);
 															echo '<div class="faq-row">';
-															echo '<input type="text" name="' . esc_attr($ai_seo_pro_field_name) . '[' . esc_attr($ai_seo_pro_f_index_safe) . '][question]" value="' . esc_attr($ai_seo_pro_faq['question'] ?? '') . '" placeholder="' . esc_attr__('Question', 'ai-seo-pro') . '" class="widefat">';
-															echo '<textarea name="' . esc_attr($ai_seo_pro_field_name) . '[' . esc_attr($ai_seo_pro_f_index_safe) . '][answer]" placeholder="' . esc_attr__('Answer', 'ai-seo-pro') . '" class="widefat" rows="2">' . esc_textarea($ai_seo_pro_faq['answer'] ?? '') . '</textarea>';
+															echo '<input type="text" name="' . esc_attr($rankflow_seo_field_name) . '[' . esc_attr($rankflow_seo_f_index_safe) . '][question]" value="' . esc_attr($rankflow_seo_faq['question'] ?? '') . '" placeholder="' . esc_attr__('Question', 'rankflow-seo') . '" class="widefat">';
+															echo '<textarea name="' . esc_attr($rankflow_seo_field_name) . '[' . esc_attr($rankflow_seo_f_index_safe) . '][answer]" placeholder="' . esc_attr__('Answer', 'rankflow-seo') . '" class="widefat" rows="2">' . esc_textarea($rankflow_seo_faq['answer'] ?? '') . '</textarea>';
 															echo '<button type="button" class="button remove-faq">×</button>';
 															echo '</div>';
 														}
 													}
-													echo '<button type="button" class="button add-faq">' . esc_html__('Add FAQ', 'ai-seo-pro') . '</button>';
+													echo '<button type="button" class="button add-faq">' . esc_html__('Add FAQ', 'rankflow-seo') . '</button>';
 													echo '</div>';
 													break;
 
 												case 'steps_repeater':
-													echo '<div class="steps-repeater" data-name="' . esc_attr($ai_seo_pro_field_name) . '">';
-													if (!empty($ai_seo_pro_field_value) && is_array($ai_seo_pro_field_value)) {
-														foreach ($ai_seo_pro_field_value as $ai_seo_pro_s_index => $ai_seo_pro_step) {
-															$ai_seo_pro_s_index_safe = intval($ai_seo_pro_s_index);
+													echo '<div class="steps-repeater" data-name="' . esc_attr($rankflow_seo_field_name) . '">';
+													if (!empty($rankflow_seo_field_value) && is_array($rankflow_seo_field_value)) {
+														foreach ($rankflow_seo_field_value as $rankflow_seo_s_index => $rankflow_seo_step) {
+															$rankflow_seo_s_index_safe = intval($rankflow_seo_s_index);
 															echo '<div class="step-row">';
-															echo '<span class="step-number">' . esc_html($ai_seo_pro_s_index_safe + 1) . '</span>';
-															echo '<input type="text" name="' . esc_attr($ai_seo_pro_field_name) . '[' . esc_attr($ai_seo_pro_s_index_safe) . '][name]" value="' . esc_attr($ai_seo_pro_step['name'] ?? '') . '" placeholder="' . esc_attr__('Step Name (optional)', 'ai-seo-pro') . '" class="widefat">';
-															echo '<textarea name="' . esc_attr($ai_seo_pro_field_name) . '[' . esc_attr($ai_seo_pro_s_index_safe) . '][text]" placeholder="' . esc_attr__('Step Instructions', 'ai-seo-pro') . '" class="widefat" rows="2">' . esc_textarea($ai_seo_pro_step['text'] ?? '') . '</textarea>';
+															echo '<span class="step-number">' . esc_html($rankflow_seo_s_index_safe + 1) . '</span>';
+															echo '<input type="text" name="' . esc_attr($rankflow_seo_field_name) . '[' . esc_attr($rankflow_seo_s_index_safe) . '][name]" value="' . esc_attr($rankflow_seo_step['name'] ?? '') . '" placeholder="' . esc_attr__('Step Name (optional)', 'rankflow-seo') . '" class="widefat">';
+															echo '<textarea name="' . esc_attr($rankflow_seo_field_name) . '[' . esc_attr($rankflow_seo_s_index_safe) . '][text]" placeholder="' . esc_attr__('Step Instructions', 'rankflow-seo') . '" class="widefat" rows="2">' . esc_textarea($rankflow_seo_step['text'] ?? '') . '</textarea>';
 															echo '<button type="button" class="button remove-step">×</button>';
 															echo '</div>';
 														}
 													}
-													echo '<button type="button" class="button add-step">' . esc_html__('Add Step', 'ai-seo-pro') . '</button>';
+													echo '<button type="button" class="button add-step">' . esc_html__('Add Step', 'rankflow-seo') . '</button>';
 													echo '</div>';
 													break;
 
 												case 'breadcrumb_repeater':
-													echo '<div class="breadcrumb-repeater" data-name="' . esc_attr($ai_seo_pro_field_name) . '">';
-													if (!empty($ai_seo_pro_field_value) && is_array($ai_seo_pro_field_value)) {
-														foreach ($ai_seo_pro_field_value as $ai_seo_pro_b_index => $ai_seo_pro_item) {
-															$ai_seo_pro_b_index_safe = intval($ai_seo_pro_b_index);
+													echo '<div class="breadcrumb-repeater" data-name="' . esc_attr($rankflow_seo_field_name) . '">';
+													if (!empty($rankflow_seo_field_value) && is_array($rankflow_seo_field_value)) {
+														foreach ($rankflow_seo_field_value as $rankflow_seo_b_index => $rankflow_seo_item) {
+															$rankflow_seo_b_index_safe = intval($rankflow_seo_b_index);
 															echo '<div class="breadcrumb-row">';
-															echo '<span class="breadcrumb-number">' . esc_html($ai_seo_pro_b_index_safe + 1) . '</span>';
-															echo '<input type="text" name="' . esc_attr($ai_seo_pro_field_name) . '[' . esc_attr($ai_seo_pro_b_index_safe) . '][name]" value="' . esc_attr($ai_seo_pro_item['name'] ?? '') . '" placeholder="' . esc_attr__('Name', 'ai-seo-pro') . '">';
-															echo '<input type="url" name="' . esc_attr($ai_seo_pro_field_name) . '[' . esc_attr($ai_seo_pro_b_index_safe) . '][url]" value="' . esc_attr($ai_seo_pro_item['url'] ?? '') . '" placeholder="' . esc_attr__('URL', 'ai-seo-pro') . '">';
+															echo '<span class="breadcrumb-number">' . esc_html($rankflow_seo_b_index_safe + 1) . '</span>';
+															echo '<input type="text" name="' . esc_attr($rankflow_seo_field_name) . '[' . esc_attr($rankflow_seo_b_index_safe) . '][name]" value="' . esc_attr($rankflow_seo_item['name'] ?? '') . '" placeholder="' . esc_attr__('Name', 'rankflow-seo') . '">';
+															echo '<input type="url" name="' . esc_attr($rankflow_seo_field_name) . '[' . esc_attr($rankflow_seo_b_index_safe) . '][url]" value="' . esc_attr($rankflow_seo_item['url'] ?? '') . '" placeholder="' . esc_attr__('URL', 'rankflow-seo') . '">';
 															echo '<button type="button" class="button remove-breadcrumb">×</button>';
 															echo '</div>';
 														}
 													}
-													echo '<button type="button" class="button add-breadcrumb">' . esc_html__('Add Item', 'ai-seo-pro') . '</button>';
+													echo '<button type="button" class="button add-breadcrumb">' . esc_html__('Add Item', 'rankflow-seo') . '</button>';
 													echo '</div>';
 													break;
 
 												default:
-													echo '<input type="' . esc_attr($ai_seo_pro_field_config['type']) . '" ';
-													echo 'id="' . esc_attr($ai_seo_pro_field_id) . '" ';
-													echo 'name="' . esc_attr($ai_seo_pro_field_name) . '" ';
-													echo 'value="' . esc_attr($ai_seo_pro_field_value) . '" ';
+													echo '<input type="' . esc_attr($rankflow_seo_field_config['type']) . '" ';
+													echo 'id="' . esc_attr($rankflow_seo_field_id) . '" ';
+													echo 'name="' . esc_attr($rankflow_seo_field_name) . '" ';
+													echo 'value="' . esc_attr($rankflow_seo_field_value) . '" ';
 													echo 'class="widefat" ';
-													if (!empty($ai_seo_pro_field_config['placeholder'])) {
-														echo 'placeholder="' . esc_attr($ai_seo_pro_field_config['placeholder']) . '"';
+													if (!empty($rankflow_seo_field_config['placeholder'])) {
+														echo 'placeholder="' . esc_attr($rankflow_seo_field_config['placeholder']) . '"';
 													}
 													echo '>';
 											}
@@ -342,14 +343,14 @@ $ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
 				<?php endif; ?>
 			</div>
 
-			<p class="no-schemas-message" <?php echo !empty($ai_seo_pro_schemas) ? 'style="display:none;"' : ''; ?>>
-				<?php esc_html_e('No schemas added yet. Click "Add Schema" to create your first schema markup.', 'ai-seo-pro'); ?>
+			<p class="no-schemas-message" <?php echo !empty($rankflow_seo_schemas) ? 'style="display:none;"' : ''; ?>>
+				<?php esc_html_e('No schemas added yet. Click "Add Schema" to create your first schema markup.', 'rankflow-seo'); ?>
 			</p>
 		</div>
 
 		<!-- Submit Button -->
-		<div class="ai-seo-pro-card submit-card">
-			<?php submit_button(esc_html__('Save Schemas', 'ai-seo-pro'), 'primary', 'submit', false); ?>
+		<div class="rankflow-seo-card submit-card">
+			<?php submit_button(esc_html__('Save Schemas', 'rankflow-seo'), 'primary', 'submit', false); ?>
 		</div>
 	</form>
 
@@ -359,90 +360,90 @@ $ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
 			<div class="schema-header">
 				<span class="schema-drag-handle dashicons dashicons-menu"></span>
 				<label class="schema-enable">
-					<input type="checkbox" name="ai_seo_pro_schemas[{{INDEX}}][enabled]" value="1" checked>
+					<input type="checkbox" name="rankflow_seo_schemas[{{INDEX}}][enabled]" value="1" checked>
 				</label>
-				<select class="schema-type-select" name="ai_seo_pro_schemas[{{INDEX}}][type]">
-					<option value=""><?php esc_html_e('— Select Schema Type —', 'ai-seo-pro'); ?></option>
-					<?php foreach ($ai_seo_pro_schema_types as $ai_seo_pro_type => $ai_seo_pro_config): ?>
-									<option value="<?php echo esc_attr($ai_seo_pro_type); ?>"><?php echo esc_html($ai_seo_pro_config['label']); ?></option>
+				<select class="schema-type-select" name="rankflow_seo_schemas[{{INDEX}}][type]">
+					<option value=""><?php esc_html_e('— Select Schema Type —', 'rankflow-seo'); ?></option>
+					<?php foreach ($rankflow_seo_schema_types as $rankflow_seo_type => $rankflow_seo_config): ?>
+												<option value="<?php echo esc_attr($rankflow_seo_type); ?>"><?php echo esc_html($rankflow_seo_config['label']); ?></option>
 					<?php endforeach; ?>
 				</select>
 				<span class="schema-title"></span>
-				<button type="button" class="schema-toggle" title="<?php esc_attr_e('Toggle', 'ai-seo-pro'); ?>">
+				<button type="button" class="schema-toggle" title="<?php esc_attr_e('Toggle', 'rankflow-seo'); ?>">
 					<span class="dashicons dashicons-arrow-down-alt2"></span>
 				</button>
-				<button type="button" class="schema-delete" title="<?php esc_attr_e('Delete', 'ai-seo-pro'); ?>">
+				<button type="button" class="schema-delete" title="<?php esc_attr_e('Delete', 'rankflow-seo'); ?>">
 					<span class="dashicons dashicons-trash"></span>
 				</button>
 			</div>
 			<div class="schema-content">
 				<!-- Display Rules Section -->
 				<div class="schema-display-rules">
-					<h4><?php esc_html_e('Display Rules', 'ai-seo-pro'); ?></h4>
+					<h4><?php esc_html_e('Display Rules', 'rankflow-seo'); ?></h4>
 					
 					<div class="display-rule-row">
-						<label><?php esc_html_e('Show on:', 'ai-seo-pro'); ?></label>
-						<select class="display-mode-select" name="ai_seo_pro_schemas[{{INDEX}}][display_mode]">
-							<option value="all"><?php esc_html_e('All Pages', 'ai-seo-pro'); ?></option>
-							<option value="homepage"><?php esc_html_e('Homepage Only', 'ai-seo-pro'); ?></option>
-							<option value="post_types"><?php esc_html_e('Specific Post Types', 'ai-seo-pro'); ?></option>
-							<option value="include"><?php esc_html_e('Only Specific Pages/Posts', 'ai-seo-pro'); ?></option>
-							<option value="exclude"><?php esc_html_e('All Except Specific Pages/Posts', 'ai-seo-pro'); ?></option>
+						<label><?php esc_html_e('Show on:', 'rankflow-seo'); ?></label>
+						<select class="display-mode-select" name="rankflow_seo_schemas[{{INDEX}}][display_mode]">
+							<option value="all"><?php esc_html_e('All Pages', 'rankflow-seo'); ?></option>
+							<option value="homepage"><?php esc_html_e('Homepage Only', 'rankflow-seo'); ?></option>
+							<option value="post_types"><?php esc_html_e('Specific Post Types', 'rankflow-seo'); ?></option>
+							<option value="include"><?php esc_html_e('Only Specific Pages/Posts', 'rankflow-seo'); ?></option>
+							<option value="exclude"><?php esc_html_e('All Except Specific Pages/Posts', 'rankflow-seo'); ?></option>
 						</select>
 					</div>
 
 					<!-- Post Types Selection -->
 					<div class="display-rule-row post-types-row" style="display:none;">
-						<label><?php esc_html_e('Post Types:', 'ai-seo-pro'); ?></label>
-						<select class="post-types-select" name="ai_seo_pro_schemas[{{INDEX}}][post_types][]" multiple>
+						<label><?php esc_html_e('Post Types:', 'rankflow-seo'); ?></label>
+						<select class="post-types-select" name="rankflow_seo_schemas[{{INDEX}}][post_types][]" multiple>
 							<?php
-							$ai_seo_pro_post_types = get_post_types(array('public' => true), 'objects');
-							foreach ($ai_seo_pro_post_types as $ai_seo_pro_pt):
-								if ('attachment' === $ai_seo_pro_pt->name) {
+							$rankflow_seo_post_types = get_post_types(array('public' => true), 'objects');
+							foreach ($rankflow_seo_post_types as $rankflow_seo_pt):
+								if ('attachment' === $rankflow_seo_pt->name) {
 									continue;
 								}
 								?>
-											<option value="<?php echo esc_attr($ai_seo_pro_pt->name); ?>"><?php echo esc_html($ai_seo_pro_pt->label); ?></option>
+														<option value="<?php echo esc_attr($rankflow_seo_pt->name); ?>"><?php echo esc_html($rankflow_seo_pt->label); ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
 
 					<!-- Include Pages/Posts -->
 					<div class="display-rule-row include-row" style="display:none;">
-						<label><?php esc_html_e('Include:', 'ai-seo-pro'); ?></label>
-						<select class="include-select" name="ai_seo_pro_schemas[{{INDEX}}][include_ids][]" multiple>
+						<label><?php esc_html_e('Include:', 'rankflow-seo'); ?></label>
+						<select class="include-select" name="rankflow_seo_schemas[{{INDEX}}][include_ids][]" multiple>
 							<?php
-							$ai_seo_pro_all_content = get_posts(array(
+							$rankflow_seo_all_content = get_posts(array(
 								'post_type' => array('post', 'page'),
 								'posts_per_page' => -1,
 								'post_status' => 'publish',
 								'orderby' => 'title',
 								'order' => 'ASC',
 							));
-							foreach ($ai_seo_pro_all_content as $ai_seo_pro_content):
+							foreach ($rankflow_seo_all_content as $rankflow_seo_content):
 								?>
-											<option value="<?php echo esc_attr($ai_seo_pro_content->ID); ?>">
-												<?php echo esc_html($ai_seo_pro_content->post_title); ?> (<?php echo esc_html(ucfirst($ai_seo_pro_content->post_type)); ?>)
-											</option>
+														<option value="<?php echo esc_attr($rankflow_seo_content->ID); ?>">
+															<?php echo esc_html($rankflow_seo_content->post_title); ?> (<?php echo esc_html(ucfirst($rankflow_seo_content->post_type)); ?>)
+														</option>
 							<?php endforeach; ?>
 						</select>
 					</div>
 
 					<!-- Exclude Pages/Posts -->
 					<div class="display-rule-row exclude-row" style="display:none;">
-						<label><?php esc_html_e('Exclude:', 'ai-seo-pro'); ?></label>
-						<select class="exclude-select" name="ai_seo_pro_schemas[{{INDEX}}][exclude_ids][]" multiple>
-							<?php foreach ($ai_seo_pro_all_content as $ai_seo_pro_content): ?>
-											<option value="<?php echo esc_attr($ai_seo_pro_content->ID); ?>">
-												<?php echo esc_html($ai_seo_pro_content->post_title); ?> (<?php echo esc_html(ucfirst($ai_seo_pro_content->post_type)); ?>)
-											</option>
+						<label><?php esc_html_e('Exclude:', 'rankflow-seo'); ?></label>
+						<select class="exclude-select" name="rankflow_seo_schemas[{{INDEX}}][exclude_ids][]" multiple>
+							<?php foreach ($rankflow_seo_all_content as $rankflow_seo_content): ?>
+														<option value="<?php echo esc_attr($rankflow_seo_content->ID); ?>">
+															<?php echo esc_html($rankflow_seo_content->post_title); ?> (<?php echo esc_html(ucfirst($rankflow_seo_content->post_type)); ?>)
+														</option>
 							<?php endforeach; ?>
 						</select>
 					</div>
 				</div>
 
 				<div class="schema-fields">
-					<p class="select-type-message"><?php esc_html_e('Please select a schema type to see available fields.', 'ai-seo-pro'); ?></p>
+					<p class="select-type-message"><?php esc_html_e('Please select a schema type to see available fields.', 'rankflow-seo'); ?></p>
 				</div>
 			</div>
 		</div>
@@ -450,11 +451,11 @@ $ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
 </div>
 
 <style>
-	.ai-seo-pro-schema {
+	.rankflow-seo-schema {
 		max-width: 1200px;
 	}
 
-	.ai-seo-pro-card {
+	.rankflow-seo-card {
 		background: #fff;
 		border: 1px solid #ddd;
 		border-radius: 8px;
@@ -462,7 +463,7 @@ $ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
 		margin-bottom: 20px;
 	}
 
-	.ai-seo-pro-card h2 {
+	.rankflow-seo-card h2 {
 		margin: 0 0 15px 0;
 		padding: 0 0 10px 0;
 		border-bottom: 1px solid #eee;
@@ -485,7 +486,7 @@ $ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
 	}
 
 	/* Toggle Switch */
-	.ai-seo-pro-toggle {
+	.rankflow-seo-toggle {
 		display: flex;
 		align-items: center;
 		gap: 12px;
@@ -493,7 +494,7 @@ $ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
 		margin-bottom: 10px;
 	}
 
-	.ai-seo-pro-toggle input {
+	.rankflow-seo-toggle input {
 		display: none;
 	}
 
@@ -519,11 +520,11 @@ $ai_seo_pro_schema_types = $ai_seo_pro_schema_admin->get_schema_types();
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 	}
 
-	.ai-seo-pro-toggle input:checked+.toggle-slider {
+	.rankflow-seo-toggle input:checked+.toggle-slider {
 		background: #2271b1;
 	}
 
-	.ai-seo-pro-toggle input:checked+.toggle-slider::after {
+	.rankflow-seo-toggle input:checked+.toggle-slider::after {
 		transform: translateX(24px);
 	}
 

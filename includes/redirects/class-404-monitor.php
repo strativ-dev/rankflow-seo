@@ -2,8 +2,8 @@
 /**
  * 404 Monitor - Track 404 errors
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/includes/redirects
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/includes/redirects
  * @author     Strativ AB
  */
 
@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class AI_SEO_Pro_404_Monitor
+ * Class RankFlow_SEO_404_Monitor
  */
-class AI_SEO_Pro_404_Monitor
+class RankFlow_SEO_404_Monitor
 {
 
     /**
@@ -31,7 +31,7 @@ class AI_SEO_Pro_404_Monitor
     public function __construct()
     {
         global $wpdb;
-        $this->table_name = $wpdb->prefix . 'ai_seo_404_logs';
+        $this->table_name = $wpdb->prefix . 'rankflow_seo_404_logs';
     }
 
     /**
@@ -335,7 +335,7 @@ class AI_SEO_Pro_404_Monitor
             return;
         }
 
-        $retention_days = get_option('ai_seo_pro_404_retention', 30);
+        $retention_days = get_option('rankflow_seo_404_retention', 30);
         $table = $this->table_name;
 
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Cleaning up old 404 logs.

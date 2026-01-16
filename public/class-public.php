@@ -2,8 +2,8 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/public
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/public
  * @author     Strativ AB
  */
 
@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class AI_SEO_Pro_Public
+ * Class RankFlow_SEO_Public
  */
-class AI_SEO_Pro_Public
+class RankFlow_SEO_Public
 {
 
 	/**
@@ -35,14 +35,14 @@ class AI_SEO_Pro_Public
 	/**
 	 * Meta manager instance.
 	 *
-	 * @var AI_SEO_Pro_Meta_Manager $meta_manager
+	 * @var RankFlow_SEO_Meta_Manager $meta_manager
 	 */
 	private $meta_manager;
 
 	/**
 	 * Schema generator instance.
 	 *
-	 * @var AI_SEO_Pro_Schema_Generator $schema_generator
+	 * @var RankFlow_SEO_Schema_Generator $schema_generator
 	 */
 	private $schema_generator;
 
@@ -56,8 +56,8 @@ class AI_SEO_Pro_Public
 	{
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		$this->meta_manager = new AI_SEO_Pro_Meta_Manager();
-		$this->schema_generator = new AI_SEO_Pro_Schema_Generator();
+		$this->meta_manager = new RankFlow_SEO_Meta_Manager();
+		$this->schema_generator = new RankFlow_SEO_Schema_Generator();
 	}
 
 	/**
@@ -76,15 +76,15 @@ class AI_SEO_Pro_Public
 		}
 
 		// Check if post type is enabled.
-		if (!AI_SEO_Pro_Helper::is_post_type_enabled($post->post_type)) {
+		if (!RankFlow_SEO_Helper::is_post_type_enabled($post->post_type)) {
 			return;
 		}
 
 		// Get meta data with prefixed variable name.
-		$ai_seo_pro_meta_data = $this->meta_manager->get_post_meta($post->ID);
+		$rankflow_seo_meta_data = $this->meta_manager->get_post_meta($post->ID);
 
 		// Include the meta tags partial.
-		include AI_SEO_PRO_PLUGIN_DIR . 'public/partials/meta-tags.php';
+		include RANKFLOW_SEO_PLUGIN_DIR . 'public/partials/meta-tags.php';
 	}
 
 	/**
@@ -92,7 +92,7 @@ class AI_SEO_Pro_Public
 	 */
 	public function output_schema_markup()
 	{
-		if (!get_option('ai_seo_pro_enable_schema', true)) {
+		if (!get_option('rankflow_seo_enable_schema', true)) {
 			return;
 		}
 
@@ -107,12 +107,12 @@ class AI_SEO_Pro_Public
 		}
 
 		// Check if post type is enabled.
-		if (!AI_SEO_Pro_Helper::is_post_type_enabled($post->post_type)) {
+		if (!RankFlow_SEO_Helper::is_post_type_enabled($post->post_type)) {
 			return;
 		}
 
 		// Include the schema output partial.
-		include AI_SEO_PRO_PLUGIN_DIR . 'public/partials/schema-output.php';
+		include RANKFLOW_SEO_PLUGIN_DIR . 'public/partials/schema-output.php';
 	}
 
 	/**
@@ -141,7 +141,7 @@ class AI_SEO_Pro_Public
 	 */
 	public function output_breadcrumbs()
 	{
-		if (!get_option('ai_seo_pro_breadcrumbs', false)) {
+		if (!get_option('rankflow_seo_breadcrumbs', false)) {
 			return;
 		}
 
@@ -149,7 +149,7 @@ class AI_SEO_Pro_Public
 			return;
 		}
 
-		include AI_SEO_PRO_PLUGIN_DIR . 'public/partials/breadcrumbs.php';
+		include RANKFLOW_SEO_PLUGIN_DIR . 'public/partials/breadcrumbs.php';
 	}
 
 	/**
@@ -171,15 +171,15 @@ class AI_SEO_Pro_Public
 		}
 
 		// Check if post type is enabled.
-		if (!AI_SEO_Pro_Helper::is_post_type_enabled($post->post_type)) {
+		if (!RankFlow_SEO_Helper::is_post_type_enabled($post->post_type)) {
 			return $title;
 		}
 
 		// Get custom meta title.
-		$ai_seo_pro_custom_title = get_post_meta($post->ID, '_ai_seo_title', true);
+		$rankflow_seo_custom_title = get_post_meta($post->ID, '_rankflow_seo_title', true);
 
-		if (!empty($ai_seo_pro_custom_title)) {
-			return $ai_seo_pro_custom_title;
+		if (!empty($rankflow_seo_custom_title)) {
+			return $rankflow_seo_custom_title;
 		}
 
 		return $title;
@@ -204,19 +204,19 @@ class AI_SEO_Pro_Public
 		}
 
 		// Check if post type is enabled.
-		if (!AI_SEO_Pro_Helper::is_post_type_enabled($post->post_type)) {
+		if (!RankFlow_SEO_Helper::is_post_type_enabled($post->post_type)) {
 			return $title_parts;
 		}
 
 		// Get custom meta title.
-		$ai_seo_pro_custom_title = get_post_meta($post->ID, '_ai_seo_title', true);
+		$rankflow_seo_custom_title = get_post_meta($post->ID, '_rankflow_seo_title', true);
 
-		if (!empty($ai_seo_pro_custom_title)) {
+		if (!empty($rankflow_seo_custom_title)) {
 			// Replace the title part completely.
-			$title_parts['title'] = $ai_seo_pro_custom_title;
+			$title_parts['title'] = $rankflow_seo_custom_title;
 
 			// Remove site name if custom title already includes it.
-			if (false !== strpos($ai_seo_pro_custom_title, get_bloginfo('name'))) {
+			if (false !== strpos($rankflow_seo_custom_title, get_bloginfo('name'))) {
 				unset($title_parts['site']);
 			}
 		}

@@ -2,11 +2,11 @@
 /**
  * The settings page functionality.
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/admin
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/admin
  * @author     Strativ AB
  */
-class AI_SEO_Pro_Settings
+class RankFlow_SEO_Settings
 {
 
 	/**
@@ -33,7 +33,7 @@ class AI_SEO_Pro_Settings
 	/**
 	 * Redirect admin instance
 	 *
-	 * @var AI_SEO_Pro_Redirect_Admin
+	 * @var RankFlow_SEO_Redirect_Admin
 	 */
 	private $redirect_admin;
 
@@ -57,19 +57,19 @@ class AI_SEO_Pro_Settings
 	public function add_plugin_admin_menu()
 	{
 		add_menu_page(
-			__('AI SEO Pro', 'ai-seo-pro'),
-			__('AI SEO Pro', 'ai-seo-pro'),
+			__('RankFlow SEO', 'rankflow-seo'),
+			__('RankFlow SEO', 'rankflow-seo'),
 			'manage_options',
 			$this->plugin_name,
 			array($this, 'display_plugin_admin_page'),
-			'dashicons-search',
+			RANKFLOW_SEO_PLUGIN_URL . 'assets/images/rankflow-icon-white.png',
 			65
 		);
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Dashboard', 'ai-seo-pro'),
-			__('Dashboard', 'ai-seo-pro'),
+			__('Dashboard', 'rankflow-seo'),
+			__('Dashboard', 'rankflow-seo'),
 			'manage_options',
 			$this->plugin_name,
 			array($this, 'display_plugin_admin_page')
@@ -77,8 +77,8 @@ class AI_SEO_Pro_Settings
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Redirects', 'ai-seo-pro'),
-			__('Redirects', 'ai-seo-pro'),
+			__('Redirects', 'rankflow-seo'),
+			__('Redirects', 'rankflow-seo'),
 			'manage_options',
 			$this->plugin_name . '-redirects',
 			array($this, 'display_redirects_page')
@@ -86,8 +86,8 @@ class AI_SEO_Pro_Settings
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('404 Monitor', 'ai-seo-pro'),
-			__('404 Monitor', 'ai-seo-pro'),
+			__('404 Monitor', 'rankflow-seo'),
+			__('404 Monitor', 'rankflow-seo'),
 			'manage_options',
 			$this->plugin_name . '-404-monitor',
 			array($this, 'display_404_monitor_page')
@@ -95,8 +95,8 @@ class AI_SEO_Pro_Settings
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Robots.txt', 'ai-seo-pro'),
-			__('Robots.txt', 'ai-seo-pro'),
+			__('Robots.txt', 'rankflow-seo'),
+			__('Robots.txt', 'rankflow-seo'),
 			'manage_options',
 			$this->plugin_name . '-robots-txt',
 			array($this, 'display_robots_page')
@@ -104,26 +104,26 @@ class AI_SEO_Pro_Settings
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Schema', 'ai-seo-pro'),
-			__('Schema', 'ai-seo-pro'),
+			__('Schema', 'rankflow-seo'),
+			__('Schema', 'rankflow-seo'),
 			'manage_options',
 			$this->plugin_name . '-schema',
 			array($this, 'display_schema_page')
 		);
 
 		add_submenu_page(
-			'ai-seo-pro',
-			__('XML Sitemap', 'ai-seo-pro'),
-			__('XML Sitemap', 'ai-seo-pro'),
+			'rankflow-seo',
+			__('XML Sitemap', 'rankflow-seo'),
+			__('XML Sitemap', 'rankflow-seo'),
 			'manage_options',
-			'ai-seo-pro-sitemap',
+			'rankflow-seo-sitemap',
 			array($this, 'display_sitemap_page')
 		);
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Settings', 'ai-seo-pro'),
-			__('Settings', 'ai-seo-pro'),
+			__('Settings', 'rankflow-seo'),
+			__('Settings', 'rankflow-seo'),
 			'manage_options',
 			$this->plugin_name . '-settings',
 			array($this, 'display_plugin_settings_page')
@@ -131,8 +131,8 @@ class AI_SEO_Pro_Settings
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Help', 'ai-seo-pro'),
-			__('Help', 'ai-seo-pro'),
+			__('Help', 'rankflow-seo'),
+			__('Help', 'rankflow-seo'),
 			'manage_options',
 			$this->plugin_name . '-help',
 			array($this, 'display_help_page')
@@ -145,7 +145,7 @@ class AI_SEO_Pro_Settings
 	 */
 	public function display_plugin_admin_page()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/dashboard.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/dashboard.php';
 	}
 
 	/**
@@ -155,8 +155,8 @@ class AI_SEO_Pro_Settings
 	{
 		// Get or create redirect admin instance
 		if (!isset($this->redirect_admin)) {
-			require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/class-redirect-admin.php';
-			$this->redirect_admin = new AI_SEO_Pro_Redirect_Admin($this->plugin_name);
+			require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/class-redirect-admin.php';
+			$this->redirect_admin = new RankFlow_SEO_Redirect_Admin($this->plugin_name);
 		}
 
 		// Call the redirect admin display method
@@ -170,8 +170,8 @@ class AI_SEO_Pro_Settings
 	{
 		// Get or create redirect admin instance
 		if (!isset($this->redirect_admin)) {
-			require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/class-redirect-admin.php';
-			$this->redirect_admin = new AI_SEO_Pro_Redirect_Admin($this->plugin_name);
+			require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/class-redirect-admin.php';
+			$this->redirect_admin = new RankFlow_SEO_Redirect_Admin($this->plugin_name);
 		}
 
 		// Call the redirect admin display method
@@ -183,7 +183,7 @@ class AI_SEO_Pro_Settings
 	 */
 	public function display_robots_page()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/settings-robots-txt.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-robots-txt.php';
 	}
 
 	/**
@@ -191,7 +191,7 @@ class AI_SEO_Pro_Settings
 	 */
 	public function display_schema_page()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/settings-schema.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-schema.php';
 	}
 
 	/**
@@ -199,7 +199,7 @@ class AI_SEO_Pro_Settings
 	 */
 	public function display_sitemap_page()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/settings-sitemap.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-sitemap.php';
 	}
 
 	/**
@@ -207,7 +207,7 @@ class AI_SEO_Pro_Settings
 	 */
 	public function display_help_page()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/help.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/help.php';
 	}
 
 	/**
@@ -218,8 +218,8 @@ class AI_SEO_Pro_Settings
 
 		// General settings.
 		register_setting(
-			'ai_seo_pro_general',
-			'ai_seo_pro_post_types',
+			'rankflow_seo_general',
+			'rankflow_seo_post_types',
 			array(
 				'type' => 'array',
 				'sanitize_callback' => array($this, 'sanitize_post_types'),
@@ -227,8 +227,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_general',
-			'ai_seo_pro_title_separator',
+			'rankflow_seo_general',
+			'rankflow_seo_title_separator',
 			array(
 				'type' => 'string',
 				'default' => '-',
@@ -237,8 +237,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_general',
-			'ai_seo_pro_homepage_title',
+			'rankflow_seo_general',
+			'rankflow_seo_homepage_title',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -247,8 +247,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_general',
-			'ai_seo_pro_homepage_description',
+			'rankflow_seo_general',
+			'rankflow_seo_homepage_description',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -257,8 +257,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_general',
-			'ai_seo_pro_site_represents',
+			'rankflow_seo_general',
+			'rankflow_seo_site_represents',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -267,8 +267,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_general',
-			'ai_seo_pro_organization_name',
+			'rankflow_seo_general',
+			'rankflow_seo_organization_name',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -277,8 +277,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_general',
-			'ai_seo_pro_person_name',
+			'rankflow_seo_general',
+			'rankflow_seo_person_name',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -287,8 +287,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_general',
-			'ai_seo_pro_site_logo',
+			'rankflow_seo_general',
+			'rankflow_seo_site_logo',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -298,8 +298,8 @@ class AI_SEO_Pro_Settings
 
 		// API settings.
 		register_setting(
-			'ai_seo_pro_api',
-			'ai_seo_pro_api_provider',
+			'rankflow_seo_api',
+			'rankflow_seo_api_provider',
 			array(
 				'type' => 'string',
 				'default' => 'gemini',
@@ -308,8 +308,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_api',
-			'ai_seo_pro_api_key',
+			'rankflow_seo_api',
+			'rankflow_seo_api_key',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => 'sanitize_text_field',
@@ -317,8 +317,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_api',
-			'ai_seo_pro_auto_generate',
+			'rankflow_seo_api',
+			'rankflow_seo_auto_generate',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -328,8 +328,8 @@ class AI_SEO_Pro_Settings
 
 		// Feature settings - SEPARATE GROUP.
 		register_setting(
-			'ai_seo_pro_features',
-			'ai_seo_pro_enable_content_analysis',
+			'rankflow_seo_features',
+			'rankflow_seo_enable_content_analysis',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -338,8 +338,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_features',
-			'ai_seo_pro_enable_seo_score',
+			'rankflow_seo_features',
+			'rankflow_seo_enable_seo_score',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -348,8 +348,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_features',
-			'ai_seo_pro_enable_schema',
+			'rankflow_seo_features',
+			'rankflow_seo_enable_schema',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -358,8 +358,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_features',
-			'ai_seo_pro_focus_keyword',
+			'rankflow_seo_features',
+			'rankflow_seo_focus_keyword',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -368,8 +368,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_features',
-			'ai_seo_pro_readability_analysis',
+			'rankflow_seo_features',
+			'rankflow_seo_readability_analysis',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -379,8 +379,8 @@ class AI_SEO_Pro_Settings
 
 		// Social settings - SEPARATE GROUP.
 		register_setting(
-			'ai_seo_pro_social',
-			'ai_seo_pro_og_tags',
+			'rankflow_seo_social',
+			'rankflow_seo_og_tags',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -389,8 +389,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_social',
-			'ai_seo_pro_twitter_cards',
+			'rankflow_seo_social',
+			'rankflow_seo_twitter_cards',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -399,8 +399,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_social',
-			'ai_seo_pro_default_og_image',
+			'rankflow_seo_social',
+			'rankflow_seo_default_og_image',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -409,8 +409,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_social',
-			'ai_seo_pro_twitter_username',
+			'rankflow_seo_social',
+			'rankflow_seo_twitter_username',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -420,8 +420,8 @@ class AI_SEO_Pro_Settings
 
 		// Site Connections settings.
 		register_setting(
-			'ai_seo_pro_site_connections',
-			'ai_seo_pro_ahrefs_verification',
+			'rankflow_seo_site_connections',
+			'rankflow_seo_ahrefs_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_verification_code'),
@@ -430,8 +430,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_site_connections',
-			'ai_seo_pro_baidu_verification',
+			'rankflow_seo_site_connections',
+			'rankflow_seo_baidu_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_verification_code'),
@@ -440,8 +440,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_site_connections',
-			'ai_seo_pro_bing_verification',
+			'rankflow_seo_site_connections',
+			'rankflow_seo_bing_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_verification_code'),
@@ -450,8 +450,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_site_connections',
-			'ai_seo_pro_google_verification',
+			'rankflow_seo_site_connections',
+			'rankflow_seo_google_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_verification_code'),
@@ -460,8 +460,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_site_connections',
-			'ai_seo_pro_pinterest_verification',
+			'rankflow_seo_site_connections',
+			'rankflow_seo_pinterest_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_verification_code'),
@@ -470,8 +470,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_site_connections',
-			'ai_seo_pro_yandex_verification',
+			'rankflow_seo_site_connections',
+			'rankflow_seo_yandex_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_verification_code'),
@@ -480,8 +480,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_site_connections',
-			'ai_seo_pro_gtm_id',
+			'rankflow_seo_site_connections',
+			'rankflow_seo_gtm_id',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_gtm_id'),
@@ -491,8 +491,8 @@ class AI_SEO_Pro_Settings
 
 		// Advanced settings.
 		register_setting(
-			'ai_seo_pro_advanced',
-			'ai_seo_pro_noindex_archives',
+			'rankflow_seo_advanced',
+			'rankflow_seo_noindex_archives',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -501,8 +501,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_advanced',
-			'ai_seo_pro_remove_stopwords',
+			'rankflow_seo_advanced',
+			'rankflow_seo_remove_stopwords',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -511,8 +511,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_advanced',
-			'ai_seo_pro_breadcrumbs',
+			'rankflow_seo_advanced',
+			'rankflow_seo_breadcrumbs',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -521,8 +521,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_advanced',
-			'ai_seo_pro_api_timeout',
+			'rankflow_seo_advanced',
+			'rankflow_seo_api_timeout',
 			array(
 				'type' => 'integer',
 				'default' => 30,
@@ -531,8 +531,8 @@ class AI_SEO_Pro_Settings
 		);
 
 		register_setting(
-			'ai_seo_pro_advanced',
-			'ai_seo_pro_cache_duration',
+			'rankflow_seo_advanced',
+			'rankflow_seo_cache_duration',
 			array(
 				'type' => 'integer',
 				'default' => 3600,
@@ -549,7 +549,7 @@ class AI_SEO_Pro_Settings
 	public function display_plugin_settings_page()
 	{
 		?>
-		<div class="wrap ai-seo-pro-settings">
+		<div class="wrap rankflow-seo-settings">
 			<h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
 			<?php settings_errors(); ?>
@@ -557,27 +557,27 @@ class AI_SEO_Pro_Settings
 			<nav class="nav-tab-wrapper">
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=general"
 					class="nav-tab <?php echo 'general' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
-					<?php esc_html_e('General', 'ai-seo-pro'); ?>
+					<?php esc_html_e('General', 'rankflow-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=api"
 					class="nav-tab <?php echo 'api' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
-					<?php esc_html_e('AI API', 'ai-seo-pro'); ?>
+					<?php esc_html_e('AI API', 'rankflow-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=features"
 					class="nav-tab <?php echo 'features' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
-					<?php esc_html_e('Features', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Features', 'rankflow-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=social"
 					class="nav-tab <?php echo 'social' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
-					<?php esc_html_e('Social Media', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Social Media', 'rankflow-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=site-connections"
 					class="nav-tab <?php echo 'site-connections' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
-					<?php esc_html_e('Site Connections', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Site Connections', 'rankflow-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=advanced"
 					class="nav-tab <?php echo 'advanced' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
-					<?php esc_html_e('Advanced', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Advanced', 'rankflow-seo'); ?>
 				</a>
 			</nav>
 
@@ -619,79 +619,79 @@ class AI_SEO_Pro_Settings
 		?>
 		<form method="post" action="options.php">
 			<?php
-			settings_fields('ai_seo_pro_general');
-			do_settings_sections('ai_seo_pro_general');
+			settings_fields('rankflow_seo_general');
+			do_settings_sections('rankflow_seo_general');
 			?>
 			<table class="form-table">
 				<tr>
 					<th scope="row">
-						<label><?php esc_html_e('Enable for Post Types', 'ai-seo-pro'); ?></label>
+						<label><?php esc_html_e('Enable for Post Types', 'rankflow-seo'); ?></label>
 					</th>
 					<td>
 						<?php
-						$ai_seo_pro_post_types = get_post_types(array('public' => true), 'objects');
-						$ai_seo_pro_enabled_post_types = get_option('ai_seo_pro_post_types', array('post', 'page'));
+						$rankflow_seo_post_types = get_post_types(array('public' => true), 'objects');
+						$rankflow_seo_enabled_post_types = get_option('rankflow_seo_post_types', array('post', 'page'));
 
-						foreach ($ai_seo_pro_post_types as $ai_seo_pro_post_type) {
-							if ('attachment' === $ai_seo_pro_post_type->name) {
+						foreach ($rankflow_seo_post_types as $rankflow_seo_post_type) {
+							if ('attachment' === $rankflow_seo_post_type->name) {
 								continue;
 							}
 							?>
 							<label style="display: block; margin-bottom: 5px;">
-								<input type="checkbox" name="ai_seo_pro_post_types[]"
-									value="<?php echo esc_attr($ai_seo_pro_post_type->name); ?>" <?php checked(in_array($ai_seo_pro_post_type->name, $ai_seo_pro_enabled_post_types, true)); ?>>
-								<?php echo esc_html($ai_seo_pro_post_type->label); ?>
+								<input type="checkbox" name="rankflow_seo_post_types[]"
+									value="<?php echo esc_attr($rankflow_seo_post_type->name); ?>" <?php checked(in_array($rankflow_seo_post_type->name, $rankflow_seo_enabled_post_types, true)); ?>>
+								<?php echo esc_html($rankflow_seo_post_type->label); ?>
 							</label>
 							<?php
 						}
 						?>
 						<p class="description">
-							<?php esc_html_e('Select which post types should have AI SEO meta boxes.', 'ai-seo-pro'); ?>
+							<?php esc_html_e('Select which post types should have AI SEO meta boxes.', 'rankflow-seo'); ?>
 						</p>
 					</td>
 				</tr>
 
 				<tr>
 					<th scope="row">
-						<label for="title_separator"><?php esc_html_e('Title Separator', 'ai-seo-pro'); ?></label>
+						<label for="title_separator"><?php esc_html_e('Title Separator', 'rankflow-seo'); ?></label>
 					</th>
 					<td>
-						<select name="ai_seo_pro_title_separator" id="title_separator">
+						<select name="rankflow_seo_title_separator" id="title_separator">
 							<?php
-							$ai_seo_pro_separators = array('-', '–', '—', '|', '/', '::', '<', '>');
-							$ai_seo_pro_current = get_option('ai_seo_pro_title_separator', '-');
-							foreach ($ai_seo_pro_separators as $ai_seo_pro_sep) {
+							$rankflow_seo_separators = array('-', '–', '—', '|', '/', '::', '<', '>');
+							$rankflow_seo_current = get_option('rankflow_seo_title_separator', '-');
+							foreach ($rankflow_seo_separators as $rankflow_seo_sep) {
 								?>
-								<option value="<?php echo esc_attr($ai_seo_pro_sep); ?>" <?php selected($ai_seo_pro_current, $ai_seo_pro_sep); ?>>
-									<?php echo esc_html($ai_seo_pro_sep); ?>
+								<option value="<?php echo esc_attr($rankflow_seo_sep); ?>" <?php selected($rankflow_seo_current, $rankflow_seo_sep); ?>>
+									<?php echo esc_html($rankflow_seo_sep); ?>
 								</option>
 								<?php
 							}
 							?>
 						</select>
 						<p class="description">
-							<?php esc_html_e('Choose separator for page titles.', 'ai-seo-pro'); ?>
+							<?php esc_html_e('Choose separator for page titles.', 'rankflow-seo'); ?>
 						</p>
 					</td>
 				</tr>
 
 				<tr>
 					<th scope="row">
-						<label for="homepage_title"><?php esc_html_e('Homepage Title', 'ai-seo-pro'); ?></label>
+						<label for="homepage_title"><?php esc_html_e('Homepage Title', 'rankflow-seo'); ?></label>
 					</th>
 					<td>
-						<input type="text" id="homepage_title" name="ai_seo_pro_homepage_title"
-							value="<?php echo esc_attr(get_option('ai_seo_pro_homepage_title')); ?>" class="regular-text">
+						<input type="text" id="homepage_title" name="rankflow_seo_homepage_title"
+							value="<?php echo esc_attr(get_option('rankflow_seo_homepage_title')); ?>" class="regular-text">
 					</td>
 				</tr>
 
 				<tr>
 					<th scope="row">
-						<label for="homepage_description"><?php esc_html_e('Homepage Description', 'ai-seo-pro'); ?></label>
+						<label for="homepage_description"><?php esc_html_e('Homepage Description', 'rankflow-seo'); ?></label>
 					</th>
 					<td>
-						<textarea id="homepage_description" name="ai_seo_pro_homepage_description" rows="3"
-							class="large-text"><?php echo esc_textarea(get_option('ai_seo_pro_homepage_description')); ?></textarea>
+						<textarea id="homepage_description" name="rankflow_seo_homepage_description" rows="3"
+							class="large-text"><?php echo esc_textarea(get_option('rankflow_seo_homepage_description')); ?></textarea>
 					</td>
 				</tr>
 			</table>
@@ -706,7 +706,7 @@ class AI_SEO_Pro_Settings
 	 */
 	private function render_api_tab()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/settings-api.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-api.php';
 	}
 
 	/**
@@ -714,7 +714,7 @@ class AI_SEO_Pro_Settings
 	 */
 	private function render_features_tab()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/settings-features.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-features.php';
 	}
 
 	/**
@@ -722,7 +722,7 @@ class AI_SEO_Pro_Settings
 	 */
 	private function render_social_tab()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/settings-social.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-social.php';
 	}
 
 	/**
@@ -730,7 +730,7 @@ class AI_SEO_Pro_Settings
 	 */
 	private function render_site_connections_tab()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/settings-site-connections.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-site-connections.php';
 	}
 
 	/**
@@ -738,7 +738,7 @@ class AI_SEO_Pro_Settings
 	 */
 	private function render_advanced_tab()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/settings-advanced.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-advanced.php';
 	}
 
 
@@ -776,8 +776,8 @@ class AI_SEO_Pro_Settings
 		}
 
 		// If user pasted full meta tag, extract the content value.
-		if (preg_match('/content=["\']([^"\']+)["\']/i', $input, $ai_seo_pro_matches)) {
-			return sanitize_text_field($ai_seo_pro_matches[1]);
+		if (preg_match('/content=["\']([^"\']+)["\']/i', $input, $rankflow_seo_matches)) {
+			return sanitize_text_field($rankflow_seo_matches[1]);
 		}
 
 		// Otherwise just sanitize and return.
@@ -823,38 +823,40 @@ class AI_SEO_Pro_Settings
 			return;
 		}
 
-		$ai_seo_pro_verifications = array(
-			'ahrefs' => array(
-				'option' => 'ai_seo_pro_ahrefs_verification',
-				'name' => 'ahrefs-site-verification',
-			),
+		// Ahrefs Analytics (script, not meta)
+		$rankflow_seo_ahrefs_key = get_option('rankflow_seo_ahrefs_verification', '');
+		if (!empty($rankflow_seo_ahrefs_key)) {
+			echo '<script src="https://analytics.ahrefs.com/analytics.js" data-key="' . esc_attr($rankflow_seo_ahrefs_key) . '" async></script>' . "\n";
+		}
+
+		$rankflow_seo_verifications = array(
 			'baidu' => array(
-				'option' => 'ai_seo_pro_baidu_verification',
+				'option' => 'rankflow_seo_baidu_verification',
 				'name' => 'baidu-site-verification',
 			),
 			'bing' => array(
-				'option' => 'ai_seo_pro_bing_verification',
+				'option' => 'rankflow_seo_bing_verification',
 				'name' => 'msvalidate.01',
 			),
 			'google' => array(
-				'option' => 'ai_seo_pro_google_verification',
+				'option' => 'rankflow_seo_google_verification',
 				'name' => 'google-site-verification',
 			),
 			'pinterest' => array(
-				'option' => 'ai_seo_pro_pinterest_verification',
+				'option' => 'rankflow_seo_pinterest_verification',
 				'name' => 'p:domain_verify',
 			),
 			'yandex' => array(
-				'option' => 'ai_seo_pro_yandex_verification',
+				'option' => 'rankflow_seo_yandex_verification',
 				'name' => 'yandex-verification',
 			),
 		);
 
-		foreach ($ai_seo_pro_verifications as $ai_seo_pro_key => $ai_seo_pro_verification) {
-			$ai_seo_pro_code = get_option($ai_seo_pro_verification['option'], '');
+		foreach ($rankflow_seo_verifications as $rankflow_seo_key => $rankflow_seo_verification) {
+			$rankflow_seo_code = get_option($rankflow_seo_verification['option'], '');
 
-			if (!empty($ai_seo_pro_code)) {
-				echo '<meta name="' . esc_attr($ai_seo_pro_verification['name']) . '" content="' . esc_attr($ai_seo_pro_code) . '" />' . "\n";
+			if (!empty($rankflow_seo_code)) {
+				echo '<meta name="' . esc_attr($rankflow_seo_verification['name']) . '" content="' . esc_attr($rankflow_seo_code) . '" />' . "\n";
 			}
 		}
 	}
@@ -864,7 +866,7 @@ class AI_SEO_Pro_Settings
 	 */
 	public static function output_gtm_head()
 	{
-		$gtm_id = get_option('ai_seo_pro_gtm_id', '');
+		$gtm_id = get_option('rankflow_seo_gtm_id', '');
 
 		if (empty($gtm_id) || is_admin()) {
 			return;
@@ -888,7 +890,7 @@ class AI_SEO_Pro_Settings
 	 */
 	public static function output_gtm_body()
 	{
-		$gtm_id = get_option('ai_seo_pro_gtm_id', '');
+		$gtm_id = get_option('rankflow_seo_gtm_id', '');
 
 		if (empty($gtm_id) || is_admin()) {
 			return;

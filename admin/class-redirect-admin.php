@@ -2,9 +2,9 @@
 /**
  * Redirect Admin - Admin interface for redirects
  *
- * @package    AI_SEO_Pro
- * @subpackage AI_SEO_Pro/admin
- * @author     Joy Roy
+ * @package    RankFlow_SEO
+ * @subpackage RankFlow_SEO/admin
+ * @author     Strativ AB
  */
 
 // Prevent direct access.
@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class AI_SEO_Pro_Redirect_Admin
+ * Class RankFlow_SEO_Redirect_Admin
  */
-class AI_SEO_Pro_Redirect_Admin
+class RankFlow_SEO_Redirect_Admin
 {
 
 	/**
@@ -28,14 +28,14 @@ class AI_SEO_Pro_Redirect_Admin
 	/**
 	 * Redirect manager
 	 *
-	 * @var AI_SEO_Pro_Redirect_Manager
+	 * @var RankFlow_SEO_Redirect_Manager
 	 */
 	private $redirect_manager;
 
 	/**
 	 * 404 monitor
 	 *
-	 * @var AI_SEO_Pro_404_Monitor
+	 * @var RankFlow_SEO_404_Monitor
 	 */
 	private $monitor_404;
 
@@ -47,8 +47,8 @@ class AI_SEO_Pro_Redirect_Admin
 	public function __construct($plugin_name)
 	{
 		$this->plugin_name = $plugin_name;
-		$this->redirect_manager = new AI_SEO_Pro_Redirect_Manager();
-		$this->monitor_404 = new AI_SEO_Pro_404_Monitor();
+		$this->redirect_manager = new RankFlow_SEO_Redirect_Manager();
+		$this->monitor_404 = new RankFlow_SEO_404_Monitor();
 
 		// Handle actions early, before any output.
 		add_action('admin_init', array($this, 'handle_redirect_actions'));
@@ -62,31 +62,31 @@ class AI_SEO_Pro_Redirect_Admin
 	public function display_redirects_page()
 	{
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for display action parameter.
-		$ai_seo_pro_action = isset($_GET['action']) ? sanitize_text_field(wp_unslash($_GET['action'])) : 'list';
+		$rankflow_seo_action = isset($_GET['action']) ? sanitize_text_field(wp_unslash($_GET['action'])) : 'list';
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for display ID parameter.
-		$ai_seo_pro_redirect_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+		$rankflow_seo_redirect_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 		?>
-		<div class="wrap ai-seo-pro-redirects">
+		<div class="wrap rankflow-seo-redirects">
 			<h1 class="wp-heading-inline">
-				<?php esc_html_e('Redirects', 'ai-seo-pro'); ?>
+				<?php esc_html_e('Redirects', 'rankflow-seo'); ?>
 			</h1>
 
-			<?php if ('list' === $ai_seo_pro_action): ?>
+			<?php if ('list' === $rankflow_seo_action): ?>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-redirects&action=add" class="page-title-action">
-					<?php esc_html_e('Add New', 'ai-seo-pro'); ?>
+					<?php esc_html_e('Add New', 'rankflow-seo'); ?>
 				</a>
 			<?php endif; ?>
 
 			<hr class="wp-header-end">
 
 			<?php
-			switch ($ai_seo_pro_action) {
+			switch ($rankflow_seo_action) {
 				case 'add':
 					$this->render_add_redirect_form();
 					break;
 				case 'edit':
-					$this->render_edit_redirect_form($ai_seo_pro_redirect_id);
+					$this->render_edit_redirect_form($rankflow_seo_redirect_id);
 					break;
 				case 'import':
 					$this->render_import_form();
@@ -105,7 +105,7 @@ class AI_SEO_Pro_Redirect_Admin
 	 */
 	public function display_404_monitor_page()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/404-monitor.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/404-monitor.php';
 	}
 
 	/**
@@ -114,19 +114,19 @@ class AI_SEO_Pro_Redirect_Admin
 	private function render_redirects_list()
 	{
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for pagination parameter.
-		$ai_seo_pro_page = isset($_GET['paged']) ? max(1, intval($_GET['paged'])) : 1;
+		$rankflow_seo_page = isset($_GET['paged']) ? max(1, intval($_GET['paged'])) : 1;
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for search parameter.
-		$ai_seo_pro_search = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
+		$rankflow_seo_search = isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s'])) : '';
 
-		$ai_seo_pro_results = $this->redirect_manager->get_redirects(
+		$rankflow_seo_results = $this->redirect_manager->get_redirects(
 			array(
-				'page' => $ai_seo_pro_page,
+				'page' => $rankflow_seo_page,
 				'per_page' => 20,
-				'search' => $ai_seo_pro_search,
+				'search' => $rankflow_seo_search,
 			)
 		);
 
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/redirects-list.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/redirects-list.php';
 	}
 
 	/**
@@ -134,7 +134,7 @@ class AI_SEO_Pro_Redirect_Admin
 	 */
 	private function render_add_redirect_form()
 	{
-		$ai_seo_pro_redirect = (object) array(
+		$rankflow_seo_redirect = (object) array(
 			'source_url' => '',
 			'target_url' => '',
 			'redirect_type' => '301',
@@ -142,7 +142,7 @@ class AI_SEO_Pro_Redirect_Admin
 			'is_active' => 1,
 		);
 
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/redirect-form.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/redirect-form.php';
 	}
 
 	/**
@@ -152,13 +152,13 @@ class AI_SEO_Pro_Redirect_Admin
 	 */
 	private function render_edit_redirect_form($redirect_id)
 	{
-		$ai_seo_pro_redirect = $this->redirect_manager->get_redirect($redirect_id);
+		$rankflow_seo_redirect = $this->redirect_manager->get_redirect($redirect_id);
 
-		if (!$ai_seo_pro_redirect) {
-			wp_die(esc_html__('Redirect not found.', 'ai-seo-pro'));
+		if (!$rankflow_seo_redirect) {
+			wp_die(esc_html__('Redirect not found.', 'rankflow-seo'));
 		}
 
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/redirect-form.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/redirect-form.php';
 	}
 
 	/**
@@ -166,7 +166,7 @@ class AI_SEO_Pro_Redirect_Admin
 	 */
 	private function render_import_form()
 	{
-		require_once AI_SEO_PRO_PLUGIN_DIR . 'admin/views/redirect-import.php';
+		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/redirect-import.php';
 	}
 
 	/**
@@ -186,17 +186,17 @@ class AI_SEO_Pro_Redirect_Admin
 		}
 
 		// Check nonce for POST actions.
-		if (!isset($_POST['ai_seo_redirect_nonce']) && !isset($_GET['_wpnonce'])) {
+		if (!isset($_POST['rankflow_seo_redirect_nonce']) && !isset($_GET['_wpnonce'])) {
 			return;
 		}
 
 		// Export CSV - must be first, before any output.
 		if (isset($_GET['action']) && 'export' === $_GET['action']) {
 			if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'export_redirects')) {
-				wp_die(esc_html__('Security check failed.', 'ai-seo-pro'));
+				wp_die(esc_html__('Security check failed.', 'rankflow-seo'));
 			}
 
-			$ai_seo_pro_csv = $this->redirect_manager->export_to_csv();
+			$rankflow_seo_csv = $this->redirect_manager->export_to_csv();
 
 			// Clear any output buffers.
 			if (ob_get_length()) {
@@ -209,13 +209,13 @@ class AI_SEO_Pro_Redirect_Admin
 			header('Expires: 0');
 
 			echo "\xEF\xBB\xBF"; // UTF-8 BOM.
-			echo $ai_seo_pro_csv; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSV output.
+			echo $rankflow_seo_csv; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSV output.
 			exit;
 		}
 
 		// Import CSV.
 		if (isset($_POST['action']) && 'import_csv' === $_POST['action']) {
-			check_admin_referer('import_redirects', 'ai_seo_redirect_nonce');
+			check_admin_referer('import_redirects', 'rankflow_seo_redirect_nonce');
 
 			// Validate file upload.
 			if (
@@ -225,54 +225,54 @@ class AI_SEO_Pro_Redirect_Admin
 				UPLOAD_ERR_OK === intval($_FILES['csv_file']['error'])
 			) {
 				// Sanitize the temporary file path.
-				$ai_seo_pro_tmp_file = sanitize_text_field(wp_unslash($_FILES['csv_file']['tmp_name']));
+				$rankflow_seo_tmp_file = sanitize_text_field(wp_unslash($_FILES['csv_file']['tmp_name']));
 
 				// Additional security: verify it's actually a valid uploaded file.
-				if (is_uploaded_file($ai_seo_pro_tmp_file)) {
-					$ai_seo_pro_import_results = $this->redirect_manager->import_from_csv($ai_seo_pro_tmp_file);
+				if (is_uploaded_file($rankflow_seo_tmp_file)) {
+					$rankflow_seo_import_results = $this->redirect_manager->import_from_csv($rankflow_seo_tmp_file);
 
-					$ai_seo_pro_message = sprintf(
+					$rankflow_seo_message = sprintf(
 						/* translators: 1: number of successful imports, 2: number of failed imports */
-						__('Import complete: %1$d succeeded, %2$d failed.', 'ai-seo-pro'),
-						$ai_seo_pro_import_results['success'],
-						$ai_seo_pro_import_results['failed']
+						__('Import complete: %1$d succeeded, %2$d failed.', 'rankflow-seo'),
+						$rankflow_seo_import_results['success'],
+						$rankflow_seo_import_results['failed']
 					);
 
 					add_settings_error(
-						'ai_seo_redirects',
+						'rankflow_seo_redirects',
 						'import_complete',
-						$ai_seo_pro_message,
-						$ai_seo_pro_import_results['failed'] > 0 ? 'warning' : 'success'
+						$rankflow_seo_message,
+						$rankflow_seo_import_results['failed'] > 0 ? 'warning' : 'success'
 					);
 				} else {
 					add_settings_error(
-						'ai_seo_redirects',
+						'rankflow_seo_redirects',
 						'import_error',
-						__('Invalid file upload.', 'ai-seo-pro'),
+						__('Invalid file upload.', 'rankflow-seo'),
 						'error'
 					);
 				}
 			} else {
 				add_settings_error(
-					'ai_seo_redirects',
+					'rankflow_seo_redirects',
 					'import_error',
-					__('No file was uploaded or there was an upload error.', 'ai-seo-pro'),
+					__('No file was uploaded or there was an upload error.', 'rankflow-seo'),
 					'error'
 				);
 			}
 
-			set_transient('ai_seo_redirect_notices', get_settings_errors('ai_seo_redirects'), 30);
+			set_transient('rankflow_seo_redirect_notices', get_settings_errors('rankflow_seo_redirects'), 30);
 			wp_safe_redirect(admin_url('admin.php?page=' . $this->plugin_name . '-redirects'));
 			exit;
 		}
 
 		// Save redirect.
 		if (isset($_POST['action']) && 'save_redirect' === $_POST['action']) {
-			check_admin_referer('ai_seo_redirect_save', 'ai_seo_redirect_nonce');
+			check_admin_referer('rankflow_seo_redirect_save', 'rankflow_seo_redirect_nonce');
 
-			$ai_seo_pro_redirect_id = isset($_POST['redirect_id']) ? intval($_POST['redirect_id']) : 0;
+			$rankflow_seo_redirect_id = isset($_POST['redirect_id']) ? intval($_POST['redirect_id']) : 0;
 
-			$ai_seo_pro_data = array(
+			$rankflow_seo_data = array(
 				'source_url' => isset($_POST['source_url']) ? sanitize_text_field(wp_unslash($_POST['source_url'])) : '',
 				'target_url' => isset($_POST['target_url']) ? sanitize_text_field(wp_unslash($_POST['target_url'])) : '',
 				'redirect_type' => isset($_POST['redirect_type']) ? sanitize_text_field(wp_unslash($_POST['redirect_type'])) : '301',
@@ -280,83 +280,83 @@ class AI_SEO_Pro_Redirect_Admin
 				'is_active' => isset($_POST['is_active']) ? 1 : 0,
 			);
 
-			if ($ai_seo_pro_redirect_id > 0) {
+			if ($rankflow_seo_redirect_id > 0) {
 				// Update.
-				$ai_seo_pro_result = $this->redirect_manager->update_redirect($ai_seo_pro_redirect_id, $ai_seo_pro_data);
-				$ai_seo_pro_message = __('Redirect updated successfully.', 'ai-seo-pro');
+				$rankflow_seo_result = $this->redirect_manager->update_redirect($rankflow_seo_redirect_id, $rankflow_seo_data);
+				$rankflow_seo_message = __('Redirect updated successfully.', 'rankflow-seo');
 			} else {
 				// Add.
-				$ai_seo_pro_result = $this->redirect_manager->add_redirect($ai_seo_pro_data);
-				$ai_seo_pro_message = __('Redirect added successfully.', 'ai-seo-pro');
+				$rankflow_seo_result = $this->redirect_manager->add_redirect($rankflow_seo_data);
+				$rankflow_seo_message = __('Redirect added successfully.', 'rankflow-seo');
 			}
 
-			if (is_wp_error($ai_seo_pro_result)) {
+			if (is_wp_error($rankflow_seo_result)) {
 				add_settings_error(
-					'ai_seo_redirects',
+					'rankflow_seo_redirects',
 					'redirect_error',
-					$ai_seo_pro_result->get_error_message(),
+					$rankflow_seo_result->get_error_message(),
 					'error'
 				);
 			} else {
 				add_settings_error(
-					'ai_seo_redirects',
+					'rankflow_seo_redirects',
 					'redirect_success',
-					$ai_seo_pro_message,
+					$rankflow_seo_message,
 					'success'
 				);
 			}
 
-			set_transient('ai_seo_redirect_notices', get_settings_errors('ai_seo_redirects'), 30);
+			set_transient('rankflow_seo_redirect_notices', get_settings_errors('rankflow_seo_redirects'), 30);
 			wp_safe_redirect(admin_url('admin.php?page=' . $this->plugin_name . '-redirects'));
 			exit;
 		}
 
 		// Delete redirect.
 		if (isset($_GET['action']) && 'delete' === $_GET['action'] && isset($_GET['id'])) {
-			$ai_seo_pro_delete_id = intval($_GET['id']);
-			if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'delete_redirect_' . $ai_seo_pro_delete_id)) {
-				wp_die(esc_html__('Security check failed.', 'ai-seo-pro'));
+			$rankflow_seo_delete_id = intval($_GET['id']);
+			if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'delete_redirect_' . $rankflow_seo_delete_id)) {
+				wp_die(esc_html__('Security check failed.', 'rankflow-seo'));
 			}
 
-			$this->redirect_manager->delete_redirect($ai_seo_pro_delete_id);
+			$this->redirect_manager->delete_redirect($rankflow_seo_delete_id);
 
 			add_settings_error(
-				'ai_seo_redirects',
+				'rankflow_seo_redirects',
 				'redirect_deleted',
-				__('Redirect deleted successfully.', 'ai-seo-pro'),
+				__('Redirect deleted successfully.', 'rankflow-seo'),
 				'success'
 			);
 
-			set_transient('ai_seo_redirect_notices', get_settings_errors('ai_seo_redirects'), 30);
+			set_transient('rankflow_seo_redirect_notices', get_settings_errors('rankflow_seo_redirects'), 30);
 			wp_safe_redirect(admin_url('admin.php?page=' . $this->plugin_name . '-redirects'));
 			exit;
 		}
 
 		// Bulk delete.
 		if (isset($_POST['action']) && 'bulk_delete' === $_POST['action'] && isset($_POST['redirect_ids'])) {
-			check_admin_referer('bulk_delete_redirects', 'ai_seo_redirect_nonce');
+			check_admin_referer('bulk_delete_redirects', 'rankflow_seo_redirect_nonce');
 
-			$ai_seo_pro_ids = array_map('intval', wp_unslash($_POST['redirect_ids']));
-			$ai_seo_pro_count = 0;
+			$rankflow_seo_ids = array_map('intval', wp_unslash($_POST['redirect_ids']));
+			$rankflow_seo_count = 0;
 
-			foreach ($ai_seo_pro_ids as $ai_seo_pro_id) {
-				if ($this->redirect_manager->delete_redirect($ai_seo_pro_id)) {
-					$ai_seo_pro_count++;
+			foreach ($rankflow_seo_ids as $rankflow_seo_id) {
+				if ($this->redirect_manager->delete_redirect($rankflow_seo_id)) {
+					$rankflow_seo_count++;
 				}
 			}
 
 			add_settings_error(
-				'ai_seo_redirects',
+				'rankflow_seo_redirects',
 				'redirects_deleted',
 				sprintf(
 					/* translators: %d: number of deleted redirects */
-					__('%d redirect(s) deleted successfully.', 'ai-seo-pro'),
-					$ai_seo_pro_count
+					__('%d redirect(s) deleted successfully.', 'rankflow-seo'),
+					$rankflow_seo_count
 				),
 				'success'
 			);
 
-			set_transient('ai_seo_redirect_notices', get_settings_errors('ai_seo_redirects'), 30);
+			set_transient('rankflow_seo_redirect_notices', get_settings_errors('rankflow_seo_redirects'), 30);
 			wp_safe_redirect(admin_url('admin.php?page=' . $this->plugin_name . '-redirects'));
 			exit;
 		}
@@ -379,18 +379,18 @@ class AI_SEO_Pro_Redirect_Admin
 		}
 
 		// Check nonce.
-		if (!isset($_GET['_wpnonce']) && !isset($_POST['ai_seo_404_nonce'])) {
+		if (!isset($_GET['_wpnonce']) && !isset($_POST['rankflow_seo_404_nonce'])) {
 			return;
 		}
 
 		// Export 404 logs - must be first.
 		if (isset($_GET['action']) && 'export_404' === $_GET['action']) {
 			if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'export_404_logs')) {
-				wp_die(esc_html__('Security check failed.', 'ai-seo-pro'));
+				wp_die(esc_html__('Security check failed.', 'rankflow-seo'));
 			}
 
-			$ai_seo_pro_days = isset($_GET['days']) ? intval($_GET['days']) : 30;
-			$ai_seo_pro_csv = $this->monitor_404->export_to_csv($ai_seo_pro_days);
+			$rankflow_seo_days = isset($_GET['days']) ? intval($_GET['days']) : 30;
+			$rankflow_seo_csv = $this->monitor_404->export_to_csv($rankflow_seo_days);
 
 			// Clear any output buffers.
 			if (ob_get_length()) {
@@ -403,27 +403,27 @@ class AI_SEO_Pro_Redirect_Admin
 			header('Expires: 0');
 
 			echo "\xEF\xBB\xBF"; // UTF-8 BOM.
-			echo $ai_seo_pro_csv; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSV output.
+			echo $rankflow_seo_csv; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSV output.
 			exit;
 		}
 
 		// Delete 404 log.
 		if (isset($_GET['action']) && 'delete' === $_GET['action'] && isset($_GET['id'])) {
-			$ai_seo_pro_delete_id = intval($_GET['id']);
-			if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'delete_404_' . $ai_seo_pro_delete_id)) {
-				wp_die(esc_html__('Security check failed.', 'ai-seo-pro'));
+			$rankflow_seo_delete_id = intval($_GET['id']);
+			if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'delete_404_' . $rankflow_seo_delete_id)) {
+				wp_die(esc_html__('Security check failed.', 'rankflow-seo'));
 			}
 
-			$this->monitor_404->delete_log($ai_seo_pro_delete_id);
+			$this->monitor_404->delete_log($rankflow_seo_delete_id);
 
 			add_settings_error(
-				'ai_seo_404',
+				'rankflow_seo_404',
 				'log_deleted',
-				__('404 log deleted successfully.', 'ai-seo-pro'),
+				__('404 log deleted successfully.', 'rankflow-seo'),
 				'success'
 			);
 
-			set_transient('ai_seo_404_notices', get_settings_errors('ai_seo_404'), 30);
+			set_transient('rankflow_seo_404_notices', get_settings_errors('rankflow_seo_404'), 30);
 			wp_safe_redirect(admin_url('admin.php?page=' . $this->plugin_name . '-404-monitor'));
 			exit;
 		}
@@ -431,61 +431,61 @@ class AI_SEO_Pro_Redirect_Admin
 		// Clear all logs.
 		if (isset($_GET['action']) && 'clear_all' === $_GET['action']) {
 			if (!isset($_GET['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'clear_all_404')) {
-				wp_die(esc_html__('Security check failed.', 'ai-seo-pro'));
+				wp_die(esc_html__('Security check failed.', 'rankflow-seo'));
 			}
 
 			$this->monitor_404->clear_all_logs();
 
 			add_settings_error(
-				'ai_seo_404',
+				'rankflow_seo_404',
 				'logs_cleared',
-				__('All 404 logs cleared successfully.', 'ai-seo-pro'),
+				__('All 404 logs cleared successfully.', 'rankflow-seo'),
 				'success'
 			);
 
-			set_transient('ai_seo_404_notices', get_settings_errors('ai_seo_404'), 30);
+			set_transient('rankflow_seo_404_notices', get_settings_errors('rankflow_seo_404'), 30);
 			wp_safe_redirect(admin_url('admin.php?page=' . $this->plugin_name . '-404-monitor'));
 			exit;
 		}
 
 		// Create redirect from 404.
 		if (isset($_POST['action']) && 'create_redirect_from_404' === $_POST['action']) {
-			check_admin_referer('create_redirect_404', 'ai_seo_404_nonce');
+			check_admin_referer('create_redirect_404', 'rankflow_seo_404_nonce');
 
-			$ai_seo_pro_source_url = isset($_POST['source_url']) ? sanitize_text_field(wp_unslash($_POST['source_url'])) : '';
-			$ai_seo_pro_target_url = isset($_POST['target_url']) ? sanitize_text_field(wp_unslash($_POST['target_url'])) : '';
+			$rankflow_seo_source_url = isset($_POST['source_url']) ? sanitize_text_field(wp_unslash($_POST['source_url'])) : '';
+			$rankflow_seo_target_url = isset($_POST['target_url']) ? sanitize_text_field(wp_unslash($_POST['target_url'])) : '';
 
-			$ai_seo_pro_result = $this->redirect_manager->add_redirect(
+			$rankflow_seo_result = $this->redirect_manager->add_redirect(
 				array(
-					'source_url' => $ai_seo_pro_source_url,
-					'target_url' => $ai_seo_pro_target_url,
+					'source_url' => $rankflow_seo_source_url,
+					'target_url' => $rankflow_seo_target_url,
 					'redirect_type' => '301',
 				)
 			);
 
-			if (is_wp_error($ai_seo_pro_result)) {
+			if (is_wp_error($rankflow_seo_result)) {
 				add_settings_error(
-					'ai_seo_404',
+					'rankflow_seo_404',
 					'redirect_error',
-					$ai_seo_pro_result->get_error_message(),
+					$rankflow_seo_result->get_error_message(),
 					'error'
 				);
 			} else {
 				// Delete the 404 log.
 				if (isset($_POST['log_id']) && !empty($_POST['log_id'])) {
-					$ai_seo_pro_log_id = intval(wp_unslash($_POST['log_id']));
-					$this->monitor_404->delete_log($ai_seo_pro_log_id);
+					$rankflow_seo_log_id = intval(wp_unslash($_POST['log_id']));
+					$this->monitor_404->delete_log($rankflow_seo_log_id);
 				}
 
 				add_settings_error(
-					'ai_seo_404',
+					'rankflow_seo_404',
 					'redirect_created',
-					__('Redirect created successfully.', 'ai-seo-pro'),
+					__('Redirect created successfully.', 'rankflow-seo'),
 					'success'
 				);
 			}
 
-			set_transient('ai_seo_404_notices', get_settings_errors('ai_seo_404'), 30);
+			set_transient('rankflow_seo_404_notices', get_settings_errors('rankflow_seo_404'), 30);
 			wp_safe_redirect(admin_url('admin.php?page=' . $this->plugin_name . '-404-monitor'));
 			exit;
 		}
@@ -496,30 +496,30 @@ class AI_SEO_Pro_Redirect_Admin
 	 */
 	public function display_notices()
 	{
-		$ai_seo_pro_notices = get_transient('ai_seo_redirect_notices');
+		$rankflow_seo_notices = get_transient('rankflow_seo_redirect_notices');
 
-		if ($ai_seo_pro_notices) {
-			foreach ($ai_seo_pro_notices as $ai_seo_pro_notice) {
+		if ($rankflow_seo_notices) {
+			foreach ($rankflow_seo_notices as $rankflow_seo_notice) {
 				printf(
 					'<div class="notice notice-%s is-dismissible"><p>%s</p></div>',
-					esc_attr($ai_seo_pro_notice['type']),
-					esc_html($ai_seo_pro_notice['message'])
+					esc_attr($rankflow_seo_notice['type']),
+					esc_html($rankflow_seo_notice['message'])
 				);
 			}
-			delete_transient('ai_seo_redirect_notices');
+			delete_transient('rankflow_seo_redirect_notices');
 		}
 
-		$ai_seo_pro_notices_404 = get_transient('ai_seo_404_notices');
+		$rankflow_seo_notices_404 = get_transient('rankflow_seo_404_notices');
 
-		if ($ai_seo_pro_notices_404) {
-			foreach ($ai_seo_pro_notices_404 as $ai_seo_pro_notice) {
+		if ($rankflow_seo_notices_404) {
+			foreach ($rankflow_seo_notices_404 as $rankflow_seo_notice) {
 				printf(
 					'<div class="notice notice-%s is-dismissible"><p>%s</p></div>',
-					esc_attr($ai_seo_pro_notice['type']),
-					esc_html($ai_seo_pro_notice['message'])
+					esc_attr($rankflow_seo_notice['type']),
+					esc_html($rankflow_seo_notice['message'])
 				);
 			}
-			delete_transient('ai_seo_404_notices');
+			delete_transient('rankflow_seo_404_notices');
 		}
 	}
 }
