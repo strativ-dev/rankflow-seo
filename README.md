@@ -68,7 +68,7 @@ Professional AI-powered SEO plugin for WordPress with advanced meta generation, 
 
 ### 📋 Schema Markup Generator
 
-**13 Schema Types Supported:**
+**14 Schema Types Supported:**
 
 | Schema Type | Key Fields |
 |-------------|------------|
@@ -78,6 +78,7 @@ Professional AI-powered SEO plugin for WordPress with advanced meta generation, 
 | Website | Name, Search Action, Language |
 | Article | Headline, Author, Publisher, Dates |
 | Product | Name, Price, Availability, Rating |
+| Services | Name, description, provider, area served, price |
 | FAQ Page | Question/Answer pairs |
 | How To | Steps, Tools, Supplies, Time |
 | Event | Date, Venue, Tickets, Performer |
@@ -190,7 +191,7 @@ Yes! Each schema has display rules for targeting specific pages, post types, or 
 - XML Sitemap with exclude option
 - Redirect Manager with 404 monitoring
 - Robots.txt Editor with AI/bot blocking
-- Schema Generator (13 types) with display rules
+- Schema Generator (14 types) with display rules
 - Site Connections (6 webmaster tools)
 - Open Graph & Twitter Cards
 - Search engine preview
