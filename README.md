@@ -1,5 +1,5 @@
 === RankFlow SEO ===
-Contributors: joyroy
+Contributors: wpstrativ, joystrativ, shuvostrativ, sayed24, redwanstrativ
 Tags: seo, ai, meta tags, schema, optimization
 Requires at least: 5.8
 Tested up to: 6.9
