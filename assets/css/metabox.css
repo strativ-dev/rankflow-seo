@@ -77,6 +77,15 @@
 	color: #fff;
 }
 
+.icon-rankflow-seo{
+	background-image: url(../images/logo-icon-orange.png);
+	background-size: cover;
+	background-position: center;
+	width: 20px;
+	height: 20px;
+	background-repeat: no-repeat;
+}
+
 /* ============================================
    Tab Content
    ============================================ */

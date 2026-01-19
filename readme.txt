@@ -1,6 +1,5 @@
 === RankFlow SEO ===
-Contributors: joyroy
-Donate link: https://developer-developer.developer/donate
+Contributors: wpstrativ, joystrativ, shuvostrativ, sayed24, redwanstrativ, 
 Tags: seo, ai seo, schema markup, xml sitemap, redirects
 Requires at least: 5.8
 Tested up to: 6.9

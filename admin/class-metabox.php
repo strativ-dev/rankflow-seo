@@ -75,7 +75,7 @@ class RankFlow_SEO_Metabox
 			add_meta_box(
 				'rankflow-seo-metabox',
 				sprintf(
-					'<span class="dashicons dashicons-search" style="margin-right: 5px;"></span>%s',
+					'<span class="icon-rankflow-seo" style="margin-right: 5px;"></span>%s',
 					__('RankFlow SEO', 'rankflow-seo')
 				),
 				array($this, 'render_metabox'),

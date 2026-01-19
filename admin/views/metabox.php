@@ -180,14 +180,14 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 			<span class="dashicons dashicons-search"></span>
 			<?php esc_html_e('SEO', 'rankflow-seo'); ?>
 			<?php if ($rankflow_seo_seo_problems > 0): ?>
-					<span class="tab-badge badge-problems"><?php echo esc_html($rankflow_seo_seo_problems); ?></span>
+				<span class="tab-badge badge-problems"><?php echo esc_html($rankflow_seo_seo_problems); ?></span>
 			<?php endif; ?>
 		</button>
 		<button type="button" class="ai-seo-tab-btn" data-tab="readability">
 			<span class="dashicons dashicons-editor-paragraph"></span>
 			<?php esc_html_e('Readability', 'rankflow-seo'); ?>
 			<?php if ($rankflow_seo_readability_problems > 0): ?>
-					<span class="tab-badge badge-problems"><?php echo esc_html($rankflow_seo_readability_problems); ?></span>
+				<span class="tab-badge badge-problems"><?php echo esc_html($rankflow_seo_readability_problems); ?></span>
 			<?php endif; ?>
 		</button>
 	</div>
@@ -283,7 +283,8 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 				<strong><?php esc_html_e('Meta Description', 'rankflow-seo'); ?></strong>
 				<span class="character-counter" data-field="rankflow_seo_description" data-max="160">0 / 160</span>
 			</label>
-			<textarea id="rankflow_seo_description" name="rankflow_seo_description" rows="3" class="widefat" maxlength="170"
+			<textarea id="rankflow_seo_description" name="rankflow_seo_description" rows="3" class="widefat"
+				maxlength="170"
 				placeholder="<?php esc_attr_e('Enter meta description or generate with AI', 'rankflow-seo'); ?>"><?php echo esc_textarea($rankflow_seo_meta_data['description']); ?></textarea>
 			<p class="description"><?php esc_html_e('Recommended: 150-160 characters', 'rankflow-seo'); ?></p>
 		</div>
@@ -307,11 +308,11 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 					<!-- Site Info Row -->
 					<div class="preview-site-info">
 						<?php if (!empty($rankflow_seo_site_icon)): ?>
-								<img src="<?php echo esc_url($rankflow_seo_site_icon); ?>" alt="" class="preview-favicon">
+							<img src="<?php echo esc_url($rankflow_seo_site_icon); ?>" alt="" class="preview-favicon">
 						<?php else: ?>
-								<span class="preview-favicon-default">
-									<span class="dashicons dashicons-admin-site-alt3"></span>
-								</span>
+							<span class="preview-favicon-default">
+								<span class="dashicons dashicons-admin-site-alt3"></span>
+							</span>
 						<?php endif; ?>
 						<div class="preview-site-details">
 							<span class="preview-site-name"><?php echo esc_html(get_bloginfo('name')); ?></span>
@@ -336,14 +337,15 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 				<!-- Preview Image -->
 				<div class="preview-image-wrapper">
 					<?php if (!empty($rankflow_seo_preview_image)): ?>
-							<div class="preview-image">
-								<img src="<?php echo esc_url($rankflow_seo_preview_image); ?>" alt="" id="rankflow_seo_preview_img">
-							</div>
+						<div class="preview-image">
+							<img src="<?php echo esc_url($rankflow_seo_preview_image); ?>" alt=""
+								id="rankflow_seo_preview_img">
+						</div>
 					<?php else: ?>
-							<div class="preview-image preview-no-image">
-								<span class="dashicons dashicons-format-image"></span>
-								<span><?php esc_html_e('No image', 'rankflow-seo'); ?></span>
-							</div>
+						<div class="preview-image preview-no-image">
+							<span class="dashicons dashicons-format-image"></span>
+							<span><?php esc_html_e('No image', 'rankflow-seo'); ?></span>
+						</div>
 					<?php endif; ?>
 				</div>
 			</div>
@@ -360,76 +362,76 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 				<?php esc_html_e('SEO Analysis', 'rankflow-seo'); ?>
 				<span class="analysis-summary">
 					<?php if ($rankflow_seo_seo_problems > 0): ?>
-							<span class="summary-problems">
-								<?php
-								printf(
-									/* translators: %d: number of SEO problems found */
-									esc_html(_n('%d problem', '%d problems', $rankflow_seo_seo_problems, 'rankflow-seo')),
-									esc_html($rankflow_seo_seo_problems)
-								);
-								?>
-							</span>
+						<span class="summary-problems">
+							<?php
+							printf(
+								/* translators: %d: number of SEO problems found */
+								esc_html(_n('%d problem', '%d problems', $rankflow_seo_seo_problems, 'rankflow-seo')),
+								esc_html($rankflow_seo_seo_problems)
+							);
+							?>
+						</span>
 					<?php endif; ?>
 					<?php if ($rankflow_seo_seo_good > 0): ?>
-							<span class="summary-good">
-								<?php
-								printf(
-									/* translators: %d: number of good SEO results */
-									esc_html(_n('%d good result', '%d good results', $rankflow_seo_seo_good, 'rankflow-seo')),
-									esc_html($rankflow_seo_seo_good)
-								);
-								?>
-							</span>
+						<span class="summary-good">
+							<?php
+							printf(
+								/* translators: %d: number of good SEO results */
+								esc_html(_n('%d good result', '%d good results', $rankflow_seo_seo_good, 'rankflow-seo')),
+								esc_html($rankflow_seo_seo_good)
+							);
+							?>
+						</span>
 					<?php endif; ?>
 				</span>
 			</button>
 			<div class="accordion-content" id="seo-analysis" style="display: none;">
 				<?php if (!empty($rankflow_seo_seo_analysis['problems'])): ?>
-						<div class="analysis-group problems-group">
-							<h5 class="group-title">
-								<span class="dashicons dashicons-warning"></span>
-								<?php
-								/* translators: %d: number of SEO problems */
-								printf(esc_html__('Problems (%d)', 'rankflow-seo'), count($rankflow_seo_seo_analysis['problems']));
-								?>
-							</h5>
-							<ul class="analysis-list">
-								<?php foreach ($rankflow_seo_seo_analysis['problems'] as $rankflow_seo_item): ?>
-										<li class="analysis-item problem">
-											<span class="item-indicator"></span>
-											<span class="item-title"><?php echo esc_html($rankflow_seo_item['title']); ?>:</span>
-											<span class="item-message"><?php echo esc_html($rankflow_seo_item['message']); ?></span>
-										</li>
-								<?php endforeach; ?>
-							</ul>
-						</div>
+					<div class="analysis-group problems-group">
+						<h5 class="group-title">
+							<span class="dashicons dashicons-warning"></span>
+							<?php
+							/* translators: %d: number of SEO problems */
+							printf(esc_html__('Problems (%d)', 'rankflow-seo'), count($rankflow_seo_seo_analysis['problems']));
+							?>
+						</h5>
+						<ul class="analysis-list">
+							<?php foreach ($rankflow_seo_seo_analysis['problems'] as $rankflow_seo_item): ?>
+								<li class="analysis-item problem">
+									<span class="item-indicator"></span>
+									<span class="item-title"><?php echo esc_html($rankflow_seo_item['title']); ?>:</span>
+									<span class="item-message"><?php echo esc_html($rankflow_seo_item['message']); ?></span>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
 				<?php endif; ?>
 
 				<?php if (!empty($rankflow_seo_seo_analysis['good'])): ?>
-						<div class="analysis-group good-group">
-							<h5 class="group-title">
-								<span class="dashicons dashicons-yes-alt"></span>
-								<?php
-								/* translators: %d: number of good SEO results */
-								printf(esc_html__('Good results (%d)', 'rankflow-seo'), count($rankflow_seo_seo_analysis['good']));
-								?>
-							</h5>
-							<ul class="analysis-list">
-								<?php foreach ($rankflow_seo_seo_analysis['good'] as $rankflow_seo_item): ?>
-										<li class="analysis-item good">
-											<span class="item-indicator"></span>
-											<span class="item-title"><?php echo esc_html($rankflow_seo_item['title']); ?>:</span>
-											<span class="item-message"><?php echo esc_html($rankflow_seo_item['message']); ?></span>
-										</li>
-								<?php endforeach; ?>
-							</ul>
-						</div>
+					<div class="analysis-group good-group">
+						<h5 class="group-title">
+							<span class="dashicons dashicons-yes-alt"></span>
+							<?php
+							/* translators: %d: number of good SEO results */
+							printf(esc_html__('Good results (%d)', 'rankflow-seo'), count($rankflow_seo_seo_analysis['good']));
+							?>
+						</h5>
+						<ul class="analysis-list">
+							<?php foreach ($rankflow_seo_seo_analysis['good'] as $rankflow_seo_item): ?>
+								<li class="analysis-item good">
+									<span class="item-indicator"></span>
+									<span class="item-title"><?php echo esc_html($rankflow_seo_item['title']); ?>:</span>
+									<span class="item-message"><?php echo esc_html($rankflow_seo_item['message']); ?></span>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
 				<?php endif; ?>
 
 				<?php if (empty($rankflow_seo_seo_analysis['problems']) && empty($rankflow_seo_seo_analysis['good'])): ?>
-						<p class="no-analysis">
-							<?php esc_html_e('Enter a focus keyphrase and save the post to see SEO analysis.', 'rankflow-seo'); ?>
-						</p>
+					<p class="no-analysis">
+						<?php esc_html_e('Enter a focus keyphrase and save the post to see SEO analysis.', 'rankflow-seo'); ?>
+					</p>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -449,8 +451,8 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 					<!-- Sitemap Settings -->
 					<div class="meta-field sitemap-field">
 						<label class="toggle-option exclude-sitemap-toggle">
-							<input type="checkbox" name="rankflow_seo_exclude_sitemap" id="rankflow_seo_exclude_sitemap" value="1"
-								<?php checked($rankflow_seo_exclude_sitemap, '1'); ?>>
+							<input type="checkbox" name="rankflow_seo_exclude_sitemap" id="rankflow_seo_exclude_sitemap"
+								value="1" <?php checked($rankflow_seo_exclude_sitemap, '1'); ?>>
 							<span><strong><?php esc_html_e('Exclude from XML Sitemap', 'rankflow-seo'); ?></strong></span>
 						</label>
 						<p class="description" style="margin-left: 24px;">
@@ -503,8 +505,8 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 					<div class="meta-field">
 						<label
 							for="rankflow_seo_og_description"><strong><?php esc_html_e('Open Graph Description', 'rankflow-seo'); ?></strong></label>
-						<textarea id="rankflow_seo_og_description" name="rankflow_seo_og_description" rows="2" class="widefat"
-							maxlength="160"
+						<textarea id="rankflow_seo_og_description" name="rankflow_seo_og_description" rows="2"
+							class="widefat" maxlength="160"
 							placeholder="<?php esc_attr_e('Leave blank to use meta description', 'rankflow-seo'); ?>"><?php echo esc_textarea($rankflow_seo_meta_data['og_description']); ?></textarea>
 					</div>
 
@@ -515,11 +517,11 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 						<div class="og-image-upload-wrapper">
 							<div class="og-image-preview" id="rankflow_seo_og_image_preview">
 								<?php if (!empty($rankflow_seo_og_image)): ?>
-										<img src="<?php echo esc_url($rankflow_seo_og_image); ?>" alt="">
-										<button type="button" class="og-image-remove" id="rankflow_seo_og_image_remove"
-											title="<?php esc_attr_e('Remove image', 'rankflow-seo'); ?>">
-											<span class="dashicons dashicons-no-alt"></span>
-										</button>
+									<img src="<?php echo esc_url($rankflow_seo_og_image); ?>" alt="">
+									<button type="button" class="og-image-remove" id="rankflow_seo_og_image_remove"
+										title="<?php esc_attr_e('Remove image', 'rankflow-seo'); ?>">
+										<span class="dashicons dashicons-no-alt"></span>
+									</button>
 								<?php endif; ?>
 							</div>
 							<input type="hidden" id="rankflow_seo_og_image" name="rankflow_seo_og_image"
@@ -591,7 +593,7 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 						<?php echo esc_html($rankflow_seo_readability_status['label']); ?>
 					</p>
 					<?php if ($rankflow_seo_grade_level): ?>
-							<p class="grade-level"><?php echo esc_html($rankflow_seo_grade_level); ?></p>
+						<p class="grade-level"><?php echo esc_html($rankflow_seo_grade_level); ?></p>
 					<?php endif; ?>
 				</div>
 			</div>
@@ -603,75 +605,75 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 				<?php esc_html_e('Readability Analysis', 'rankflow-seo'); ?>
 				<span class="analysis-summary">
 					<?php if ($rankflow_seo_readability_problems > 0): ?>
-							<span class="summary-problems">
-								<?php
-								printf(
-									/* translators: %d: number of readability problems found */
-									esc_html(_n('%d problem', '%d problems', $rankflow_seo_readability_problems, 'rankflow-seo')),
-									esc_html($rankflow_seo_readability_problems)
-								);
-								?>
-							</span>
+						<span class="summary-problems">
+							<?php
+							printf(
+								/* translators: %d: number of readability problems found */
+								esc_html(_n('%d problem', '%d problems', $rankflow_seo_readability_problems, 'rankflow-seo')),
+								esc_html($rankflow_seo_readability_problems)
+							);
+							?>
+						</span>
 					<?php endif; ?>
 					<?php if ($rankflow_seo_readability_good > 0): ?>
-							<span class="summary-good">
-								<?php
-								printf(
-									/* translators: %d: number of good readability results */
-									esc_html(_n('%d good result', '%d good results', $rankflow_seo_readability_good, 'rankflow-seo')),
-									esc_html($rankflow_seo_readability_good)
-								);
-								?>
-							</span>
+						<span class="summary-good">
+							<?php
+							printf(
+								/* translators: %d: number of good readability results */
+								esc_html(_n('%d good result', '%d good results', $rankflow_seo_readability_good, 'rankflow-seo')),
+								esc_html($rankflow_seo_readability_good)
+							);
+							?>
+						</span>
 					<?php endif; ?>
 				</span>
 			</button>
 			<div class="accordion-content" id="readability-analysis">
 				<?php if (!empty($rankflow_seo_readability_analysis['problems'])): ?>
-						<div class="analysis-group problems-group">
-							<h5 class="group-title">
-								<span class="dashicons dashicons-warning"></span>
-								<?php
-								/* translators: %d: number of readability problems */
-								printf(esc_html__('Problems (%d)', 'rankflow-seo'), count($rankflow_seo_readability_analysis['problems']));
-								?>
-							</h5>
-							<ul class="analysis-list">
-								<?php foreach ($rankflow_seo_readability_analysis['problems'] as $rankflow_seo_item): ?>
-										<li class="analysis-item problem">
-											<span class="item-indicator"></span>
-											<span class="item-title"><?php echo esc_html($rankflow_seo_item['title']); ?>:</span>
-											<span class="item-message"><?php echo esc_html($rankflow_seo_item['message']); ?></span>
-										</li>
-								<?php endforeach; ?>
-							</ul>
-						</div>
+					<div class="analysis-group problems-group">
+						<h5 class="group-title">
+							<span class="dashicons dashicons-warning"></span>
+							<?php
+							/* translators: %d: number of readability problems */
+							printf(esc_html__('Problems (%d)', 'rankflow-seo'), count($rankflow_seo_readability_analysis['problems']));
+							?>
+						</h5>
+						<ul class="analysis-list">
+							<?php foreach ($rankflow_seo_readability_analysis['problems'] as $rankflow_seo_item): ?>
+								<li class="analysis-item problem">
+									<span class="item-indicator"></span>
+									<span class="item-title"><?php echo esc_html($rankflow_seo_item['title']); ?>:</span>
+									<span class="item-message"><?php echo esc_html($rankflow_seo_item['message']); ?></span>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
 				<?php endif; ?>
 
 				<?php if (!empty($rankflow_seo_readability_analysis['good'])): ?>
-						<div class="analysis-group good-group">
-							<h5 class="group-title">
-								<span class="dashicons dashicons-yes-alt"></span>
-								<?php
-								/* translators: %d: number of good readability results */
-								printf(esc_html__('Good results (%d)', 'rankflow-seo'), count($rankflow_seo_readability_analysis['good']));
-								?>
-							</h5>
-							<ul class="analysis-list">
-								<?php foreach ($rankflow_seo_readability_analysis['good'] as $rankflow_seo_item): ?>
-										<li class="analysis-item good">
-											<span class="item-indicator"></span>
-											<span class="item-title"><?php echo esc_html($rankflow_seo_item['title']); ?>:</span>
-											<span class="item-message"><?php echo esc_html($rankflow_seo_item['message']); ?></span>
-										</li>
-								<?php endforeach; ?>
-							</ul>
-						</div>
+					<div class="analysis-group good-group">
+						<h5 class="group-title">
+							<span class="dashicons dashicons-yes-alt"></span>
+							<?php
+							/* translators: %d: number of good readability results */
+							printf(esc_html__('Good results (%d)', 'rankflow-seo'), count($rankflow_seo_readability_analysis['good']));
+							?>
+						</h5>
+						<ul class="analysis-list">
+							<?php foreach ($rankflow_seo_readability_analysis['good'] as $rankflow_seo_item): ?>
+								<li class="analysis-item good">
+									<span class="item-indicator"></span>
+									<span class="item-title"><?php echo esc_html($rankflow_seo_item['title']); ?>:</span>
+									<span class="item-message"><?php echo esc_html($rankflow_seo_item['message']); ?></span>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
 				<?php endif; ?>
 
 				<?php if (empty($rankflow_seo_readability_analysis['problems']) && empty($rankflow_seo_readability_analysis['good'])): ?>
-						<p class="no-analysis"><?php esc_html_e('Add content to see readability analysis.', 'rankflow-seo'); ?>
-						</p>
+					<p class="no-analysis"><?php esc_html_e('Add content to see readability analysis.', 'rankflow-seo'); ?>
+					</p>
 				<?php endif; ?>
 			</div>
 		</div>
