@@ -1,5 +1,5 @@
 === RankFlow SEO ===
-Contributors: wpstrativ, joystrativ, shuvostrativ, sayed24, redwanstrativ, 
+Contributors: wpstrativ, joystrativ, shuvostrativ, sayed24, redwanstrativ 
 Tags: seo, ai seo, schema markup, xml sitemap, redirects
 Requires at least: 5.8
 Tested up to: 6.9
