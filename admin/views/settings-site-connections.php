@@ -25,11 +25,11 @@ $rankflow_seo_yandex_code = get_option('rankflow_seo_yandex_verification', '');
 <div class="rankflow-seo-site-connections-tab">
     <h2><?php esc_html_e('Site Connections', 'rankflow-seo'); ?></h2>
 
-    <p class="description" style="font-size: 14px; margin-bottom: 20px;">
+    <p class="description rankflow-seo-description">
         <?php esc_html_e('Connect your site with analytics tools and verify ownership with search engines. Add your tracking IDs and verification codes below.', 'rankflow-seo'); ?>
     </p>
 
-    <hr style="margin: 20px 0;">
+    <hr class="rankflow-seo-divider-20">
 
     <form method="post" action="options.php">
         <?php settings_fields('rankflow_seo_site_connections'); ?>
@@ -70,12 +70,12 @@ $rankflow_seo_yandex_code = get_option('rankflow_seo_yandex_verification', '');
             </div>
         </div>
 
-        <hr style="margin: 30px 0;">
+        <hr class="rankflow-seo-divider-30">
 
         <!-- Webmaster Verification Section -->
         <div class="rankflow-seo-section">
             <h3><?php esc_html_e('Webmaster Verification', 'rankflow-seo'); ?></h3>
-            <p class="description" style="margin-bottom: 20px;">
+            <p class="description rankflow-seo-mb-20">
                 <?php esc_html_e('Verify your site with search engines. You can paste the full meta tag or just the verification code.', 'rankflow-seo'); ?>
             </p>
 
@@ -199,104 +199,3 @@ $rankflow_seo_yandex_code = get_option('rankflow_seo_yandex_verification', '');
     </form>
 </div>
 
-<style>
-    .rankflow-seo-site-connections-tab {
-        max-width: 700px;
-    }
-
-    .rankflow-seo-site-connections-tab h2 {
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-
-    .rankflow-seo-section h3 {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1d2327;
-        margin: 0 0 15px 0;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #eee;
-    }
-
-    .rankflow-seo-connection-field {
-        margin-bottom: 25px;
-    }
-
-    .rankflow-seo-connection-field label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
-        color: #1d2327;
-    }
-
-    .rankflow-seo-connection-field input[type="text"] {
-        width: 100%;
-        max-width: 500px;
-        padding: 10px 14px;
-        font-size: 14px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        background: #fff;
-        transition: border-color 0.2s ease;
-    }
-
-    .rankflow-seo-connection-field input[type="text"]:focus {
-        border-color: #2271b1;
-        outline: none;
-        box-shadow: 0 0 0 1px #2271b1;
-    }
-
-    .rankflow-seo-connection-field input[type="text"]::placeholder {
-        color: #a0a5aa;
-    }
-
-    .rankflow-seo-connection-field .description {
-        margin-top: 8px;
-        font-size: 13px;
-        color: #646970;
-    }
-
-    .rankflow-seo-connection-field .description a {
-        color: #2271b1;
-        text-decoration: none;
-    }
-
-    .rankflow-seo-connection-field .description a:hover {
-        text-decoration: underline;
-    }
-
-    /* GTM Field Styling */
-    .gtm-field {
-        background: #f8f9fa;
-        border: 1px solid #e2e4e7;
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    .gtm-input-full {
-        max-width: 300px !important;
-        text-transform: uppercase;
-    }
-
-    .gtm-status {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-top: 12px;
-        padding: 8px 12px;
-        background: #d4edda;
-        border: 1px solid #c3e6cb;
-        border-radius: 4px;
-        color: #155724;
-        font-size: 13px;
-        max-width: fit-content;
-    }
-
-    .gtm-status .dashicons {
-        color: #28a745;
-        font-size: 16px;
-        width: 16px;
-        height: 16px;
-    }
-</style>

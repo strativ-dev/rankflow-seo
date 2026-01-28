@@ -1,0 +1,2174 @@
+/* ==========================================================================
+   RankFlow SEO - Admin Views Consolidated Styles
+   
+   This file contains all CSS that was previously inline in PHP view files.
+   ========================================================================== */
+
+/* From: admin/partials/header.php */
+	.rankflow-seo-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20px 0 20px 15px;
+		border-bottom: 1px solid #ddd;
+		margin-bottom: 20px;
+	}
+
+	.rankflow-seo-header-logo {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+	}
+
+	.rankflow-seo-header-logo span {
+		margin: 0;
+		font-size: 24px;
+	}
+
+	.rankflow-seo-header-actions {
+		display: flex;
+		gap: 10px;
+	}
+
+/* From: admin/partials/help-sidebar.php */
+	.rankflow-seo-help-sidebar {
+		background: #fff;
+		border: 1px solid #ddd;
+		border-radius: 6px;
+		padding: 0;
+	}
+
+	.rankflow-seo-help-sidebar .help-section {
+		padding: 15px 20px;
+		border-bottom: 1px solid #eee;
+	}
+
+	.rankflow-seo-help-sidebar .help-section:last-child {
+		border-bottom: none;
+	}
+
+	.rankflow-seo-help-sidebar .help-section h3 {
+		margin: 0 0 12px 0;
+		padding: 0;
+		color: #1d2327;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	/* Quick Links */
+	.quick-links {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.quick-links li {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 6px 0;
+	}
+
+	.quick-links .dashicons {
+		color: #2271b1;
+		font-size: 16px;
+		width: 16px;
+		height: 16px;
+	}
+
+	.quick-links a {
+		text-decoration: none;
+		color: #2271b1;
+		font-size: 13px;
+	}
+
+	.quick-links a:hover {
+		color: #135e96;
+		text-decoration: underline;
+	}
+
+	/* Quick Start */
+	.quick-start-list {
+		margin: 0;
+		padding-left: 20px;
+		font-size: 13px;
+	}
+
+	.quick-start-list li {
+		margin-bottom: 6px;
+		color: #555;
+	}
+
+	/* Feature Status */
+	.feature-status {
+		width: 100%;
+		font-size: 13px;
+		border-collapse: collapse;
+	}
+
+	.feature-status td {
+		padding: 6px 0;
+		vertical-align: middle;
+	}
+
+	.feature-status td:first-child {
+		font-weight: 500;
+		color: #1d2327;
+	}
+
+	.feature-status td:last-child {
+		text-align: right;
+	}
+
+	.status-on {
+		color: #00a32a;
+		font-weight: 500;
+	}
+
+	.status-off {
+		color: #999;
+	}
+
+	.status-warning {
+		color: #dba617;
+	}
+
+	/* System Status */
+	.system-status {
+		width: 100%;
+		font-size: 13px;
+		border-collapse: collapse;
+	}
+
+	.system-status td {
+		padding: 4px 0;
+	}
+
+	.system-status td:first-child {
+		font-weight: 500;
+		color: #555;
+	}
+
+	.system-status td:last-child {
+		text-align: right;
+		color: #666;
+	}
+
+	/* URL List */
+	.url-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		font-size: 12px;
+	}
+
+	.url-list li {
+		padding: 5px 0;
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+
+	.url-label {
+		color: #666;
+		font-size: 11px;
+	}
+
+	.url-list a {
+		color: #2271b1;
+		text-decoration: none;
+		word-break: break-all;
+	}
+
+	.url-list a:hover {
+		text-decoration: underline;
+	}
+
+	/* External Links */
+	.external-links {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.external-links li {
+		padding: 5px 0;
+	}
+
+	.external-links a {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		text-decoration: none;
+		color: #2271b1;
+		font-size: 13px;
+	}
+
+	.external-links a:hover {
+		text-decoration: underline;
+	}
+
+	.external-links .dashicons {
+		font-size: 12px;
+		width: 12px;
+		height: 12px;
+	}
+
+	/* Help CTA */
+	.help-cta {
+		background: #f8f9fa;
+		text-align: center;
+	}
+
+	.help-cta p {
+		margin: 0 0 12px 0;
+		font-size: 13px;
+		color: #555;
+	}
+
+	.help-cta .button {
+		width: 100%;
+	}
+
+/* From: admin/views/dashboard.php */
+	.rankflow-seo-dashboard .dashboard-content {
+		display: flex;
+		gap: 20px;
+		margin-top: 20px;
+	}
+
+	.dashboard-main {
+		flex: 1;
+	}
+
+	.dashboard-sidebar {
+		width: 300px;
+	}
+
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 20px;
+		margin-bottom: 30px;
+	}
+
+	.stat-card {
+		background: #fff;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		padding: 20px;
+		display: flex;
+		align-items: center;
+		gap: 15px;
+	}
+
+	.stat-icon {
+		font-size: 36px;
+	}
+
+	.stat-content h3 {
+		margin: 0 0 5px 0;
+		font-size: 20px;
+		color: #23282d;
+	}
+
+	.stat-content p {
+		margin: 0;
+		color: #666;
+		font-size: 14px;
+	}
+
+	.recent-activity {
+		background: #fff;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		padding: 20px;
+	}
+
+	.recent-activity h2 {
+		margin-top: 0;
+		font-size: 18px;
+	}
+
+	@media (max-width: 1200px) {
+		.rankflow-seo-dashboard .dashboard-content {
+			flex-direction: column;
+		}
+
+		.dashboard-sidebar {
+			width: 100%;
+		}
+	}
+
+/* From: admin/views/help.php */
+	.rankflow-seo-help .help-content {
+		display: flex;
+		gap: 30px;
+		margin-top: 20px;
+	}
+
+	.help-main {
+		flex: 1;
+	}
+
+	.help-sidebar {
+		width: 300px;
+	}
+
+	.help-section {
+		margin-bottom: 40px;
+	}
+
+	.help-section h2 {
+		font-size: 24px;
+		margin-bottom: 20px;
+		color: #1d2327;
+		padding-bottom: 10px;
+		border-bottom: 2px solid #2271b1;
+	}
+
+	.help-card {
+		background: #fff;
+		border: 1px solid #ddd;
+		border-radius: 6px;
+		padding: 20px;
+		margin-bottom: 20px;
+	}
+
+	.help-card h3 {
+		margin-top: 0;
+		color: #2271b1;
+		font-size: 18px;
+	}
+
+	.help-card h4 {
+		margin-top: 0;
+		color: #1d2327;
+		font-size: 16px;
+	}
+
+	.help-card ul,
+	.help-card ol {
+		margin: 10px 0;
+		padding-left: 25px;
+	}
+
+	.help-card li {
+		margin-bottom: 8px;
+	}
+
+	.help-card code {
+		background: #f0f0f1;
+		padding: 8px 12px;
+		display: block;
+		margin-top: 10px;
+		border-radius: 4px;
+		font-size: 12px;
+		word-break: break-word;
+	}
+
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 20px;
+	}
+
+	.feature-card {
+		background: #fff;
+		border: 1px solid #ddd;
+		border-radius: 6px;
+		padding: 20px;
+		text-align: center;
+		transition: box-shadow 0.2s, transform 0.2s;
+	}
+
+	.feature-card:hover {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		transform: translateY(-2px);
+	}
+
+	.feature-icon {
+		font-size: 40px;
+		display: block;
+		margin-bottom: 12px;
+	}
+
+	.feature-card h4 {
+		margin: 10px 0;
+		font-size: 15px;
+		color: #1d2327;
+	}
+
+	.feature-card p {
+		font-size: 13px;
+		color: #666;
+		margin: 0;
+		line-height: 1.5;
+	}
+
+	/* Schema Types Grid */
+	.schema-types-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 15px;
+	}
+
+	.schema-type-card {
+		background: #fff;
+		border: 1px solid #ddd;
+		border-radius: 6px;
+		padding: 15px;
+	}
+
+	.schema-type-card h4 {
+		margin: 0 0 8px 0;
+		font-size: 14px;
+		color: #1d2327;
+	}
+
+	.schema-type-card p {
+		margin: 0;
+		font-size: 12px;
+		color: #666;
+		line-height: 1.4;
+	}
+	
+	button#add-schema span.dashicons {
+	    margin-top: 4px;
+	}
+
+	/* FAQ */
+	.faq-item,
+	.troubleshooting-item {
+		background: #fff;
+		border: 1px solid #ddd;
+		border-radius: 6px;
+		padding: 20px;
+		margin-bottom: 15px;
+	}
+
+	.faq-item h4,
+	.troubleshooting-item h4 {
+		margin-top: 0;
+		color: #1d2327;
+		font-size: 15px;
+	}
+
+	.faq-item p {
+		margin: 0;
+		color: #555;
+		line-height: 1.6;
+	}
+
+	.troubleshooting-item ul {
+		margin: 10px 0 0 0;
+		padding-left: 25px;
+	}
+
+	.troubleshooting-item li {
+		margin-bottom: 5px;
+	}
+
+	/* Tools List */
+	.tools-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.tools-list li {
+		padding: 10px 0;
+		border-bottom: 1px solid #eee;
+	}
+
+	.tools-list li:last-child {
+		border-bottom: none;
+	}
+
+	.tools-list a {
+		color: #2271b1;
+		text-decoration: none;
+		font-weight: 500;
+	}
+
+	.tools-list a:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 1200px) {
+		.rankflow-seo-help .help-content {
+			flex-direction: column;
+		}
+
+		.help-sidebar {
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 782px) {
+
+		.features-grid,
+		.schema-types-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+/* From: admin/views/metabox.php */
+	.search-preview-section h4 {
+		margin: 0 0 12px 0;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.search-preview.google-style {
+		background: #202124;
+		border-radius: 12px;
+		padding: 16px;
+		display: flex;
+		gap: 16px;
+		align-items: flex-start;
+	}
+
+	.search-preview .preview-content {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.search-preview .preview-site-info {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 10px;
+	}
+
+	.search-preview .preview-favicon {
+		width: 26px;
+		height: 26px;
+		border-radius: 50%;
+		background: #303134;
+		object-fit: contain;
+	}
+
+	.search-preview .preview-favicon-default {
+		width: 26px;
+		height: 26px;
+		border-radius: 50%;
+		background: #303134;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.search-preview .preview-favicon-default .dashicons {
+		font-size: 14px;
+		width: 14px;
+		height: 14px;
+		color: #9aa0a6;
+	}
+
+	.search-preview .preview-site-details {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		min-width: 0;
+	}
+
+	.search-preview .preview-site-name {
+		color: #dadce0;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 1.3;
+	}
+
+	.search-preview .preview-url-text {
+		color: #9aa0a6;
+		font-size: 12px;
+		line-height: 1.3;
+		word-break: break-all;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		max-width: 100%;
+	}
+
+	.search-preview .preview-title {
+		color: #8ab4f8;
+		font-size: 20px;
+		font-weight: 400;
+		line-height: 1.3;
+		margin-bottom: 8px;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.search-preview .preview-title:hover {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+
+	.search-preview .preview-description {
+		color: #bdc1c6;
+		font-size: 14px;
+		line-height: 1.58;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.search-preview .preview-image-wrapper {
+		flex-shrink: 0;
+	}
+
+	.search-preview .preview-image {
+		width: 92px;
+		height: 92px;
+		border-radius: 8px;
+		overflow: hidden;
+		background: #303134;
+	}
+
+	.search-preview .preview-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.search-preview .preview-no-image {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		color: #5f6368;
+		gap: 4px;
+		font-size: 10px;
+	}
+
+	.search-preview .preview-no-image .dashicons {
+		font-size: 24px;
+		width: 24px;
+		height: 24px;
+	}
+
+	.search-preview-section .preview-note {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		margin-top: 10px;
+		font-size: 12px;
+		color: #666;
+		font-style: italic;
+	}
+
+	.search-preview-section .preview-note .dashicons {
+		font-size: 14px;
+		width: 14px;
+		height: 14px;
+		color: #999;
+	}
+
+	@media (max-width: 500px) {
+		.search-preview.google-style {
+			flex-direction: column-reverse;
+		}
+
+		.search-preview .preview-image {
+			width: 100%;
+			height: 120px;
+		}
+	}
+
+	/* OG Image Upload Field */
+	.og-image-field .og-image-upload-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.og-image-field .og-image-preview {
+		position: relative;
+		max-width: 300px;
+		border-radius: 6px;
+		overflow: hidden;
+		background: #f0f0f0;
+	}
+
+	.og-image-field .og-image-preview img {
+		width: 100%;
+		height: auto;
+		display: block;
+		max-height: 160px;
+		object-fit: cover;
+	}
+
+	.og-image-field .og-image-preview:empty {
+		display: none;
+	}
+
+	.og-image-field .og-image-remove {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		background: rgba(0, 0, 0, 0.7);
+		border: none;
+		border-radius: 50%;
+		width: 24px;
+		height: 24px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+	}
+
+	.og-image-field .og-image-remove .dashicons {
+		color: #fff;
+		font-size: 16px;
+		width: 16px;
+		height: 16px;
+	}
+
+	.og-image-field .og-image-remove:hover {
+		background: rgba(220, 50, 50, 0.9);
+	}
+
+	.og-image-field #rankflow_seo_og_image_upload {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.og-image-field #rankflow_seo_og_image_upload .dashicons {
+		font-size: 16px;
+		width: 16px;
+		height: 16px;
+	}
+
+/* From: admin/views/redirect-form.php */
+    .redirect-form-container {
+        background: #fff;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-top: 20px;
+    }
+
+    .required {
+        color: #dc3232;
+    }
+
+/* From: admin/views/redirects-list.php */
+    .redirect-type {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .redirect-type-301 {
+        background: #d7f2d8;
+        color: #1e4620;
+    }
+
+    .redirect-type-302,
+    .redirect-type-307 {
+        background: #fff4e5;
+        color: #8a6d3b;
+    }
+
+    .redirect-type-410,
+    .redirect-type-451 {
+        background: #ffe5e5;
+        color: #a94442;
+    }
+
+/* From: admin/views/settings-social.php */
+	.default-og-image-wrapper {
+		max-width: 500px;
+	}
+
+	.default-og-image-preview {
+		position: relative;
+		max-width: 300px;
+		margin-bottom: 10px;
+		border-radius: 8px;
+		overflow: hidden;
+		background: #f0f0f0;
+	}
+
+	.default-og-image-preview:empty {
+		display: none;
+	}
+
+	.default-og-image-preview img {
+		width: 100%;
+		height: auto;
+		display: block;
+		max-height: 180px;
+		object-fit: cover;
+	}
+
+	.default-og-image-remove {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		background: rgba(0, 0, 0, 0.7);
+		border: none;
+		border-radius: 50%;
+		width: 28px;
+		height: 28px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+		transition: background 0.2s;
+	}
+
+	.default-og-image-remove:hover {
+		background: rgba(220, 50, 50, 0.9);
+	}
+
+	.default-og-image-remove .dashicons {
+		color: #fff;
+		font-size: 18px;
+		width: 18px;
+		height: 18px;
+	}
+
+	#default_og_image_upload {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+	}
+
+	#default_og_image_upload .dashicons {
+		font-size: 16px;
+		width: 16px;
+		height: 16px;
+	}
+
+/* From: admin/views/settings-robots-txt.php */
+    .rankflow-seo-robots-txt {
+        max-width: 1400px;
+    }
+
+    .rankflow-seo-robots-container {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    @media (max-width: 1200px) {
+        .rankflow-seo-robots-container {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .rankflow-seo-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .rankflow-seo-card h2 {
+        margin: 0 0 15px 0;
+        padding: 0 0 10px 0;
+        border-bottom: 1px solid #eee;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .rankflow-seo-card h3 {
+        margin: 0 0 15px 0;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Toggle Switch */
+    .rankflow-seo-toggle {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    .rankflow-seo-toggle input {
+        display: none;
+    }
+
+    .toggle-slider {
+        width: 50px;
+        height: 26px;
+        background: #ccc;
+        border-radius: 13px;
+        position: relative;
+        transition: background 0.3s;
+    }
+
+    .toggle-slider::after {
+        content: '';
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        background: #fff;
+        border-radius: 50%;
+        top: 2px;
+        left: 2px;
+        transition: transform 0.3s;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .rankflow-seo-toggle input:checked+.toggle-slider {
+        background: #2271b1;
+    }
+
+    .rankflow-seo-toggle input:checked+.toggle-slider::after {
+        transform: translateX(24px);
+    }
+
+    .toggle-label {
+        font-weight: 500;
+    }
+
+    /* Checkboxes */
+    .rankflow-seo-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        margin-bottom: 5px;
+    }
+
+    .rankflow-seo-checkbox input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    .rankflow-seo-checkbox+.description {
+        margin-left: 26px;
+        margin-bottom: 15px;
+    }
+
+    /* Parent Checkbox */
+    .parent-checkbox {
+        background: #f0f6fc;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 10px !important;
+        border: 1px solid #c3d7ee;
+    }
+
+    .parent-checkbox:hover {
+        background: #e5f2ff;
+    }
+
+    /* Bot List Styling */
+    .bot-list {
+        background: #f9f9f9;
+        border: 1px solid #e5e5e5;
+        border-radius: 6px;
+        padding: 15px;
+        max-height: 300px;
+        overflow-y: auto;
+        margin-top: 10px;
+    }
+
+    .bot-list .bot-checkbox {
+        margin-bottom: 8px;
+        padding: 6px 8px;
+        border-radius: 4px;
+        transition: background 0.2s;
+    }
+
+    .bot-list .bot-checkbox:hover {
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .bot-list code {
+        background: #e8e8e8;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 11px;
+        color: #666;
+        margin-left: 5px;
+    }
+
+    .bot-list::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .bot-list::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    .bot-list::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 4px;
+    }
+
+    .bot-list::-webkit-scrollbar-thumb:hover {
+        background: #a1a1a1;
+    }
+
+    /* Preview */
+    .preview-card .preview-content {
+        background: #1d2327;
+        border-radius: 6px;
+        padding: 15px;
+        max-height: 400px;
+        overflow: auto;
+        margin-bottom: 15px;
+    }
+
+    .preview-card pre {
+        margin: 0;
+        color: #50fa7b;
+        font-family: 'Monaco', 'Consolas', monospace;
+        font-size: 12px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    .preview-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .preview-actions .button {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    /* Syntax Help */
+    .syntax-help {
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    .syntax-help h4 {
+        margin: 0 0 10px 0;
+        font-size: 13px;
+    }
+
+    .syntax-table,
+    .crawlers-table {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    .syntax-table td,
+    .crawlers-table td {
+        padding: 5px 10px 5px 0;
+        vertical-align: top;
+    }
+
+    .syntax-table code,
+    .crawlers-table code {
+        background: #f0f0f1;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 12px;
+    }
+
+    /* Info Card */
+    .info-card ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .info-card li {
+        margin-bottom: 8px;
+        font-size: 13px;
+        color: #646970;
+    }
+
+    .info-card a {
+        color: #2271b1;
+        text-decoration: none;
+    }
+
+    .info-card a:hover {
+        text-decoration: underline;
+    }
+
+    /* Submit Card */
+    .submit-card {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .submit-card .button {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    /* Robots URL */
+    .robots-url {
+        margin-top: 15px;
+        padding: 10px;
+        background: #f0f6fc;
+        border-radius: 4px;
+        font-size: 13px;
+    }
+
+    .robots-url a {
+        color: #2271b1;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .robots-url a:hover {
+        text-decoration: underline;
+    }
+
+    /* Textarea */
+    textarea.code {
+        font-family: 'Monaco', 'Consolas', monospace;
+        font-size: 13px;
+    }
+
+    /* Notice */
+    .notice {
+        margin: 15px 0;
+    }
+
+
+/* From: admin/views/settings-schema.php */
+	.rankflow-seo-schema {
+		max-width: 1200px;
+	}
+
+	.rankflow-seo-card {
+		background: #fff;
+		border: 1px solid #ddd;
+		border-radius: 8px;
+		padding: 20px;
+		margin-bottom: 20px;
+	}
+
+	.rankflow-seo-card h2 {
+		margin: 0 0 15px 0;
+		padding: 0 0 10px 0;
+		border-bottom: 1px solid #eee;
+		font-size: 16px;
+	}
+
+	.card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 15px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #eee;
+	}
+
+	.card-header h2 {
+		margin: 0 !important;
+		padding: 0 !important;
+		border: none !important;
+	}
+
+	/* Toggle Switch */
+	.rankflow-seo-toggle {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		cursor: pointer;
+		margin-bottom: 10px;
+	}
+
+	.rankflow-seo-toggle input {
+		display: none;
+	}
+
+	.toggle-slider {
+		width: 50px;
+		height: 26px;
+		background: #ccc;
+		border-radius: 13px;
+		position: relative;
+		transition: background 0.3s;
+	}
+
+	.toggle-slider::after {
+		content: '';
+		position: absolute;
+		width: 22px;
+		height: 22px;
+		background: #fff;
+		border-radius: 50%;
+		top: 2px;
+		left: 2px;
+		transition: transform 0.3s;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+	}
+
+	.rankflow-seo-toggle input:checked+.toggle-slider {
+		background: #2271b1;
+	}
+
+	.rankflow-seo-toggle input:checked+.toggle-slider::after {
+		transform: translateX(24px);
+	}
+
+	.toggle-label {
+		font-weight: 500;
+	}
+
+	/* Schema Repeater */
+	.schema-repeater {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.schema-item {
+		border: 1px solid #ddd;
+		border-radius: 6px;
+		background: #fafafa;
+	}
+
+	.schema-header {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 12px 15px;
+		background: #f5f5f5;
+		border-radius: 6px 6px 0 0;
+		cursor: pointer;
+	}
+
+	.schema-item.collapsed .schema-header {
+		border-radius: 6px;
+	}
+
+	.schema-drag-handle {
+		cursor: grab;
+		color: #999;
+	}
+
+	.schema-enable input {
+		width: 18px;
+		height: 18px;
+	}
+
+	.schema-type-select {
+		min-width: 200px;
+	}
+
+	.schema-title {
+		flex: 1;
+		font-weight: 500;
+		color: #666;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.schema-toggle,
+	.schema-delete {
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 5px;
+		color: #666;
+		transition: color 0.2s;
+	}
+
+	.schema-toggle:hover {
+		color: #2271b1;
+	}
+
+	.schema-delete:hover {
+		color: #dc3232;
+	}
+
+	.schema-content {
+		padding: 20px;
+		background: #fff;
+		border-radius: 0 0 6px 6px;
+	}
+
+	.schema-fields {
+		display: grid;
+		gap: 15px;
+	}
+
+	.schema-field {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.schema-field label {
+		font-weight: 500;
+		font-size: 13px;
+		color: #1d2327;
+	}
+
+	.schema-field .required {
+		color: #dc3232;
+	}
+
+	.schema-field input[type="text"],
+	.schema-field input[type="url"],
+	.schema-field input[type="email"],
+	.schema-field input[type="tel"],
+	.schema-field input[type="number"],
+	.schema-field input[type="date"],
+	.schema-field input[type="datetime-local"],
+	.schema-field textarea,
+	.schema-field select {
+		padding: 8px 12px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		font-size: 14px;
+	}
+
+	.schema-field textarea {
+		resize: vertical;
+	}
+
+	.select-type-message {
+		color: #666;
+		font-style: italic;
+		padding: 20px;
+		text-align: center;
+		background: #f9f9f9;
+		border-radius: 4px;
+	}
+
+	/* Image field */
+	.image-field-wrapper {
+		display: flex;
+		gap: 10px;
+	}
+
+	.image-field-wrapper input {
+		flex: 1;
+	}
+
+	/* Hours, FAQ, Steps repeaters */
+	.hours-repeater,
+	.faq-repeater,
+	.steps-repeater,
+	.breadcrumb-repeater {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.hour-row,
+	.faq-row,
+	.step-row,
+	.breadcrumb-row {
+		display: flex;
+		gap: 10px;
+		align-items: flex-start;
+		padding: 10px;
+		background: #f9f9f9;
+		border-radius: 4px;
+	}
+
+	.hour-row select,
+	.hour-row input {
+		flex: 1;
+	}
+
+	.faq-row input,
+	.faq-row textarea {
+		flex: 1;
+	}
+
+	.step-row .step-number,
+	.breadcrumb-row .breadcrumb-number {
+		width: 30px;
+		height: 30px;
+		background: #2271b1;
+		color: #fff;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: bold;
+		flex-shrink: 0;
+	}
+
+	.step-row input,
+	.step-row textarea,
+	.breadcrumb-row input {
+		flex: 1;
+	}
+
+	.days-select {
+		min-height: 100px;
+	}
+
+	/* Checkbox label */
+	.checkbox-label {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-weight: normal !important;
+	}
+
+	/* No schemas message */
+	.no-schemas-message {
+		padding: 30px;
+		text-align: center;
+		color: #666;
+		background: #f9f9f9;
+		border-radius: 4px;
+		font-style: italic;
+	}
+
+	/* Submit card */
+	.submit-card {
+		display: flex;
+		gap: 10px;
+	}
+
+	/* Sortable placeholder */
+	.schema-item.ui-sortable-placeholder {
+		visibility: visible !important;
+		background: #f0f6fc;
+		border: 2px dashed #2271b1;
+	}
+
+	/* Display Rules Section */
+	.schema-display-rules {
+		background: #f8f9fa;
+		border: 1px solid #e2e4e7;
+		border-radius: 6px;
+		padding: 15px;
+		margin-bottom: 20px;
+	}
+
+	.schema-display-rules h4 {
+		margin: 0 0 15px 0;
+		padding: 0 0 10px 0;
+		border-bottom: 1px solid #e2e4e7;
+		font-size: 14px;
+		color: #1d2327;
+	}
+
+	.display-rule-row {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+		margin-bottom: 12px;
+	}
+
+	.display-rule-row:last-child {
+		margin-bottom: 0;
+	}
+
+	.display-rule-row>label {
+		min-width: 100px;
+		font-weight: 500;
+		font-size: 13px;
+	}
+
+	.display-rule-row select {
+		flex: 1;
+		max-width: 400px;
+	}
+
+	.display-rule-row .select2-container {
+		flex: 1;
+		max-width: 400px;
+	}
+
+	/* Select2 Styling */
+	.select2-container--default .select2-selection--multiple {
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		min-height: 36px;
+	}
+
+	.select2-container--default .select2-selection--multiple .select2-selection__choice {
+		background: #2271b1 !important;
+		border: none;
+		color: #fff;
+		border-radius: 3px;
+		padding: 2px 8px;
+	}
+
+	.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+		color: #fff !important;
+		margin-right: 5px;
+	}
+
+	.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+		color: #fff !important;
+		background: transparent !important;
+	}
+
+	/* Responsive */
+	@media (max-width: 782px) {
+		.schema-header {
+			flex-wrap: wrap;
+		}
+
+		.schema-type-select {
+			min-width: 150px;
+		}
+
+		.hour-row,
+		.step-row,
+		.breadcrumb-row {
+			flex-wrap: wrap;
+		}
+	}
+
+/* From: admin/views/settings-site-connections.php */
+    .rankflow-seo-site-connections-tab {
+        max-width: 700px;
+    }
+
+    .rankflow-seo-site-connections-tab h2 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .rankflow-seo-section h3 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1d2327;
+        margin: 0 0 15px 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .rankflow-seo-connection-field {
+        margin-bottom: 25px;
+    }
+
+    .rankflow-seo-connection-field label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: #1d2327;
+    }
+
+    .rankflow-seo-connection-field input[type="text"] {
+        width: 100%;
+        max-width: 500px;
+        padding: 10px 14px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: #fff;
+        transition: border-color 0.2s ease;
+    }
+
+    .rankflow-seo-connection-field input[type="text"]:focus {
+        border-color: #2271b1;
+        outline: none;
+        box-shadow: 0 0 0 1px #2271b1;
+    }
+
+    .rankflow-seo-connection-field input[type="text"]::placeholder {
+        color: #a0a5aa;
+    }
+
+    .rankflow-seo-connection-field .description {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #646970;
+    }
+
+    .rankflow-seo-connection-field .description a {
+        color: #2271b1;
+        text-decoration: none;
+    }
+
+    .rankflow-seo-connection-field .description a:hover {
+        text-decoration: underline;
+    }
+
+    /* GTM Field Styling */
+    .gtm-field {
+        background: #f8f9fa;
+        border: 1px solid #e2e4e7;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .gtm-input-full {
+        max-width: 300px !important;
+        text-transform: uppercase;
+    }
+
+    .gtm-status {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 12px;
+        padding: 8px 12px;
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        border-radius: 4px;
+        color: #155724;
+        font-size: 13px;
+        max-width: fit-content;
+    }
+
+    .gtm-status .dashicons {
+        color: #28a745;
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+    }
+
+/* From: admin/views/settings-sitemap.php */
+	.rankflow-seo-sitemap-status {
+		background: #fff;
+		border: 1px solid #ccd0d4;
+		border-radius: 4px;
+		padding: 20px;
+		margin: 20px 0;
+	}
+
+	.rankflow-seo-sitemap-status h2 {
+		margin-top: 0;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #eee;
+	}
+
+	.sitemap-enabled {
+		display: flex;
+		align-items: flex-start;
+		gap: 15px;
+		flex-wrap: wrap;
+	}
+
+	.sitemap-enabled .dashicons-yes-alt {
+		color: #46b450;
+		font-size: 40px;
+		width: 40px;
+		height: 40px;
+	}
+
+	.sitemap-disabled .dashicons-warning {
+		color: #dc3232;
+		font-size: 40px;
+		width: 40px;
+		height: 40px;
+	}
+
+	.sitemap-url {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		font-size: 14px;
+		font-weight: 500;
+		word-break: break-all;
+	}
+
+	.sitemap-actions {
+		width: 100%;
+		margin-top: 10px;
+		display: flex;
+		gap: 10px;
+	}
+
+	.rankflow-seo-card {
+		background: #fff;
+		border: 1px solid #ccd0d4;
+		border-radius: 4px;
+		padding: 20px;
+		margin: 20px 0;
+	}
+
+	.rankflow-seo-card h2 {
+		margin-top: 0;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #eee;
+	}
+
+	.ai-seo-toggle {
+		position: relative;
+		display: inline-block;
+		width: 40px;
+		height: 22px;
+		vertical-align: middle;
+	}
+
+	.ai-seo-toggle input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+	.ai-seo-toggle .slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #ccc;
+		transition: .3s;
+		border-radius: 22px;
+	}
+
+	.ai-seo-toggle .slider:before {
+		position: absolute;
+		content: "";
+		height: 16px;
+		width: 16px;
+		left: 3px;
+		bottom: 3px;
+		background-color: white;
+		transition: .3s;
+		border-radius: 50%;
+	}
+
+	.ai-seo-toggle input:checked+.slider {
+		background-color: #0073aa;
+	}
+
+	.ai-seo-toggle input:checked+.slider:before {
+		transform: translateX(18px);
+	}
+
+	.post-count {
+		color: #666;
+		font-size: 12px;
+		margin-left: 10px;
+	}
+
+	.taxonomy-list {
+		margin-top: 15px;
+		padding-top: 15px;
+		border-top: 1px solid #eee;
+	}
+
+	#flush-sitemap-cache {
+		margin-left: 10px;
+	}
+
+	.rankflow-seo-recommended {
+		color: #2271b1;
+		font-size: 12px;
+		font-weight: normal;
+		margin-left: 5px;
+	}
+
+
+
+/* ==========================================================================
+   Additional Utility Classes (replacing inline styles)
+   ========================================================================== */
+
+/* Image sizing */
+.rankflow-seo-icon-40 { height: 40px; }
+.rankflow-seo-icon-45 { width: 45px; }
+.rankflow-seo-icon-35 { width: 35px; }
+.rankflow-seo-icon-32 { width: 32px; }
+
+/* Stats Grid - 404 Monitor */
+.rankflow-seo-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.rankflow-seo-stat-card {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.rankflow-seo-stat-card-error {
+    border-left: 4px solid #dc3232;
+}
+
+.rankflow-seo-stat-card-warning {
+    border-left: 4px solid #ffb900;
+}
+
+.rankflow-seo-stat-card h3 {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.rankflow-seo-stat-value {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.rankflow-seo-stat-value-error {
+    color: #dc3232;
+}
+
+.rankflow-seo-stat-value-warning {
+    color: #ffb900;
+}
+
+.rankflow-seo-stat-subtitle {
+    margin: 5px 0 0 0;
+    color: #999;
+    font-size: 12px;
+}
+
+/* Card styles */
+.rankflow-seo-card-white {
+    background: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.rankflow-seo-card-white h2 {
+    margin-top: 0;
+}
+
+/* Badge styles */
+.rankflow-seo-badge {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    margin-left: 5px;
+}
+
+.rankflow-seo-badge-error {
+    background: #dc3232;
+    color: #fff;
+    font-weight: 600;
+}
+
+.rankflow-seo-badge-blue {
+    background: #007cba;
+    color: #fff;
+}
+
+.rankflow-seo-badge-count {
+    background: #dc3232;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Hits count */
+.rankflow-seo-hits-count {
+    font-weight: 600;
+    color: #dc3232;
+}
+
+/* Filter section */
+.rankflow-seo-filters {
+    background: #fff;
+    padding: 15px;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.rankflow-seo-filters-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.rankflow-seo-filters-flex {
+    flex: 1;
+}
+
+.rankflow-seo-filters-right {
+    margin-left: auto;
+}
+
+.rankflow-seo-search-input {
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Status colors */
+.rankflow-seo-status-active {
+    color: #46b450;
+}
+
+.rankflow-seo-status-inactive {
+    color: #999;
+}
+
+/* Form containers */
+.rankflow-seo-form-container {
+    max-width: 800px;
+}
+
+.rankflow-seo-form-box {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Info boxes */
+.rankflow-seo-info-box {
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.rankflow-seo-info-box-blue {
+    background: #e7f5fe;
+    border-left: 4px solid #2271b1;
+}
+
+.rankflow-seo-info-box-yellow {
+    background: #fff4e5;
+    border-left: 4px solid #ffb900;
+}
+
+.rankflow-seo-info-box-red {
+    background: #ffe5e5;
+    border-left: 4px solid #dc3232;
+}
+
+.rankflow-seo-info-box-gray {
+    background: #f9f9f9;
+    border-left: 4px solid #2271b1;
+}
+
+.rankflow-seo-info-box h3,
+.rankflow-seo-info-box h4 {
+    margin-top: 0;
+}
+
+.rankflow-seo-info-box ul {
+    margin: 0;
+}
+
+/* Sample box */
+.rankflow-seo-sample-box {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.rankflow-seo-sample-box pre {
+    background: #f5f5f5;
+    padding: 10px;
+    overflow-x: auto;
+}
+
+/* Required asterisk */
+.rankflow-seo-required {
+    color: #dc3232;
+}
+
+/* Margin utilities */
+.rankflow-seo-mt-0 { margin-top: 0; }
+.rankflow-seo-mt-10 { margin-top: 10px; }
+.rankflow-seo-mt-15 { margin-top: 15px; }
+.rankflow-seo-mt-20 { margin-top: 20px; }
+.rankflow-seo-mb-0 { margin-bottom: 0; }
+.rankflow-seo-mb-10 { margin-bottom: 10px; }
+.rankflow-seo-mb-20 { margin-bottom: 20px; }
+.rankflow-seo-my-20 { margin: 20px 0; }
+.rankflow-seo-ml-5 { margin-left: 5px; }
+.rankflow-seo-ml-10 { margin-left: 10px; }
+.rankflow-seo-ml-24 { margin-left: 24px; }
+.rankflow-seo-mr-10 { margin-right: 10px; }
+
+/* Dividers */
+.rankflow-seo-divider {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.rankflow-seo-divider-20 {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.rankflow-seo-divider-30 {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* Action buttons row */
+.rankflow-seo-actions-row {
+    margin: 20px 0;
+}
+
+/* Title preview box */
+.rankflow-seo-title-preview {
+    margin-top: 15px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-left: 4px solid #2271b1;
+}
+
+/* Hidden rows */
+.rankflow-seo-hidden {
+    display: none;
+}
+
+/* Description text */
+.rankflow-seo-description {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Block label */
+.rankflow-seo-label-block {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Score border dynamic - these need inline style for dynamic colors */
+/* Keeping dynamic color styles inline is acceptable for PHP-generated values */
+
+/* GTM noscript - required inline style for GTM spec */
+/* style="display:none;visibility:hidden" is required by Google Tag Manager */
+
+/* Accordion content - initial hidden state */
+.rankflow-seo-accordion-content {
+    display: none;
+}
+
+/* Schema display rules - conditional visibility handled by JS */
+.rankflow-seo-display-rule-hidden {
+    display: none;
+}
+
+/* Modal styles */
+.rankflow-seo-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 100000;
+}
+
+.rankflow-seo-modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 30px;
+    border-radius: 4px;
+    z-index: 100001;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.rankflow-seo-modal-content h2 {
+    margin-top: 0;
+}
+
+/* Referrer link */
+.rankflow-seo-referrer-link {
+    font-size: 12px;
+}
+
+/* Time ago text */
+.rankflow-seo-time-ago {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Readonly input */
+.rankflow-seo-readonly-input {
+    background: #f5f5f5;
+}
+
+/* ==========================================================================
+   Score Status Colors (replacing dynamic inline styles)
+   ========================================================================== */
+
+/* Score circle border colors based on status */
+.score-circle.rankflow-seo-score-good,
+.score-display .score-circle.rankflow-seo-score-good {
+    border-color: #46b450 !important;
+}
+
+.score-circle.rankflow-seo-score-ok,
+.score-display .score-circle.rankflow-seo-score-ok {
+    border-color: #ffb900 !important;
+}
+
+.score-circle.rankflow-seo-score-needs_improvement,
+.score-display .score-circle.rankflow-seo-score-needs_improvement {
+    border-color: #ffb900 !important;
+}
+
+.score-circle.rankflow-seo-score-bad,
+.score-display .score-circle.rankflow-seo-score-bad {
+    border-color: #dc3232 !important;
+}
+
+/* Score status text colors */
+.score-status.good,
+.score-status.rankflow-seo-status-good {
+    color: #46b450 !important;
+}
+
+.score-status.rankflow-seo-score-needs_improvement {
+    color: #ffb900 !important;
+}
+
+.score-status.ok,
+.score-status.rankflow-seo-status-ok {
+    color: #ffb900 !important;
+}
+
+.score-status.bad,
+.score-status.rankflow-seo-status-bad {
+    color: #dc3232 !important;
+}
+
+/* Readability score colors */
+.readability-score-section .score-circle.rankflow-seo-score-good {
+    border-color: #46b450 !important;
+}
+
+.readability-score-section .score-circle.rankflow-seo-score-moderate {
+    border-color: #ffb900 !important;
+}
+
+.readability-score-section .score-circle.rankflow-seo-score-bad {
+    border-color: #dc3232 !important;
+}

@@ -547,7 +547,7 @@ class RankFlow_SEO_Settings
 	{
 		?>
 		<div class="wrap rankflow-seo-settings">
-			<h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+			<?php require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
 
 			<?php settings_errors(); ?>
 
@@ -634,7 +634,7 @@ class RankFlow_SEO_Settings
 								continue;
 							}
 							?>
-							<label style="display: block; margin-bottom: 5px;">
+							<label class="rankflow-seo-label-block">
 								<input type="checkbox" name="rankflow_seo_post_types[]"
 									value="<?php echo esc_attr($rankflow_seo_post_type->name); ?>" <?php checked(in_array($rankflow_seo_post_type->name, $rankflow_seo_enabled_post_types, true)); ?>>
 								<?php echo esc_html($rankflow_seo_post_type->label); ?>
@@ -938,7 +938,9 @@ class RankFlow_SEO_Settings
 	}
 
 	/**
-	 * Output Google Tag Manager head script.
+	 * Output Google Tag Manager script in head.
+	 * GTM requires the script to be in the head as early as possible.
+	 * Using wp_head hook directly is the recommended approach for GTM.
 	 */
 	public static function output_gtm_head()
 	{
@@ -947,22 +949,22 @@ class RankFlow_SEO_Settings
 		if (empty($gtm_id) || is_admin()) {
 			return;
 		}
+
+		// Output GTM script directly in head (this is the standard GTM implementation).
 		?>
-		<!-- Google Tag Manager -->
-		<script>(function (w, d, s, l, i) {
-				w[l] = w[l] || []; w[l].push({
-					'gtm.start':
-						new Date().getTime(), event: 'gtm.js'
-				}); var f = d.getElementsByTagName(s)[0],
-					j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-						'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-			})(window, document, 'script', 'dataLayer', '<?php echo esc_js($gtm_id); ?>');</script>
-		<!-- End Google Tag Manager -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','<?php echo esc_js($gtm_id); ?>');</script>
+<!-- End Google Tag Manager -->
 		<?php
 	}
 
 	/**
 	 * Output Google Tag Manager noscript body tag.
+	 * Note: noscript tags cannot be enqueued, they must be output directly.
 	 */
 	public static function output_gtm_body()
 	{
@@ -971,11 +973,11 @@ class RankFlow_SEO_Settings
 		if (empty($gtm_id) || is_admin()) {
 			return;
 		}
-		?>
-		<!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo esc_attr($gtm_id); ?>" height="0"
-				width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<!-- End Google Tag Manager (noscript) -->
-		<?php
+
+		// Output noscript fallback for GTM.
+		printf(
+			'<!-- Google Tag Manager (noscript) --><noscript><iframe src="%s" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->',
+			esc_url('https://www.googletagmanager.com/ns.html?id=' . $gtm_id)
+		);
 	}
 }

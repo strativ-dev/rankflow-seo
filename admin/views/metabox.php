@@ -197,16 +197,14 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 		<!-- SEO Score -->
 		<div class="seo-score-section">
 			<div class="score-display">
-				<div class="score-circle"
-					style="border-color: <?php echo esc_attr($rankflow_seo_score_status['color']); ?>">
+				<div class="score-circle rankflow-seo-score-<?php echo esc_attr($rankflow_seo_score_status['status']); ?>">
 					<span
 						class="score-number"><?php echo esc_html($rankflow_seo_seo_score ? $rankflow_seo_seo_score : 0); ?></span>
 					<span class="score-label">/100</span>
 				</div>
 				<div class="score-info">
 					<h4><?php esc_html_e('SEO Score', 'rankflow-seo'); ?></h4>
-					<p class="score-status <?php echo esc_attr($rankflow_seo_score_status['status']); ?>"
-						style="color: <?php echo esc_attr($rankflow_seo_score_status['color']); ?>">
+					<p class="score-status <?php echo esc_attr($rankflow_seo_score_status['status']); ?>">
 						<?php echo esc_html($rankflow_seo_score_status['label']); ?>
 					</p>
 				</div>
@@ -385,7 +383,7 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 					<?php endif; ?>
 				</span>
 			</button>
-			<div class="accordion-content" id="seo-analysis" style="display: none;">
+			<div class="accordion-content rankflow-seo-accordion-content" id="seo-analysis">
 				<?php if (!empty($rankflow_seo_seo_analysis['problems'])): ?>
 					<div class="analysis-group problems-group">
 						<h5 class="group-title">
@@ -446,7 +444,7 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 						class="summary-info"><?php esc_html_e('Canonical, Robots, Social Tags', 'rankflow-seo'); ?></span>
 				</span>
 			</button>
-			<div class="accordion-content" id="advanced-options" style="display: none;">
+			<div class="accordion-content rankflow-seo-accordion-content" id="advanced-options">
 				<div class="advanced-options-inner">
 					<!-- Sitemap Settings -->
 					<div class="meta-field sitemap-field">
@@ -455,12 +453,12 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 								value="1" <?php checked($rankflow_seo_exclude_sitemap, '1'); ?>>
 							<span><strong><?php esc_html_e('Exclude from XML Sitemap', 'rankflow-seo'); ?></strong></span>
 						</label>
-						<p class="description" style="margin-left: 24px;">
+						<p class="description rankflow-seo-ml-24">
 							<?php esc_html_e('When enabled, this page will not appear in the XML sitemap.', 'rankflow-seo'); ?>
 						</p>
 					</div>
 
-					<hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
+					<hr class="rankflow-seo-divider">
 
 					<!-- Canonical URL -->
 					<div class="meta-field">
@@ -536,7 +534,7 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 						</p>
 					</div>
 
-					<hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
+					<hr class="rankflow-seo-divider">
 
 					<!-- Twitter Title -->
 					<div class="meta-field">
@@ -581,15 +579,13 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 		?>
 		<div class="readability-score-section">
 			<div class="score-display">
-				<div class="score-circle"
-					style="border-color: <?php echo esc_attr($rankflow_seo_readability_status['color']); ?>">
+				<div class="score-circle rankflow-seo-score-<?php echo esc_attr($rankflow_seo_readability_status['status']); ?>">
 					<span class="score-number"><?php echo esc_html(round($rankflow_seo_flesch_score)); ?></span>
 					<span class="score-label">/100</span>
 				</div>
 				<div class="score-info">
 					<h4><?php esc_html_e('Readability Score', 'rankflow-seo'); ?></h4>
-					<p class="score-status"
-						style="color: <?php echo esc_attr($rankflow_seo_readability_status['color']); ?>">
+					<p class="score-status <?php echo esc_attr($rankflow_seo_readability_status['status']); ?>">
 						<?php echo esc_html($rankflow_seo_readability_status['label']); ?>
 					</p>
 					<?php if ($rankflow_seo_grade_level): ?>
@@ -692,322 +688,3 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 </div>
 
 <!-- Google-Style Search Preview CSS -->
-<style>
-	.search-preview-section h4 {
-		margin: 0 0 12px 0;
-		font-size: 14px;
-		font-weight: 600;
-	}
-
-	.search-preview.google-style {
-		background: #202124;
-		border-radius: 12px;
-		padding: 16px;
-		display: flex;
-		gap: 16px;
-		align-items: flex-start;
-	}
-
-	.search-preview .preview-content {
-		flex: 1;
-		min-width: 0;
-	}
-
-	.search-preview .preview-site-info {
-		display: flex;
-		align-items: center;
-		gap: 12px;
-		margin-bottom: 10px;
-	}
-
-	.search-preview .preview-favicon {
-		width: 26px;
-		height: 26px;
-		border-radius: 50%;
-		background: #303134;
-		object-fit: contain;
-	}
-
-	.search-preview .preview-favicon-default {
-		width: 26px;
-		height: 26px;
-		border-radius: 50%;
-		background: #303134;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.search-preview .preview-favicon-default .dashicons {
-		font-size: 14px;
-		width: 14px;
-		height: 14px;
-		color: #9aa0a6;
-	}
-
-	.search-preview .preview-site-details {
-		display: flex;
-		flex-direction: column;
-		gap: 2px;
-		min-width: 0;
-	}
-
-	.search-preview .preview-site-name {
-		color: #dadce0;
-		font-size: 14px;
-		font-weight: 400;
-		line-height: 1.3;
-	}
-
-	.search-preview .preview-url-text {
-		color: #9aa0a6;
-		font-size: 12px;
-		line-height: 1.3;
-		word-break: break-all;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		max-width: 100%;
-	}
-
-	.search-preview .preview-title {
-		color: #8ab4f8;
-		font-size: 20px;
-		font-weight: 400;
-		line-height: 1.3;
-		margin-bottom: 8px;
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-	}
-
-	.search-preview .preview-title:hover {
-		text-decoration: underline;
-		cursor: pointer;
-	}
-
-	.search-preview .preview-description {
-		color: #bdc1c6;
-		font-size: 14px;
-		line-height: 1.58;
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-	}
-
-	.search-preview .preview-image-wrapper {
-		flex-shrink: 0;
-	}
-
-	.search-preview .preview-image {
-		width: 92px;
-		height: 92px;
-		border-radius: 8px;
-		overflow: hidden;
-		background: #303134;
-	}
-
-	.search-preview .preview-image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.search-preview .preview-no-image {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		color: #5f6368;
-		gap: 4px;
-		font-size: 10px;
-	}
-
-	.search-preview .preview-no-image .dashicons {
-		font-size: 24px;
-		width: 24px;
-		height: 24px;
-	}
-
-	.search-preview-section .preview-note {
-		display: flex;
-		align-items: center;
-		gap: 6px;
-		margin-top: 10px;
-		font-size: 12px;
-		color: #666;
-		font-style: italic;
-	}
-
-	.search-preview-section .preview-note .dashicons {
-		font-size: 14px;
-		width: 14px;
-		height: 14px;
-		color: #999;
-	}
-
-	@media (max-width: 500px) {
-		.search-preview.google-style {
-			flex-direction: column-reverse;
-		}
-
-		.search-preview .preview-image {
-			width: 100%;
-			height: 120px;
-		}
-	}
-
-	/* OG Image Upload Field */
-	.og-image-field .og-image-upload-wrapper {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	.og-image-field .og-image-preview {
-		position: relative;
-		max-width: 300px;
-		border-radius: 6px;
-		overflow: hidden;
-		background: #f0f0f0;
-	}
-
-	.og-image-field .og-image-preview img {
-		width: 100%;
-		height: auto;
-		display: block;
-		max-height: 160px;
-		object-fit: cover;
-	}
-
-	.og-image-field .og-image-preview:empty {
-		display: none;
-	}
-
-	.og-image-field .og-image-remove {
-		position: absolute;
-		top: 5px;
-		right: 5px;
-		background: rgba(0, 0, 0, 0.7);
-		border: none;
-		border-radius: 50%;
-		width: 24px;
-		height: 24px;
-		cursor: pointer;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 0;
-	}
-
-	.og-image-field .og-image-remove .dashicons {
-		color: #fff;
-		font-size: 16px;
-		width: 16px;
-		height: 16px;
-	}
-
-	.og-image-field .og-image-remove:hover {
-		background: rgba(220, 50, 50, 0.9);
-	}
-
-	.og-image-field #rankflow_seo_og_image_upload {
-		display: inline-flex;
-		align-items: center;
-		gap: 4px;
-	}
-
-	.og-image-field #rankflow_seo_og_image_upload .dashicons {
-		font-size: 16px;
-		width: 16px;
-		height: 16px;
-	}
-</style>
-
-<!-- OG Image Upload JavaScript -->
-<script>
-	jQuery(document).ready(function ($) {
-		var ogImageFrame;
-
-		// OG Image Upload Button
-		$('#rankflow_seo_og_image_upload').on('click', function (e) {
-			e.preventDefault();
-
-			if (ogImageFrame) {
-				ogImageFrame.open();
-				return;
-			}
-
-			ogImageFrame = wp.media({
-				title: '<?php echo esc_js(__("Select Open Graph Image", "rankflow-seo")); ?>',
-				button: {
-					text: '<?php echo esc_js(__("Use this image", "rankflow-seo")); ?>'
-				},
-				multiple: false,
-				library: {
-					type: 'image'
-				}
-			});
-
-			ogImageFrame.on('select', function () {
-				var attachment = ogImageFrame.state().get('selection').first().toJSON();
-				var imageUrl = attachment.url;
-
-				// Update hidden field
-				$('#rankflow_seo_og_image').val(imageUrl);
-
-				// Update preview
-				$('#rankflow_seo_og_image_preview').html(
-					'<img src="' + imageUrl + '" alt="">' +
-					'<button type="button" class="og-image-remove" id="rankflow_seo_og_image_remove" title="<?php echo esc_js(__("Remove image", "rankflow-seo")); ?>">' +
-					'<span class="dashicons dashicons-no-alt"></span></button>'
-				);
-
-				// Update search preview
-				updateSearchPreviewImage(imageUrl);
-			});
-
-			ogImageFrame.open();
-		});
-
-		// Remove OG Image
-		$(document).on('click', '#rankflow_seo_og_image_remove', function (e) {
-			e.preventDefault();
-			$('#rankflow_seo_og_image').val('');
-			$('#rankflow_seo_og_image_preview').empty();
-			updateSearchPreviewImage('');
-		});
-
-		// Update search preview image
-		function updateSearchPreviewImage(url) {
-			var $wrapper = $('.search-preview .preview-image-wrapper');
-
-			if (url) {
-				$wrapper.html('<div class="preview-image"><img src="' + url + '" alt=""></div>');
-			} else {
-				// Check for featured image
-				var $featuredImg = $('#set-post-thumbnail img, #postimagediv img');
-				if ($featuredImg.length && $featuredImg.attr('src')) {
-					$wrapper.html('<div class="preview-image"><img src="' + $featuredImg.attr('src') + '" alt=""></div>');
-				} else {
-					$wrapper.html(
-						'<div class="preview-image preview-no-image">' +
-						'<span class="dashicons dashicons-format-image"></span>' +
-						'<span><?php echo esc_js(__("No image", "rankflow-seo")); ?></span></div>'
-					);
-				}
-			}
-		}
-
-		// Watch for featured image changes
-		$(document).on('click', '#remove-post-thumbnail', function () {
-			setTimeout(function () {
-				if (!$('#rankflow_seo_og_image').val()) {
-					updateSearchPreviewImage('');
-				}
-			}, 500);
-		});
-	});
-</script>

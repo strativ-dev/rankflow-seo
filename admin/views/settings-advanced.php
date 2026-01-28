@@ -128,20 +128,3 @@ if (!defined('ABSPATH')) {
 	<?php submit_button(); ?>
 </form>
 
-<script>
-	jQuery(document).ready(function ($) {
-		$('#reset_settings').on('click', function () {
-			if (confirm('<?php echo esc_js(__('Are you sure? This will reset all plugin settings to defaults.', 'rankflow-seo')); ?>')) {
-				// Add AJAX call to reset settings.
-				alert('<?php echo esc_js(__('Settings reset functionality will be implemented.', 'rankflow-seo')); ?>');
-			}
-		});
-
-		$('#clear_cache').on('click', function () {
-			if (confirm('<?php echo esc_js(__('Are you sure? This will clear all cached API responses.', 'rankflow-seo')); ?>')) {
-				// Add AJAX call to clear cache.
-				alert('<?php echo esc_js(__('Cache cleared successfully.', 'rankflow-seo')); ?>');
-			}
-		});
-	});
-</script>

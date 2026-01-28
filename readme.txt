@@ -124,6 +124,46 @@ Optimize how your content appears when shared:
 * Clean, modern admin interface
 * WordPress coding standards compliant
 
+== External Services ==
+
+This plugin connects to the following third-party services to provide its features. Please review the information below to understand what data is sent and when.
+
+= Anthropic Claude API =
+
+This plugin optionally connects to Anthropic's Claude API to generate AI-powered SEO meta titles and descriptions.
+
+**What data is sent:** When you click "Generate with AI" on a post or page, the plugin sends your post title, post content (up to 2000 words), and focus keyword (if provided) to Anthropic's API servers.
+
+**When data is sent:** Data is only sent when you explicitly click the "Generate Now with AI" button in the post editor, or when you enable "Auto-generate on save" and save a post. No data is sent automatically without user action.
+
+**Service Links:**
+* [Anthropic Terms of Service](https://www.anthropic.com/legal/terms)
+* [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
+
+= Google Gemini API =
+
+This plugin optionally connects to Google's Generative AI (Gemini) API to generate AI-powered SEO meta titles and descriptions.
+
+**What data is sent:** When you click "Generate with AI" on a post or page, the plugin sends your post title, post content (up to 2000 words), and focus keyword (if provided) to Google's Generative AI API servers.
+
+**When data is sent:** Data is only sent when you explicitly click the "Generate Now with AI" button in the post editor, or when you enable "Auto-generate on save" and save a post. No data is sent automatically without user action.
+
+**Service Links:**
+* [Google API Terms of Service](https://developers.google.com/terms)
+* [Google Privacy Policy](https://policies.google.com/privacy)
+
+= Google Tag Manager =
+
+This plugin optionally allows you to add Google Tag Manager to your website for analytics and marketing purposes.
+
+**What data is sent:** If you configure a GTM container ID in the plugin settings, the Google Tag Manager script is added to your website. GTM may collect visitor data (such as page views, interactions, and device information) based on your GTM container configuration.
+
+**When data is sent:** The GTM script loads on every page view for your site visitors, but only when you have configured a GTM container ID in the plugin settings. If no GTM ID is configured, no connection to Google is made.
+
+**Service Links:**
+* [Google Tag Manager Terms of Service](https://www.google.com/analytics/tag-manager/use-policy/)
+* [Google Privacy Policy](https://policies.google.com/privacy)
+
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/rankflow-seo/` directory, or install the plugin through the WordPress plugins screen directly.

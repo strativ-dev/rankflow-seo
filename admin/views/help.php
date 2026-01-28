@@ -102,7 +102,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/ai-meta-generator-icon.png'); ?>"
-								alt="AI Meta Generation" style="width: 35px;">
+								alt="AI Meta Generation" class="rankflow-seo-icon-35">
 						</span>
 						<h4><?php esc_html_e('AI Meta Generation', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Generate SEO-optimized meta titles and descriptions using Anthropic Claude or Google Gemini AI.', 'rankflow-seo'); ?>
@@ -112,7 +112,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/seo-analysis-icon.png'); ?>"
-								alt="SEO Analysis" style="width: 32px;">
+								alt="SEO Analysis" class="rankflow-seo-icon-32">
 						</span>
 						<h4><?php esc_html_e('SEO Analysis', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('17 comprehensive SEO checks with color-coded scores and actionable recommendations.', 'rankflow-seo'); ?>
@@ -122,7 +122,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/readyblity-analysis-icon.png'); ?>"
-								alt="Readability Analysis" style="width: 32px;">
+								alt="Readability Analysis" class="rankflow-seo-icon-32">
 						</span>
 						<h4><?php esc_html_e('Readability Analysis', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('8 readability checks including sentence length, paragraph structure, and passive voice.', 'rankflow-seo'); ?>
@@ -132,7 +132,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/xml-sitemap-icon.png'); ?>"
-								alt="XML Sitemap" style="width: 32px;">
+								alt="XML Sitemap" class="rankflow-seo-icon-32">
 						</span>
 						<h4><?php esc_html_e('XML Sitemap', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Automatic sitemap generation with post, page, and category sitemaps. Auto-ping search engines.', 'rankflow-seo'); ?>
@@ -142,7 +142,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/redirect-manager-icon.png'); ?>"
-								alt="Redirect Manager" style="width: 32px;">
+								alt="Redirect Manager" class="rankflow-seo-icon-32">
 						</span>
 						<h4><?php esc_html_e('Redirect Manager', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Create 301/302 redirects, monitor 404 errors, and fix broken links with one click.', 'rankflow-seo'); ?>
@@ -152,7 +152,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/robots-txt-editor-icon.png'); ?>"
-								alt="Robots.txt Editor" style="width: 32px;">
+								alt="Robots.txt Editor" class="rankflow-seo-icon-32">
 						</span>
 						<h4><?php esc_html_e('Robots.txt Editor', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Virtual robots.txt with one-click AI crawler blocking and custom rules editor.', 'rankflow-seo'); ?>
@@ -162,7 +162,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/schema-generator-icon.png'); ?>"
-								alt="Schema Generator" style="width: 32px;">
+								alt="Schema Generator" class="rankflow-seo-icon-32">
 						</span>
 						<h4><?php esc_html_e('Schema Generator', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('14 schema types with display rules. Target specific pages, post types, or exclude pages.', 'rankflow-seo'); ?>
@@ -172,7 +172,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/site-conneciton-icon.png'); ?>"
-								alt="Site Connections" style="width: 32px;">
+								alt="Site Connections" class="rankflow-seo-icon-32">
 						</span>
 						<h4><?php esc_html_e('Site Connections', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Verify ownership with Google, Bing, Baidu, Yandex, Pinterest, and Ahrefs.', 'rankflow-seo'); ?>
@@ -182,7 +182,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/social-media-tags-icon.png'); ?>"
-								alt="Social Media Tags" style="width: 32px;">
+								alt="Social Media Tags" class="rankflow-seo-icon-32">
 						</span>
 						<h4><?php esc_html_e('Social Media Tags', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Open Graph and Twitter Card meta tags for better social sharing.', 'rankflow-seo'); ?>
@@ -192,7 +192,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/search-preview-icon.png'); ?>"
-								alt="Search Preview" style="width: 32px;">
+								alt="Search Preview" class="rankflow-seo-icon-32">
 						</span>
 						<h4><?php esc_html_e('Search Preview', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('See how your content will appear in Google search results before publishing.', 'rankflow-seo'); ?>
@@ -202,7 +202,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/advanced-options-icon.png'); ?>"
-								alt="Advanced Options" style="width: 32px;">
+								alt="Advanced Options" class="rankflow-seo-icon-32">
 						</span>
 						<h4><?php esc_html_e('Advanced Options', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Per-post noindex, nofollow, canonical URL, and exclude from sitemap options.', 'rankflow-seo'); ?>
@@ -212,7 +212,7 @@ if (!defined('ABSPATH')) {
 					<div class="feature-card">
 						<span class="feature-icon">
 							<img src="<?php echo esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/images/custom-post-type-icon.png'); ?>"
-								alt="Custom Post Types" style="width: 32px;">
+								alt="Custom Post Types" class="rankflow-seo-icon-32">
 						</span>
 						<h4><?php esc_html_e('Custom Post Types', 'rankflow-seo'); ?></h4>
 						<p><?php esc_html_e('Works with any public post type including WooCommerce products and portfolios.', 'rankflow-seo'); ?>
@@ -310,7 +310,7 @@ if (!defined('ABSPATH')) {
 					</div>
 				</div>
 
-				<div class="help-card" style="margin-top: 20px;">
+				<div class="help-card rankflow-seo-mt-20">
 					<h4><?php esc_html_e('Schema Display Rules', 'rankflow-seo'); ?></h4>
 					<p><?php esc_html_e('Each schema can be targeted to specific pages:', 'rankflow-seo'); ?></p>
 					<ul>
@@ -550,212 +550,3 @@ if (!defined('ABSPATH')) {
 	</div>
 </div>
 
-<style>
-	.rankflow-seo-help .help-content {
-		display: flex;
-		gap: 30px;
-		margin-top: 20px;
-	}
-
-	.help-main {
-		flex: 1;
-	}
-
-	.help-sidebar {
-		width: 300px;
-	}
-
-	.help-section {
-		margin-bottom: 40px;
-	}
-
-	.help-section h2 {
-		font-size: 24px;
-		margin-bottom: 20px;
-		color: #1d2327;
-		padding-bottom: 10px;
-		border-bottom: 2px solid #2271b1;
-	}
-
-	.help-card {
-		background: #fff;
-		border: 1px solid #ddd;
-		border-radius: 6px;
-		padding: 20px;
-		margin-bottom: 20px;
-	}
-
-	.help-card h3 {
-		margin-top: 0;
-		color: #2271b1;
-		font-size: 18px;
-	}
-
-	.help-card h4 {
-		margin-top: 0;
-		color: #1d2327;
-		font-size: 16px;
-	}
-
-	.help-card ul,
-	.help-card ol {
-		margin: 10px 0;
-		padding-left: 25px;
-	}
-
-	.help-card li {
-		margin-bottom: 8px;
-	}
-
-	.help-card code {
-		background: #f0f0f1;
-		padding: 8px 12px;
-		display: block;
-		margin-top: 10px;
-		border-radius: 4px;
-		font-size: 12px;
-		word-break: break-word;
-	}
-
-	.features-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 20px;
-	}
-
-	.feature-card {
-		background: #fff;
-		border: 1px solid #ddd;
-		border-radius: 6px;
-		padding: 20px;
-		text-align: center;
-		transition: box-shadow 0.2s, transform 0.2s;
-	}
-
-	.feature-card:hover {
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-		transform: translateY(-2px);
-	}
-
-	.feature-icon {
-		font-size: 40px;
-		display: block;
-		margin-bottom: 12px;
-	}
-
-	.feature-card h4 {
-		margin: 10px 0;
-		font-size: 15px;
-		color: #1d2327;
-	}
-
-	.feature-card p {
-		font-size: 13px;
-		color: #666;
-		margin: 0;
-		line-height: 1.5;
-	}
-
-	/* Schema Types Grid */
-	.schema-types-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 15px;
-	}
-
-	.schema-type-card {
-		background: #fff;
-		border: 1px solid #ddd;
-		border-radius: 6px;
-		padding: 15px;
-	}
-
-	.schema-type-card h4 {
-		margin: 0 0 8px 0;
-		font-size: 14px;
-		color: #1d2327;
-	}
-
-	.schema-type-card p {
-		margin: 0;
-		font-size: 12px;
-		color: #666;
-		line-height: 1.4;
-	}
-
-	/* FAQ */
-	.faq-item,
-	.troubleshooting-item {
-		background: #fff;
-		border: 1px solid #ddd;
-		border-radius: 6px;
-		padding: 20px;
-		margin-bottom: 15px;
-	}
-
-	.faq-item h4,
-	.troubleshooting-item h4 {
-		margin-top: 0;
-		color: #1d2327;
-		font-size: 15px;
-	}
-
-	.faq-item p {
-		margin: 0;
-		color: #555;
-		line-height: 1.6;
-	}
-
-	.troubleshooting-item ul {
-		margin: 10px 0 0 0;
-		padding-left: 25px;
-	}
-
-	.troubleshooting-item li {
-		margin-bottom: 5px;
-	}
-
-	/* Tools List */
-	.tools-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
-
-	.tools-list li {
-		padding: 10px 0;
-		border-bottom: 1px solid #eee;
-	}
-
-	.tools-list li:last-child {
-		border-bottom: none;
-	}
-
-	.tools-list a {
-		color: #2271b1;
-		text-decoration: none;
-		font-weight: 500;
-	}
-
-	.tools-list a:hover {
-		text-decoration: underline;
-	}
-
-	@media (max-width: 1200px) {
-		.rankflow-seo-help .help-content {
-			flex-direction: column;
-		}
-
-		.help-sidebar {
-			width: 100%;
-		}
-	}
-
-	@media (max-width: 782px) {
-
-		.features-grid,
-		.schema-types-grid {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>

@@ -68,9 +68,7 @@ class RankFlow_SEO_Redirect_Admin
 
 		?>
 		<div class="wrap rankflow-seo-redirects">
-			<h1 class="wp-heading-inline">
-				<?php esc_html_e('Redirects', 'rankflow-seo'); ?>
-			</h1>
+			<?php require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
 
 			<?php if ('list' === $rankflow_seo_action): ?>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-redirects&action=add" class="page-title-action">

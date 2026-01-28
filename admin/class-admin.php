@@ -64,6 +64,15 @@ class RankFlow_SEO_Admin
 				$this->version,
 				'all'
 			);
+
+			// Admin views styles - consolidated from inline styles.
+			wp_enqueue_style(
+				$this->plugin_name . '-admin-views',
+				RANKFLOW_SEO_PLUGIN_URL . 'assets/css/admin-views.css',
+				array($this->plugin_name . '-admin'),
+				$this->version,
+				'all'
+			);
 		}
 	}
 
@@ -141,6 +150,44 @@ class RankFlow_SEO_Admin
 				)
 			);
 		}
+
+		// Admin views scripts - consolidated from inline scripts.
+		// Load on all post edit screens and plugin settings pages.
+		if (
+			in_array($hook, array('post.php', 'post-new.php'), true) ||
+			strpos($hook, 'rankflow-seo') !== false
+		) {
+			wp_enqueue_script(
+				$this->plugin_name . '-admin-views',
+				RANKFLOW_SEO_PLUGIN_URL . 'assets/js/admin-views.js',
+				array('jquery'),
+				$this->version,
+				true
+			);
+
+			// Localize for admin-views.js
+			wp_localize_script(
+				$this->plugin_name . '-admin-views',
+				'rankflowSeoViewsData',
+				array(
+					'ajaxUrl' => admin_url('admin-ajax.php'),
+					'nonce' => wp_create_nonce('rankflow_seo_nonce'),
+					'strings' => array(
+						'selectOgImage' => __('Select Open Graph Image', 'rankflow-seo'),
+						'selectDefaultOgImage' => __('Select Default OG Image', 'rankflow-seo'),
+						'useThisImage' => __('Use this image', 'rankflow-seo'),
+						'removeImage' => __('Remove image', 'rankflow-seo'),
+						'noImage' => __('No image', 'rankflow-seo'),
+						'copied' => __('Copied!', 'rankflow-seo'),
+						'copyToClipboard' => __('Copy to Clipboard', 'rankflow-seo'),
+						'pinging' => __('Pinging...', 'rankflow-seo'),
+						'pingSitemap' => __('Ping Search Engines', 'rankflow-seo'),
+						'pingSuccess' => __('Sitemap pinged successfully!', 'rankflow-seo'),
+					),
+				)
+			);
+		}
+
 		// Ensure media uploader is available
 		wp_enqueue_media();
 	}

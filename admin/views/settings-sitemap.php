@@ -224,7 +224,7 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 ?>
 
 <div class="wrap rankflow-seo-settings">
-	<h1><?php esc_html_e('XML Sitemap Settings', 'rankflow-seo'); ?></h1>
+	<?php require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
 
 	<?php settings_errors('rankflow_seo_sitemap'); ?>
 
@@ -414,7 +414,7 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 				</tr>
 			</table>
 
-			<div class="taxonomy-list" <?php echo !$rankflow_seo_include_taxonomies ? 'style="display:none;"' : ''; ?>>
+			<div class="taxonomy-list <?php echo !$rankflow_seo_include_taxonomies ? 'rankflow-seo-hidden' : ''; ?>">
 				<table class="form-table">
 					<?php foreach ($rankflow_seo_taxonomies as $rankflow_seo_taxonomy): ?>
 						<?php
@@ -516,163 +516,3 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 	</form>
 </div>
 
-<style>
-	.rankflow-seo-sitemap-status {
-		background: #fff;
-		border: 1px solid #ccd0d4;
-		border-radius: 4px;
-		padding: 20px;
-		margin: 20px 0;
-	}
-
-	.rankflow-seo-sitemap-status h2 {
-		margin-top: 0;
-		padding-bottom: 10px;
-		border-bottom: 1px solid #eee;
-	}
-
-	.sitemap-enabled {
-		display: flex;
-		align-items: flex-start;
-		gap: 15px;
-		flex-wrap: wrap;
-	}
-
-	.sitemap-enabled .dashicons-yes-alt {
-		color: #46b450;
-		font-size: 40px;
-		width: 40px;
-		height: 40px;
-	}
-
-	.sitemap-disabled .dashicons-warning {
-		color: #dc3232;
-		font-size: 40px;
-		width: 40px;
-		height: 40px;
-	}
-
-	.sitemap-url {
-		display: inline-flex;
-		align-items: center;
-		gap: 5px;
-		font-size: 14px;
-		font-weight: 500;
-		word-break: break-all;
-	}
-
-	.sitemap-actions {
-		width: 100%;
-		margin-top: 10px;
-		display: flex;
-		gap: 10px;
-	}
-
-	.rankflow-seo-card {
-		background: #fff;
-		border: 1px solid #ccd0d4;
-		border-radius: 4px;
-		padding: 20px;
-		margin: 20px 0;
-	}
-
-	.rankflow-seo-card h2 {
-		margin-top: 0;
-		padding-bottom: 10px;
-		border-bottom: 1px solid #eee;
-	}
-
-	.ai-seo-toggle {
-		position: relative;
-		display: inline-block;
-		width: 40px;
-		height: 22px;
-		vertical-align: middle;
-	}
-
-	.ai-seo-toggle input {
-		opacity: 0;
-		width: 0;
-		height: 0;
-	}
-
-	.ai-seo-toggle .slider {
-		position: absolute;
-		cursor: pointer;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: #ccc;
-		transition: .3s;
-		border-radius: 22px;
-	}
-
-	.ai-seo-toggle .slider:before {
-		position: absolute;
-		content: "";
-		height: 16px;
-		width: 16px;
-		left: 3px;
-		bottom: 3px;
-		background-color: white;
-		transition: .3s;
-		border-radius: 50%;
-	}
-
-	.ai-seo-toggle input:checked+.slider {
-		background-color: #0073aa;
-	}
-
-	.ai-seo-toggle input:checked+.slider:before {
-		transform: translateX(18px);
-	}
-
-	.post-count {
-		color: #666;
-		font-size: 12px;
-		margin-left: 10px;
-	}
-
-	.taxonomy-list {
-		margin-top: 15px;
-		padding-top: 15px;
-		border-top: 1px solid #eee;
-	}
-
-	#flush-sitemap-cache {
-		margin-left: 10px;
-	}
-
-	.rankflow-seo-recommended {
-		color: #2271b1;
-		font-size: 12px;
-		font-weight: normal;
-		margin-left: 5px;
-	}
-</style>
-
-<script>
-	jQuery(document).ready(function ($) {
-		// Toggle taxonomy list visibility.
-		$('#rankflow_seo_sitemap_include_taxonomies').on('change', function () {
-			$('.taxonomy-list').toggle(this.checked);
-		});
-
-		// Flush sitemap cache.
-		$('#flush-sitemap-cache').on('click', function () {
-			var $btn = $(this);
-			$btn.prop('disabled', true).text('<?php echo esc_js(__('Flushing...', 'rankflow-seo')); ?>');
-
-			$.post(ajaxurl, {
-				action: 'rankflow_seo_flush_sitemap',
-				nonce: '<?php echo esc_js(wp_create_nonce('rankflow_seo_sitemap')); ?>'
-			}, function (response) {
-				$btn.prop('disabled', false).text('<?php echo esc_js(__('Flush Sitemap Cache', 'rankflow-seo')); ?>');
-				if (response.success) {
-					alert('<?php echo esc_js(__('Sitemap cache flushed successfully!', 'rankflow-seo')); ?>');
-				}
-			});
-		});
-	});
-</script>

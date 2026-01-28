@@ -87,7 +87,7 @@ $rankflow_seo_homepage_description = get_option('rankflow_seo_homepage_descripti
 				</p>
 
 				<div class="title-preview"
-					style="margin-top: 15px; padding: 10px; background: #f9f9f9; border-left: 4px solid #2271b1;">
+					class="rankflow-seo-title-preview">
 					<strong><?php esc_html_e('Preview:', 'rankflow-seo'); ?></strong><br>
 					<span id="title-preview-text">
 						<?php echo esc_html('Your Post Title ' . $rankflow_seo_title_separator . ' ' . get_bloginfo('name')); ?>
@@ -160,7 +160,7 @@ $rankflow_seo_homepage_description = get_option('rankflow_seo_homepage_descripti
 			</td>
 		</tr>
 
-		<tr id="person_name_row" style="display: none;">
+		<tr id="person_name_row" class="rankflow-seo-hidden">
 			<th scope="row">
 				<label for="person_name"><?php esc_html_e('Person Name', 'rankflow-seo'); ?></label>
 			</th>
@@ -191,24 +191,3 @@ $rankflow_seo_homepage_description = get_option('rankflow_seo_homepage_descripti
 	<?php submit_button(); ?>
 </form>
 
-<script>
-	jQuery(document).ready(function ($) {
-		// Update title preview.
-		$('#title_separator').on('change', function () {
-			var separator = $(this).val();
-			var preview = 'Your Post Title ' + separator + ' <?php echo esc_js(get_bloginfo('name')); ?>';
-			$('#title-preview-text').text(preview);
-		});
-
-		// Toggle organization/person fields.
-		$('#site_represents').on('change', function () {
-			if ($(this).val() === 'organization') {
-				$('#organization_name_row').show();
-				$('#person_name_row').hide();
-			} else {
-				$('#organization_name_row').hide();
-				$('#person_name_row').show();
-			}
-		}).trigger('change');
-	});
-</script>
