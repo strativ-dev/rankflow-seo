@@ -86,10 +86,9 @@ $rankflow_seo_homepage_description = get_option('rankflow_seo_homepage_descripti
 					<?php esc_html_e('Choose the separator to use in page titles (e.g., "Post Title - Site Name")', 'rankflow-seo'); ?>
 				</p>
 
-				<div class="title-preview"
-					class="rankflow-seo-title-preview">
+				<div class="rankflow-seo-title-preview">
 					<strong><?php esc_html_e('Preview:', 'rankflow-seo'); ?></strong><br>
-					<span id="title-preview-text">
+					<span id="title-preview-text" data-site-name="<?php echo esc_attr(get_bloginfo('name')); ?>">
 						<?php echo esc_html('Your Post Title ' . $rankflow_seo_title_separator . ' ' . get_bloginfo('name')); ?>
 					</span>
 				</div>

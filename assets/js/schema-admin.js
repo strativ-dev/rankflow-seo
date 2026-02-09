@@ -12,7 +12,7 @@
         schemaTypes: {},
 
         init: function () {
-            this.schemaTypes = aiSeoProSchema.schemaTypes || {};
+            this.schemaTypes = rankflowSeoSchema.schemaTypes || {};
             this.schemaIndex = $('.schema-item').length;
 
             this.bindEvents();
@@ -31,7 +31,7 @@
             // Delete schema
             $(document).on('click', '.schema-delete', function (e) {
                 e.stopPropagation();
-                if (confirm(aiSeoProSchema.confirmDelete)) {
+                if (confirm(rankflowSeoSchema.confirmDelete)) {
                     self.deleteSchema($(this).closest('.schema-item'));
                 }
             });
@@ -293,7 +293,7 @@
                 case 'image':
                     html = '<div class="image-field-wrapper">';
                     html += '<input type="url" id="' + id + '" name="' + name + '" class="widefat image-url-input" placeholder="' + placeholder + '">';
-                    html += '<button type="button" class="button select-image">' + aiSeoProSchema.selectImage + '</button>';
+                    html += '<button type="button" class="button select-image">' + rankflowSeoSchema.selectImage + '</button>';
                     html += '</div>';
                     break;
 
@@ -345,9 +345,9 @@
             var $input = $button.siblings('.image-url-input');
 
             var mediaUploader = wp.media({
-                title: aiSeoProSchema.selectImage,
+                title: rankflowSeoSchema.selectImage,
                 button: {
-                    text: aiSeoProSchema.useImage
+                    text: rankflowSeoSchema.useImage
                 },
                 multiple: false
             });

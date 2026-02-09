@@ -112,8 +112,10 @@ $rankflow_seo_avg_score = $wpdb->get_var(
 									</td>
 									<td>
 										<?php
-										// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-										echo RankFlow_SEO_Helper::format_score( $rankflow_seo_score ? $rankflow_seo_score : 0 );
+										echo wp_kses(
+											RankFlow_SEO_Helper::format_score( $rankflow_seo_score ? $rankflow_seo_score : 0 ),
+											array( 'span' => array( 'style' => array() ) )
+										);
 										?>
 									</td>
 									<td>

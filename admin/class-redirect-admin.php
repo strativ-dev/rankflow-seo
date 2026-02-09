@@ -202,7 +202,7 @@ class RankFlow_SEO_Redirect_Admin
 			}
 
 			header('Content-Type: text/csv; charset=utf-8');
-			header('Content-Disposition: attachment; filename="ai-seo-redirects-' . gmdate('Y-m-d') . '.csv"');
+			header('Content-Disposition: attachment; filename="rankflow-seo-redirects-' . gmdate('Y-m-d') . '.csv"');
 			header('Pragma: no-cache');
 			header('Expires: 0');
 
@@ -396,7 +396,7 @@ class RankFlow_SEO_Redirect_Admin
 			}
 
 			header('Content-Type: text/csv; charset=utf-8');
-			header('Content-Disposition: attachment; filename="ai-seo-404-logs-' . gmdate('Y-m-d') . '.csv"');
+			header('Content-Disposition: attachment; filename="rankflow-seo-404-logs-' . gmdate('Y-m-d') . '.csv"');
 			header('Pragma: no-cache');
 			header('Expires: 0');
 

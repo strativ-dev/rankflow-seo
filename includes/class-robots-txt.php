@@ -375,7 +375,7 @@ class RankFlow_SEO_Robots_Txt
         if (get_option('rankflow_seo_robots_include_sitemap', true)) {
             // Check if our sitemap is enabled.
             if (get_option('rankflow_seo_sitemap_enabled', false)) {
-                $lines[] = 'Sitemap: ' . home_url('sitemap_index.xml');
+                $lines[] = 'Sitemap: ' . esc_url(home_url('sitemap_index.xml'));
             }
         }
 
@@ -386,14 +386,14 @@ class RankFlow_SEO_Robots_Txt
             foreach ($sitemap_urls as $url) {
                 $url = trim($url);
                 if (!empty($url)) {
-                    $lines[] = 'Sitemap: ' . $url;
+                    $lines[] = 'Sitemap: ' . esc_url($url);
                 }
             }
         }
 
         // Add default WordPress sitemap if exists and no other sitemap added.
         if (!get_option('rankflow_seo_sitemap_enabled', false) && empty(trim($custom_sitemaps))) {
-            $lines[] = 'Sitemap: ' . home_url('wp-sitemap.xml');
+            $lines[] = 'Sitemap: ' . esc_url(home_url('wp-sitemap.xml'));
         }
 
         $lines[] = '';
@@ -531,10 +531,10 @@ class RankFlow_SEO_Robots_Txt
         if (get_option('rankflow_seo_sitemap_enabled', false)) {
             // RankFlow SEO sitemap is enabled - show that instead of WordPress default.
             $output .= "# RankFlow SEO Sitemap\n";
-            $output .= "Sitemap: " . home_url('sitemap_index.xml') . "\n";
+            $output .= "Sitemap: " . esc_url(home_url('sitemap_index.xml')) . "\n";
         } else {
             // Default WordPress sitemap.
-            $output .= "Sitemap: " . home_url('wp-sitemap.xml') . "\n";
+            $output .= "Sitemap: " . esc_url(home_url('wp-sitemap.xml')) . "\n";
         }
 
         return $output;
@@ -559,9 +559,17 @@ class RankFlow_SEO_Robots_Txt
     public function get_physical_file_content()
     {
         $robots_path = ABSPATH . 'robots.txt';
-        if (file_exists($robots_path)) {
-            return file_get_contents($robots_path);
+        if (!file_exists($robots_path)) {
+            return false;
         }
-        return false;
+
+        global $wp_filesystem;
+
+        if (empty($wp_filesystem)) {
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+            WP_Filesystem();
+        }
+
+        return $wp_filesystem->get_contents($robots_path);
     }
 }

@@ -32,7 +32,7 @@ $rankflow_seo_results = $this->monitor_404->get_404_logs(
 );
 ?>
 
-<div class="wrap ai-seo-404-monitor">
+<div class="wrap rankflow-seo-404-monitor">
 	<?php require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
 
 	<!-- Statistics Cards -->

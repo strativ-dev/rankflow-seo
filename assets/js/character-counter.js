@@ -88,7 +88,7 @@
 	});
 
 	// Export for use in other modules
-	window.AISeoPro = window.AISeoPro || {};
-	window.AISeoPro.CharacterCounter = CharacterCounter;
+	window.RankflowSeo = window.RankflowSeo || {};
+	window.RankflowSeo.CharacterCounter = CharacterCounter;
 
 })(jQuery);

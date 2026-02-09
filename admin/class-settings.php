@@ -478,16 +478,6 @@ class RankFlow_SEO_Settings
 			)
 		);
 
-		register_setting(
-			'rankflow_seo_site_connections',
-			'rankflow_seo_gtm_id',
-			array(
-				'type' => 'string',
-				'sanitize_callback' => array($this, 'sanitize_gtm_id'),
-				'default' => '',
-			)
-		);
-
 		// Advanced settings.
 		register_setting(
 			'rankflow_seo_advanced',
@@ -750,7 +740,19 @@ class RankFlow_SEO_Settings
 			return array();
 		}
 
-		return array_map('sanitize_text_field', $input);
+		// Get valid public post types to whitelist against.
+		$valid_post_types = get_post_types(array('public' => true), 'names');
+
+		$sanitized = array();
+		foreach ($input as $post_type) {
+			$post_type = sanitize_key($post_type);
+			// Only allow valid, registered public post types.
+			if (isset($valid_post_types[$post_type])) {
+				$sanitized[] = $post_type;
+			}
+		}
+
+		return $sanitized;
 	}
 
 	/**
@@ -801,34 +803,6 @@ class RankFlow_SEO_Settings
 
 		// Otherwise just sanitize and return.
 		return sanitize_text_field($input);
-	}
-
-	/**
-	 * Sanitize GTM Container ID.
-	 *
-	 * @param string $input The input value.
-	 * @return string Sanitized GTM ID with GTM- prefix.
-	 */
-	public function sanitize_gtm_id($input)
-	{
-		$input = trim($input);
-
-		if (empty($input)) {
-			return '';
-		}
-
-		if (preg_match('/GTM-([A-Z0-9]+)/i', $input, $matches)) {
-			return 'GTM-' . strtoupper(sanitize_text_field($matches[1]));
-		}
-
-		$input = preg_replace('/^GTM-/i', '', $input);
-		$clean_id = strtoupper(sanitize_text_field($input));
-
-		if (empty($clean_id)) {
-			return '';
-		}
-
-		return 'GTM-' . $clean_id;
 	}
 
 	/**
@@ -937,47 +911,4 @@ class RankFlow_SEO_Settings
 		}
 	}
 
-	/**
-	 * Output Google Tag Manager script in head.
-	 * GTM requires the script to be in the head as early as possible.
-	 * Using wp_head hook directly is the recommended approach for GTM.
-	 */
-	public static function output_gtm_head()
-	{
-		$gtm_id = get_option('rankflow_seo_gtm_id', '');
-
-		if (empty($gtm_id) || is_admin()) {
-			return;
-		}
-
-		// Output GTM script directly in head (this is the standard GTM implementation).
-		?>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','<?php echo esc_js($gtm_id); ?>');</script>
-<!-- End Google Tag Manager -->
-		<?php
-	}
-
-	/**
-	 * Output Google Tag Manager noscript body tag.
-	 * Note: noscript tags cannot be enqueued, they must be output directly.
-	 */
-	public static function output_gtm_body()
-	{
-		$gtm_id = get_option('rankflow_seo_gtm_id', '');
-
-		if (empty($gtm_id) || is_admin()) {
-			return;
-		}
-
-		// Output noscript fallback for GTM.
-		printf(
-			'<!-- Google Tag Manager (noscript) --><noscript><iframe src="%s" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->',
-			esc_url('https://www.googletagmanager.com/ns.html?id=' . $gtm_id)
-		);
-	}
 }

@@ -107,7 +107,7 @@ class RankFlow_SEO_Schema_Admin
 
 		wp_localize_script(
 			'rankflow-seo-schema-admin',
-			'aiSeoProSchema',
+			'rankflowSeoSchema',
 			array(
 				'schemaTypes' => $this->get_schema_types(),
 				'nonce' => wp_create_nonce('rankflow_seo_schema_nonce'),

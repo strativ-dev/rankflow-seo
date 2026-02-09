@@ -72,7 +72,7 @@ $rankflow_seo_twitter_username = get_option('rankflow_seo_twitter_username', '')
 
 <?php if (get_option('rankflow_seo_og_tags', true)): ?>
 	<!-- Open Graph / Facebook -->
-	<meta property="og:type" content="<?php echo is_front_page() ? 'website' : 'article'; ?>">
+	<meta property="og:type" content="<?php echo esc_attr(is_front_page() ? 'website' : 'article'); ?>">
 	<meta property="og:url" content="<?php echo esc_url(get_permalink($post->ID)); ?>">
 	<meta property="og:title" content="<?php echo esc_attr($rankflow_seo_og_title); ?>">
 	<meta property="og:description" content="<?php echo esc_attr($rankflow_seo_og_description); ?>">

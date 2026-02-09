@@ -56,7 +56,7 @@ class RankFlow_SEO_Schema_Output
 			if ($markup) {
 				echo "\n<!-- RankFlow SEO Schema: " . esc_html($schema['type']) . " -->\n";
 				echo '<script type="application/ld+json">' . "\n";
-				echo wp_json_encode($markup, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+				echo wp_json_encode($markup, JSON_HEX_TAG | JSON_HEX_AMP);
 				echo "\n</script>\n";
 			}
 		}

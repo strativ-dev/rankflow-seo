@@ -166,7 +166,7 @@
                 var $btn = $(this);
                 $btn.prop('disabled', true).text(rankflowSeoViewsData.strings.pinging || 'Pinging...');
                 $.ajax({
-                    url: ajaxurl,
+                    url: rankflowSeoViewsData.ajaxUrl,
                     type: 'POST',
                     data: { action: 'rankflow_seo_ping_sitemap', nonce: rankflowSeoViewsData.nonce },
                     success: function(response) {
@@ -211,9 +211,9 @@
 
         /* Handle "No schemas" message visibility */
         function updateNoSchemasMessage() {
-            var $schemasContainer = $('#schemas-container');
+            var $schemasContainer = $('#schema-repeater');
             var $noSchemasMessage = $('.no-schemas-message');
-            
+
             if ($schemasContainer.find('.schema-item').length > 0) {
                 $noSchemasMessage.addClass('rankflow-seo-hidden');
             } else {

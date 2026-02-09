@@ -272,10 +272,10 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 						</label>
 					</th>
 					<td>
-						<label class="ai-seo-toggle">
+						<label class="rankflow-seo-toggle">
 							<input type="checkbox" id="rankflow_seo_sitemap_enabled" name="rankflow_seo_sitemap_enabled"
 								value="1" <?php checked($rankflow_seo_sitemap_enabled); ?>>
-							<span class="slider"></span>
+							<span class="toggle-slider"></span>
 						</label>
 						<p class="description">
 							<?php esc_html_e('Generate an XML sitemap for search engines.', 'rankflow-seo'); ?>
@@ -310,10 +310,10 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 						</label>
 					</th>
 					<td>
-						<label class="ai-seo-toggle">
+						<label class="rankflow-seo-toggle">
 							<input type="checkbox" id="rankflow_seo_sitemap_include_images"
 								name="rankflow_seo_sitemap_include_images" value="1" <?php checked($rankflow_seo_include_images); ?>>
-							<span class="slider"></span>
+							<span class="toggle-slider"></span>
 						</label>
 						<p class="description">
 							<?php esc_html_e('Include image URLs in the sitemap for better image SEO.', 'rankflow-seo'); ?>
@@ -328,10 +328,10 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 						</label>
 					</th>
 					<td>
-						<label class="ai-seo-toggle">
+						<label class="rankflow-seo-toggle">
 							<input type="checkbox" id="rankflow_seo_sitemap_ping_search_engines"
 								name="rankflow_seo_sitemap_ping_search_engines" value="1" <?php checked($rankflow_seo_ping_search_engines); ?>>
-							<span class="slider"></span>
+							<span class="toggle-slider"></span>
 						</label>
 						<p class="description">
 							<?php esc_html_e('Automatically notify Google and Bing when content is published.', 'rankflow-seo'); ?>
@@ -364,12 +364,12 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 							</label>
 						</th>
 						<td>
-							<label class="ai-seo-toggle">
+							<label class="rankflow-seo-toggle">
 								<input type="checkbox"
 									id="sitemap_pt_<?php echo esc_attr($rankflow_seo_post_type->name); ?>"
 									name="rankflow_seo_sitemap_post_types[]"
 									value="<?php echo esc_attr($rankflow_seo_post_type->name); ?>" <?php checked(in_array($rankflow_seo_post_type->name, $rankflow_seo_saved_post_types, true)); ?>>
-								<span class="slider"></span>
+								<span class="toggle-slider"></span>
 							</label>
 							<?php
 							$rankflow_seo_count = wp_count_posts($rankflow_seo_post_type->name);
@@ -402,10 +402,10 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 						</label>
 					</th>
 					<td>
-						<label class="ai-seo-toggle">
+						<label class="rankflow-seo-toggle">
 							<input type="checkbox" id="rankflow_seo_sitemap_include_taxonomies"
 								name="rankflow_seo_sitemap_include_taxonomies" value="1" <?php checked($rankflow_seo_include_taxonomies); ?>>
-							<span class="slider"></span>
+							<span class="toggle-slider"></span>
 						</label>
 						<p class="description">
 							<?php esc_html_e('Include taxonomy archives (categories, tags, etc.) in the sitemap.', 'rankflow-seo'); ?>
@@ -431,12 +431,12 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 								</label>
 							</th>
 							<td>
-								<label class="ai-seo-toggle">
+								<label class="rankflow-seo-toggle">
 									<input type="checkbox"
 										id="sitemap_tax_<?php echo esc_attr($rankflow_seo_taxonomy->name); ?>"
 										name="rankflow_seo_sitemap_taxonomies[]"
 										value="<?php echo esc_attr($rankflow_seo_taxonomy->name); ?>" <?php checked(in_array($rankflow_seo_taxonomy->name, $rankflow_seo_saved_taxonomies, true)); ?>>
-									<span class="slider"></span>
+									<span class="toggle-slider"></span>
 								</label>
 								<?php
 								$rankflow_seo_term_count = wp_count_terms(
@@ -474,10 +474,10 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 						</label>
 					</th>
 					<td>
-						<label class="ai-seo-toggle">
+						<label class="rankflow-seo-toggle">
 							<input type="checkbox" id="rankflow_seo_sitemap_include_authors"
 								name="rankflow_seo_sitemap_include_authors" value="1" <?php checked($rankflow_seo_include_authors); ?>>
-							<span class="slider"></span>
+							<span class="toggle-slider"></span>
 						</label>
 						<p class="description">
 							<?php esc_html_e('Include author archive pages in the sitemap.', 'rankflow-seo'); ?>

@@ -169,6 +169,12 @@ class RankFlow_SEO_Sitemap_Manager
 			'index.php?rankflow_seo_sitemap=xsl',
 			'top'
 		);
+
+		// Auto-flush if our rules are missing from stored rewrite rules.
+		$rules = get_option('rewrite_rules');
+		if (is_array($rules) && !isset($rules['^sitemap_index\.xml$'])) {
+			update_option('rankflow_seo_flush_rewrite_rules', true);
+		}
 	}
 
 	/**
@@ -629,7 +635,7 @@ class RankFlow_SEO_Sitemap_Manager
 <head>
 	<title>XML Sitemap - ' . esc_html(get_bloginfo('name')) . '</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<style type="text/css">
+	<style>
 		body {
 			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 			font-size: 14px;

@@ -6,28 +6,28 @@
  */
 
 /* Breadcrumbs (if enabled) */
-.ai-seo-breadcrumbs {
+.rankflow-seo-breadcrumbs {
 	font-size: 14px;
 	color: #646970;
 	margin: 20px 0;
 	padding: 10px 0;
 }
 
-.ai-seo-breadcrumbs a {
+.rankflow-seo-breadcrumbs a {
 	color: #2271b1;
 	text-decoration: none;
 }
 
-.ai-seo-breadcrumbs a:hover {
+.rankflow-seo-breadcrumbs a:hover {
 	text-decoration: underline;
 }
 
-.ai-seo-breadcrumbs .separator {
+.rankflow-seo-breadcrumbs .separator {
 	margin: 0 8px;
 	color: #646970;
 }
 
-.ai-seo-breadcrumbs .current {
+.rankflow-seo-breadcrumbs .current {
 	color: #1d2327;
 	font-weight: 600;
 }

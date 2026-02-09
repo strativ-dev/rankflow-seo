@@ -175,15 +175,15 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 
 <div class="rankflow-seo-metabox">
 	<!-- Tab Navigation -->
-	<div class="ai-seo-tabs-nav">
-		<button type="button" class="ai-seo-tab-btn active" data-tab="seo">
+	<div class="rankflow-seo-tabs-nav">
+		<button type="button" class="rankflow-seo-tab-btn active" data-tab="seo">
 			<span class="dashicons dashicons-search"></span>
 			<?php esc_html_e('SEO', 'rankflow-seo'); ?>
 			<?php if ($rankflow_seo_seo_problems > 0): ?>
 				<span class="tab-badge badge-problems"><?php echo esc_html($rankflow_seo_seo_problems); ?></span>
 			<?php endif; ?>
 		</button>
-		<button type="button" class="ai-seo-tab-btn" data-tab="readability">
+		<button type="button" class="rankflow-seo-tab-btn" data-tab="readability">
 			<span class="dashicons dashicons-editor-paragraph"></span>
 			<?php esc_html_e('Readability', 'rankflow-seo'); ?>
 			<?php if ($rankflow_seo_readability_problems > 0): ?>
@@ -193,7 +193,7 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 	</div>
 
 	<!-- SEO Tab Content -->
-	<div class="ai-seo-tab-content active" data-tab="seo">
+	<div class="rankflow-seo-tab-content active" data-tab="seo">
 		<!-- SEO Score -->
 		<div class="seo-score-section">
 			<div class="score-display">
@@ -560,7 +560,7 @@ $rankflow_seo_site_icon = get_site_icon_url(16);
 	</div>
 
 	<!-- Readability Tab Content -->
-	<div class="ai-seo-tab-content" data-tab="readability">
+	<div class="rankflow-seo-tab-content" data-tab="readability">
 		<?php
 		$rankflow_seo_flesch_score = isset($rankflow_seo_readability_analysis['flesch_score']) ? $rankflow_seo_readability_analysis['flesch_score'] : 0;
 		$rankflow_seo_grade_level = isset($rankflow_seo_readability_analysis['grade_level']) ? $rankflow_seo_readability_analysis['grade_level'] : '';

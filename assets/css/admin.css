@@ -235,7 +235,7 @@ input:checked + .toggle-slider:before {
 
 /* Redirect Tables */
 .rankflow-seo-redirects .wp-list-table,
-.ai-seo-404-monitor .wp-list-table {
+.rankflow-seo-404-monitor .wp-list-table {
     margin-top: 20px;
 }
 

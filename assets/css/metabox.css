@@ -13,7 +13,7 @@
 /* ============================================
    Tab Navigation
    ============================================ */
-.ai-seo-tabs-nav {
+.rankflow-seo-tabs-nav {
 	display: flex;
 	border-bottom: 1px solid #ddd;
 	background: #f9f9f9;
@@ -21,7 +21,7 @@
 	padding: 0;
 }
 
-.ai-seo-tab-btn {
+.rankflow-seo-tab-btn {
 	flex: 1;
 	display: flex;
 	align-items: center;
@@ -38,18 +38,18 @@
 	transition: all 0.2s ease;
 }
 
-.ai-seo-tab-btn:hover {
+.rankflow-seo-tab-btn:hover {
 	color: #2271b1;
 	background: #f0f0f1;
 }
 
-.ai-seo-tab-btn.active {
+.rankflow-seo-tab-btn.active {
 	color: #2271b1;
 	background: #fff;
 	border-bottom-color: #2271b1;
 }
 
-.ai-seo-tab-btn .dashicons {
+.rankflow-seo-tab-btn .dashicons {
 	font-size: 18px;
 	width: 18px;
 	height: 18px;
@@ -89,12 +89,12 @@
 /* ============================================
    Tab Content
    ============================================ */
-.ai-seo-tab-content {
+.rankflow-seo-tab-content {
 	display: none;
 	padding: 10px 0;
 }
 
-.ai-seo-tab-content.active {
+.rankflow-seo-tab-content.active {
 	display: block;
 }
 
@@ -649,16 +649,16 @@
    Responsive
    ============================================ */
 @media screen and (max-width: 782px) {
-	.ai-seo-tabs-nav {
+	.rankflow-seo-tabs-nav {
 		margin: -10px -10px 15px -10px;
 	}
 
-	.ai-seo-tab-btn {
+	.rankflow-seo-tab-btn {
 		padding: 12px 10px;
 		font-size: 13px;
 	}
 
-	.ai-seo-tab-btn .dashicons {
+	.rankflow-seo-tab-btn .dashicons {
 		display: none;
 	}
 

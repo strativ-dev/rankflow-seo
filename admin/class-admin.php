@@ -114,7 +114,7 @@ class RankFlow_SEO_Admin
 			$post_id = get_the_ID();
 			wp_localize_script(
 				$this->plugin_name . '-metabox',
-				'aiSeoProData',
+				'rankflowSeoData',
 				array(
 					'ajaxUrl' => admin_url('admin-ajax.php'),
 					'nonce' => wp_create_nonce('rankflow_seo_nonce'),
@@ -143,7 +143,7 @@ class RankFlow_SEO_Admin
 			// Localize for settings page too.
 			wp_localize_script(
 				$this->plugin_name . '-settings',
-				'aiSeoProData',
+				'rankflowSeoData',
 				array(
 					'ajaxUrl' => admin_url('admin-ajax.php'),
 					'nonce' => wp_create_nonce('rankflow_seo_nonce'),

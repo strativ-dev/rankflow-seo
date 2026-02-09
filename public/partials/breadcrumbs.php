@@ -60,7 +60,7 @@ $rankflow_seo_breadcrumb_items[] = array(
 );
 ?>
 
-<nav class="ai-seo-breadcrumbs" aria-label="Breadcrumb">
+<nav class="rankflow-seo-breadcrumbs" aria-label="Breadcrumb">
 	<?php foreach ($rankflow_seo_breadcrumb_items as $rankflow_seo_index => $rankflow_seo_item): ?>
 		<?php if ($rankflow_seo_index > 0): ?>
 			<span class="separator">/</span>

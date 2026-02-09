@@ -19,7 +19,7 @@
 
 		init() {
 			// Tab switching
-			$('.ai-seo-tab-btn').on('click', (e) => this.switchTab(e));
+			$('.rankflow-seo-tab-btn').on('click', (e) => this.switchTab(e));
 
 			// Accordion toggle
 			$('.accordion-toggle').on('click', (e) => this.toggleAccordion(e));
@@ -52,12 +52,12 @@
 			const tabId = button.data('tab');
 
 			// Update button states
-			$('.ai-seo-tab-btn').removeClass('active');
+			$('.rankflow-seo-tab-btn').removeClass('active');
 			button.addClass('active');
 
 			// Update content states
-			$('.ai-seo-tab-content').removeClass('active');
-			$(`.ai-seo-tab-content[data-tab="${tabId}"]`).addClass('active');
+			$('.rankflow-seo-tab-content').removeClass('active');
+			$(`.rankflow-seo-tab-content[data-tab="${tabId}"]`).addClass('active');
 		}
 
 		/**
@@ -209,17 +209,17 @@
 
 			// Show loading state
 			this.generating = true;
-			button.prop('disabled', true).html('<span class="dashicons dashicons-update dashicons-spin"></span> ' + aiSeoProData.strings.generating);
+			button.prop('disabled', true).html('<span class="dashicons dashicons-update dashicons-spin"></span> ' + rankflowSeoData.strings.generating);
 			spinner.addClass('is-active');
 
 			// Make AJAX request
 			$.ajax({
-				url: aiSeoProData.ajaxUrl,
+				url: rankflowSeoData.ajaxUrl,
 				type: 'POST',
 				data: {
 					action: 'rankflow_seo_generate_meta',
-					nonce: aiSeoProData.nonce,
-					post_id: aiSeoProData.postId,
+					nonce: rankflowSeoData.nonce,
+					post_id: rankflowSeoData.postId,
 					title: title,
 					content: content,
 					focus_keyword: focusKeyword,
@@ -250,10 +250,10 @@
 						// Trigger analysis update
 						this.triggerAnalysisUpdate();
 
-						const message = response.data.message || aiSeoProData.strings.success;
+						const message = response.data.message || rankflowSeoData.strings.success;
 						this.showNotice(message, 'success');
 					} else {
-						const errorMsg = response.data.message || response.data || aiSeoProData.strings.error;
+						const errorMsg = response.data.message || response.data || rankflowSeoData.strings.error;
 						this.showNotice(errorMsg, 'error');
 					}
 				},
@@ -353,7 +353,7 @@
 		 * Trigger analysis update via AJAX
 		 */
 		triggerAnalysisUpdate() {
-			const postId = aiSeoProData.postId;
+			const postId = rankflowSeoData.postId;
 			const focusKeyword = $('#rankflow_seo_focus_keyword').val();
 			const content = this.getEditorContent();
 			const title = this.getPostTitle();
@@ -364,11 +364,11 @@
 			if (!postId) return;
 
 			$.ajax({
-				url: aiSeoProData.ajaxUrl,
+				url: rankflowSeoData.ajaxUrl,
 				type: 'POST',
 				data: {
 					action: 'rankflow_seo_update_analysis',
-					nonce: aiSeoProData.nonce,
+					nonce: rankflowSeoData.nonce,
 					post_id: postId,
 					focus_keyword: focusKeyword,
 					content: content,
@@ -462,7 +462,7 @@
 		 * Update tab badge
 		 */
 		updateTabBadge(tabName, analysis) {
-			const tab = $(`.ai-seo-tab-btn[data-tab="${tabName}"]`);
+			const tab = $(`.rankflow-seo-tab-btn[data-tab="${tabName}"]`);
 			tab.find('.tab-badge').remove();
 
 			const problemCount = analysis.problems ? analysis.problems.length : 0;

@@ -56,7 +56,7 @@
 		initTooltips() {
 			$('[data-tooltip]').each(function () {
 				const tooltip = $('<span>')
-					.addClass('ai-seo-tooltip')
+					.addClass('rankflow-seo-tooltip')
 					.text($(this).data('tooltip'));
 
 				$(this).append(tooltip);
@@ -78,7 +78,7 @@
 		 */
 		showLoading(message = 'Processing...') {
 			const overlay = $('<div>')
-				.addClass('ai-seo-loading-overlay')
+				.addClass('rankflow-seo-loading-overlay')
 				.html(`
 					<div class="loading-content">
 						<div class="spinner is-active"></div>
@@ -93,8 +93,8 @@
 		 * Hide loading overlay
 		 */
 		hideLoading() {
-			$('.ai-seo-loading-overlay').fadeOut(() => {
-				$('.ai-seo-loading-overlay').remove();
+			$('.rankflow-seo-loading-overlay').fadeOut(() => {
+				$('.rankflow-seo-loading-overlay').remove();
 			});
 		}
 
@@ -116,7 +116,7 @@
 		 */
 		showToast(message, type = 'info') {
 			const toast = $('<div>')
-				.addClass('ai-seo-toast toast-' + type)
+				.addClass('rankflow-seo-toast toast-' + type)
 				.text(message);
 
 			$('body').append(toast);
@@ -135,9 +135,9 @@
 	/**
 	 * Utility functions
 	 */
-	window.AISeoPro = window.AISeoPro || {};
+	window.RankflowSeo = window.RankflowSeo || {};
 
-	window.AISeoPro.Utils = {
+	window.RankflowSeo.Utils = {
 		/**
 		 * Format number with commas
 		 */
@@ -193,7 +193,7 @@
 	 * Initialize on document ready
 	 */
 	$(document).ready(function () {
-		window.AISeoPro.Admin = new AdminHandler();
+		window.RankflowSeo.Admin = new AdminHandler();
 	});
 
 })(jQuery);

@@ -120,7 +120,6 @@ Optimize how your content appears when shared:
 * Search engine preview (Google SERP simulator)
 * Custom post type support
 * Advanced options per post (noindex, nofollow, canonical)
-* Google Tag Manager integration
 * Clean, modern admin interface
 * WordPress coding standards compliant
 
@@ -152,17 +151,41 @@ This plugin optionally connects to Google's Generative AI (Gemini) API to genera
 * [Google API Terms of Service](https://developers.google.com/terms)
 * [Google Privacy Policy](https://policies.google.com/privacy)
 
-= Google Tag Manager =
+= Google Sitemap Ping =
 
-This plugin optionally allows you to add Google Tag Manager to your website for analytics and marketing purposes.
+This plugin optionally pings Google to notify them that your sitemap has been updated when you publish or update content.
 
-**What data is sent:** If you configure a GTM container ID in the plugin settings, the Google Tag Manager script is added to your website. GTM may collect visitor data (such as page views, interactions, and device information) based on your GTM container configuration.
+**What data is sent:** When you publish or update a post or page, the plugin sends your sitemap URL to Google's ping endpoint to request re-crawling.
 
-**When data is sent:** The GTM script loads on every page view for your site visitors, but only when you have configured a GTM container ID in the plugin settings. If no GTM ID is configured, no connection to Google is made.
+**When data is sent:** Data is sent automatically when a post or page is published or updated, but only if sitemap ping is enabled in the plugin settings. Pings are throttled to once per hour to prevent excessive requests.
 
 **Service Links:**
-* [Google Tag Manager Terms of Service](https://www.google.com/analytics/tag-manager/use-policy/)
+* [Google Terms of Service](https://policies.google.com/terms)
 * [Google Privacy Policy](https://policies.google.com/privacy)
+
+= Bing Sitemap Ping =
+
+This plugin optionally pings Bing to notify them that your sitemap has been updated when you publish or update content.
+
+**What data is sent:** When you publish or update a post or page, the plugin sends your sitemap URL to Bing's ping endpoint to request re-crawling.
+
+**When data is sent:** Data is sent automatically when a post or page is published or updated, but only if sitemap ping is enabled in the plugin settings. Pings are throttled to once per hour to prevent excessive requests.
+
+**Service Links:**
+* [Bing Webmaster Tools Terms of Use](https://www.bing.com/toolbox/webmaster/terms)
+* [Microsoft Privacy Statement](https://privacy.microsoft.com/en-us/privacystatement)
+
+= Ahrefs Analytics =
+
+This plugin optionally loads the Ahrefs Analytics script on your website's homepage for site verification and analytics purposes.
+
+**What data is sent:** If you configure an Ahrefs verification key in the plugin settings, the Ahrefs Analytics JavaScript file is loaded on your homepage. Ahrefs may collect visitor data based on their script functionality.
+
+**When data is sent:** The Ahrefs script loads only on the homepage/front page and only when you have configured an Ahrefs verification key in the Site Connections settings. If no key is configured, no connection to Ahrefs is made.
+
+**Service Links:**
+* [Ahrefs Terms of Service](https://ahrefs.com/terms)
+* [Ahrefs Privacy Policy](https://ahrefs.com/privacy)
 
 == Installation ==
 
@@ -264,7 +287,6 @@ For support questions, please use the WordPress.org support forum for this plugi
 * Schema Generator with 14 schema types and flexible display rules
 * Site Connections for 6 webmaster tools
 * Open Graph and Twitter Card meta tags
-* Google Tag Manager integration
 * Search engine preview (SERP simulator)
 
 == Upgrade Notice ==

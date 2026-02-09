@@ -13,7 +13,6 @@ if (!defined('ABSPATH')) {
 }
 
 // Get current settings.
-$rankflow_seo_gtm_id = get_option('rankflow_seo_gtm_id', '');
 $rankflow_seo_ahrefs_code = get_option('rankflow_seo_ahrefs_verification', '');
 $rankflow_seo_baidu_code = get_option('rankflow_seo_baidu_verification', '');
 $rankflow_seo_bing_code = get_option('rankflow_seo_bing_verification', '');
@@ -33,44 +32,6 @@ $rankflow_seo_yandex_code = get_option('rankflow_seo_yandex_verification', '');
 
     <form method="post" action="options.php">
         <?php settings_fields('rankflow_seo_site_connections'); ?>
-
-        <!-- Google Tag Manager Section -->
-        <div class="rankflow-seo-section">
-            <h3><?php esc_html_e('Analytics', 'rankflow-seo'); ?></h3>
-
-            <!-- Google Tag Manager -->
-            <div class="rankflow-seo-connection-field gtm-field">
-                <label for="rankflow_seo_gtm_id">
-                    <strong><?php esc_html_e('Google Tag Manager', 'rankflow-seo'); ?></strong>
-                </label>
-                <input type="text" id="rankflow_seo_gtm_id" name="rankflow_seo_gtm_id"
-                    value="<?php echo esc_attr($rankflow_seo_gtm_id); ?>" class="widefat gtm-input-full"
-                    placeholder="<?php esc_attr_e('GTM-XXXXXXX', 'rankflow-seo'); ?>">
-                <p class="description">
-                    <?php
-                    printf(
-                        /* translators: %s: Google Tag Manager link */
-                        esc_html__('Enter your Container ID (e.g., GTM-K4JQ77J4). Find it in %s.', 'rankflow-seo'),
-                        '<a href="https://tagmanager.google.com/" target="_blank" rel="noopener noreferrer">' . esc_html__('Google Tag Manager', 'rankflow-seo') . '</a>'
-                    );
-                    ?>
-                </p>
-                <?php if (!empty($rankflow_seo_gtm_id)): ?>
-                    <div class="gtm-status">
-                        <span class="dashicons dashicons-yes-alt"></span>
-                        <?php
-                        printf(
-                            /* translators: %s: GTM Container ID */
-                            esc_html__('%s is active on your site', 'rankflow-seo'),
-                            esc_html($rankflow_seo_gtm_id)
-                        );
-                        ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </div>
-
-        <hr class="rankflow-seo-divider-30">
 
         <!-- Webmaster Verification Section -->
         <div class="rankflow-seo-section">

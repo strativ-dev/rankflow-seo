@@ -39,7 +39,7 @@ if (!empty($rankflow_seo_schema_data)):
 	?>
 	<!-- RankFlow SEO Schema Markup -->
 	<script type="application/ld+json">
-					<?php echo wp_json_encode($rankflow_seo_schema_data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
+					<?php echo wp_json_encode($rankflow_seo_schema_data, JSON_HEX_TAG | JSON_HEX_AMP); ?>
 					</script>
 	<!-- /RankFlow SEO Schema Markup -->
 	<?php

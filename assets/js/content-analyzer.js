@@ -27,11 +27,11 @@
 			this.analyzing = true;
 
 			return $.ajax({
-				url: aiSeoProData.ajaxUrl,
+				url: rankflowSeoData.ajaxUrl,
 				type: 'POST',
 				data: {
 					action: 'rankflow_seo_analyze_content',
-					nonce: aiSeoProData.nonce,
+					nonce: rankflowSeoData.nonce,
 					post_id: postId,
 					content: content,
 					focus_keyword: focusKeyword
@@ -168,7 +168,7 @@
 	}
 
 	// Export for use in other modules
-	window.AISeoPro = window.AISeoPro || {};
-	window.AISeoPro.ContentAnalyzer = ContentAnalyzer;
+	window.RankflowSeo = window.RankflowSeo || {};
+	window.RankflowSeo.ContentAnalyzer = ContentAnalyzer;
 
 })(jQuery);

@@ -85,11 +85,11 @@
 			button.prop('disabled', true).text('Resetting...');
 
 			$.ajax({
-				url: ajaxurl,
+				url: rankflowSeoData.ajaxUrl,
 				type: 'POST',
 				data: {
 					action: 'rankflow_seo_reset_settings',
-					nonce: aiSeoProData.nonce
+					nonce: rankflowSeoData.nonce
 				},
 				success: (response) => {
 					if (response.success) {
@@ -124,11 +124,11 @@
 			button.prop('disabled', true).text('Clearing...');
 
 			$.ajax({
-				url: ajaxurl,
+				url: rankflowSeoData.ajaxUrl,
 				type: 'POST',
 				data: {
 					action: 'rankflow_seo_clear_cache',
-					nonce: aiSeoProData.nonce
+					nonce: rankflowSeoData.nonce
 				},
 				success: (response) => {
 					if (response.success) {
@@ -164,11 +164,11 @@
 			button.prop('disabled', true).text('Testing...');
 
 			$.ajax({
-				url: ajaxurl,
+				url: rankflowSeoData.ajaxUrl,
 				type: 'POST',
 				data: {
 					action: 'rankflow_seo_test_api',
-					nonce: aiSeoProData.nonce,
+					nonce: rankflowSeoData.nonce,
 					api_key: apiKey,
 					provider: provider
 				},
