@@ -543,27 +543,27 @@ class RankFlow_SEO_Settings
 
 			<nav class="nav-tab-wrapper">
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=general"
-					class="nav-tab <?php echo 'general' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
+					class="nav-tab <?php echo esc_attr('general' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
 					<?php esc_html_e('General', 'rankflow-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=api"
-					class="nav-tab <?php echo 'api' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
+					class="nav-tab <?php echo esc_attr('api' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
 					<?php esc_html_e('AI API', 'rankflow-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=features"
-					class="nav-tab <?php echo 'features' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
+					class="nav-tab <?php echo esc_attr('features' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
 					<?php esc_html_e('Features', 'rankflow-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=social"
-					class="nav-tab <?php echo 'social' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
+					class="nav-tab <?php echo esc_attr('social' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
 					<?php esc_html_e('Social Media', 'rankflow-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=site-connections"
-					class="nav-tab <?php echo 'site-connections' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
+					class="nav-tab <?php echo esc_attr('site-connections' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
 					<?php esc_html_e('Site Connections', 'rankflow-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=advanced"
-					class="nav-tab <?php echo 'advanced' === $this->active_tab ? 'nav-tab-active' : ''; ?>">
+					class="nav-tab <?php echo esc_attr('advanced' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
 					<?php esc_html_e('Advanced', 'rankflow-seo'); ?>
 				</a>
 			</nav>

@@ -109,7 +109,7 @@ $rankflow_seo_schema_types = $rankflow_seo_schema_admin->get_schema_types();
 									</div>
 
 									<!-- Post Types Selection -->
-									<div class="display-rule-row post-types-row <?php echo ($rankflow_seo_schema['display_mode'] ?? '') === 'post_types' ? '' : 'rankflow-seo-hidden'; ?>">
+									<div class="display-rule-row post-types-row <?php echo esc_attr(($rankflow_seo_schema['display_mode'] ?? '') === 'post_types' ? '' : 'rankflow-seo-hidden'); ?>">
 										<label><?php esc_html_e('Post Types:', 'rankflow-seo'); ?></label>
 										<select class="post-types-select"
 											name="rankflow_seo_schemas[<?php echo esc_attr($rankflow_seo_index); ?>][post_types][]"
@@ -130,7 +130,7 @@ $rankflow_seo_schema_types = $rankflow_seo_schema_admin->get_schema_types();
 									</div>
 
 									<!-- Include Pages/Posts -->
-									<div class="display-rule-row include-row <?php echo ($rankflow_seo_schema['display_mode'] ?? '') === 'include' ? '' : 'rankflow-seo-hidden'; ?>">
+									<div class="display-rule-row include-row <?php echo esc_attr(($rankflow_seo_schema['display_mode'] ?? '') === 'include' ? '' : 'rankflow-seo-hidden'); ?>">
 										<label><?php esc_html_e('Include:', 'rankflow-seo'); ?></label>
 										<select class="include-select"
 											name="rankflow_seo_schemas[<?php echo esc_attr($rankflow_seo_index); ?>][include_ids][]"
@@ -155,7 +155,7 @@ $rankflow_seo_schema_types = $rankflow_seo_schema_admin->get_schema_types();
 									</div>
 
 									<!-- Exclude Pages/Posts -->
-									<div class="display-rule-row exclude-row <?php echo ($rankflow_seo_schema['display_mode'] ?? '') === 'exclude' ? '' : 'rankflow-seo-hidden'; ?>">
+									<div class="display-rule-row exclude-row <?php echo esc_attr(($rankflow_seo_schema['display_mode'] ?? '') === 'exclude' ? '' : 'rankflow-seo-hidden'); ?>">
 										<label><?php esc_html_e('Exclude:', 'rankflow-seo'); ?></label>
 										<select class="exclude-select"
 											name="rankflow_seo_schemas[<?php echo esc_attr($rankflow_seo_index); ?>][exclude_ids][]"
@@ -337,7 +337,7 @@ $rankflow_seo_schema_types = $rankflow_seo_schema_admin->get_schema_types();
 				<?php endif; ?>
 			</div>
 
-			<p class="no-schemas-message <?php echo !empty($rankflow_seo_schemas) ? 'rankflow-seo-hidden' : ''; ?>">
+			<p class="no-schemas-message <?php echo esc_attr(!empty($rankflow_seo_schemas) ? 'rankflow-seo-hidden' : ''); ?>">
 				<?php esc_html_e('No schemas added yet. Click "Add Schema" to create your first schema markup.', 'rankflow-seo'); ?>
 			</p>
 		</div>
@@ -349,7 +349,7 @@ $rankflow_seo_schema_types = $rankflow_seo_schema_admin->get_schema_types();
 	</form>
 
 	<!-- Schema Type Template (Hidden) -->
-	<script type="text/template" id="schema-item-template">
+	<template id="schema-item-template">
 		<div class="schema-item" data-index="{{INDEX}}">
 			<div class="schema-header">
 				<span class="schema-drag-handle dashicons dashicons-menu"></span>
@@ -441,6 +441,6 @@ $rankflow_seo_schema_types = $rankflow_seo_schema_admin->get_schema_types();
 				</div>
 			</div>
 		</div>
-	</script>
+	</template>
 </div>
 

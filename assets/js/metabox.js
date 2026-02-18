@@ -96,7 +96,7 @@
 						return content;
 					}
 				} catch (e) {
-					console.log('Gutenberg not available:', e);
+					// Gutenberg not available, fall through to Classic Editor.
 				}
 			}
 
@@ -258,8 +258,7 @@
 					}
 				},
 				error: (xhr, status, error) => {
-					console.error('AJAX Error:', { xhr, status, error });
-					this.showNotice('Error: ' + error, 'error');
+						this.showNotice('Error: ' + error, 'error');
 				},
 				complete: () => {
 					this.generating = false;
@@ -588,8 +587,7 @@
 	$(document).ready(function () {
 		if ($('.rankflow-seo-metabox').length) {
 			new MetaBoxHandler();
-			console.log('RankFlow SEO metabox with tabs initialized');
-		}
+					}
 	});
 
 })(jQuery);

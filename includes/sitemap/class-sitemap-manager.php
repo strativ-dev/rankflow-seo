@@ -634,81 +634,9 @@ class RankFlow_SEO_Sitemap_Manager
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>XML Sitemap - ' . esc_html(get_bloginfo('name')) . '</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<style>
-		body {
-			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-			font-size: 14px;
-			color: #333;
-			background: #f1f1f1;
-			margin: 0;
-			padding: 20px;
-		}
-		.container {
-			max-width: 1200px;
-			margin: 0 auto;
-			background: #fff;
-			padding: 30px;
-			border-radius: 4px;
-			box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-		}
-		h1 {
-			color: #23282d;
-			font-size: 24px;
-			font-weight: 600;
-			margin: 0 0 10px;
-		}
-		.description {
-			color: #666;
-			margin-bottom: 20px;
-		}
-		.stats {
-			background: #f7f7f7;
-			padding: 15px;
-			border-radius: 4px;
-			margin-bottom: 20px;
-		}
-		table {
-			width: 100%;
-			border-collapse: collapse;
-			margin-top: 20px;
-		}
-		th {
-			background: #0073aa;
-			color: #fff;
-			padding: 12px;
-			text-align: left;
-			font-weight: 600;
-		}
-		td {
-			padding: 10px 12px;
-			border-bottom: 1px solid #eee;
-		}
-		tr:hover td {
-			background: #f7f7f7;
-		}
-		a {
-			color: #0073aa;
-			text-decoration: none;
-		}
-		a:hover {
-			text-decoration: underline;
-		}
-		.priority {
-			text-align: center;
-		}
-		.images {
-			color: #666;
-			font-size: 12px;
-		}
-		.brand {
-			margin-top: 20px;
-			padding-top: 20px;
-			border-top: 1px solid #eee;
-			color: #666;
-			font-size: 12px;
-		}
-	</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet -- XSL stylesheet served outside WordPress template; wp_enqueue_style not available.
+		echo '	<link rel="stylesheet" href="' . esc_url(RANKFLOW_SEO_PLUGIN_URL . 'assets/css/rankflow-seo-sitemap.css') . '" />
 </head>
 <body>
 <div class="container">

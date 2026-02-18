@@ -157,7 +157,7 @@
         },
 
         addSchema: function () {
-            var template = $('#schema-item-template').html();
+            var template = document.getElementById('schema-item-template').innerHTML;
             template = template.replace(/\{\{INDEX\}\}/g, this.schemaIndex);
 
             var $newItem = $(template);

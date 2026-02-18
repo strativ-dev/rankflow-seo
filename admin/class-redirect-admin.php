@@ -174,6 +174,11 @@ class RankFlow_SEO_Redirect_Admin
 	 */
 	public function handle_redirect_actions()
 	{
+		// Verify user capabilities.
+		if (!current_user_can('manage_options')) {
+			return;
+		}
+
 		// Only run on our redirect pages.
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification happens later for specific actions.
 		if (
@@ -222,10 +227,11 @@ class RankFlow_SEO_Redirect_Admin
 				isset($_FILES['csv_file']['tmp_name']) &&
 				UPLOAD_ERR_OK === intval($_FILES['csv_file']['error'])
 			) {
-				// Sanitize the temporary file path.
-				$rankflow_seo_tmp_file = sanitize_text_field(wp_unslash($_FILES['csv_file']['tmp_name']));
+				// Get the temporary file path - validated by is_uploaded_file() below.
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- File path validated by is_uploaded_file().
+				$rankflow_seo_tmp_file = wp_unslash($_FILES['csv_file']['tmp_name']);
 
-				// Additional security: verify it's actually a valid uploaded file.
+				// Security: verify it's actually a valid uploaded file.
 				if (is_uploaded_file($rankflow_seo_tmp_file)) {
 					$rankflow_seo_import_results = $this->redirect_manager->import_from_csv($rankflow_seo_tmp_file);
 
@@ -367,6 +373,11 @@ class RankFlow_SEO_Redirect_Admin
 	 */
 	public function handle_404_actions()
 	{
+		// Verify user capabilities.
+		if (!current_user_can('manage_options')) {
+			return;
+		}
+
 		// Only run on our 404 monitor page.
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification happens later for specific actions.
 		if (

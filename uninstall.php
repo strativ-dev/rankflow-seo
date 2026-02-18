@@ -151,8 +151,8 @@ function rankflow_seo_delete_transients()
 			"DELETE FROM {$wpdb->options} 
 			WHERE option_name LIKE %s 
 			OR option_name LIKE %s",
-			'%\_transient\_ai\_seo\_pro\_%',
-			'%\_transient\_timeout\_ai\_seo\_pro\_%'
+			'%\_transient\_rankflow\_seo\_%',
+			'%\_transient\_timeout\_rankflow\_seo\_%'
 		)
 	);
 }

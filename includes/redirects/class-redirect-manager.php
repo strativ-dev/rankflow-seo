@@ -383,7 +383,12 @@ class RankFlow_SEO_Redirect_Manager
             $normalized_regex_source = $this->normalize_url($regex_redirect->source_url);
 
             foreach ($url_variations as $url_variant) {
-                if (@preg_match($normalized_regex_source, $url_variant)) {
+                // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Intentional: invalid regex from user input must not produce warnings.
+                $match = @preg_match($normalized_regex_source, $url_variant);
+                if (false === $match) {
+                    break; // Invalid regex, skip this redirect rule.
+                }
+                if ($match) {
                     wp_cache_set($cache_key, $regex_redirect, 'rankflow_seo', 3600);
                     return $regex_redirect;
                 }
@@ -442,6 +447,7 @@ class RankFlow_SEO_Redirect_Manager
 
         // Validate regex if enabled.
         if (!empty($data['is_regex'])) {
+            // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Intentional: testing user-supplied regex pattern validity.
             $test = @preg_match($data['source_url'], '');
             if (false === $test) {
                 return new WP_Error('invalid_regex', __('Invalid regular expression pattern.', 'rankflow-seo'));

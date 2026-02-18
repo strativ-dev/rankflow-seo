@@ -147,6 +147,33 @@
         }
 
         /* From: admin/views/settings-robots-txt.php */
+
+        // "Block all AI crawlers" toggle
+        if ($('#block-all-ai').length) {
+            $('#block-all-ai').on('change', function() {
+                $('.individual-ai-bot').prop('checked', this.checked);
+            });
+            // Sync parent when individual bots change
+            $('.individual-ai-bot').on('change', function() {
+                var total = $('.individual-ai-bot').length;
+                var checked = $('.individual-ai-bot:checked').length;
+                $('#block-all-ai').prop('checked', total === checked);
+            });
+        }
+
+        // "Block all aggressive SEO crawlers" toggle
+        if ($('#block-all-bad-bots').length) {
+            $('#block-all-bad-bots').on('change', function() {
+                $('.individual-bad-bot').prop('checked', this.checked);
+            });
+            // Sync parent when individual bots change
+            $('.individual-bad-bot').on('change', function() {
+                var total = $('.individual-bad-bot').length;
+                var checked = $('.individual-bad-bot:checked').length;
+                $('#block-all-bad-bots').prop('checked', total === checked);
+            });
+        }
+
         if ($('#copy-robots-txt').length) {
             $('#copy-robots-txt').on('click', function() {
                 var content = $('#robots-preview-content').text();

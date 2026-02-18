@@ -414,7 +414,7 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 				</tr>
 			</table>
 
-			<div class="taxonomy-list <?php echo !$rankflow_seo_include_taxonomies ? 'rankflow-seo-hidden' : ''; ?>">
+			<div class="taxonomy-list <?php echo esc_attr(!$rankflow_seo_include_taxonomies ? 'rankflow-seo-hidden' : ''); ?>">
 				<table class="form-table">
 					<?php foreach ($rankflow_seo_taxonomies as $rankflow_seo_taxonomy): ?>
 						<?php

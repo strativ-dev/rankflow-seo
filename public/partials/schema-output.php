@@ -38,9 +38,12 @@ $rankflow_seo_schema_data = apply_filters('rankflow_seo_schema_data', $rankflow_
 if (!empty($rankflow_seo_schema_data)):
 	?>
 	<!-- RankFlow SEO Schema Markup -->
-	<script type="application/ld+json">
-					<?php echo wp_json_encode($rankflow_seo_schema_data, JSON_HEX_TAG | JSON_HEX_AMP); ?>
-					</script>
+	<?php
+	wp_print_inline_script_tag(
+		wp_json_encode($rankflow_seo_schema_data, JSON_HEX_TAG | JSON_HEX_AMP),
+		array('type' => 'application/ld+json')
+	);
+	?>
 	<!-- /RankFlow SEO Schema Markup -->
 	<?php
 endif;
