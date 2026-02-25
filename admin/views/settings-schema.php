@@ -26,8 +26,6 @@ $rankflow_seo_schema_types = $rankflow_seo_schema_admin->get_schema_types();
 		<?php esc_html_e('Generate structured data (schema markup) for your website to help search engines understand your content better and display rich results.', 'rankflow-seo'); ?>
 	</p>
 
-	<?php settings_errors('rankflow_seo_schema'); ?>
-
 	<form method="post" action="options.php" id="rankflow-seo-schema-form">
 		<?php settings_fields('rankflow_seo_schema'); ?>
 

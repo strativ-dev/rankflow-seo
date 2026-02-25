@@ -76,8 +76,6 @@ class RankFlow_SEO_Redirect_Admin
 				</a>
 			<?php endif; ?>
 
-			<hr class="wp-header-end">
-
 			<?php
 			switch ($rankflow_seo_action) {
 				case 'add':

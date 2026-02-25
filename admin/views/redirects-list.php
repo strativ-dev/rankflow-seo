@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="tablenav top">
 			<div class="alignleft actions bulkactions">
-				<button type="submit" class="button action" onclick="return confirm('<?php echo esc_js( __( 'Are you sure you want to delete selected redirects?', 'rankflow-seo' ) ); ?>');">
+				<button type="submit" class="button action rankflow-seo-confirm" data-confirm="<?php echo esc_attr( __( 'Are you sure you want to delete selected redirects?', 'rankflow-seo' ) ); ?>">
 					<?php esc_html_e( 'Delete Selected', 'rankflow-seo' ); ?>
 				</button>
 			</div>
@@ -98,7 +98,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<a href="?page=<?php echo esc_attr( $this->plugin_name ); ?>-redirects&action=edit&id=<?php echo esc_attr( $rankflow_seo_redirect->id ); ?>" class="button button-small">
 								<?php esc_html_e( 'Edit', 'rankflow-seo' ); ?>
 							</a>
-							<a href="<?php echo esc_url( wp_nonce_url( '?page=' . $this->plugin_name . '-redirects&action=delete&id=' . $rankflow_seo_redirect->id, 'delete_redirect_' . $rankflow_seo_redirect->id ) ); ?>" class="button button-small" onclick="return confirm('<?php echo esc_js( __( 'Are you sure you want to delete this redirect?', 'rankflow-seo' ) ); ?>');">
+							<a href="<?php echo esc_url( wp_nonce_url( '?page=' . $this->plugin_name . '-redirects&action=delete&id=' . $rankflow_seo_redirect->id, 'delete_redirect_' . $rankflow_seo_redirect->id ) ); ?>" class="button button-small rankflow-seo-confirm" data-confirm="<?php echo esc_attr( __( 'Are you sure you want to delete this redirect?', 'rankflow-seo' ) ); ?>">
 								<?php esc_html_e( 'Delete', 'rankflow-seo' ); ?>
 							</a>
 						</td>

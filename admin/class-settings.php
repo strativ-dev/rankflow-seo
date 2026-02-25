@@ -539,8 +539,6 @@ class RankFlow_SEO_Settings
 		<div class="wrap rankflow-seo-settings">
 			<?php require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
 
-			<?php settings_errors(); ?>
-
 			<nav class="nav-tab-wrapper">
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=general"
 					class="nav-tab <?php echo esc_attr('general' === $this->active_tab ? 'nav-tab-active' : ''); ?>">

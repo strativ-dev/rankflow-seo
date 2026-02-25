@@ -49,7 +49,7 @@ $rankflow_seo_auto_generate = get_option('rankflow_seo_auto_generate', false);
 					<?php esc_html_e('Enter your API key from your chosen provider', 'rankflow-seo'); ?>
 				</p>
 
-				<div class="api-key-instructions" style="margin-top: 15px;">
+				<div class="api-key-instructions rankflow-seo-mt-15">
 					<p><strong><?php esc_html_e('How to get your API key:', 'rankflow-seo'); ?></strong></p>
 					<ul class="provider-instructions">
 						<li data-provider="anthropic">

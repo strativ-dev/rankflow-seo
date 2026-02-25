@@ -11,6 +11,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
+<?php settings_errors(); ?>
+
+<div class="wp-header-end"></div>
+
 <div class="rankflow-seo-header">
 	<div class="rankflow-seo-header-logo">
 		<img src="<?php echo esc_url( RANKFLOW_SEO_PLUGIN_URL . 'assets/images/logo-icon-orange.png' ); ?>" alt="RankFlow SEO" class="rankflow-seo-icon-40">

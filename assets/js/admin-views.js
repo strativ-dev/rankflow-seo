@@ -17,6 +17,20 @@
             });
         }
 
+        /* Confirm dialogs - replaces all inline onclick="return confirm(...)" */
+        $(document).on('click', '.rankflow-seo-confirm', function(e) {
+            var message = $(this).data('confirm');
+            if (message && !window.confirm(message)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        /* Days filter auto-submit - replaces inline onchange="this.form.submit()" */
+        $(document).on('change', '.rankflow-seo-days-filter', function() {
+            $(this).closest('form').submit();
+        });
+
         /* From: admin/views/redirect-form.php */
         if ($('#redirect_type').length) {
             $('#redirect_type').on('change', function() {

@@ -1159,7 +1159,7 @@
 
 
 /* From: admin/views/settings-schema.php */
-	.rankflow-seo-schema {
+	.rankflow-seo-schema form#rankflow-seo-schema-form{
 		max-width: 1200px;
 	}
 

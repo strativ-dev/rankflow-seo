@@ -226,8 +226,6 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 <div class="wrap rankflow-seo-settings">
 	<?php require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
 
-	<?php settings_errors('rankflow_seo_sitemap'); ?>
-
 	<!-- Sitemap Status Box -->
 	<div class="rankflow-seo-sitemap-status">
 		<h2><?php esc_html_e('Sitemap Status', 'rankflow-seo'); ?></h2>

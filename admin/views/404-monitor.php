@@ -104,7 +104,7 @@ $rankflow_seo_results = $this->monitor_404->get_404_logs(
 
 			<label>
 				<?php esc_html_e( 'Time Period:', 'rankflow-seo' ); ?>
-				<select name="days" onchange="this.form.submit()">
+				<select name="days" class="rankflow-seo-days-filter">
 					<option value="7" <?php selected( $rankflow_seo_days, 7 ); ?>><?php esc_html_e( 'Last 7 days', 'rankflow-seo' ); ?></option>
 					<option value="30" <?php selected( $rankflow_seo_days, 30 ); ?>><?php esc_html_e( 'Last 30 days', 'rankflow-seo' ); ?></option>
 					<option value="90" <?php selected( $rankflow_seo_days, 90 ); ?>><?php esc_html_e( 'Last 90 days', 'rankflow-seo' ); ?></option>
@@ -121,7 +121,7 @@ $rankflow_seo_results = $this->monitor_404->get_404_logs(
 				<a href="<?php echo esc_url( wp_nonce_url( '?page=' . $this->plugin_name . '-404-monitor&action=export_404&days=' . $rankflow_seo_days, 'export_404_logs' ) ); ?>" class="button">
 					<?php esc_html_e( 'Export CSV', 'rankflow-seo' ); ?>
 				</a>
-				<a href="<?php echo esc_url( wp_nonce_url( '?page=' . $this->plugin_name . '-404-monitor&action=clear_all', 'clear_all_404' ) ); ?>" class="button" onclick="return confirm('<?php echo esc_js( __( 'Are you sure you want to delete all 404 logs? This cannot be undone.', 'rankflow-seo' ) ); ?>');">
+				<a href="<?php echo esc_url( wp_nonce_url( '?page=' . $this->plugin_name . '-404-monitor&action=clear_all', 'clear_all_404' ) ); ?>" class="button rankflow-seo-confirm" data-confirm="<?php echo esc_attr( __( 'Are you sure you want to delete all 404 logs? This cannot be undone.', 'rankflow-seo' ) ); ?>">
 					<?php esc_html_e( 'Clear All', 'rankflow-seo' ); ?>
 				</a>
 			</div>

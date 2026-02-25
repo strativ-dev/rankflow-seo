@@ -102,8 +102,6 @@ $rankflow_seo_bad_bots = array(
                 </div>
     <?php endif; ?>
 
-    <?php settings_errors('rankflow_seo_robots_txt'); ?>
-
     <div class="rankflow-seo-robots-container">
         <!-- Settings Column -->
         <div class="rankflow-seo-robots-settings">
