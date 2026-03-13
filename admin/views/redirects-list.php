@@ -2,12 +2,12 @@
 /**
  * Redirects List View
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/admin/views
+ * @package    MPSEO
+ * @subpackage MPSEO/admin/views
  *
- * @var array  $rankflow_seo_results Redirects results.
- * @var string $rankflow_seo_search  Search query.
- * @var int    $rankflow_seo_page    Current page number.
+ * @var array  $mpseo_results Redirects results.
+ * @var string $mpseo_search  Search query.
+ * @var int    $mpseo_page    Current page number.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,37 +15,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<div class="rankflow-seo-actions-row">
+<div class="mpseo-actions-row">
 	<a href="?page=<?php echo esc_attr( $this->plugin_name ); ?>-redirects&action=import" class="button">
-		<?php esc_html_e( 'Import CSV', 'rankflow-seo' ); ?>
+		<?php esc_html_e( 'Import CSV', 'metapilot-smart-seo' ); ?>
 	</a>
 	<a href="<?php echo esc_url( wp_nonce_url( '?page=' . $this->plugin_name . '-redirects&action=export', 'export_redirects' ) ); ?>" class="button">
-		<?php esc_html_e( 'Export CSV', 'rankflow-seo' ); ?>
+		<?php esc_html_e( 'Export CSV', 'metapilot-smart-seo' ); ?>
 	</a>
 </div>
 
 <!-- Search Form -->
-<form method="get" class="rankflow-seo-my-20">
+<form method="get" class="mpseo-my-20">
 	<input type="hidden" name="page" value="<?php echo esc_attr( $this->plugin_name ); ?>-redirects">
 	<p class="search-box">
-		<input type="search" name="s" value="<?php echo esc_attr( $rankflow_seo_search ); ?>" placeholder="<?php esc_attr_e( 'Search redirects...', 'rankflow-seo' ); ?>">
-		<button type="submit" class="button"><?php esc_html_e( 'Search', 'rankflow-seo' ); ?></button>
+		<input type="search" name="s" value="<?php echo esc_attr( $mpseo_search ); ?>" placeholder="<?php esc_attr_e( 'Search redirects...', 'metapilot-smart-seo' ); ?>">
+		<button type="submit" class="button"><?php esc_html_e( 'Search', 'metapilot-smart-seo' ); ?></button>
 	</p>
 </form>
 
-<?php if ( empty( $rankflow_seo_results['redirects'] ) ) : ?>
+<?php if ( empty( $mpseo_results['redirects'] ) ) : ?>
 	<div class="notice notice-info">
-		<p><?php esc_html_e( 'No redirects found. Click "Add New" to create your first redirect.', 'rankflow-seo' ); ?></p>
+		<p><?php esc_html_e( 'No redirects found. Click "Add New" to create your first redirect.', 'metapilot-smart-seo' ); ?></p>
 	</div>
 <?php else : ?>
 	<form method="post" id="bulk-action-form">
-		<?php wp_nonce_field( 'bulk_delete_redirects', 'rankflow_seo_redirect_nonce' ); ?>
+		<?php wp_nonce_field( 'bulk_delete_redirects', 'mpseo_redirect_nonce' ); ?>
 		<input type="hidden" name="action" value="bulk_delete">
 
 		<div class="tablenav top">
 			<div class="alignleft actions bulkactions">
-				<button type="submit" class="button action rankflow-seo-confirm" data-confirm="<?php echo esc_attr( __( 'Are you sure you want to delete selected redirects?', 'rankflow-seo' ) ); ?>">
-					<?php esc_html_e( 'Delete Selected', 'rankflow-seo' ); ?>
+				<button type="submit" class="button action mpseo-confirm" data-confirm="<?php echo esc_attr( __( 'Are you sure you want to delete selected redirects?', 'metapilot-smart-seo' ) ); ?>">
+					<?php esc_html_e( 'Delete Selected', 'metapilot-smart-seo' ); ?>
 				</button>
 			</div>
 		</div>
@@ -56,50 +56,50 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<td class="check-column">
 						<input type="checkbox" id="select-all">
 					</td>
-					<th><?php esc_html_e( 'Source URL', 'rankflow-seo' ); ?></th>
-					<th><?php esc_html_e( 'Target URL', 'rankflow-seo' ); ?></th>
-					<th><?php esc_html_e( 'Type', 'rankflow-seo' ); ?></th>
-					<th><?php esc_html_e( 'Hits', 'rankflow-seo' ); ?></th>
-					<th><?php esc_html_e( 'Status', 'rankflow-seo' ); ?></th>
-					<th><?php esc_html_e( 'Actions', 'rankflow-seo' ); ?></th>
+					<th><?php esc_html_e( 'Source URL', 'metapilot-smart-seo' ); ?></th>
+					<th><?php esc_html_e( 'Target URL', 'metapilot-smart-seo' ); ?></th>
+					<th><?php esc_html_e( 'Type', 'metapilot-smart-seo' ); ?></th>
+					<th><?php esc_html_e( 'Hits', 'metapilot-smart-seo' ); ?></th>
+					<th><?php esc_html_e( 'Status', 'metapilot-smart-seo' ); ?></th>
+					<th><?php esc_html_e( 'Actions', 'metapilot-smart-seo' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach ( $rankflow_seo_results['redirects'] as $rankflow_seo_redirect ) : ?>
+				<?php foreach ( $mpseo_results['redirects'] as $mpseo_redirect ) : ?>
 					<tr>
 						<th class="check-column">
-							<input type="checkbox" name="redirect_ids[]" value="<?php echo esc_attr( $rankflow_seo_redirect->id ); ?>">
+							<input type="checkbox" name="redirect_ids[]" value="<?php echo esc_attr( $mpseo_redirect->id ); ?>">
 						</th>
 						<td>
-							<strong><?php echo esc_html( $rankflow_seo_redirect->source_url ); ?></strong>
-							<?php if ( $rankflow_seo_redirect->is_regex ) : ?>
-								<span class="rankflow-seo-badge rankflow-seo-badge-blue">REGEX</span>
+							<strong><?php echo esc_html( $mpseo_redirect->source_url ); ?></strong>
+							<?php if ( $mpseo_redirect->is_regex ) : ?>
+								<span class="mpseo-badge mpseo-badge-blue">REGEX</span>
 							<?php endif; ?>
 						</td>
 						<td>
-							<a href="<?php echo esc_url( home_url( $rankflow_seo_redirect->target_url ) ); ?>" target="_blank">
-								<?php echo esc_html( $rankflow_seo_redirect->target_url ); ?>
+							<a href="<?php echo esc_url( home_url( $mpseo_redirect->target_url ) ); ?>" target="_blank">
+								<?php echo esc_html( $mpseo_redirect->target_url ); ?>
 							</a>
 						</td>
 						<td>
-							<span class="redirect-type redirect-type-<?php echo esc_attr( $rankflow_seo_redirect->redirect_type ); ?>">
-								<?php echo esc_html( $rankflow_seo_redirect->redirect_type ); ?>
+							<span class="redirect-type redirect-type-<?php echo esc_attr( $mpseo_redirect->redirect_type ); ?>">
+								<?php echo esc_html( $mpseo_redirect->redirect_type ); ?>
 							</span>
 						</td>
-						<td><?php echo esc_html( number_format( $rankflow_seo_redirect->hits ) ); ?></td>
+						<td><?php echo esc_html( number_format( $mpseo_redirect->hits ) ); ?></td>
 						<td>
-							<?php if ( $rankflow_seo_redirect->is_active ) : ?>
-								<span class="rankflow-seo-status-active">● <?php esc_html_e( 'Active', 'rankflow-seo' ); ?></span>
+							<?php if ( $mpseo_redirect->is_active ) : ?>
+								<span class="mpseo-status-active">● <?php esc_html_e( 'Active', 'metapilot-smart-seo' ); ?></span>
 							<?php else : ?>
-								<span class="rankflow-seo-status-inactive">● <?php esc_html_e( 'Inactive', 'rankflow-seo' ); ?></span>
+								<span class="mpseo-status-inactive">● <?php esc_html_e( 'Inactive', 'metapilot-smart-seo' ); ?></span>
 							<?php endif; ?>
 						</td>
 						<td>
-							<a href="?page=<?php echo esc_attr( $this->plugin_name ); ?>-redirects&action=edit&id=<?php echo esc_attr( $rankflow_seo_redirect->id ); ?>" class="button button-small">
-								<?php esc_html_e( 'Edit', 'rankflow-seo' ); ?>
+							<a href="?page=<?php echo esc_attr( $this->plugin_name ); ?>-redirects&action=edit&id=<?php echo esc_attr( $mpseo_redirect->id ); ?>" class="button button-small">
+								<?php esc_html_e( 'Edit', 'metapilot-smart-seo' ); ?>
 							</a>
-							<a href="<?php echo esc_url( wp_nonce_url( '?page=' . $this->plugin_name . '-redirects&action=delete&id=' . $rankflow_seo_redirect->id, 'delete_redirect_' . $rankflow_seo_redirect->id ) ); ?>" class="button button-small rankflow-seo-confirm" data-confirm="<?php echo esc_attr( __( 'Are you sure you want to delete this redirect?', 'rankflow-seo' ) ); ?>">
-								<?php esc_html_e( 'Delete', 'rankflow-seo' ); ?>
+							<a href="<?php echo esc_url( wp_nonce_url( '?page=' . $this->plugin_name . '-redirects&action=delete&id=' . $mpseo_redirect->id, 'delete_redirect_' . $mpseo_redirect->id ) ); ?>" class="button button-small mpseo-confirm" data-confirm="<?php echo esc_attr( __( 'Are you sure you want to delete this redirect?', 'metapilot-smart-seo' ) ); ?>">
+								<?php esc_html_e( 'Delete', 'metapilot-smart-seo' ); ?>
 							</a>
 						</td>
 					</tr>
@@ -108,23 +108,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</table>
 
 		<!-- Pagination -->
-		<?php if ( $rankflow_seo_results['pages'] > 1 ) : ?>
+		<?php if ( $mpseo_results['pages'] > 1 ) : ?>
 			<div class="tablenav bottom">
 				<div class="tablenav-pages">
 					<?php
-					$rankflow_seo_pagination = paginate_links(
+					$mpseo_pagination = paginate_links(
 						array(
 							'base'      => add_query_arg( 'paged', '%#%' ),
 							'format'    => '',
 							'prev_text' => '&laquo;',
 							'next_text' => '&raquo;',
-							'total'     => $rankflow_seo_results['pages'],
-							'current'   => $rankflow_seo_page,
+							'total'     => $mpseo_results['pages'],
+							'current'   => $mpseo_page,
 						)
 					);
 
-					if ( $rankflow_seo_pagination ) {
-						echo wp_kses_post( $rankflow_seo_pagination );
+					if ( $mpseo_pagination ) {
+						echo wp_kses_post( $mpseo_pagination );
 					}
 					?>
 				</div>

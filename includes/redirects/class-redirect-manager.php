@@ -2,8 +2,8 @@
 /**
  * Redirect Manager - Core redirect functionality
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/redirects
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/redirects
  * @author     Strativ AB
  */
 
@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class RankFlow_SEO_Redirect_Manager
+ * Class MPSEO_Redirect_Manager
  */
-class RankFlow_SEO_Redirect_Manager
+class MPSEO_Redirect_Manager
 {
 
     /**
@@ -31,7 +31,7 @@ class RankFlow_SEO_Redirect_Manager
     public function __construct()
     {
         global $wpdb;
-        $this->table_name = $wpdb->prefix . 'rankflow_seo_redirects';
+        $this->table_name = $wpdb->prefix . 'mpseo_redirects';
     }
 
     /**
@@ -86,7 +86,7 @@ class RankFlow_SEO_Redirect_Manager
 
         // Check for duplicates (only for non-regex).
         if (empty($data['is_regex']) && $this->redirect_exists($source_normalized)) {
-            return new WP_Error('duplicate_redirect', __('A redirect for this source URL already exists.', 'rankflow-seo'));
+            return new WP_Error('duplicate_redirect', __('A redirect for this source URL already exists.', 'metapilot-smart-seo'));
         }
 
         // Prepare data.
@@ -109,7 +109,7 @@ class RankFlow_SEO_Redirect_Manager
         // Check for errors.
         if (false === $result) {
             $error = $wpdb->last_error;
-            return new WP_Error('db_error', __('Failed to add redirect: ', 'rankflow-seo') . $error);
+            return new WP_Error('db_error', __('Failed to add redirect: ', 'metapilot-smart-seo') . $error);
         }
 
         // Clear cache.
@@ -154,7 +154,7 @@ class RankFlow_SEO_Redirect_Manager
         );
 
         if (false === $result) {
-            return new WP_Error('db_error', __('Failed to update redirect.', 'rankflow-seo'));
+            return new WP_Error('db_error', __('Failed to update redirect.', 'metapilot-smart-seo'));
         }
 
         // Clear cache.
@@ -323,7 +323,7 @@ class RankFlow_SEO_Redirect_Manager
 
         // Try cache first.
         $cache_key = 'redirect_' . md5($normalized_url);
-        $cached = wp_cache_get($cache_key, 'rankflow_seo');
+        $cached = wp_cache_get($cache_key, 'mpseo');
 
         if (false !== $cached) {
             return $cached;
@@ -363,7 +363,7 @@ class RankFlow_SEO_Redirect_Manager
                     $normalized_source === $url_variant ||
                     rtrim($normalized_source, '/') === rtrim($url_variant, '/')
                 ) {
-                    wp_cache_set($cache_key, $redirect, 'rankflow_seo', 3600);
+                    wp_cache_set($cache_key, $redirect, 'mpseo', 3600);
                     return $redirect;
                 }
             }
@@ -389,14 +389,14 @@ class RankFlow_SEO_Redirect_Manager
                     break; // Invalid regex, skip this redirect rule.
                 }
                 if ($match) {
-                    wp_cache_set($cache_key, $regex_redirect, 'rankflow_seo', 3600);
+                    wp_cache_set($cache_key, $regex_redirect, 'mpseo', 3600);
                     return $regex_redirect;
                 }
             }
         }
 
         // No match found.
-        wp_cache_set($cache_key, null, 'rankflow_seo', 3600);
+        wp_cache_set($cache_key, null, 'mpseo', 3600);
         return null;
     }
 
@@ -430,19 +430,19 @@ class RankFlow_SEO_Redirect_Manager
     {
         // Check source URL.
         if (empty($data['source_url'])) {
-            return new WP_Error('missing_source', __('Source URL is required.', 'rankflow-seo'));
+            return new WP_Error('missing_source', __('Source URL is required.', 'metapilot-smart-seo'));
         }
 
         // Check target URL (not required for 410 and 451).
         $redirect_type = isset($data['redirect_type']) ? $data['redirect_type'] : '301';
         if (!in_array($redirect_type, array('410', '451'), true) && empty($data['target_url'])) {
-            return new WP_Error('missing_target', __('Target URL is required.', 'rankflow-seo'));
+            return new WP_Error('missing_target', __('Target URL is required.', 'metapilot-smart-seo'));
         }
 
         // Validate redirect type.
         $valid_types = array('301', '302', '307', '410', '451');
         if (!in_array($redirect_type, $valid_types, true)) {
-            return new WP_Error('invalid_type', __('Invalid redirect type. Must be 301, 302, 307, 410, or 451.', 'rankflow-seo'));
+            return new WP_Error('invalid_type', __('Invalid redirect type. Must be 301, 302, 307, 410, or 451.', 'metapilot-smart-seo'));
         }
 
         // Validate regex if enabled.
@@ -450,7 +450,7 @@ class RankFlow_SEO_Redirect_Manager
             // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Intentional: testing user-supplied regex pattern validity.
             $test = @preg_match($data['source_url'], '');
             if (false === $test) {
-                return new WP_Error('invalid_regex', __('Invalid regular expression pattern.', 'rankflow-seo'));
+                return new WP_Error('invalid_regex', __('Invalid regular expression pattern.', 'metapilot-smart-seo'));
             }
         }
 
@@ -531,7 +531,7 @@ class RankFlow_SEO_Redirect_Manager
      */
     private function clear_cache()
     {
-        wp_cache_delete('rankflow_seo_redirects', 'rankflow_seo');
+        wp_cache_delete('mpseo_redirects', 'mpseo');
     }
 
     /**

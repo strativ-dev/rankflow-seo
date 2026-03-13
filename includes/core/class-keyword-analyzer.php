@@ -2,11 +2,11 @@
 /**
  * Keyword analyzer.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/core
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/core
  * @author     Strativ AB
  */
-class RankFlow_SEO_Keyword_Analyzer
+class MPSEO_Keyword_Analyzer
 {
 
 	/**
@@ -163,7 +163,7 @@ class RankFlow_SEO_Keyword_Analyzer
 				'type' => 'warning',
 				'message' => sprintf(
 					/* translators: %s: keyword density percentage */
-					__('Keyword density is low (%s%%). Try to include the focus keyword more naturally in your content.', 'rankflow-seo'),
+					__('Keyword density is low (%s%%). Try to include the focus keyword more naturally in your content.', 'metapilot-smart-seo'),
 					number_format($analysis['density'], 2)
 				),
 			);
@@ -172,7 +172,7 @@ class RankFlow_SEO_Keyword_Analyzer
 				'type' => 'error',
 				'message' => sprintf(
 					/* translators: %s: keyword density percentage */
-					__('Keyword density is too high (%s%%). This might be considered keyword stuffing.', 'rankflow-seo'),
+					__('Keyword density is too high (%s%%). This might be considered keyword stuffing.', 'metapilot-smart-seo'),
 					number_format($analysis['density'], 2)
 				),
 			);
@@ -181,7 +181,7 @@ class RankFlow_SEO_Keyword_Analyzer
 				'type' => 'success',
 				'message' => sprintf(
 					/* translators: %s: keyword density percentage */
-					__('Keyword density is good (%s%%).', 'rankflow-seo'),
+					__('Keyword density is good (%s%%).', 'metapilot-smart-seo'),
 					number_format($analysis['density'], 2)
 				),
 			);
@@ -191,14 +191,14 @@ class RankFlow_SEO_Keyword_Analyzer
 		if ($analysis['in_headings'] === 0) {
 			$recommendations[] = array(
 				'type' => 'warning',
-				'message' => __('Focus keyword not found in any headings. Use it in at least one heading (H1-H6).', 'rankflow-seo'),
+				'message' => __('Focus keyword not found in any headings. Use it in at least one heading (H1-H6).', 'metapilot-smart-seo'),
 			);
 		} else {
 			$recommendations[] = array(
 				'type' => 'success',
 				'message' => sprintf(
 					/* translators: %d: number of headings containing the keyword */
-					__('Focus keyword appears in %d heading(s).', 'rankflow-seo'),
+					__('Focus keyword appears in %d heading(s).', 'metapilot-smart-seo'),
 					$analysis['in_headings']
 				),
 			);
@@ -208,12 +208,12 @@ class RankFlow_SEO_Keyword_Analyzer
 		if (!$analysis['in_first_para']) {
 			$recommendations[] = array(
 				'type' => 'warning',
-				'message' => __('Focus keyword not found in the first paragraph. Include it early in your content.', 'rankflow-seo'),
+				'message' => __('Focus keyword not found in the first paragraph. Include it early in your content.', 'metapilot-smart-seo'),
 			);
 		} else {
 			$recommendations[] = array(
 				'type' => 'success',
-				'message' => __('Focus keyword appears in the first paragraph.', 'rankflow-seo'),
+				'message' => __('Focus keyword appears in the first paragraph.', 'metapilot-smart-seo'),
 			);
 		}
 

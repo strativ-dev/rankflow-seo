@@ -2,11 +2,11 @@
 /**
  * Google Gemini API implementation
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/api
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/api
  * @author     Strativ AB
  */
-class RankFlow_SEO_Gemini_API extends RankFlow_SEO_API_Base
+class MPSEO_Gemini_API extends MPSEO_API_Base
 {
 
 	/**
@@ -28,14 +28,14 @@ class RankFlow_SEO_Gemini_API extends RankFlow_SEO_API_Base
 	{
 
 		if (empty($this->api_key)) {
-			return new WP_Error('no_api_key', __('Google API key is not configured', 'rankflow-seo'));
+			return new WP_Error('no_api_key', __('Google API key is not configured', 'metapilot-smart-seo'));
 		}
 
 		// Prepare content.
 		$clean_content = $this->prepare_content($content);
 
 		if (empty($clean_content)) {
-			return new WP_Error('no_content', __('Content is empty', 'rankflow-seo'));
+			return new WP_Error('no_content', __('Content is empty', 'metapilot-smart-seo'));
 		}
 
 		// Build prompt.
@@ -76,7 +76,7 @@ class RankFlow_SEO_Gemini_API extends RankFlow_SEO_API_Base
 				'gemini_api_error',
 				sprintf(
 					/* translators: 1: error code, 2: error message */
-					__('Gemini API Error (%1$s): %2$s', 'rankflow-seo'),
+					__('Gemini API Error (%1$s): %2$s', 'metapilot-smart-seo'),
 					$response['error']['code'] ?? 'unknown',
 					$response['error']['message'] ?? 'Unknown error'
 				)
@@ -90,7 +90,7 @@ class RankFlow_SEO_Gemini_API extends RankFlow_SEO_API_Base
 		) {
 			return new WP_Error(
 				'safety_blocked',
-				__('Content was blocked by Gemini safety filters. Try different content.', 'rankflow-seo')
+				__('Content was blocked by Gemini safety filters. Try different content.', 'metapilot-smart-seo')
 			);
 		}
 
@@ -99,7 +99,7 @@ class RankFlow_SEO_Gemini_API extends RankFlow_SEO_API_Base
 			// More detailed error.
 			return new WP_Error(
 				'invalid_response',
-				__('Invalid response from Google Gemini. Check WordPress error logs for details.', 'rankflow-seo')
+				__('Invalid response from Google Gemini. Check WordPress error logs for details.', 'metapilot-smart-seo')
 			);
 		}
 

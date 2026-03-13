@@ -1,280 +1,369 @@
 /**
  * Settings page styles
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/assets/css
+ * @package    MPSEO
+ * @subpackage MPSEO/assets/css
  */
 
-.rankflow-seo-settings {
-	max-width: 1200px;
-}
-
 /* Settings Header */
-.rankflow-seo-settings h1 {
-	font-size: 28px;
-	font-weight: 600;
-	margin-bottom: 20px;
+.mpseo-settings h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
-/* Tabs */
-.rankflow-seo-settings .nav-tab-wrapper {
-	margin-bottom: 30px;
-	border-bottom: 1px solid #c3c4c7;
+/* Tabs — override WordPress defaults */
+.mpseo-settings .nav-tab-wrapper {
+  margin: 0 0 24px 0 !important;
+  border-bottom: 1px solid #ddd !important;
+  background: #fff !important;
+  padding: 0 !important;
 }
 
-.rankflow-seo-settings .nav-tab {
-	font-size: 15px;
-	font-weight: 500;
-	padding: 12px 20px;
-	margin-right: 5px;
-	color: #50575e;
-	text-decoration: none;
-	border: 1px solid transparent;
-	background: transparent;
+.mpseo-settings .nav-tab,
+.mpseo-settings .nav-tab:hover,
+.mpseo-settings .nav-tab:focus {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  padding: 14px 16px !important;
+  margin: 0 2px -1px 0 !important;
+  color: #50575e !important;
+  text-decoration: none !important;
+  border: none !important;
+  border-bottom: 3px solid transparent !important;
+  background: transparent !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  line-height: 1.4 !important;
+  box-shadow: none !important;
 }
 
-.rankflow-seo-settings .nav-tab:hover {
-	color: #2271b1;
-	background: #f6f7f7;
+.mpseo-settings .nav-tab:hover,
+.mpseo-settings .nav-tab:focus {
+  color: #1d2327 !important;
+  border-bottom-color: #c3c4c7 !important;
 }
 
-.rankflow-seo-settings .nav-tab-active {
-	color: #2271b1;
-	border: 1px solid #c3c4c7;
-	border-bottom-color: #fff;
-	background: #fff;
-	margin-bottom: -1px;
+.mpseo-settings .nav-tab .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  line-height: 1;
+  color: inherit;
+}
+
+.mpseo-settings .nav-tab-active,
+.mpseo-settings .nav-tab-active:hover,
+.mpseo-settings .nav-tab-active:focus {
+  color: #e05a1e !important;
+  border-bottom: 3px solid #e05a1e !important;
+  background: transparent !important;
+  font-weight: 500 !important;
+}
+
+.mpseo-settings .nav-tab-active .dashicons {
+  color: #e05a1e !important;
 }
 
 /* Tab Content */
-.tab-content {
-	background: #fff;
-	padding: 30px;
-	border: 1px solid #c3c4c7;
-	border-top: none;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+.mpseo-settings .tab-content {
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Settings Section Cards */
+.mpseo-section-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.mpseo-section-card .mpseo-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: #1d2327;
+  border: none;
+  padding: 0;
+}
+
+.mpseo-section-card .mpseo-section-desc {
+  font-size: 13px;
+  color: #646970;
+  margin: 0 0 20px 0;
+}
+
+.mpseo-section-card .form-table {
+  margin-top: 0;
+}
+
+/* Title Separator Buttons */
+.mpseo-sep-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.mpseo-sep-btn {
+  min-width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  border: 1px solid #c3c4c7;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  color: #1d2327;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.mpseo-sep-btn:hover {
+  border-color: #e05a1e;
+  color: #e05a1e;
+}
+
+.mpseo-sep-btn.selected {
+  border: 2px solid #e05a1e;
+  color: #e05a1e;
+  font-weight: 600;
+}
+
+/* Post type checkboxes styled */
+.post-type-list label:has(input:checked) {
+  border-color: #e05a1e;
 }
 
 /* Form Sections */
 .settings-section {
-	margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .settings-section h2 {
-	font-size: 20px;
-	margin-bottom: 15px;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #ddd;
+  font-size: 20px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
 /* API Key Field */
 .api-key-field {
-	position: relative;
+  position: relative;
 }
 
 .api-key-field input[type="password"],
 .api-key-field input[type="text"] {
-	padding-right: 80px;
+  padding-right: 80px;
 }
 
 .api-key-field .button {
-	position: absolute;
-	right: 5px;
-	top: 50%;
-	transform: translateY(-50%);
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* API Provider Instructions */
 .api-key-instructions {
-	background: #f9f9f9;
-	border-left: 4px solid #2271b1;
-	padding: 15px;
-	margin-top: 15px;
+  background: #f9f9f9;
+  border-left: 4px solid #2271b1;
+  padding: 15px;
+  margin-top: 15px;
 }
 
 .provider-instructions {
-	list-style: none;
-	padding: 0;
-	margin: 10px 0 0 0;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
 }
 
 .provider-instructions li {
-	padding: 8px 0;
-	font-size: 14px;
+  padding: 8px 0;
+  font-size: 14px;
 }
 
 .provider-instructions strong {
-	color: #1d2327;
+  color: #1d2327;
 }
 
 .provider-instructions a {
-	color: #2271b1;
-	text-decoration: none;
+  color: #2271b1;
+  text-decoration: none;
 }
 
 .provider-instructions a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* Toggle Groups */
 .toggle-group {
-	background: #f9f9f9;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	padding: 15px;
-	margin-bottom: 15px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 15px;
 }
 
 .toggle-group label {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	padding: 10px 0;
-	font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  font-weight: 500;
 }
 
 .toggle-group input[type="checkbox"] {
-	width: 20px;
-	height: 20px;
-	margin: 0;
+  width: 20px;
+  height: 20px;
+  margin: 0;
 }
 
 /* Post Type Checkboxes */
 .post-type-list {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
 }
 
 .post-type-list label {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	padding: 8px;
-	background: #fff;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	cursor: pointer;
-	transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .post-type-list label:hover {
-	border-color: #2271b1;
-	background: #f0f6fc;
+  border-color: #e05a1e;
+  background: #fdf3ee;
 }
 
 .post-type-list input[type="checkbox"] {
-	margin: 0;
+  margin: 0;
 }
 
 /* Danger Zone */
 .danger-zone {
-	background: #fff4f4;
-	border: 1px solid #dc3232;
-	border-radius: 4px;
-	padding: 20px;
-	margin-top: 30px;
+  background: #fff4f4;
+  border: 1px solid #dc3232;
+  border-radius: 4px;
+  padding: 20px;
+  margin-top: 30px;
 }
 
 .danger-zone h3 {
-	color: #dc3232;
-	margin-top: 0;
+  color: #dc3232;
+  margin-top: 0;
 }
 
 .danger-zone .button {
-	background: #dc3232;
-	color: #fff;
-	border-color: #dc3232;
+  background: #dc3232;
+  color: #fff;
+  border-color: #dc3232;
 }
 
 .danger-zone .button:hover {
-	background: #a00;
-	border-color: #a00;
+  background: #a00;
+  border-color: #a00;
 }
 
 /* System Info */
 .system-info {
-	background: #f9f9f9;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	padding: 20px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 20px;
 }
 
 .system-info h3 {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .system-info table {
-	width: 100%;
-	border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .system-info td {
-	padding: 10px 0;
-	border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
 }
 
 .system-info td:first-child {
-	font-weight: 600;
-	width: 40%;
+  font-weight: 600;
+  width: 40%;
 }
 
 .system-info tr:last-child td {
-	border-bottom: none;
+  border-bottom: none;
 }
 
 /* Status Indicators */
 .status-indicator {
-	display: inline-flex;
-	align-items: center;
-	gap: 5px;
-	font-size: 13px;
-	padding: 3px 10px;
-	border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  padding: 3px 10px;
+  border-radius: 12px;
 }
 
 .status-indicator.active {
-	background: #d7f2d8;
-	color: #1e4620;
+  background: #d7f2d8;
+  color: #1e4620;
 }
 
 .status-indicator.inactive {
-	background: #f0f0f1;
-	color: #646970;
+  background: #f0f0f1;
+  color: #646970;
 }
 
 .status-indicator.error {
-	background: #ffe5e5;
-	color: #a94442;
+  background: #ffe5e5;
+  color: #a94442;
 }
 
 /* Help Text */
 .help-text {
-	background: #e7f5fe;
-	border-left: 4px solid #2271b1;
-	padding: 15px;
-	margin: 15px 0;
-	font-size: 14px;
+  background: #e7f5fe;
+  border-left: 4px solid #2271b1;
+  padding: 15px;
+  margin: 15px 0;
+  font-size: 14px;
 }
 
 .help-text strong {
-	display: block;
-	margin-bottom: 8px;
-	color: #135e96;
+  display: block;
+  margin-bottom: 8px;
+  color: #135e96;
 }
 
 /* Responsive */
 @media screen and (max-width: 782px) {
-	.tab-content {
-		padding: 15px;
-	}
-	
-	.post-type-list {
-		grid-template-columns: 1fr;
-	}
-	
-	.rankflow-seo-settings .nav-tab {
-		display: block;
-		margin-bottom: 5px;
-	}
+  .tab-content {
+    padding: 15px;
+  }
+
+  .post-type-list {
+    grid-template-columns: 1fr;
+  }
+
+  .mpseo-settings .nav-tab {
+    display: block;
+    margin-bottom: 5px;
+  }
 }

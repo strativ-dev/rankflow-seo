@@ -2,11 +2,11 @@
 /**
  * Helper functions.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/utils
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/utils
  * @author     Strativ AB
  */
-class RankFlow_SEO_Helper
+class MPSEO_Helper
 {
 
 	/**
@@ -52,7 +52,7 @@ class RankFlow_SEO_Helper
 	 */
 	public static function get_enabled_post_types()
 	{
-		$enabled = get_option('rankflow_seo_post_types', array('post', 'page'));
+		$enabled = get_option('mpseo_post_types', array('post', 'page'));
 		return is_array($enabled) ? $enabled : array('post', 'page');
 	}
 
@@ -90,7 +90,7 @@ class RankFlow_SEO_Helper
 	 */
 	public static function is_api_configured()
 	{
-		$api_key = get_option('rankflow_seo_api_key');
+		$api_key = get_option('mpseo_api_key');
 		return !empty($api_key);
 	}
 

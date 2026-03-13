@@ -2,8 +2,8 @@
 /**
  * Fired during plugin activation
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes
+ * @package    MPSEO
+ * @subpackage MPSEO/includes
  * @author     Strativ AB
  */
 
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-class RankFlow_SEO_Activator
+class MPSEO_Activator
 {
 
 	/**
@@ -24,20 +24,20 @@ class RankFlow_SEO_Activator
 	{
 		// Check PHP version
 		if (version_compare(PHP_VERSION, '7.4', '<')) {
-			deactivate_plugins(RANKFLOW_SEO_PLUGIN_BASENAME);
+			deactivate_plugins(MPSEO_PLUGIN_BASENAME);
 			wp_die(
-				esc_html__('RankFlow SEO requires PHP 7.4 or higher. Please upgrade your PHP version.', 'rankflow-seo'),
-				esc_html__('Plugin Activation Error', 'rankflow-seo'),
+				esc_html__('Metapilot Smart SEO requires PHP 7.4 or higher. Please upgrade your PHP version.', 'metapilot-smart-seo'),
+				esc_html__('Plugin Activation Error', 'metapilot-smart-seo'),
 				array('back_link' => true)
 			);
 		}
 
 		// Check WordPress version
 		if (version_compare(get_bloginfo('version'), '5.8', '<')) {
-			deactivate_plugins(RANKFLOW_SEO_PLUGIN_BASENAME);
+			deactivate_plugins(MPSEO_PLUGIN_BASENAME);
 			wp_die(
-				esc_html__('RankFlow SEO requires WordPress 5.8 or higher. Please upgrade your WordPress installation.', 'rankflow-seo'),
-				esc_html__('Plugin Activation Error', 'rankflow-seo'),
+				esc_html__('Metapilot Smart SEO requires WordPress 5.8 or higher. Please upgrade your WordPress installation.', 'metapilot-smart-seo'),
+				esc_html__('Plugin Activation Error', 'metapilot-smart-seo'),
 				array('back_link' => true)
 			);
 		}
@@ -49,10 +49,10 @@ class RankFlow_SEO_Activator
 		self::create_tables();
 
 		// Set activation flag for redirect
-		set_transient('rankflow_seo_activation_redirect', true, 30);
+		set_transient('mpseo_activation_redirect', true, 30);
 
 		// Set flag to flush rewrite rules on next page load
-		update_option('rankflow_seo_flush_rewrite_rules', true);
+		update_option('mpseo_flush_rewrite_rules', true);
 	}
 
 	/**
@@ -91,8 +91,8 @@ class RankFlow_SEO_Activator
 		);
 
 		foreach ($defaults as $key => $value) {
-			if (false === get_option('rankflow_seo_' . $key)) {
-				add_option('rankflow_seo_' . $key, $value);
+			if (false === get_option('mpseo_' . $key)) {
+				add_option('mpseo_' . $key, $value);
 			}
 		}
 	}
@@ -109,7 +109,7 @@ class RankFlow_SEO_Activator
 		$charset_collate = $wpdb->get_charset_collate();
 
 		// Analysis table
-		$analysis_table = $wpdb->prefix . 'rankflow_seo_analysis';
+		$analysis_table = $wpdb->prefix . 'mpseo_analysis';
 		$sql1 = "CREATE TABLE $analysis_table (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			post_id bigint(20) NOT NULL,
@@ -124,7 +124,7 @@ class RankFlow_SEO_Activator
 		) $charset_collate;";
 
 		// Redirects table
-		$redirects_table = $wpdb->prefix . 'rankflow_seo_redirects';
+		$redirects_table = $wpdb->prefix . 'mpseo_redirects';
 		$sql2 = "CREATE TABLE $redirects_table (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			source_url varchar(500) NOT NULL,
@@ -143,7 +143,7 @@ class RankFlow_SEO_Activator
 		) $charset_collate;";
 
 		// 404 Logs table
-		$logs_table = $wpdb->prefix . 'rankflow_seo_404_logs';
+		$logs_table = $wpdb->prefix . 'mpseo_404_logs';
 		$sql3 = "CREATE TABLE $logs_table (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			url varchar(500) NOT NULL,
@@ -166,6 +166,6 @@ class RankFlow_SEO_Activator
 		dbDelta($sql3);
 
 		// Store database version
-		update_option('rankflow_seo_db_version', '1.1');
+		update_option('mpseo_db_version', '1.1');
 	}
 }

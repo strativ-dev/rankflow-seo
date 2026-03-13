@@ -1,5 +1,5 @@
 {
-  "name": "joyroy/rankflow-seo",
+  "name": "joyroy/metapilot-smart-seo",
   "description": "Professional AI-powered SEO plugin for WordPress with advanced meta generation, content analysis, and schema markup",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
@@ -39,7 +39,7 @@
   },
   "autoload": {
     "psr-4": {
-      "RankFlow_SEO\\": "includes/"
+      "MPSEO\\": "includes/"
     },
     "classmap": [
       "includes/",
@@ -49,7 +49,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "RankFlow_SEO\\Tests\\": "tests/"
+      "MPSEO\\Tests\\": "tests/"
     }
   },
   "scripts": {

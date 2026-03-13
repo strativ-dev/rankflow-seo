@@ -2,8 +2,8 @@
 /**
  * Admin page header partial.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/admin/partials
+ * @package    MPSEO
+ * @subpackage MPSEO/admin/partials
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,9 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="wp-header-end"></div>
 
-<div class="rankflow-seo-header">
-	<div class="rankflow-seo-header-logo">
-		<img src="<?php echo esc_url( RANKFLOW_SEO_PLUGIN_URL . 'assets/images/logo-icon-orange.png' ); ?>" alt="RankFlow SEO" class="rankflow-seo-icon-40">
+<div class="mpseo-header">
+	<div class="mpseo-header-logo">
+		<img src="<?php echo esc_url( MPSEO_PLUGIN_URL . 'assets/images/logo-icon-orange.png' ); ?>" alt="Metapilot Smart SEO" class="mpseo-icon-40">
 		<span><?php echo esc_html( get_admin_page_title() ); ?></span>
 	</div>
 </div>

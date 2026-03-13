@@ -2,11 +2,11 @@
 /**
  * Base API class for all AI providers
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/api
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/api
  * @author     Strativ AB
  */
-abstract class RankFlow_SEO_API_Base
+abstract class MPSEO_API_Base
 {
 
 	/**
@@ -112,7 +112,7 @@ abstract class RankFlow_SEO_API_Base
 		preg_match('/\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/s', $response, $matches);
 
 		if (empty($matches[0])) {
-			return new WP_Error('invalid_response', __('Could not find JSON in API response. AI may have returned plain text instead of JSON.', 'rankflow-seo'));
+			return new WP_Error('invalid_response', __('Could not find JSON in API response. AI may have returned plain text instead of JSON.', 'metapilot-smart-seo'));
 		}
 
 		$json_string = $matches[0];
@@ -124,7 +124,7 @@ abstract class RankFlow_SEO_API_Base
 				'json_error',
 				sprintf(
 					/* translators: %s: JSON error message */
-					__('Invalid JSON in API response: %s', 'rankflow-seo'),
+					__('Invalid JSON in API response: %s', 'metapilot-smart-seo'),
 					json_last_error_msg()
 				)
 			);
@@ -145,7 +145,7 @@ abstract class RankFlow_SEO_API_Base
 				'missing_fields',
 				sprintf(
 					/* translators: %s: comma-separated list of missing field names */
-					__('Missing required fields in API response: %s', 'rankflow-seo'),
+					__('Missing required fields in API response: %s', 'metapilot-smart-seo'),
 					implode(', ', $missing_fields)
 				)
 			);
@@ -198,7 +198,7 @@ abstract class RankFlow_SEO_API_Base
 				? $error_data['error']['message']
 				: sprintf(
 				/* translators: %d: HTTP status code */
-				__('API request failed with status code: %d', 'rankflow-seo'),
+				__('API request failed with status code: %d', 'metapilot-smart-seo'),
 				$status_code
 			);
 

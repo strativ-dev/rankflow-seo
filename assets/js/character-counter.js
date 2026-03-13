@@ -1,8 +1,8 @@
 /**
  * Character counter functionality
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/assets/js
+ * @package    MPSEO
+ * @subpackage MPSEO/assets/js
  */
 
 (function ($) {
@@ -88,7 +88,7 @@
 	});
 
 	// Export for use in other modules
-	window.RankflowSeo = window.RankflowSeo || {};
-	window.RankflowSeo.CharacterCounter = CharacterCounter;
+	window.Mpseo = window.Mpseo || {};
+	window.Mpseo.CharacterCounter = CharacterCounter;
 
 })(jQuery);

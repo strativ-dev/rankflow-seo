@@ -4,8 +4,8 @@
  *
  * Manages virtual robots.txt file generation and rules
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes
+ * @package    MPSEO
+ * @subpackage MPSEO/includes
  * @author     Strativ AB
  */
 
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class RankFlow_SEO_Robots_Txt
+class MPSEO_Robots_Txt
 {
 
     /**
@@ -29,7 +29,7 @@ class RankFlow_SEO_Robots_Txt
      *
      * @param string $plugin_name The plugin name.
      */
-    public function __construct($plugin_name = 'rankflow-seo')
+    public function __construct($plugin_name = 'metapilot-smart-seo')
     {
         $this->plugin_name = $plugin_name;
     }
@@ -41,8 +41,8 @@ class RankFlow_SEO_Robots_Txt
     {
         // Enable/disable virtual robots.txt.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_enabled',
+            'mpseo_robots_txt',
+            'mpseo_robots_enabled',
             array(
                 'type' => 'boolean',
                 'sanitize_callback' => 'rest_sanitize_boolean',
@@ -52,8 +52,8 @@ class RankFlow_SEO_Robots_Txt
 
         // Custom robots.txt content.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_custom_rules',
+            'mpseo_robots_txt',
+            'mpseo_robots_custom_rules',
             array(
                 'type' => 'string',
                 'sanitize_callback' => array($this, 'sanitize_robots_rules'),
@@ -63,8 +63,8 @@ class RankFlow_SEO_Robots_Txt
 
         // Include sitemap.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_include_sitemap',
+            'mpseo_robots_txt',
+            'mpseo_robots_include_sitemap',
             array(
                 'type' => 'boolean',
                 'sanitize_callback' => 'rest_sanitize_boolean',
@@ -74,8 +74,8 @@ class RankFlow_SEO_Robots_Txt
 
         // Block AI crawlers - parent toggle.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_block_ai',
+            'mpseo_robots_txt',
+            'mpseo_robots_block_ai',
             array(
                 'type' => 'boolean',
                 'sanitize_callback' => 'rest_sanitize_boolean',
@@ -85,8 +85,8 @@ class RankFlow_SEO_Robots_Txt
 
         // Individual AI bots array.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_blocked_ai_bots',
+            'mpseo_robots_txt',
+            'mpseo_robots_blocked_ai_bots',
             array(
                 'type' => 'array',
                 'sanitize_callback' => array($this, 'sanitize_bot_array'),
@@ -96,8 +96,8 @@ class RankFlow_SEO_Robots_Txt
 
         // Block bad bots - parent toggle.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_block_bad_bots',
+            'mpseo_robots_txt',
+            'mpseo_robots_block_bad_bots',
             array(
                 'type' => 'boolean',
                 'sanitize_callback' => 'rest_sanitize_boolean',
@@ -107,8 +107,8 @@ class RankFlow_SEO_Robots_Txt
 
         // Individual bad bots array.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_blocked_bad_bots',
+            'mpseo_robots_txt',
+            'mpseo_robots_blocked_bad_bots',
             array(
                 'type' => 'array',
                 'sanitize_callback' => array($this, 'sanitize_bot_array'),
@@ -118,8 +118,8 @@ class RankFlow_SEO_Robots_Txt
 
         // Disallow wp-admin.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_disallow_wp_admin',
+            'mpseo_robots_txt',
+            'mpseo_robots_disallow_wp_admin',
             array(
                 'type' => 'boolean',
                 'sanitize_callback' => 'rest_sanitize_boolean',
@@ -129,8 +129,8 @@ class RankFlow_SEO_Robots_Txt
 
         // Disallow wp-includes.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_disallow_wp_includes',
+            'mpseo_robots_txt',
+            'mpseo_robots_disallow_wp_includes',
             array(
                 'type' => 'boolean',
                 'sanitize_callback' => 'rest_sanitize_boolean',
@@ -140,8 +140,8 @@ class RankFlow_SEO_Robots_Txt
 
         // Allow wp-admin/admin-ajax.php.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_allow_ajax',
+            'mpseo_robots_txt',
+            'mpseo_robots_allow_ajax',
             array(
                 'type' => 'boolean',
                 'sanitize_callback' => 'rest_sanitize_boolean',
@@ -151,8 +151,8 @@ class RankFlow_SEO_Robots_Txt
 
         // Disallow search results.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_disallow_search',
+            'mpseo_robots_txt',
+            'mpseo_robots_disallow_search',
             array(
                 'type' => 'boolean',
                 'sanitize_callback' => 'rest_sanitize_boolean',
@@ -162,8 +162,8 @@ class RankFlow_SEO_Robots_Txt
 
         // Custom sitemap URLs.
         register_setting(
-            'rankflow_seo_robots_txt',
-            'rankflow_seo_robots_sitemap_urls',
+            'mpseo_robots_txt',
+            'mpseo_robots_sitemap_urls',
             array(
                 'type' => 'string',
                 'sanitize_callback' => array($this, 'sanitize_sitemap_urls'),
@@ -233,7 +233,7 @@ class RankFlow_SEO_Robots_Txt
     public function output_robots_txt($output, $public)
     {
         // Check if custom robots.txt is enabled.
-        if (!get_option('rankflow_seo_robots_enabled', false)) {
+        if (!get_option('mpseo_robots_enabled', false)) {
             return $output;
         }
 
@@ -251,7 +251,7 @@ class RankFlow_SEO_Robots_Txt
         $lines = array();
 
         // Add header comment.
-        $lines[] = '# Robots.txt generated by RankFlow SEO';
+        $lines[] = '# Robots.txt generated by Metapilot Smart SEO';
         $lines[] = '# ' . gmdate('Y-m-d H:i:s') . ' UTC';
         $lines[] = '# ' . home_url('/');
         $lines[] = '';
@@ -266,10 +266,10 @@ class RankFlow_SEO_Robots_Txt
         }
 
         // Get bot blocking settings.
-        $block_all_ai = get_option('rankflow_seo_robots_block_ai', false);
-        $blocked_ai_bots = get_option('rankflow_seo_robots_blocked_ai_bots', array());
-        $block_all_bad = get_option('rankflow_seo_robots_block_bad_bots', false);
-        $blocked_bad_bots = get_option('rankflow_seo_robots_blocked_bad_bots', array());
+        $block_all_ai = get_option('mpseo_robots_block_ai', false);
+        $blocked_ai_bots = get_option('mpseo_robots_blocked_ai_bots', array());
+        $block_all_bad = get_option('mpseo_robots_block_bad_bots', false);
+        $blocked_bad_bots = get_option('mpseo_robots_blocked_bad_bots', array());
 
         // Determine which AI bots to block.
         $ai_bots_to_block = array();
@@ -316,22 +316,22 @@ class RankFlow_SEO_Robots_Txt
         $lines[] = 'User-agent: *';
 
         // Disallow wp-admin.
-        if (get_option('rankflow_seo_robots_disallow_wp_admin', true)) {
+        if (get_option('mpseo_robots_disallow_wp_admin', true)) {
             $lines[] = 'Disallow: /wp-admin/';
         }
 
         // Allow admin-ajax.php.
-        if (get_option('rankflow_seo_robots_allow_ajax', true)) {
+        if (get_option('mpseo_robots_allow_ajax', true)) {
             $lines[] = 'Allow: /wp-admin/admin-ajax.php';
         }
 
         // Disallow wp-includes.
-        if (get_option('rankflow_seo_robots_disallow_wp_includes', false)) {
+        if (get_option('mpseo_robots_disallow_wp_includes', false)) {
             $lines[] = 'Disallow: /wp-includes/';
         }
 
         // Disallow search results.
-        if (get_option('rankflow_seo_robots_disallow_search', true)) {
+        if (get_option('mpseo_robots_disallow_search', true)) {
             $lines[] = 'Disallow: /?s=';
             $lines[] = 'Disallow: /search/';
         }
@@ -360,7 +360,7 @@ class RankFlow_SEO_Robots_Txt
         $lines[] = 'Allow: /*.svg';
 
         // Custom rules.
-        $custom_rules = get_option('rankflow_seo_robots_custom_rules', '');
+        $custom_rules = get_option('mpseo_robots_custom_rules', '');
         if (!empty(trim($custom_rules))) {
             $lines[] = '';
             $lines[] = '# Custom rules';
@@ -372,15 +372,15 @@ class RankFlow_SEO_Robots_Txt
         $lines[] = '# Sitemaps';
 
         // Include plugin sitemap if enabled.
-        if (get_option('rankflow_seo_robots_include_sitemap', true)) {
+        if (get_option('mpseo_robots_include_sitemap', true)) {
             // Check if our sitemap is enabled.
-            if (get_option('rankflow_seo_sitemap_enabled', false)) {
+            if (get_option('mpseo_sitemap_enabled', false)) {
                 $lines[] = 'Sitemap: ' . esc_url(home_url('sitemap_index.xml'));
             }
         }
 
         // Custom sitemap URLs.
-        $custom_sitemaps = get_option('rankflow_seo_robots_sitemap_urls', '');
+        $custom_sitemaps = get_option('mpseo_robots_sitemap_urls', '');
         if (!empty(trim($custom_sitemaps))) {
             $sitemap_urls = explode("\n", $custom_sitemaps);
             foreach ($sitemap_urls as $url) {
@@ -392,7 +392,7 @@ class RankFlow_SEO_Robots_Txt
         }
 
         // Add default WordPress sitemap if exists and no other sitemap added.
-        if (!get_option('rankflow_seo_sitemap_enabled', false) && empty(trim($custom_sitemaps))) {
+        if (!get_option('mpseo_sitemap_enabled', false) && empty(trim($custom_sitemaps))) {
             $lines[] = 'Sitemap: ' . esc_url(home_url('wp-sitemap.xml'));
         }
 
@@ -462,14 +462,14 @@ class RankFlow_SEO_Robots_Txt
      */
     public function ajax_preview_robots()
     {
-        check_ajax_referer('rankflow_seo_robots_nonce', 'nonce');
+        check_ajax_referer('mpseo_robots_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(array('message' => __('Permission denied.', 'rankflow-seo')));
+            wp_send_json_error(array('message' => __('Permission denied.', 'metapilot-smart-seo')));
         }
 
         // Show appropriate preview based on enabled status.
-        if (get_option('rankflow_seo_robots_enabled', false)) {
+        if (get_option('mpseo_robots_enabled', false)) {
             $preview = $this->generate_robots_txt();
         } else {
             $preview = $this->get_default_robots_txt();
@@ -483,27 +483,27 @@ class RankFlow_SEO_Robots_Txt
      */
     public function ajax_reset_robots()
     {
-        check_ajax_referer('rankflow_seo_robots_nonce', 'nonce');
+        check_ajax_referer('mpseo_robots_nonce', 'nonce');
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(array('message' => __('Permission denied.', 'rankflow-seo')));
+            wp_send_json_error(array('message' => __('Permission denied.', 'metapilot-smart-seo')));
         }
 
         // Reset all options to defaults.
-        update_option('rankflow_seo_robots_enabled', false);
-        update_option('rankflow_seo_robots_custom_rules', '');
-        update_option('rankflow_seo_robots_include_sitemap', true);
-        update_option('rankflow_seo_robots_block_ai', false);
-        update_option('rankflow_seo_robots_blocked_ai_bots', array());
-        update_option('rankflow_seo_robots_block_bad_bots', false);
-        update_option('rankflow_seo_robots_blocked_bad_bots', array());
-        update_option('rankflow_seo_robots_disallow_wp_admin', true);
-        update_option('rankflow_seo_robots_disallow_wp_includes', false);
-        update_option('rankflow_seo_robots_allow_ajax', true);
-        update_option('rankflow_seo_robots_disallow_search', true);
-        update_option('rankflow_seo_robots_sitemap_urls', '');
+        update_option('mpseo_robots_enabled', false);
+        update_option('mpseo_robots_custom_rules', '');
+        update_option('mpseo_robots_include_sitemap', true);
+        update_option('mpseo_robots_block_ai', false);
+        update_option('mpseo_robots_blocked_ai_bots', array());
+        update_option('mpseo_robots_block_bad_bots', false);
+        update_option('mpseo_robots_blocked_bad_bots', array());
+        update_option('mpseo_robots_disallow_wp_admin', true);
+        update_option('mpseo_robots_disallow_wp_includes', false);
+        update_option('mpseo_robots_allow_ajax', true);
+        update_option('mpseo_robots_disallow_search', true);
+        update_option('mpseo_robots_sitemap_urls', '');
 
-        wp_send_json_success(array('message' => __('Settings reset to defaults.', 'rankflow-seo')));
+        wp_send_json_success(array('message' => __('Settings reset to defaults.', 'metapilot-smart-seo')));
     }
 
     /**
@@ -528,9 +528,9 @@ class RankFlow_SEO_Robots_Txt
         $output .= "\n";
 
         // Check which sitemap to show.
-        if (get_option('rankflow_seo_sitemap_enabled', false)) {
-            // RankFlow SEO sitemap is enabled - show that instead of WordPress default.
-            $output .= "# RankFlow SEO Sitemap\n";
+        if (get_option('mpseo_sitemap_enabled', false)) {
+            // Metapilot Smart SEO sitemap is enabled - show that instead of WordPress default.
+            $output .= "# Metapilot Smart SEO Sitemap\n";
             $output .= "Sitemap: " . esc_url(home_url('sitemap_index.xml')) . "\n";
         } else {
             // Default WordPress sitemap.

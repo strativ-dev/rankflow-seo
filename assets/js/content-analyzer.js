@@ -1,8 +1,8 @@
 /**
  * Content analyzer functionality
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/assets/js
+ * @package    MPSEO
+ * @subpackage MPSEO/assets/js
  */
 
 (function ($) {
@@ -27,11 +27,11 @@
 			this.analyzing = true;
 
 			return $.ajax({
-				url: rankflowSeoData.ajaxUrl,
+				url: mpseoData.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'rankflow_seo_analyze_content',
-					nonce: rankflowSeoData.nonce,
+					action: 'mpseo_analyze_content',
+					nonce: mpseoData.nonce,
 					post_id: postId,
 					content: content,
 					focus_keyword: focusKeyword
@@ -168,7 +168,7 @@
 	}
 
 	// Export for use in other modules
-	window.RankflowSeo = window.RankflowSeo || {};
-	window.RankflowSeo.ContentAnalyzer = ContentAnalyzer;
+	window.Mpseo = window.Mpseo || {};
+	window.Mpseo.ContentAnalyzer = ContentAnalyzer;
 
 })(jQuery);

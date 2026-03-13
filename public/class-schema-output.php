@@ -4,8 +4,8 @@
  *
  * Outputs schema markup on the frontend
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/public
+ * @package    MPSEO
+ * @subpackage MPSEO/public
  * @author     Strativ AB
  */
 
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-class RankFlow_SEO_Schema_Output
+class MPSEO_Schema_Output
 {
 
 	/**
@@ -22,23 +22,23 @@ class RankFlow_SEO_Schema_Output
 	 */
 	public function output_schema()
 	{
-		// Check if schema is enabled.
-		if (!get_option('rankflow_seo_schema_enabled', true)) {
+		// Check if schema module is enabled.
+		if (!get_option('mpseo_schema_enabled', true)) {
 			return;
 		}
 
-		$schemas = get_option('rankflow_seo_schemas', array());
+		$schemas = get_option('mpseo_schemas', array());
 
 		if (empty($schemas)) {
 			return;
 		}
 
 		// Load the admin class for generation methods.
-		if (!class_exists('RankFlow_SEO_Schema_Admin')) {
-			require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/class-schema-admin.php';
+		if (!class_exists('MPSEO_Schema_Admin')) {
+			require_once MPSEO_PLUGIN_DIR . 'admin/class-schema-admin.php';
 		}
 
-		$schema_admin = new RankFlow_SEO_Schema_Admin();
+		$schema_admin = new MPSEO_Schema_Admin();
 
 		foreach ($schemas as $schema) {
 			// Check if schema is enabled.
@@ -54,7 +54,7 @@ class RankFlow_SEO_Schema_Output
 			$markup = $schema_admin->generate_schema_markup($schema);
 
 			if ($markup) {
-				echo "\n<!-- RankFlow SEO Schema: " . esc_html($schema['type']) . " -->\n";
+				echo "\n<!-- Metapilot Smart SEO Schema: " . esc_html($schema['type']) . " -->\n";
 				wp_print_inline_script_tag(
 					wp_json_encode($markup, JSON_HEX_TAG | JSON_HEX_AMP),
 					array('type' => 'application/ld+json')

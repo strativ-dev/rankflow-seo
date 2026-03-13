@@ -1,8 +1,8 @@
 /**
  * Settings page functionality
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/assets/js
+ * @package    MPSEO
+ * @subpackage MPSEO/assets/js
  */
 
 (function ($) {
@@ -85,11 +85,11 @@
 			button.prop('disabled', true).text('Resetting...');
 
 			$.ajax({
-				url: rankflowSeoData.ajaxUrl,
+				url: mpseoData.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'rankflow_seo_reset_settings',
-					nonce: rankflowSeoData.nonce
+					action: 'mpseo_reset_settings',
+					nonce: mpseoData.nonce
 				},
 				success: (response) => {
 					if (response.success) {
@@ -124,11 +124,11 @@
 			button.prop('disabled', true).text('Clearing...');
 
 			$.ajax({
-				url: rankflowSeoData.ajaxUrl,
+				url: mpseoData.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'rankflow_seo_clear_cache',
-					nonce: rankflowSeoData.nonce
+					action: 'mpseo_clear_cache',
+					nonce: mpseoData.nonce
 				},
 				success: (response) => {
 					if (response.success) {
@@ -164,11 +164,11 @@
 			button.prop('disabled', true).text('Testing...');
 
 			$.ajax({
-				url: rankflowSeoData.ajaxUrl,
+				url: mpseoData.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'rankflow_seo_test_api',
-					nonce: rankflowSeoData.nonce,
+					action: 'mpseo_test_api',
+					nonce: mpseoData.nonce,
 					api_key: apiKey,
 					provider: provider
 				},
@@ -209,7 +209,7 @@
 	 * Initialize on document ready
 	 */
 	$(document).ready(function () {
-		if ($('.rankflow-seo-settings').length) {
+		if ($('.mpseo-settings').length) {
 			new SettingsHandler();
 		}
 	});

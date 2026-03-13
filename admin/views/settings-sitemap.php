@@ -2,8 +2,8 @@
 /**
  * Sitemap Settings View
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/admin/views
+ * @package    MPSEO
+ * @subpackage MPSEO/admin/views
  * @author     Strativ AB
  */
 
@@ -13,20 +13,20 @@ if (!defined('ABSPATH')) {
 }
 
 // Get current settings.
-$rankflow_seo_sitemap_enabled = get_option('rankflow_seo_sitemap_enabled', true);
-$rankflow_seo_include_images = get_option('rankflow_seo_sitemap_include_images', true);
-$rankflow_seo_include_taxonomies = get_option('rankflow_seo_sitemap_include_taxonomies', true);
-$rankflow_seo_include_authors = get_option('rankflow_seo_sitemap_include_authors', false);
-$rankflow_seo_entries_per_page = get_option('rankflow_seo_sitemap_entries_per_page', 1000);
-$rankflow_seo_ping_search_engines = get_option('rankflow_seo_sitemap_ping_search_engines', true);
-$rankflow_seo_saved_post_types = get_option('rankflow_seo_sitemap_post_types', array());
-$rankflow_seo_saved_taxonomies = get_option('rankflow_seo_sitemap_taxonomies', array());
+$mpseo_sitemap_enabled = get_option('mpseo_sitemap_enabled', true);
+$mpseo_include_images = get_option('mpseo_sitemap_include_images', true);
+$mpseo_include_taxonomies = get_option('mpseo_sitemap_include_taxonomies', true);
+$mpseo_include_authors = get_option('mpseo_sitemap_include_authors', false);
+$mpseo_entries_per_page = get_option('mpseo_sitemap_entries_per_page', 1000);
+$mpseo_ping_search_engines = get_option('mpseo_sitemap_ping_search_engines', true);
+$mpseo_saved_post_types = get_option('mpseo_sitemap_post_types', array());
+$mpseo_saved_taxonomies = get_option('mpseo_sitemap_taxonomies', array());
 
 // Get available post types (public ones only).
-$rankflow_seo_post_types = get_post_types(array('public' => true), 'objects');
+$mpseo_post_types = get_post_types(array('public' => true), 'objects');
 
 // Exclude page builder and internal post types (no public frontend pages).
-$rankflow_seo_excluded_post_types = array(
+$mpseo_excluded_post_types = array(
 	'attachment',
 	// Elementor.
 	'elementor_library',
@@ -153,15 +153,15 @@ $rankflow_seo_excluded_post_types = array(
 	'wp_font_face',
 );
 
-foreach ($rankflow_seo_excluded_post_types as $rankflow_seo_excluded) {
-	unset($rankflow_seo_post_types[$rankflow_seo_excluded]);
+foreach ($mpseo_excluded_post_types as $mpseo_excluded) {
+	unset($mpseo_post_types[$mpseo_excluded]);
 }
 
 // Get available taxonomies (public ones only).
-$rankflow_seo_taxonomies = get_taxonomies(array('public' => true), 'objects');
+$mpseo_taxonomies = get_taxonomies(array('public' => true), 'objects');
 
 // Exclude page builder and internal taxonomies.
-$rankflow_seo_excluded_taxonomies = array(
+$mpseo_excluded_taxonomies = array(
 	'post_format',
 	// Elementor.
 	'elementor_library_type',
@@ -206,133 +206,133 @@ $rankflow_seo_excluded_taxonomies = array(
 	'wp_pattern_category',
 );
 
-foreach ($rankflow_seo_excluded_taxonomies as $rankflow_seo_excluded) {
-	unset($rankflow_seo_taxonomies[$rankflow_seo_excluded]);
+foreach ($mpseo_excluded_taxonomies as $mpseo_excluded) {
+	unset($mpseo_taxonomies[$mpseo_excluded]);
 }
 
 // Default post types: only 'post' and 'page' enabled by default.
-if (empty($rankflow_seo_saved_post_types)) {
-	$rankflow_seo_saved_post_types = array('post', 'page');
+if (empty($mpseo_saved_post_types)) {
+	$mpseo_saved_post_types = array('post', 'page');
 }
 
 // Default taxonomies: only 'category' and 'product_cat' enabled by default.
-if (empty($rankflow_seo_saved_taxonomies)) {
-	$rankflow_seo_saved_taxonomies = array('category', 'product_cat');
+if (empty($mpseo_saved_taxonomies)) {
+	$mpseo_saved_taxonomies = array('category', 'product_cat');
 }
 
-$rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
+$mpseo_sitemap_url = home_url('sitemap_index.xml');
 ?>
 
-<div class="wrap rankflow-seo-settings">
-	<?php require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
+<div class="wrap mpseo-settings">
+	<?php require_once MPSEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
 
 	<!-- Sitemap Status Box -->
-	<div class="rankflow-seo-sitemap-status">
-		<h2><?php esc_html_e('Sitemap Status', 'rankflow-seo'); ?></h2>
+	<div class="mpseo-sitemap-status">
+		<h2><?php esc_html_e('Sitemap Status', 'metapilot-smart-seo'); ?></h2>
 
-		<?php if ($rankflow_seo_sitemap_enabled): ?>
+		<?php if ($mpseo_sitemap_enabled): ?>
 			<div class="sitemap-enabled">
 				<span class="dashicons dashicons-yes-alt"></span>
 				<p>
-					<?php esc_html_e('Your XML Sitemap is enabled and accessible at:', 'rankflow-seo'); ?>
+					<?php esc_html_e('Your XML Sitemap is enabled and accessible at:', 'metapilot-smart-seo'); ?>
 					<br>
-					<a href="<?php echo esc_url($rankflow_seo_sitemap_url); ?>" target="_blank" class="sitemap-url">
-						<?php echo esc_html($rankflow_seo_sitemap_url); ?>
+					<a href="<?php echo esc_url($mpseo_sitemap_url); ?>" target="_blank" class="sitemap-url">
+						<?php echo esc_html($mpseo_sitemap_url); ?>
 						<span class="dashicons dashicons-external"></span>
 					</a>
 				</p>
 				<div class="sitemap-actions">
-					<a href="<?php echo esc_url($rankflow_seo_sitemap_url); ?>" target="_blank" class="button">
-						<?php esc_html_e('View Sitemap', 'rankflow-seo'); ?>
+					<a href="<?php echo esc_url($mpseo_sitemap_url); ?>" target="_blank" class="button">
+						<?php esc_html_e('View Sitemap', 'metapilot-smart-seo'); ?>
 					</a>
 				</div>
 			</div>
 		<?php else: ?>
 			<div class="sitemap-disabled">
 				<span class="dashicons dashicons-warning"></span>
-				<p><?php esc_html_e('XML Sitemap is currently disabled.', 'rankflow-seo'); ?></p>
+				<p><?php esc_html_e('XML Sitemap is currently disabled.', 'metapilot-smart-seo'); ?></p>
 			</div>
 		<?php endif; ?>
 	</div>
 
 	<form method="post" action="options.php">
-		<?php settings_fields('rankflow_seo_sitemap_settings'); ?>
+		<?php settings_fields('mpseo_sitemap_settings'); ?>
 
 		<!-- General Settings -->
-		<div class="rankflow-seo-card">
-			<h2><?php esc_html_e('General Settings', 'rankflow-seo'); ?></h2>
+		<div class="mpseo-card">
+			<h2><?php esc_html_e('General Settings', 'metapilot-smart-seo'); ?></h2>
 
 			<table class="form-table">
 				<tr>
 					<th scope="row">
-						<label for="rankflow_seo_sitemap_enabled">
-							<?php esc_html_e('Enable XML Sitemap', 'rankflow-seo'); ?>
+						<label for="mpseo_sitemap_enabled">
+							<?php esc_html_e('Enable XML Sitemap', 'metapilot-smart-seo'); ?>
 						</label>
 					</th>
 					<td>
-						<label class="rankflow-seo-toggle">
-							<input type="checkbox" id="rankflow_seo_sitemap_enabled" name="rankflow_seo_sitemap_enabled"
-								value="1" <?php checked($rankflow_seo_sitemap_enabled); ?>>
+						<label class="mpseo-toggle">
+							<input type="checkbox" id="mpseo_sitemap_enabled" name="mpseo_sitemap_enabled"
+								value="1" <?php checked($mpseo_sitemap_enabled); ?>>
 							<span class="toggle-slider"></span>
 						</label>
 						<p class="description">
-							<?php esc_html_e('Generate an XML sitemap for search engines.', 'rankflow-seo'); ?>
+							<?php esc_html_e('Generate an XML sitemap for search engines.', 'metapilot-smart-seo'); ?>
 						</p>
 					</td>
 				</tr>
 
 				<tr>
 					<th scope="row">
-						<label for="rankflow_seo_sitemap_entries_per_page">
-							<?php esc_html_e('URLs per Sitemap', 'rankflow-seo'); ?>
+						<label for="mpseo_sitemap_entries_per_page">
+							<?php esc_html_e('URLs per Sitemap', 'metapilot-smart-seo'); ?>
 						</label>
 					</th>
 					<td>
-						<select id="rankflow_seo_sitemap_entries_per_page" name="rankflow_seo_sitemap_entries_per_page">
-							<option value="100" <?php selected($rankflow_seo_entries_per_page, 100); ?>>100</option>
-							<option value="250" <?php selected($rankflow_seo_entries_per_page, 250); ?>>250</option>
-							<option value="500" <?php selected($rankflow_seo_entries_per_page, 500); ?>>500</option>
-							<option value="1000" <?php selected($rankflow_seo_entries_per_page, 1000); ?>>1000</option>
-							<option value="2500" <?php selected($rankflow_seo_entries_per_page, 2500); ?>>2500</option>
+						<select id="mpseo_sitemap_entries_per_page" name="mpseo_sitemap_entries_per_page">
+							<option value="100" <?php selected($mpseo_entries_per_page, 100); ?>>100</option>
+							<option value="250" <?php selected($mpseo_entries_per_page, 250); ?>>250</option>
+							<option value="500" <?php selected($mpseo_entries_per_page, 500); ?>>500</option>
+							<option value="1000" <?php selected($mpseo_entries_per_page, 1000); ?>>1000</option>
+							<option value="2500" <?php selected($mpseo_entries_per_page, 2500); ?>>2500</option>
 						</select>
 						<p class="description">
-							<?php esc_html_e('Maximum number of URLs per sitemap file. Recommended: 1000', 'rankflow-seo'); ?>
+							<?php esc_html_e('Maximum number of URLs per sitemap file. Recommended: 1000', 'metapilot-smart-seo'); ?>
 						</p>
 					</td>
 				</tr>
 
 				<tr>
 					<th scope="row">
-						<label for="rankflow_seo_sitemap_include_images">
-							<?php esc_html_e('Include Images', 'rankflow-seo'); ?>
+						<label for="mpseo_sitemap_include_images">
+							<?php esc_html_e('Include Images', 'metapilot-smart-seo'); ?>
 						</label>
 					</th>
 					<td>
-						<label class="rankflow-seo-toggle">
-							<input type="checkbox" id="rankflow_seo_sitemap_include_images"
-								name="rankflow_seo_sitemap_include_images" value="1" <?php checked($rankflow_seo_include_images); ?>>
+						<label class="mpseo-toggle">
+							<input type="checkbox" id="mpseo_sitemap_include_images"
+								name="mpseo_sitemap_include_images" value="1" <?php checked($mpseo_include_images); ?>>
 							<span class="toggle-slider"></span>
 						</label>
 						<p class="description">
-							<?php esc_html_e('Include image URLs in the sitemap for better image SEO.', 'rankflow-seo'); ?>
+							<?php esc_html_e('Include image URLs in the sitemap for better image SEO.', 'metapilot-smart-seo'); ?>
 						</p>
 					</td>
 				</tr>
 
 				<tr>
 					<th scope="row">
-						<label for="rankflow_seo_sitemap_ping_search_engines">
-							<?php esc_html_e('Ping Search Engines', 'rankflow-seo'); ?>
+						<label for="mpseo_sitemap_ping_search_engines">
+							<?php esc_html_e('Ping Search Engines', 'metapilot-smart-seo'); ?>
 						</label>
 					</th>
 					<td>
-						<label class="rankflow-seo-toggle">
-							<input type="checkbox" id="rankflow_seo_sitemap_ping_search_engines"
-								name="rankflow_seo_sitemap_ping_search_engines" value="1" <?php checked($rankflow_seo_ping_search_engines); ?>>
+						<label class="mpseo-toggle">
+							<input type="checkbox" id="mpseo_sitemap_ping_search_engines"
+								name="mpseo_sitemap_ping_search_engines" value="1" <?php checked($mpseo_ping_search_engines); ?>>
 							<span class="toggle-slider"></span>
 						</label>
 						<p class="description">
-							<?php esc_html_e('Automatically notify Google and Bing when content is published.', 'rankflow-seo'); ?>
+							<?php esc_html_e('Automatically notify Google and Bing when content is published.', 'metapilot-smart-seo'); ?>
 						</p>
 					</td>
 				</tr>
@@ -340,45 +340,45 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 		</div>
 
 		<!-- Post Types -->
-		<div class="rankflow-seo-card">
-			<h2><?php esc_html_e('Post Types', 'rankflow-seo'); ?></h2>
+		<div class="mpseo-card">
+			<h2><?php esc_html_e('Post Types', 'metapilot-smart-seo'); ?></h2>
 			<p class="description">
-				<?php esc_html_e('Select which post types to include in the sitemap.', 'rankflow-seo'); ?>
+				<?php esc_html_e('Select which post types to include in the sitemap.', 'metapilot-smart-seo'); ?>
 			</p>
 
 			<table class="form-table">
-				<?php foreach ($rankflow_seo_post_types as $rankflow_seo_post_type): ?>
+				<?php foreach ($mpseo_post_types as $mpseo_post_type): ?>
 					<?php
-					$rankflow_seo_is_default = in_array($rankflow_seo_post_type->name, array('post', 'page'), true);
+					$mpseo_is_default = in_array($mpseo_post_type->name, array('post', 'page'), true);
 					?>
 					<tr>
 						<th scope="row">
-							<label for="sitemap_pt_<?php echo esc_attr($rankflow_seo_post_type->name); ?>">
-								<?php echo esc_html($rankflow_seo_post_type->labels->name); ?>
-								<?php if ($rankflow_seo_is_default): ?>
+							<label for="sitemap_pt_<?php echo esc_attr($mpseo_post_type->name); ?>">
+								<?php echo esc_html($mpseo_post_type->labels->name); ?>
+								<?php if ($mpseo_is_default): ?>
 									<span
-										class="rankflow-seo-recommended"><?php esc_html_e('(recommended)', 'rankflow-seo'); ?></span>
+										class="mpseo-recommended"><?php esc_html_e('(recommended)', 'metapilot-smart-seo'); ?></span>
 								<?php endif; ?>
 							</label>
 						</th>
 						<td>
-							<label class="rankflow-seo-toggle">
+							<label class="mpseo-toggle">
 								<input type="checkbox"
-									id="sitemap_pt_<?php echo esc_attr($rankflow_seo_post_type->name); ?>"
-									name="rankflow_seo_sitemap_post_types[]"
-									value="<?php echo esc_attr($rankflow_seo_post_type->name); ?>" <?php checked(in_array($rankflow_seo_post_type->name, $rankflow_seo_saved_post_types, true)); ?>>
+									id="sitemap_pt_<?php echo esc_attr($mpseo_post_type->name); ?>"
+									name="mpseo_sitemap_post_types[]"
+									value="<?php echo esc_attr($mpseo_post_type->name); ?>" <?php checked(in_array($mpseo_post_type->name, $mpseo_saved_post_types, true)); ?>>
 								<span class="toggle-slider"></span>
 							</label>
 							<?php
-							$rankflow_seo_count = wp_count_posts($rankflow_seo_post_type->name);
-							$rankflow_seo_published = isset($rankflow_seo_count->publish) ? $rankflow_seo_count->publish : 0;
+							$mpseo_count = wp_count_posts($mpseo_post_type->name);
+							$mpseo_published = isset($mpseo_count->publish) ? $mpseo_count->publish : 0;
 							?>
 							<span class="post-count">
 								<?php
 								printf(
 									/* translators: %d: number of published posts */
-									esc_html__('%d published', 'rankflow-seo'),
-									esc_html($rankflow_seo_published)
+									esc_html__('%d published', 'metapilot-smart-seo'),
+									(int) $mpseo_published
 								);
 								?>
 							</span>
@@ -389,57 +389,57 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 		</div>
 
 		<!-- Taxonomies -->
-		<div class="rankflow-seo-card">
-			<h2><?php esc_html_e('Taxonomies', 'rankflow-seo'); ?></h2>
+		<div class="mpseo-card">
+			<h2><?php esc_html_e('Taxonomies', 'metapilot-smart-seo'); ?></h2>
 
 			<table class="form-table">
 				<tr>
 					<th scope="row">
-						<label for="rankflow_seo_sitemap_include_taxonomies">
-							<?php esc_html_e('Include Taxonomies', 'rankflow-seo'); ?>
+						<label for="mpseo_sitemap_include_taxonomies">
+							<?php esc_html_e('Include Taxonomies', 'metapilot-smart-seo'); ?>
 						</label>
 					</th>
 					<td>
-						<label class="rankflow-seo-toggle">
-							<input type="checkbox" id="rankflow_seo_sitemap_include_taxonomies"
-								name="rankflow_seo_sitemap_include_taxonomies" value="1" <?php checked($rankflow_seo_include_taxonomies); ?>>
+						<label class="mpseo-toggle">
+							<input type="checkbox" id="mpseo_sitemap_include_taxonomies"
+								name="mpseo_sitemap_include_taxonomies" value="1" <?php checked($mpseo_include_taxonomies); ?>>
 							<span class="toggle-slider"></span>
 						</label>
 						<p class="description">
-							<?php esc_html_e('Include taxonomy archives (categories, tags, etc.) in the sitemap.', 'rankflow-seo'); ?>
+							<?php esc_html_e('Include taxonomy archives (categories, tags, etc.) in the sitemap.', 'metapilot-smart-seo'); ?>
 						</p>
 					</td>
 				</tr>
 			</table>
 
-			<div class="taxonomy-list <?php echo esc_attr(!$rankflow_seo_include_taxonomies ? 'rankflow-seo-hidden' : ''); ?>">
+			<div class="taxonomy-list <?php echo esc_attr(!$mpseo_include_taxonomies ? 'mpseo-hidden' : ''); ?>">
 				<table class="form-table">
-					<?php foreach ($rankflow_seo_taxonomies as $rankflow_seo_taxonomy): ?>
+					<?php foreach ($mpseo_taxonomies as $mpseo_taxonomy): ?>
 						<?php
-						$rankflow_seo_is_default = in_array($rankflow_seo_taxonomy->name, array('category', 'product_cat'), true);
+						$mpseo_is_default = in_array($mpseo_taxonomy->name, array('category', 'product_cat'), true);
 						?>
 						<tr>
 							<th scope="row">
-								<label for="sitemap_tax_<?php echo esc_attr($rankflow_seo_taxonomy->name); ?>">
-									<?php echo esc_html($rankflow_seo_taxonomy->labels->name); ?>
-									<?php if ($rankflow_seo_is_default): ?>
+								<label for="sitemap_tax_<?php echo esc_attr($mpseo_taxonomy->name); ?>">
+									<?php echo esc_html($mpseo_taxonomy->labels->name); ?>
+									<?php if ($mpseo_is_default): ?>
 										<span
-											class="rankflow-seo-recommended"><?php esc_html_e('(recommended)', 'rankflow-seo'); ?></span>
+											class="mpseo-recommended"><?php esc_html_e('(recommended)', 'metapilot-smart-seo'); ?></span>
 									<?php endif; ?>
 								</label>
 							</th>
 							<td>
-								<label class="rankflow-seo-toggle">
+								<label class="mpseo-toggle">
 									<input type="checkbox"
-										id="sitemap_tax_<?php echo esc_attr($rankflow_seo_taxonomy->name); ?>"
-										name="rankflow_seo_sitemap_taxonomies[]"
-										value="<?php echo esc_attr($rankflow_seo_taxonomy->name); ?>" <?php checked(in_array($rankflow_seo_taxonomy->name, $rankflow_seo_saved_taxonomies, true)); ?>>
+										id="sitemap_tax_<?php echo esc_attr($mpseo_taxonomy->name); ?>"
+										name="mpseo_sitemap_taxonomies[]"
+										value="<?php echo esc_attr($mpseo_taxonomy->name); ?>" <?php checked(in_array($mpseo_taxonomy->name, $mpseo_saved_taxonomies, true)); ?>>
 									<span class="toggle-slider"></span>
 								</label>
 								<?php
-								$rankflow_seo_term_count = wp_count_terms(
+								$mpseo_term_count = wp_count_terms(
 									array(
-										'taxonomy' => $rankflow_seo_taxonomy->name,
+										'taxonomy' => $mpseo_taxonomy->name,
 										'hide_empty' => true,
 									)
 								);
@@ -448,8 +448,8 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 									<?php
 									printf(
 										/* translators: %d: number of terms */
-										esc_html__('%d terms', 'rankflow-seo'),
-										esc_html(is_wp_error($rankflow_seo_term_count) ? 0 : $rankflow_seo_term_count)
+										esc_html__('%d terms', 'metapilot-smart-seo'),
+										(int) ( is_wp_error($mpseo_term_count) ? 0 : $mpseo_term_count )
 									);
 									?>
 								</span>
@@ -461,27 +461,27 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 		</div>
 
 		<!-- Authors -->
-		<div class="rankflow-seo-card">
-			<h2><?php esc_html_e('Author Archives', 'rankflow-seo'); ?></h2>
+		<div class="mpseo-card">
+			<h2><?php esc_html_e('Author Archives', 'metapilot-smart-seo'); ?></h2>
 
 			<table class="form-table">
 				<tr>
 					<th scope="row">
-						<label for="rankflow_seo_sitemap_include_authors">
-							<?php esc_html_e('Include Author Archives', 'rankflow-seo'); ?>
+						<label for="mpseo_sitemap_include_authors">
+							<?php esc_html_e('Include Author Archives', 'metapilot-smart-seo'); ?>
 						</label>
 					</th>
 					<td>
-						<label class="rankflow-seo-toggle">
-							<input type="checkbox" id="rankflow_seo_sitemap_include_authors"
-								name="rankflow_seo_sitemap_include_authors" value="1" <?php checked($rankflow_seo_include_authors); ?>>
+						<label class="mpseo-toggle">
+							<input type="checkbox" id="mpseo_sitemap_include_authors"
+								name="mpseo_sitemap_include_authors" value="1" <?php checked($mpseo_include_authors); ?>>
 							<span class="toggle-slider"></span>
 						</label>
 						<p class="description">
-							<?php esc_html_e('Include author archive pages in the sitemap.', 'rankflow-seo'); ?>
+							<?php esc_html_e('Include author archive pages in the sitemap.', 'metapilot-smart-seo'); ?>
 						</p>
 						<?php
-						$rankflow_seo_author_count = count(
+						$mpseo_author_count = count(
 							get_users(
 								array(
 									'has_published_posts' => true,
@@ -494,8 +494,8 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 							<?php
 							printf(
 								/* translators: %d: number of authors */
-								esc_html__('%d authors with published posts', 'rankflow-seo'),
-								esc_html($rankflow_seo_author_count)
+								esc_html__('%d authors with published posts', 'metapilot-smart-seo'),
+								(int) $mpseo_author_count
 							);
 							?>
 						</span>
@@ -506,9 +506,9 @@ $rankflow_seo_sitemap_url = home_url('sitemap_index.xml');
 
 		<!-- Submit -->
 		<p class="submit">
-			<?php submit_button(esc_html__('Save Settings', 'rankflow-seo'), 'primary', 'submit', false); ?>
+			<?php submit_button(esc_html__('Save Settings', 'metapilot-smart-seo'), 'primary', 'submit', false); ?>
 			<button type="button" class="button" id="flush-sitemap-cache">
-				<?php esc_html_e('Flush Sitemap Cache', 'rankflow-seo'); ?>
+				<?php esc_html_e('Flush Sitemap Cache', 'metapilot-smart-seo'); ?>
 			</button>
 		</p>
 	</form>

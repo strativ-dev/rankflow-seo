@@ -2,8 +2,8 @@
 /**
  * Redirect Handler - Execute redirects
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/redirects
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/redirects
  * @author     Strativ AB
  */
 
@@ -13,22 +13,22 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class RankFlow_SEO_Redirect_Handler
+ * Class MPSEO_Redirect_Handler
  */
-class RankFlow_SEO_Redirect_Handler
+class MPSEO_Redirect_Handler
 {
 
 	/**
 	 * Redirect manager instance
 	 *
-	 * @var RankFlow_SEO_Redirect_Manager
+	 * @var MPSEO_Redirect_Manager
 	 */
 	private $manager;
 
 	/**
 	 * 404 monitor instance
 	 *
-	 * @var RankFlow_SEO_404_Monitor
+	 * @var MPSEO_404_Monitor
 	 */
 	private $monitor_404;
 
@@ -37,8 +37,8 @@ class RankFlow_SEO_Redirect_Handler
 	 */
 	public function __construct()
 	{
-		$this->manager = new RankFlow_SEO_Redirect_Manager();
-		$this->monitor_404 = new RankFlow_SEO_404_Monitor();
+		$this->manager = new MPSEO_Redirect_Manager();
+		$this->monitor_404 = new MPSEO_404_Monitor();
 	}
 
 	/**
@@ -118,8 +118,8 @@ class RankFlow_SEO_Redirect_Handler
 				status_header(410);
 				nocache_headers();
 				wp_die(
-					esc_html__('This content has been permanently removed.', 'rankflow-seo'),
-					esc_html__('Gone', 'rankflow-seo'),
+					esc_html__('This content has been permanently removed.', 'metapilot-smart-seo'),
+					esc_html__('Gone', 'metapilot-smart-seo'),
 					array('response' => 410)
 				);
 				exit;
@@ -129,8 +129,8 @@ class RankFlow_SEO_Redirect_Handler
 				status_header(451);
 				nocache_headers();
 				wp_die(
-					esc_html__('This content is unavailable for legal reasons.', 'rankflow-seo'),
-					esc_html__('Unavailable For Legal Reasons', 'rankflow-seo'),
+					esc_html__('This content is unavailable for legal reasons.', 'metapilot-smart-seo'),
+					esc_html__('Unavailable For Legal Reasons', 'metapilot-smart-seo'),
 					array('response' => 451)
 				);
 				exit;
@@ -139,8 +139,8 @@ class RankFlow_SEO_Redirect_Handler
 		}
 
 		// Allow filtering.
-		$target_url = apply_filters('rankflow_seo_redirect_url', $target_url, $redirect_type);
-		$status_code = apply_filters('rankflow_seo_redirect_status', $status_code, $redirect_type);
+		$target_url = apply_filters('mpseo_redirect_url', $target_url, $redirect_type);
+		$status_code = apply_filters('mpseo_redirect_status', $status_code, $redirect_type);
 
 		// Sanitize URL.
 		$target_url = esc_url_raw($target_url);
@@ -169,7 +169,7 @@ class RankFlow_SEO_Redirect_Handler
 	 */
 	public function handle_404()
 	{
-		if (is_404() && get_option('rankflow_seo_404_monitoring', true)) {
+		if (is_404() && get_option('mpseo_404_monitoring', true)) {
 			$this->monitor_404->log_404($this->get_current_url());
 		}
 	}

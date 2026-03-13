@@ -2,11 +2,11 @@
 /**
  * API Factory
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/api
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/api
  * @author     Strativ AB
  */
-class RankFlow_SEO_API_Factory
+class MPSEO_API_Factory
 {
 
 	/**
@@ -14,24 +14,24 @@ class RankFlow_SEO_API_Factory
 	 *
 	 * @param    string    $provider    Provider name
 	 * @param    string    $api_key     API key
-	 * @return   RankFlow_SEO_API_Base|WP_Error
+	 * @return   MPSEO_API_Base|WP_Error
 	 */
 	public static function create($provider, $api_key)
 	{
 
 		if (empty($api_key)) {
-			return new WP_Error('no_api_key', __('API key is required', 'rankflow-seo'));
+			return new WP_Error('no_api_key', __('API key is required', 'metapilot-smart-seo'));
 		}
 
 		switch ($provider) {
 			case 'anthropic':
-				return new RankFlow_SEO_Anthropic_API($api_key);
+				return new MPSEO_Anthropic_API($api_key);
 
 			case 'gemini':
-				return new RankFlow_SEO_Gemini_API($api_key);
+				return new MPSEO_Gemini_API($api_key);
 
 			default:
-				return new WP_Error('invalid_provider', __('Invalid API provider', 'rankflow-seo'));
+				return new WP_Error('invalid_provider', __('Invalid API provider', 'metapilot-smart-seo'));
 		}
 	}
 
@@ -45,12 +45,12 @@ class RankFlow_SEO_API_Factory
 		return array(
 			'anthropic' => array(
 				'name' => 'Anthropic',
-				'description' => __('Claude AI models', 'rankflow-seo'),
+				'description' => __('Claude AI models', 'metapilot-smart-seo'),
 				'url' => 'https://www.anthropic.com/',
 			),
 			'gemini' => array(
 				'name' => 'Google Gemini',
-				'description' => __('Google\'s Gemini AI models', 'rankflow-seo'),
+				'description' => __('Google\'s Gemini AI models', 'metapilot-smart-seo'),
 				'url' => 'https://ai.google.dev/',
 			),
 		);

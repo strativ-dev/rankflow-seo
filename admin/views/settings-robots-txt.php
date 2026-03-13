@@ -2,8 +2,8 @@
 /**
  * Robots.txt Settings View
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/admin/views
+ * @package    MPSEO
+ * @subpackage MPSEO/admin/views
  * @author     Strativ AB
  */
 
@@ -13,35 +13,35 @@ if (!defined('ABSPATH')) {
 }
 
 // Get current settings.
-$rankflow_seo_robots_enabled = get_option('rankflow_seo_robots_enabled', false);
-$rankflow_seo_custom_rules = get_option('rankflow_seo_robots_custom_rules', '');
-$rankflow_seo_include_sitemap = get_option('rankflow_seo_robots_include_sitemap', true);
-$rankflow_seo_block_ai = get_option('rankflow_seo_robots_block_ai', false);
-$rankflow_seo_block_bad_bots = get_option('rankflow_seo_robots_block_bad_bots', false);
-$rankflow_seo_disallow_wp_admin = get_option('rankflow_seo_robots_disallow_wp_admin', true);
-$rankflow_seo_disallow_wp_includes = get_option('rankflow_seo_robots_disallow_wp_includes', false);
-$rankflow_seo_allow_ajax = get_option('rankflow_seo_robots_allow_ajax', true);
-$rankflow_seo_disallow_search = get_option('rankflow_seo_robots_disallow_search', true);
-$rankflow_seo_sitemap_urls = get_option('rankflow_seo_robots_sitemap_urls', '');
+$mpseo_robots_enabled = get_option('mpseo_robots_enabled', false);
+$mpseo_custom_rules = get_option('mpseo_robots_custom_rules', '');
+$mpseo_include_sitemap = get_option('mpseo_robots_include_sitemap', true);
+$mpseo_block_ai = get_option('mpseo_robots_block_ai', false);
+$mpseo_block_bad_bots = get_option('mpseo_robots_block_bad_bots', false);
+$mpseo_disallow_wp_admin = get_option('mpseo_robots_disallow_wp_admin', true);
+$mpseo_disallow_wp_includes = get_option('mpseo_robots_disallow_wp_includes', false);
+$mpseo_allow_ajax = get_option('mpseo_robots_allow_ajax', true);
+$mpseo_disallow_search = get_option('mpseo_robots_disallow_search', true);
+$mpseo_sitemap_urls = get_option('mpseo_robots_sitemap_urls', '');
 
 // Get individual bot blocking settings
-$rankflow_seo_blocked_ai_bots = get_option('rankflow_seo_robots_blocked_ai_bots', array());
-$rankflow_seo_blocked_bad_bots = get_option('rankflow_seo_robots_blocked_bad_bots', array());
+$mpseo_blocked_ai_bots = get_option('mpseo_robots_blocked_ai_bots', array());
+$mpseo_blocked_bad_bots = get_option('mpseo_robots_blocked_bad_bots', array());
 
 // Check for physical robots.txt file.
-$rankflow_seo_robots_handler = new RankFlow_SEO_Robots_Txt();
-$rankflow_seo_physical_file_exists = $rankflow_seo_robots_handler->physical_file_exists();
-$rankflow_seo_physical_file_content = $rankflow_seo_robots_handler->get_physical_file_content();
+$mpseo_robots_handler = new MPSEO_Robots_Txt();
+$mpseo_physical_file_exists = $mpseo_robots_handler->physical_file_exists();
+$mpseo_physical_file_content = $mpseo_robots_handler->get_physical_file_content();
 
 // Generate preview based on enabled status.
-if ($rankflow_seo_robots_enabled) {
-    $rankflow_seo_preview_content = $rankflow_seo_robots_handler->generate_robots_txt();
+if ($mpseo_robots_enabled) {
+    $mpseo_preview_content = $mpseo_robots_handler->generate_robots_txt();
 } else {
-    $rankflow_seo_preview_content = $rankflow_seo_robots_handler->get_default_robots_txt();
+    $mpseo_preview_content = $mpseo_robots_handler->get_default_robots_txt();
 }
 
 // Define AI bots
-$rankflow_seo_ai_bots = array(
+$mpseo_ai_bots = array(
     'GPTBot' => 'OpenAI GPTBot',
     'ChatGPT-User' => 'ChatGPT User Agent',
     'Google-Extended' => 'Google Extended (AI Training)',
@@ -59,7 +59,7 @@ $rankflow_seo_ai_bots = array(
 );
 
 // Define bad bots
-$rankflow_seo_bad_bots = array(
+$mpseo_bad_bots = array(
     'AhrefsBot' => 'Ahrefs SEO Bot',
     'SemrushBot' => 'Semrush Bot',
     'MJ12bot' => 'Majestic SEO Bot',
@@ -82,45 +82,45 @@ $rankflow_seo_bad_bots = array(
 );
 ?>
 
-<div class="wrap rankflow-seo-robots-txt">
-    <?php require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
+<div class="wrap mpseo-robots-txt">
+    <?php require_once MPSEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
 
-    <p class="description rankflow-seo-description">
-        <?php esc_html_e('Control how search engines crawl your website. The robots.txt file tells web crawlers which pages or sections of your site should not be processed or scanned.', 'rankflow-seo'); ?>
+    <p class="description mpseo-description">
+        <?php esc_html_e('Control how search engines crawl your website. The robots.txt file tells web crawlers which pages or sections of your site should not be processed or scanned.', 'metapilot-smart-seo'); ?>
     </p>
 
-    <?php if ($rankflow_seo_physical_file_exists): ?>
+    <?php if ($mpseo_physical_file_exists): ?>
                 <div class="notice notice-warning">
                     <p>
-                        <strong><?php esc_html_e('Warning:', 'rankflow-seo'); ?></strong>
-                        <?php esc_html_e('A physical robots.txt file exists in your WordPress root directory. This file will take precedence over the virtual robots.txt generated by this plugin. You need to delete or rename the physical file for these settings to work.', 'rankflow-seo'); ?>
+                        <strong><?php esc_html_e('Warning:', 'metapilot-smart-seo'); ?></strong>
+                        <?php esc_html_e('A physical robots.txt file exists in your WordPress root directory. This file will take precedence over the virtual robots.txt generated by this plugin. You need to delete or rename the physical file for these settings to work.', 'metapilot-smart-seo'); ?>
                     </p>
                     <p>
-                        <strong><?php esc_html_e('File location:', 'rankflow-seo'); ?></strong>
+                        <strong><?php esc_html_e('File location:', 'metapilot-smart-seo'); ?></strong>
                         <code><?php echo esc_html(ABSPATH . 'robots.txt'); ?></code>
                     </p>
                 </div>
     <?php endif; ?>
 
-    <div class="rankflow-seo-robots-container">
+    <div class="mpseo-robots-container">
         <!-- Settings Column -->
-        <div class="rankflow-seo-robots-settings">
-            <form method="post" action="options.php" id="rankflow-seo-robots-form">
-                <?php settings_fields('rankflow_seo_robots_txt'); ?>
+        <div class="mpseo-robots-settings">
+            <form method="post" action="options.php" id="mpseo-robots-form">
+                <?php settings_fields('mpseo_robots_txt'); ?>
 
                 <!-- Enable Toggle -->
-                <div class="rankflow-seo-card">
-                    <h2><?php esc_html_e('Enable Virtual Robots.txt', 'rankflow-seo'); ?></h2>
-                    <label class="rankflow-seo-toggle">
-                        <input type="checkbox" name="rankflow_seo_robots_enabled" value="1" <?php checked($rankflow_seo_robots_enabled); ?>>
+                <div class="mpseo-card">
+                    <h2><?php esc_html_e('Enable Virtual Robots.txt', 'metapilot-smart-seo'); ?></h2>
+                    <label class="mpseo-toggle">
+                        <input type="checkbox" name="mpseo_robots_enabled" value="1" <?php checked($mpseo_robots_enabled); ?>>
                         <span class="toggle-slider"></span>
-                        <span class="toggle-label"><?php esc_html_e('Enable custom robots.txt', 'rankflow-seo'); ?></span>
+                        <span class="toggle-label"><?php esc_html_e('Enable custom robots.txt', 'metapilot-smart-seo'); ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('When enabled, WordPress will serve the virtual robots.txt file generated by these settings.', 'rankflow-seo'); ?>
+                        <?php esc_html_e('When enabled, WordPress will serve the virtual robots.txt file generated by these settings.', 'metapilot-smart-seo'); ?>
                     </p>
                     <p class="robots-url">
-                        <strong><?php esc_html_e('Your robots.txt URL:', 'rankflow-seo'); ?></strong>
+                        <strong><?php esc_html_e('Your robots.txt URL:', 'metapilot-smart-seo'); ?></strong>
                         <a href="<?php echo esc_url(home_url('robots.txt')); ?>" target="_blank">
                             <?php echo esc_url(home_url('robots.txt')); ?>
                             <span class="dashicons dashicons-external"></span>
@@ -129,270 +129,277 @@ $rankflow_seo_bad_bots = array(
                 </div>
 
                 <!-- WordPress Defaults -->
-                <div class="rankflow-seo-card">
-                    <h2><?php esc_html_e('WordPress Defaults', 'rankflow-seo'); ?></h2>
+                <div class="mpseo-card">
+                    <h2><?php esc_html_e('WordPress Defaults', 'metapilot-smart-seo'); ?></h2>
 
-                    <label class="rankflow-seo-checkbox">
-                        <input type="checkbox" name="rankflow_seo_robots_disallow_wp_admin" value="1" <?php checked($rankflow_seo_disallow_wp_admin); ?>>
-                        <span><?php esc_html_e('Disallow /wp-admin/', 'rankflow-seo'); ?></span>
+                    <label class="mpseo-checkbox">
+                        <input type="checkbox" name="mpseo_robots_disallow_wp_admin" value="1" <?php checked($mpseo_disallow_wp_admin); ?>>
+                        <span><?php esc_html_e('Disallow /wp-admin/', 'metapilot-smart-seo'); ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('Block crawlers from accessing the WordPress admin area.', 'rankflow-seo'); ?>
+                        <?php esc_html_e('Block crawlers from accessing the WordPress admin area.', 'metapilot-smart-seo'); ?>
                     </p>
 
-                    <label class="rankflow-seo-checkbox">
-                        <input type="checkbox" name="rankflow_seo_robots_allow_ajax" value="1" <?php checked($rankflow_seo_allow_ajax); ?>>
-                        <span><?php esc_html_e('Allow /wp-admin/admin-ajax.php', 'rankflow-seo'); ?></span>
+                    <?php $mpseo_ajax_path = wp_parse_url( admin_url( 'admin-ajax.php' ), PHP_URL_PATH ); ?>
+                    <label class="mpseo-checkbox">
+                        <input type="checkbox" name="mpseo_robots_allow_ajax" value="1" <?php checked($mpseo_allow_ajax); ?>>
+                        <span><?php
+                            /* translators: %s: server path to admin-ajax.php (e.g. /wp-admin/admin-ajax.php) */
+                            printf( esc_html__( 'Allow %s', 'metapilot-smart-seo' ), esc_html( $mpseo_ajax_path ) );
+                        ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('Allow access to admin-ajax.php for themes/plugins that use it.', 'rankflow-seo'); ?>
+                        <?php
+                            /* translators: %s: server path to admin-ajax.php */
+                            printf( esc_html__( 'Allow access to %s for themes/plugins that use it.', 'metapilot-smart-seo' ), esc_html( $mpseo_ajax_path ) );
+                        ?>
                     </p>
 
-                    <label class="rankflow-seo-checkbox">
-                        <input type="checkbox" name="rankflow_seo_robots_disallow_wp_includes" value="1" <?php checked($rankflow_seo_disallow_wp_includes); ?>>
-                        <span><?php esc_html_e('Disallow /wp-includes/', 'rankflow-seo'); ?></span>
+                    <label class="mpseo-checkbox">
+                        <input type="checkbox" name="mpseo_robots_disallow_wp_includes" value="1" <?php checked($mpseo_disallow_wp_includes); ?>>
+                        <span><?php esc_html_e('Disallow /wp-includes/', 'metapilot-smart-seo'); ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('Block crawlers from accessing WordPress core files. Note: This may affect rendering.', 'rankflow-seo'); ?>
+                        <?php esc_html_e('Block crawlers from accessing WordPress core files. Note: This may affect rendering.', 'metapilot-smart-seo'); ?>
                     </p>
 
-                    <label class="rankflow-seo-checkbox">
-                        <input type="checkbox" name="rankflow_seo_robots_disallow_search" value="1" <?php checked($rankflow_seo_disallow_search); ?>>
-                        <span><?php esc_html_e('Disallow search results pages', 'rankflow-seo'); ?></span>
+                    <label class="mpseo-checkbox">
+                        <input type="checkbox" name="mpseo_robots_disallow_search" value="1" <?php checked($mpseo_disallow_search); ?>>
+                        <span><?php esc_html_e('Disallow search results pages', 'metapilot-smart-seo'); ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('Block crawlers from indexing internal search results (?s= and /search/).', 'rankflow-seo'); ?>
+                        <?php esc_html_e('Block crawlers from indexing internal search results (?s= and /search/).', 'metapilot-smart-seo'); ?>
                     </p>
                 </div>
 
                 <!-- AI Crawler Blocking -->
-                <div class="rankflow-seo-card">
-                    <h2><?php esc_html_e('AI Crawler Blocking', 'rankflow-seo'); ?></h2>
+                <div class="mpseo-card">
+                    <h2><?php esc_html_e('AI Crawler Blocking', 'metapilot-smart-seo'); ?></h2>
 
-                    <label class="rankflow-seo-checkbox parent-checkbox">
-                        <input type="checkbox" name="rankflow_seo_robots_block_ai" value="1" 
+                    <label class="mpseo-checkbox parent-checkbox">
+                        <input type="checkbox" name="mpseo_robots_block_ai" value="1" 
                                id="block-all-ai" 
-                               <?php checked($rankflow_seo_block_ai); ?>>
-                        <span><strong><?php esc_html_e('Block all AI crawlers', 'rankflow-seo'); ?></strong></span>
+                               <?php checked($mpseo_block_ai); ?>>
+                        <span><strong><?php esc_html_e('Block all AI crawlers', 'metapilot-smart-seo'); ?></strong></span>
                     </label>
-                    <p class="description rankflow-seo-mb-10">
-                        <?php esc_html_e('Block all AI training crawlers at once, or select individual bots below.', 'rankflow-seo'); ?>
+                    <p class="description mpseo-mb-10">
+                        <?php esc_html_e('Block all AI training crawlers at once, or select individual bots below.', 'metapilot-smart-seo'); ?>
                     </p>
 
                     <div class="bot-list ai-bot-list">
-                        <?php foreach ($rankflow_seo_ai_bots as $rankflow_seo_bot_key => $rankflow_seo_bot_name): ?>
-                                    <label class="rankflow-seo-checkbox bot-checkbox">
+                        <?php foreach ($mpseo_ai_bots as $mpseo_bot_key => $mpseo_bot_name): ?>
+                                    <label class="mpseo-checkbox bot-checkbox">
                                         <input type="checkbox" 
-                                               name="rankflow_seo_robots_blocked_ai_bots[]" 
-                                               value="<?php echo esc_attr($rankflow_seo_bot_key); ?>"
+                                               name="mpseo_robots_blocked_ai_bots[]" 
+                                               value="<?php echo esc_attr($mpseo_bot_key); ?>"
                                                class="individual-ai-bot"
-                                               <?php checked(in_array($rankflow_seo_bot_key, $rankflow_seo_blocked_ai_bots)); ?>>
-                                        <span><?php echo esc_html($rankflow_seo_bot_name); ?> <code><?php echo esc_html($rankflow_seo_bot_key); ?></code></span>
+                                               <?php checked(in_array($mpseo_bot_key, $mpseo_blocked_ai_bots)); ?>>
+                                        <span><?php echo esc_html($mpseo_bot_name); ?> <code><?php echo esc_html($mpseo_bot_key); ?></code></span>
                                     </label>
                         <?php endforeach; ?>
                     </div>
                 </div>
 
                 <!-- Bad Bot Blocking -->
-                <div class="rankflow-seo-card">
-                    <h2><?php esc_html_e('Aggressive SEO Crawler Blocking', 'rankflow-seo'); ?></h2>
+                <div class="mpseo-card">
+                    <h2><?php esc_html_e('Aggressive SEO Crawler Blocking', 'metapilot-smart-seo'); ?></h2>
 
-                    <label class="rankflow-seo-checkbox parent-checkbox">
-                        <input type="checkbox" name="rankflow_seo_robots_block_bad_bots" value="1" 
+                    <label class="mpseo-checkbox parent-checkbox">
+                        <input type="checkbox" name="mpseo_robots_block_bad_bots" value="1" 
                                id="block-all-bad-bots"
-                               <?php checked($rankflow_seo_block_bad_bots); ?>>
-                        <span><strong><?php esc_html_e('Block all aggressive SEO crawlers', 'rankflow-seo'); ?></strong></span>
+                               <?php checked($mpseo_block_bad_bots); ?>>
+                        <span><strong><?php esc_html_e('Block all aggressive SEO crawlers', 'metapilot-smart-seo'); ?></strong></span>
                     </label>
-                    <p class="description rankflow-seo-mb-10">
-                        <?php esc_html_e('Block all aggressive SEO tool crawlers at once, or select individual bots below. These can slow down your server.', 'rankflow-seo'); ?>
+                    <p class="description mpseo-mb-10">
+                        <?php esc_html_e('Block all aggressive SEO tool crawlers at once, or select individual bots below. These can slow down your server.', 'metapilot-smart-seo'); ?>
                     </p>
 
                     <div class="bot-list bad-bot-list">
-                        <?php foreach ($rankflow_seo_bad_bots as $rankflow_seo_bot_key => $rankflow_seo_bot_name): ?>
-                                    <label class="rankflow-seo-checkbox bot-checkbox">
+                        <?php foreach ($mpseo_bad_bots as $mpseo_bot_key => $mpseo_bot_name): ?>
+                                    <label class="mpseo-checkbox bot-checkbox">
                                         <input type="checkbox" 
-                                               name="rankflow_seo_robots_blocked_bad_bots[]" 
-                                               value="<?php echo esc_attr($rankflow_seo_bot_key); ?>"
+                                               name="mpseo_robots_blocked_bad_bots[]" 
+                                               value="<?php echo esc_attr($mpseo_bot_key); ?>"
                                                class="individual-bad-bot"
-                                               <?php checked(in_array($rankflow_seo_bot_key, $rankflow_seo_blocked_bad_bots)); ?>>
-                                        <span><?php echo esc_html($rankflow_seo_bot_name); ?> <code><?php echo esc_html($rankflow_seo_bot_key); ?></code></span>
+                                               <?php checked(in_array($mpseo_bot_key, $mpseo_blocked_bad_bots)); ?>>
+                                        <span><?php echo esc_html($mpseo_bot_name); ?> <code><?php echo esc_html($mpseo_bot_key); ?></code></span>
                                     </label>
                         <?php endforeach; ?>
                     </div>
                 </div>
 
                 <!-- Sitemap Settings -->
-                <div class="rankflow-seo-card">
-                    <h2><?php esc_html_e('Sitemap', 'rankflow-seo'); ?></h2>
+                <div class="mpseo-card">
+                    <h2><?php esc_html_e('Sitemap', 'metapilot-smart-seo'); ?></h2>
 
-                    <label class="rankflow-seo-checkbox">
-                        <input type="checkbox" name="rankflow_seo_robots_include_sitemap" value="1" <?php checked($rankflow_seo_include_sitemap); ?>>
-                        <span><?php esc_html_e('Include RankFlow SEO sitemap', 'rankflow-seo'); ?></span>
+                    <label class="mpseo-checkbox">
+                        <input type="checkbox" name="mpseo_robots_include_sitemap" value="1" <?php checked($mpseo_include_sitemap); ?>>
+                        <span><?php esc_html_e('Include Metapilot Smart SEO sitemap', 'metapilot-smart-seo'); ?></span>
                     </label>
                     <p class="description">
-                        <?php esc_html_e('Automatically add the RankFlow SEO sitemap URL if the sitemap feature is enabled.', 'rankflow-seo'); ?>
+                        <?php esc_html_e('Automatically add the Metapilot Smart SEO sitemap URL if the sitemap feature is enabled.', 'metapilot-smart-seo'); ?>
                     </p>
 
-                    <label for="rankflow_seo_robots_sitemap_urls">
-                        <strong><?php esc_html_e('Additional Sitemap URLs', 'rankflow-seo'); ?></strong>
+                    <label for="mpseo_robots_sitemap_urls">
+                        <strong><?php esc_html_e('Additional Sitemap URLs', 'metapilot-smart-seo'); ?></strong>
                     </label>
-                    <textarea id="rankflow_seo_robots_sitemap_urls" name="rankflow_seo_robots_sitemap_urls" rows="3"
+                    <textarea id="mpseo_robots_sitemap_urls" name="mpseo_robots_sitemap_urls" rows="3"
                         class="widefat code"
-                        placeholder="https://example.com/sitemap.xml&#10;https://example.com/news-sitemap.xml"><?php echo esc_textarea($rankflow_seo_sitemap_urls); ?></textarea>
+                        placeholder="https://example.com/sitemap.xml&#10;https://example.com/news-sitemap.xml"><?php echo esc_textarea($mpseo_sitemap_urls); ?></textarea>
                     <p class="description">
-                        <?php esc_html_e('Enter additional sitemap URLs, one per line. These will be added to the robots.txt file.', 'rankflow-seo'); ?>
+                        <?php esc_html_e('Enter additional sitemap URLs, one per line. These will be added to the robots.txt file.', 'metapilot-smart-seo'); ?>
                     </p>
                 </div>
 
                 <!-- Custom Rules -->
-                <div class="rankflow-seo-card">
-                    <h2><?php esc_html_e('Custom Rules', 'rankflow-seo'); ?></h2>
-                    <p class="description rankflow-seo-mb-10">
-                        <?php esc_html_e('Add custom robots.txt rules. These will be added after the default rules.', 'rankflow-seo'); ?>
+                <div class="mpseo-card">
+                    <h2><?php esc_html_e('Custom Rules', 'metapilot-smart-seo'); ?></h2>
+                    <p class="description mpseo-mb-10">
+                        <?php esc_html_e('Add custom robots.txt rules. These will be added after the default rules.', 'metapilot-smart-seo'); ?>
                     </p>
 
-                    <textarea id="rankflow_seo_robots_custom_rules" name="rankflow_seo_robots_custom_rules" rows="8"
+                    <textarea id="mpseo_robots_custom_rules" name="mpseo_robots_custom_rules" rows="8"
                         class="widefat code"
-                        placeholder="# Example custom rules&#10;User-agent: Googlebot&#10;Allow: /important-page/&#10;&#10;User-agent: Bingbot&#10;Crawl-delay: 10"><?php echo esc_textarea($rankflow_seo_custom_rules); ?></textarea>
+                        placeholder="# Example custom rules&#10;User-agent: Googlebot&#10;Allow: /important-page/&#10;&#10;User-agent: Bingbot&#10;Crawl-delay: 10"><?php echo esc_textarea($mpseo_custom_rules); ?></textarea>
 
                     <!-- Syntax Help -->
                     <div class="syntax-help">
-                        <h4><?php esc_html_e('Syntax Reference', 'rankflow-seo'); ?></h4>
+                        <h4><?php esc_html_e('Syntax Reference', 'metapilot-smart-seo'); ?></h4>
                         <table class="syntax-table">
                             <tr>
                                 <td><code>User-agent: *</code></td>
-                                <td><?php esc_html_e('Applies to all crawlers', 'rankflow-seo'); ?></td>
+                                <td><?php esc_html_e('Applies to all crawlers', 'metapilot-smart-seo'); ?></td>
                             </tr>
                             <tr>
                                 <td><code>User-agent: Googlebot</code></td>
-                                <td><?php esc_html_e('Applies only to Googlebot', 'rankflow-seo'); ?></td>
+                                <td><?php esc_html_e('Applies only to Googlebot', 'metapilot-smart-seo'); ?></td>
                             </tr>
                             <tr>
                                 <td><code>Disallow: /folder/</code></td>
-                                <td><?php esc_html_e('Block access to a folder', 'rankflow-seo'); ?></td>
+                                <td><?php esc_html_e('Block access to a folder', 'metapilot-smart-seo'); ?></td>
                             </tr>
                             <tr>
                                 <td><code>Allow: /folder/page.html</code></td>
-                                <td><?php esc_html_e('Allow access to a specific page', 'rankflow-seo'); ?></td>
+                                <td><?php esc_html_e('Allow access to a specific page', 'metapilot-smart-seo'); ?></td>
                             </tr>
                             <tr>
                                 <td><code>Disallow: /*.pdf$</code></td>
-                                <td><?php esc_html_e('Block all PDF files ($ = end of URL)', 'rankflow-seo'); ?></td>
+                                <td><?php esc_html_e('Block all PDF files ($ = end of URL)', 'metapilot-smart-seo'); ?></td>
                             </tr>
                             <tr>
                                 <td><code>Disallow: /folder/*.php</code></td>
-                                <td><?php esc_html_e('Block PHP files in folder (* = wildcard)', 'rankflow-seo'); ?>
+                                <td><?php esc_html_e('Block PHP files in folder (* = wildcard)', 'metapilot-smart-seo'); ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td><code># Comment</code></td>
-                                <td><?php esc_html_e('Add a comment (ignored by crawlers)', 'rankflow-seo'); ?></td>
+                                <td><?php esc_html_e('Add a comment (ignored by crawlers)', 'metapilot-smart-seo'); ?></td>
                             </tr>
                         </table>
                     </div>
                 </div>
 
                 <!-- Submit Buttons -->
-                <div class="rankflow-seo-card submit-card">
-                    <?php submit_button(__('Save Settings', 'rankflow-seo'), 'primary', 'submit', false); ?>
-                    <button type="button" id="rankflow-seo-reset-robots" class="button button-secondary">
-                        <?php esc_html_e('Reset to Defaults', 'rankflow-seo'); ?>
+                <div class="mpseo-card submit-card">
+                    <?php submit_button(__('Save Settings', 'metapilot-smart-seo'), 'primary', 'submit', false); ?>
+                    <button type="button" id="mpseo-reset-robots" class="button button-secondary">
+                        <?php esc_html_e('Reset to Defaults', 'metapilot-smart-seo'); ?>
                     </button>
-                    <button type="button" id="rankflow-seo-preview-robots" class="button button-secondary">
+                    <button type="button" id="mpseo-preview-robots" class="button button-secondary">
                         <span class="dashicons dashicons-visibility"></span>
-                        <?php esc_html_e('Refresh Preview', 'rankflow-seo'); ?>
+                        <?php esc_html_e('Refresh Preview', 'metapilot-smart-seo'); ?>
                     </button>
                 </div>
             </form>
         </div>
 
         <!-- Preview Column -->
-        <div class="rankflow-seo-robots-preview">
-            <div class="rankflow-seo-card preview-card">
+        <div class="mpseo-robots-preview">
+            <div class="mpseo-card preview-card">
                 <h2>
                     <span class="dashicons dashicons-visibility"></span>
-                    <?php esc_html_e('Robots.txt Preview', 'rankflow-seo'); ?>
+                    <?php esc_html_e('Robots.txt Preview', 'metapilot-smart-seo'); ?>
                 </h2>
                 <p class="description">
-                    <?php esc_html_e('This is a preview of your generated robots.txt file. Save settings to apply changes.', 'rankflow-seo'); ?>
+                    <?php esc_html_e('This is a preview of your generated robots.txt file. Save settings to apply changes.', 'metapilot-smart-seo'); ?>
                 </p>
                 <div class="preview-content">
-                    <pre id="robots-preview-content"><?php echo esc_html($rankflow_seo_preview_content); ?></pre>
+                    <pre id="robots-preview-content"><?php echo esc_html($mpseo_preview_content); ?></pre>
                 </div>
                 <div class="preview-actions">
                     <button type="button" id="copy-robots-txt" class="button">
                         <span class="dashicons dashicons-clipboard"></span>
-                        <?php esc_html_e('Copy to Clipboard', 'rankflow-seo'); ?>
+                        <?php esc_html_e('Copy to Clipboard', 'metapilot-smart-seo'); ?>
                     </button>
                     <a href="<?php echo esc_url(home_url('robots.txt')); ?>" target="_blank" class="button">
                         <span class="dashicons dashicons-external"></span>
-                        <?php esc_html_e('View Live', 'rankflow-seo'); ?>
+                        <?php esc_html_e('View Live', 'metapilot-smart-seo'); ?>
                     </a>
                 </div>
             </div>
 
             <!-- Info Card -->
-            <div class="rankflow-seo-card info-card">
+            <div class="mpseo-card info-card">
                 <h3>
                     <span class="dashicons dashicons-info"></span>
-                    <?php esc_html_e('About Robots.txt', 'rankflow-seo'); ?>
+                    <?php esc_html_e('About Robots.txt', 'metapilot-smart-seo'); ?>
                 </h3>
                 <ul>
-                    <li><?php esc_html_e('Robots.txt is a standard way to tell crawlers which URLs they can access on your site.', 'rankflow-seo'); ?>
+                    <li><?php esc_html_e('Robots.txt is a standard way to tell crawlers which URLs they can access on your site.', 'metapilot-smart-seo'); ?>
                     </li>
-                    <li><?php esc_html_e('It does NOT prevent pages from being indexed. Use noindex meta tag for that.', 'rankflow-seo'); ?>
+                    <li><?php esc_html_e('It does NOT prevent pages from being indexed. Use noindex meta tag for that.', 'metapilot-smart-seo'); ?>
                     </li>
-                    <li><?php esc_html_e('Changes take effect immediately but crawlers may cache old rules for up to 24 hours.', 'rankflow-seo'); ?>
+                    <li><?php esc_html_e('Changes take effect immediately but crawlers may cache old rules for up to 24 hours.', 'metapilot-smart-seo'); ?>
                     </li>
-                    <li><?php esc_html_e('Test your robots.txt with Google Search Console\'s robots.txt Tester.', 'rankflow-seo'); ?>
+                    <li><?php esc_html_e('Test your robots.txt with Google Search Console\'s robots.txt Tester.', 'metapilot-smart-seo'); ?>
                     </li>
                 </ul>
                 <p>
                     <a href="https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt"
                         target="_blank" rel="noopener noreferrer">
-                        <?php esc_html_e('Learn more about robots.txt →', 'rankflow-seo'); ?>
+                        <?php esc_html_e('Learn more about robots.txt →', 'metapilot-smart-seo'); ?>
                     </a>
                 </p>
             </div>
 
             <!-- Common Crawlers -->
-            <div class="rankflow-seo-card crawlers-card">
+            <div class="mpseo-card crawlers-card">
                 <h3>
                     <span class="dashicons dashicons-admin-users"></span>
-                    <?php esc_html_e('Common Crawlers', 'rankflow-seo'); ?>
+                    <?php esc_html_e('Common Crawlers', 'metapilot-smart-seo'); ?>
                 </h3>
                 <table class="crawlers-table">
                     <tr>
                         <td><code>Googlebot</code></td>
-                        <td><?php esc_html_e('Google Search', 'rankflow-seo'); ?></td>
+                        <td><?php esc_html_e('Google Search', 'metapilot-smart-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>Bingbot</code></td>
-                        <td><?php esc_html_e('Bing Search', 'rankflow-seo'); ?></td>
+                        <td><?php esc_html_e('Bing Search', 'metapilot-smart-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>Slurp</code></td>
-                        <td><?php esc_html_e('Yahoo Search', 'rankflow-seo'); ?></td>
+                        <td><?php esc_html_e('Yahoo Search', 'metapilot-smart-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>DuckDuckBot</code></td>
-                        <td><?php esc_html_e('DuckDuckGo', 'rankflow-seo'); ?></td>
+                        <td><?php esc_html_e('DuckDuckGo', 'metapilot-smart-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>facebookexternalhit</code></td>
-                        <td><?php esc_html_e('Facebook', 'rankflow-seo'); ?></td>
+                        <td><?php esc_html_e('Facebook', 'metapilot-smart-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>Twitterbot</code></td>
-                        <td><?php esc_html_e('X/Twitter', 'rankflow-seo'); ?></td>
+                        <td><?php esc_html_e('X/Twitter', 'metapilot-smart-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>GPTBot</code></td>
-                        <td><?php esc_html_e('OpenAI', 'rankflow-seo'); ?></td>
+                        <td><?php esc_html_e('OpenAI', 'metapilot-smart-seo'); ?></td>
                     </tr>
                     <tr>
                         <td><code>ClaudeBot</code></td>
-                        <td><?php esc_html_e('Anthropic', 'rankflow-seo'); ?></td>
+                        <td><?php esc_html_e('Anthropic', 'metapilot-smart-seo'); ?></td>
                     </tr>
                 </table>
             </div>

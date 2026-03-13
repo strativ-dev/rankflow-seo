@@ -1,8 +1,8 @@
 /**
  * Meta box functionality with Tabs and Analysis
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/assets/js
+ * @package    MPSEO
+ * @subpackage MPSEO/assets/js
  */
 
 (function ($) {
@@ -19,22 +19,22 @@
 
 		init() {
 			// Tab switching
-			$('.rankflow-seo-tab-btn').on('click', (e) => this.switchTab(e));
+			$('.mpseo-tab-btn').on('click', (e) => this.switchTab(e));
 
 			// Accordion toggle
 			$('.accordion-toggle').on('click', (e) => this.toggleAccordion(e));
 
 			// Generate button click
-			$('#rankflow_seo_generate_now').on('click', (e) => this.generateMeta(e));
+			$('#mpseo_generate_now').on('click', (e) => this.generateMeta(e));
 
 			// Auto-generate toggle
-			$('#rankflow_seo_auto_generate').on('change', (e) => this.handleAutoGenerateToggle(e));
+			$('#mpseo_auto_generate').on('change', (e) => this.handleAutoGenerateToggle(e));
 
 			// Update preview on input
-			$('#rankflow_seo_title, #rankflow_seo_description').on('input', () => this.updatePreview());
+			$('#mpseo_title, #mpseo_description').on('input', () => this.updatePreview());
 
 			// Focus keyword analysis
-			$('#rankflow_seo_focus_keyword').on('blur', () => this.analyzeFocusKeyword());
+			$('#mpseo_focus_keyword').on('blur', () => this.analyzeFocusKeyword());
 
 			// Real-time analysis on content change
 			this.initRealTimeAnalysis();
@@ -52,12 +52,12 @@
 			const tabId = button.data('tab');
 
 			// Update button states
-			$('.rankflow-seo-tab-btn').removeClass('active');
+			$('.mpseo-tab-btn').removeClass('active');
 			button.addClass('active');
 
 			// Update content states
-			$('.rankflow-seo-tab-content').removeClass('active');
-			$(`.rankflow-seo-tab-content[data-tab="${tabId}"]`).addClass('active');
+			$('.mpseo-tab-content').removeClass('active');
+			$(`.mpseo-tab-content[data-tab="${tabId}"]`).addClass('active');
 		}
 
 		/**
@@ -165,7 +165,7 @@
 				return;
 			}
 
-			const button = $('#rankflow_seo_generate_now');
+			const button = $('#mpseo_generate_now');
 			const spinner = button.next('.spinner');
 
 			const title = this.getPostTitle();
@@ -185,15 +185,15 @@
 			let confirmNeeded = false;
 			let fieldsToReplace = [];
 
-			if (generateTitle && $('#rankflow_seo_title').val()) {
+			if (generateTitle && $('#mpseo_title').val()) {
 				confirmNeeded = true;
 				fieldsToReplace.push('title');
 			}
-			if (generateDescription && $('#rankflow_seo_description').val()) {
+			if (generateDescription && $('#mpseo_description').val()) {
 				confirmNeeded = true;
 				fieldsToReplace.push('description');
 			}
-			if (generateKeywords && $('#rankflow_seo_keywords').val()) {
+			if (generateKeywords && $('#mpseo_keywords').val()) {
 				confirmNeeded = true;
 				fieldsToReplace.push('keywords');
 			}
@@ -205,21 +205,21 @@
 				}
 			}
 
-			const focusKeyword = $('#rankflow_seo_focus_keyword').val();
+			const focusKeyword = $('#mpseo_focus_keyword').val();
 
 			// Show loading state
 			this.generating = true;
-			button.prop('disabled', true).html('<span class="dashicons dashicons-update dashicons-spin"></span> ' + rankflowSeoData.strings.generating);
+			button.prop('disabled', true).html('<span class="dashicons dashicons-update dashicons-spin"></span> ' + mpseoData.strings.generating);
 			spinner.addClass('is-active');
 
 			// Make AJAX request
 			$.ajax({
-				url: rankflowSeoData.ajaxUrl,
+				url: mpseoData.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'rankflow_seo_generate_meta',
-					nonce: rankflowSeoData.nonce,
-					post_id: rankflowSeoData.postId,
+					action: 'mpseo_generate_meta',
+					nonce: mpseoData.nonce,
+					post_id: mpseoData.postId,
 					title: title,
 					content: content,
 					focus_keyword: focusKeyword,
@@ -232,17 +232,17 @@
 						const data = response.data.data || response.data;
 
 						if (generateTitle && data.title) {
-							$('#rankflow_seo_title').val(data.title);
+							$('#mpseo_title').val(data.title);
 						}
 						if (generateDescription && data.description) {
-							$('#rankflow_seo_description').val(data.description);
+							$('#mpseo_description').val(data.description);
 						}
 						if (generateKeywords && data.keywords) {
-							$('#rankflow_seo_keywords').val(data.keywords);
+							$('#mpseo_keywords').val(data.keywords);
 						}
 
 						// Update character counters
-						$('#rankflow_seo_title, #rankflow_seo_description').trigger('input');
+						$('#mpseo_title, #mpseo_description').trigger('input');
 
 						// Update preview
 						this.updatePreview();
@@ -250,10 +250,10 @@
 						// Trigger analysis update
 						this.triggerAnalysisUpdate();
 
-						const message = response.data.message || rankflowSeoData.strings.success;
+						const message = response.data.message || mpseoData.strings.success;
 						this.showNotice(message, 'success');
 					} else {
-						const errorMsg = response.data.message || response.data || rankflowSeoData.strings.error;
+						const errorMsg = response.data.message || response.data || mpseoData.strings.error;
 						this.showNotice(errorMsg, 'error');
 					}
 				},
@@ -273,13 +273,13 @@
 		 */
 		handleAutoGenerateToggle(e) {
 			const checked = $(e.target).is(':checked');
-			const title = $('#rankflow_seo_title').val();
+			const title = $('#mpseo_title').val();
 
 			if (checked && !title) {
 				const confirmMsg = 'Auto-generate is enabled. Meta tags will be generated automatically when you save. Would you like to generate them now instead?';
 
 				if (confirm(confirmMsg)) {
-					$('#rankflow_seo_generate_now').click();
+					$('#mpseo_generate_now').click();
 				}
 			}
 		}
@@ -288,8 +288,8 @@
 		 * Update search preview
 		 */
 		updatePreview() {
-			const title = $('#rankflow_seo_title').val() || this.getPostTitle() || 'Page Title';
-			const description = $('#rankflow_seo_description').val() || 'Your page description will appear here...';
+			const title = $('#mpseo_title').val() || this.getPostTitle() || 'Page Title';
+			const description = $('#mpseo_description').val() || 'Your page description will appear here...';
 
 			$('.preview-title').text(title);
 			$('.preview-description').text(description);
@@ -299,7 +299,7 @@
 		 * Analyze focus keyword
 		 */
 		analyzeFocusKeyword() {
-			const keyword = $('#rankflow_seo_focus_keyword').val();
+			const keyword = $('#mpseo_focus_keyword').val();
 			if (!keyword) return;
 
 			this.triggerAnalysisUpdate();
@@ -345,29 +345,29 @@
 			}
 
 			// For focus keyword and meta fields
-			$('#rankflow_seo_focus_keyword, #rankflow_seo_title, #rankflow_seo_description').on('input', debouncedAnalysis);
+			$('#mpseo_focus_keyword, #mpseo_title, #mpseo_description').on('input', debouncedAnalysis);
 		}
 
 		/**
 		 * Trigger analysis update via AJAX
 		 */
 		triggerAnalysisUpdate() {
-			const postId = rankflowSeoData.postId;
-			const focusKeyword = $('#rankflow_seo_focus_keyword').val();
+			const postId = mpseoData.postId;
+			const focusKeyword = $('#mpseo_focus_keyword').val();
 			const content = this.getEditorContent();
 			const title = this.getPostTitle();
-			const metaTitle = $('#rankflow_seo_title').val();
-			const metaDescription = $('#rankflow_seo_description').val();
+			const metaTitle = $('#mpseo_title').val();
+			const metaDescription = $('#mpseo_description').val();
 			const slug = $('input[name="post_name"]').val() || '';
 
 			if (!postId) return;
 
 			$.ajax({
-				url: rankflowSeoData.ajaxUrl,
+				url: mpseoData.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'rankflow_seo_update_analysis',
-					nonce: rankflowSeoData.nonce,
+					action: 'mpseo_update_analysis',
+					nonce: mpseoData.nonce,
 					post_id: postId,
 					focus_keyword: focusKeyword,
 					content: content,
@@ -461,7 +461,7 @@
 		 * Update tab badge
 		 */
 		updateTabBadge(tabName, analysis) {
-			const tab = $(`.rankflow-seo-tab-btn[data-tab="${tabName}"]`);
+			const tab = $(`.mpseo-tab-btn[data-tab="${tabName}"]`);
 			tab.find('.tab-badge').remove();
 
 			const problemCount = analysis.problems ? analysis.problems.length : 0;
@@ -552,7 +552,7 @@
 		 * Show notice
 		 */
 		showNotice(message, type) {
-			$('.rankflow-seo-metabox .notice').remove();
+			$('.mpseo-metabox .notice').remove();
 
 			const notice = $('<div>')
 				.addClass('notice notice-' + type + ' is-dismissible')
@@ -562,7 +562,7 @@
 					'padding': '10px 15px'
 				});
 
-			$('.rankflow-seo-metabox').prepend(notice);
+			$('.mpseo-metabox').prepend(notice);
 
 			if (type === 'success') {
 				setTimeout(() => {
@@ -585,7 +585,7 @@
 	 * Initialize on document ready
 	 */
 	$(document).ready(function () {
-		if ($('.rankflow-seo-metabox').length) {
+		if ($('.mpseo-metabox').length) {
 			new MetaBoxHandler();
 					}
 	});

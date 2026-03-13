@@ -2,8 +2,8 @@
 /**
  * Fired during plugin deactivation.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes
+ * @package    MPSEO
+ * @subpackage MPSEO/includes
  * @author     Strativ AB
  */
 
@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class RankFlow_SEO_Deactivator
+ * Class MPSEO_Deactivator
  */
-class RankFlow_SEO_Deactivator
+class MPSEO_Deactivator
 {
 
 	/**
@@ -27,7 +27,7 @@ class RankFlow_SEO_Deactivator
 	{
 
 		// Clear scheduled hooks (if any).
-		wp_clear_scheduled_hook('rankflow_seo_daily_cleanup');
+		wp_clear_scheduled_hook('mpseo_daily_cleanup');
 
 		// Flush rewrite rules.
 		flush_rewrite_rules();
@@ -54,8 +54,8 @@ class RankFlow_SEO_Deactivator
 				"SELECT option_name FROM {$wpdb->options} 
 				WHERE option_name LIKE %s 
 				OR option_name LIKE %s",
-				'_transient_rankflow_seo_%',
-				'_transient_timeout_rankflow_seo_%'
+				'_transient_mpseo_%',
+				'_transient_timeout_mpseo_%'
 			)
 		);
 

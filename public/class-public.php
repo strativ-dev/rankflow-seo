@@ -2,8 +2,8 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/public
+ * @package    MPSEO
+ * @subpackage MPSEO/public
  * @author     Strativ AB
  */
 
@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class RankFlow_SEO_Public
+ * Class MPSEO_Public
  */
-class RankFlow_SEO_Public
+class MPSEO_Public
 {
 
 	/**
@@ -35,14 +35,14 @@ class RankFlow_SEO_Public
 	/**
 	 * Meta manager instance.
 	 *
-	 * @var RankFlow_SEO_Meta_Manager $meta_manager
+	 * @var MPSEO_Meta_Manager $meta_manager
 	 */
 	private $meta_manager;
 
 	/**
 	 * Schema generator instance.
 	 *
-	 * @var RankFlow_SEO_Schema_Generator $schema_generator
+	 * @var MPSEO_Schema_Generator $schema_generator
 	 */
 	private $schema_generator;
 
@@ -56,8 +56,8 @@ class RankFlow_SEO_Public
 	{
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		$this->meta_manager = new RankFlow_SEO_Meta_Manager();
-		$this->schema_generator = new RankFlow_SEO_Schema_Generator();
+		$this->meta_manager = new MPSEO_Meta_Manager();
+		$this->schema_generator = new MPSEO_Schema_Generator();
 	}
 
 	/**
@@ -76,15 +76,15 @@ class RankFlow_SEO_Public
 		}
 
 		// Check if post type is enabled.
-		if (!RankFlow_SEO_Helper::is_post_type_enabled($post->post_type)) {
+		if (!MPSEO_Helper::is_post_type_enabled($post->post_type)) {
 			return;
 		}
 
 		// Get meta data with prefixed variable name.
-		$rankflow_seo_meta_data = $this->meta_manager->get_post_meta($post->ID);
+		$mpseo_meta_data = $this->meta_manager->get_post_meta($post->ID);
 
 		// Include the meta tags partial.
-		include RANKFLOW_SEO_PLUGIN_DIR . 'public/partials/meta-tags.php';
+		include MPSEO_PLUGIN_DIR . 'public/partials/meta-tags.php';
 	}
 
 	/**
@@ -92,7 +92,7 @@ class RankFlow_SEO_Public
 	 */
 	public function output_schema_markup()
 	{
-		if (!get_option('rankflow_seo_enable_schema', true)) {
+		if (!get_option('mpseo_schema_enabled', true)) {
 			return;
 		}
 
@@ -107,12 +107,12 @@ class RankFlow_SEO_Public
 		}
 
 		// Check if post type is enabled.
-		if (!RankFlow_SEO_Helper::is_post_type_enabled($post->post_type)) {
+		if (!MPSEO_Helper::is_post_type_enabled($post->post_type)) {
 			return;
 		}
 
 		// Include the schema output partial.
-		include RANKFLOW_SEO_PLUGIN_DIR . 'public/partials/schema-output.php';
+		include MPSEO_PLUGIN_DIR . 'public/partials/schema-output.php';
 	}
 
 	/**
@@ -141,7 +141,7 @@ class RankFlow_SEO_Public
 	 */
 	public function output_breadcrumbs()
 	{
-		if (!get_option('rankflow_seo_breadcrumbs', false)) {
+		if (!get_option('mpseo_breadcrumbs', false)) {
 			return;
 		}
 
@@ -149,7 +149,7 @@ class RankFlow_SEO_Public
 			return;
 		}
 
-		include RANKFLOW_SEO_PLUGIN_DIR . 'public/partials/breadcrumbs.php';
+		include MPSEO_PLUGIN_DIR . 'public/partials/breadcrumbs.php';
 	}
 
 	/**
@@ -171,15 +171,15 @@ class RankFlow_SEO_Public
 		}
 
 		// Check if post type is enabled.
-		if (!RankFlow_SEO_Helper::is_post_type_enabled($post->post_type)) {
+		if (!MPSEO_Helper::is_post_type_enabled($post->post_type)) {
 			return $title;
 		}
 
 		// Get custom meta title.
-		$rankflow_seo_custom_title = get_post_meta($post->ID, '_rankflow_seo_title', true);
+		$mpseo_custom_title = get_post_meta($post->ID, '_mpseo_title', true);
 
-		if (!empty($rankflow_seo_custom_title)) {
-			return $rankflow_seo_custom_title;
+		if (!empty($mpseo_custom_title)) {
+			return $mpseo_custom_title;
 		}
 
 		return $title;
@@ -204,19 +204,19 @@ class RankFlow_SEO_Public
 		}
 
 		// Check if post type is enabled.
-		if (!RankFlow_SEO_Helper::is_post_type_enabled($post->post_type)) {
+		if (!MPSEO_Helper::is_post_type_enabled($post->post_type)) {
 			return $title_parts;
 		}
 
 		// Get custom meta title.
-		$rankflow_seo_custom_title = get_post_meta($post->ID, '_rankflow_seo_title', true);
+		$mpseo_custom_title = get_post_meta($post->ID, '_mpseo_title', true);
 
-		if (!empty($rankflow_seo_custom_title)) {
+		if (!empty($mpseo_custom_title)) {
 			// Replace the title part completely.
-			$title_parts['title'] = $rankflow_seo_custom_title;
+			$title_parts['title'] = $mpseo_custom_title;
 
 			// Remove site name if custom title already includes it.
-			if (false !== strpos($rankflow_seo_custom_title, get_bloginfo('name'))) {
+			if (false !== strpos($mpseo_custom_title, get_bloginfo('name'))) {
 				unset($title_parts['site']);
 			}
 		}

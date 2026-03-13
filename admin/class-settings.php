@@ -2,11 +2,11 @@
 /**
  * The settings page functionality.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/admin
+ * @package    MPSEO
+ * @subpackage MPSEO/admin
  * @author     Strativ AB
  */
-class RankFlow_SEO_Settings
+class MPSEO_Settings
 {
 
 	/**
@@ -33,7 +33,7 @@ class RankFlow_SEO_Settings
 	/**
 	 * Redirect admin instance
 	 *
-	 * @var RankFlow_SEO_Redirect_Admin
+	 * @var MPSEO_Redirect_Admin
 	 */
 	private $redirect_admin;
 
@@ -57,19 +57,19 @@ class RankFlow_SEO_Settings
 	public function add_plugin_admin_menu()
 	{
 		add_menu_page(
-			__('RankFlow SEO', 'rankflow-seo'),
-			__('RankFlow SEO', 'rankflow-seo'),
+			__('Metapilot Smart SEO', 'metapilot-smart-seo'),
+			__('Metapilot Smart SEO', 'metapilot-smart-seo'),
 			'manage_options',
 			$this->plugin_name,
 			array($this, 'display_plugin_admin_page'),
-			RANKFLOW_SEO_PLUGIN_URL . 'assets/images/rankflow-icon-white.png',
+			MPSEO_PLUGIN_URL . 'assets/images/mpseo-icon-white.png',
 			65
 		);
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Dashboard', 'rankflow-seo'),
-			__('Dashboard', 'rankflow-seo'),
+			__('Dashboard', 'metapilot-smart-seo'),
+			__('Dashboard', 'metapilot-smart-seo'),
 			'manage_options',
 			$this->plugin_name,
 			array($this, 'display_plugin_admin_page')
@@ -77,8 +77,8 @@ class RankFlow_SEO_Settings
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Redirects', 'rankflow-seo'),
-			__('Redirects', 'rankflow-seo'),
+			__('Redirects', 'metapilot-smart-seo'),
+			__('Redirects', 'metapilot-smart-seo'),
 			'manage_options',
 			$this->plugin_name . '-redirects',
 			array($this, 'display_redirects_page')
@@ -86,8 +86,8 @@ class RankFlow_SEO_Settings
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('404 Monitor', 'rankflow-seo'),
-			__('404 Monitor', 'rankflow-seo'),
+			__('404 Monitor', 'metapilot-smart-seo'),
+			__('404 Monitor', 'metapilot-smart-seo'),
 			'manage_options',
 			$this->plugin_name . '-404-monitor',
 			array($this, 'display_404_monitor_page')
@@ -95,8 +95,8 @@ class RankFlow_SEO_Settings
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Robots.txt', 'rankflow-seo'),
-			__('Robots.txt', 'rankflow-seo'),
+			__('Robots.txt', 'metapilot-smart-seo'),
+			__('Robots.txt', 'metapilot-smart-seo'),
 			'manage_options',
 			$this->plugin_name . '-robots-txt',
 			array($this, 'display_robots_page')
@@ -104,26 +104,26 @@ class RankFlow_SEO_Settings
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Schema', 'rankflow-seo'),
-			__('Schema', 'rankflow-seo'),
+			__('Schema', 'metapilot-smart-seo'),
+			__('Schema', 'metapilot-smart-seo'),
 			'manage_options',
-			$this->plugin_name . '-schema',
+			'mpseo-schema',
 			array($this, 'display_schema_page')
 		);
 
 		add_submenu_page(
-			'rankflow-seo',
-			__('XML Sitemap', 'rankflow-seo'),
-			__('XML Sitemap', 'rankflow-seo'),
+			'metapilot-smart-seo',
+			__('XML Sitemap', 'metapilot-smart-seo'),
+			__('XML Sitemap', 'metapilot-smart-seo'),
 			'manage_options',
-			'rankflow-seo-sitemap',
+			'mpseo-sitemap',
 			array($this, 'display_sitemap_page')
 		);
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Settings', 'rankflow-seo'),
-			__('Settings', 'rankflow-seo'),
+			__('Settings', 'metapilot-smart-seo'),
+			__('Settings', 'metapilot-smart-seo'),
 			'manage_options',
 			$this->plugin_name . '-settings',
 			array($this, 'display_plugin_settings_page')
@@ -131,8 +131,8 @@ class RankFlow_SEO_Settings
 
 		add_submenu_page(
 			$this->plugin_name,
-			__('Help', 'rankflow-seo'),
-			__('Help', 'rankflow-seo'),
+			__('Help', 'metapilot-smart-seo'),
+			__('Help', 'metapilot-smart-seo'),
 			'manage_options',
 			$this->plugin_name . '-help',
 			array($this, 'display_help_page')
@@ -144,7 +144,7 @@ class RankFlow_SEO_Settings
 	 */
 	public function display_plugin_admin_page()
 	{
-		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/dashboard.php';
+		require_once MPSEO_PLUGIN_DIR . 'admin/views/dashboard.php';
 	}
 
 	/**
@@ -154,8 +154,8 @@ class RankFlow_SEO_Settings
 	{
 		// Get or create redirect admin instance.
 		if (!isset($this->redirect_admin)) {
-			require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/class-redirect-admin.php';
-			$this->redirect_admin = new RankFlow_SEO_Redirect_Admin($this->plugin_name);
+			require_once MPSEO_PLUGIN_DIR . 'admin/class-redirect-admin.php';
+			$this->redirect_admin = new MPSEO_Redirect_Admin($this->plugin_name);
 		}
 
 		// Call the redirect admin display method.
@@ -169,8 +169,8 @@ class RankFlow_SEO_Settings
 	{
 		// Get or create redirect admin instance.
 		if (!isset($this->redirect_admin)) {
-			require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/class-redirect-admin.php';
-			$this->redirect_admin = new RankFlow_SEO_Redirect_Admin($this->plugin_name);
+			require_once MPSEO_PLUGIN_DIR . 'admin/class-redirect-admin.php';
+			$this->redirect_admin = new MPSEO_Redirect_Admin($this->plugin_name);
 		}
 
 		// Call the redirect admin display method.
@@ -182,7 +182,7 @@ class RankFlow_SEO_Settings
 	 */
 	public function display_robots_page()
 	{
-		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-robots-txt.php';
+		require_once MPSEO_PLUGIN_DIR . 'admin/views/settings-robots-txt.php';
 	}
 
 	/**
@@ -190,7 +190,7 @@ class RankFlow_SEO_Settings
 	 */
 	public function display_schema_page()
 	{
-		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-schema.php';
+		require_once MPSEO_PLUGIN_DIR . 'admin/views/settings-schema.php';
 	}
 
 	/**
@@ -198,7 +198,7 @@ class RankFlow_SEO_Settings
 	 */
 	public function display_sitemap_page()
 	{
-		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-sitemap.php';
+		require_once MPSEO_PLUGIN_DIR . 'admin/views/settings-sitemap.php';
 	}
 
 	/**
@@ -206,7 +206,7 @@ class RankFlow_SEO_Settings
 	 */
 	public function display_help_page()
 	{
-		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/help.php';
+		require_once MPSEO_PLUGIN_DIR . 'admin/views/help.php';
 	}
 
 	/**
@@ -217,8 +217,8 @@ class RankFlow_SEO_Settings
 
 		// General settings.
 		register_setting(
-			'rankflow_seo_general',
-			'rankflow_seo_post_types',
+			'mpseo_general',
+			'mpseo_post_types',
 			array(
 				'type' => 'array',
 				'sanitize_callback' => array($this, 'sanitize_post_types'),
@@ -226,8 +226,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_general',
-			'rankflow_seo_title_separator',
+			'mpseo_general',
+			'mpseo_title_separator',
 			array(
 				'type' => 'string',
 				'default' => '-',
@@ -236,8 +236,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_general',
-			'rankflow_seo_homepage_title',
+			'mpseo_general',
+			'mpseo_homepage_title',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -246,8 +246,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_general',
-			'rankflow_seo_homepage_description',
+			'mpseo_general',
+			'mpseo_homepage_description',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -256,8 +256,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_general',
-			'rankflow_seo_site_represents',
+			'mpseo_general',
+			'mpseo_site_represents',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -266,8 +266,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_general',
-			'rankflow_seo_organization_name',
+			'mpseo_general',
+			'mpseo_organization_name',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -276,8 +276,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_general',
-			'rankflow_seo_person_name',
+			'mpseo_general',
+			'mpseo_person_name',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -286,8 +286,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_general',
-			'rankflow_seo_site_logo',
+			'mpseo_general',
+			'mpseo_site_logo',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -297,8 +297,8 @@ class RankFlow_SEO_Settings
 
 		// API settings.
 		register_setting(
-			'rankflow_seo_api',
-			'rankflow_seo_api_provider',
+			'mpseo_api',
+			'mpseo_api_provider',
 			array(
 				'type' => 'string',
 				'default' => 'gemini',
@@ -307,8 +307,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_api',
-			'rankflow_seo_api_key',
+			'mpseo_api',
+			'mpseo_api_key',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => 'sanitize_text_field',
@@ -316,8 +316,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_api',
-			'rankflow_seo_auto_generate',
+			'mpseo_api',
+			'mpseo_auto_generate',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -327,8 +327,8 @@ class RankFlow_SEO_Settings
 
 		// Feature settings - SEPARATE GROUP.
 		register_setting(
-			'rankflow_seo_features',
-			'rankflow_seo_enable_content_analysis',
+			'mpseo_features',
+			'mpseo_enable_content_analysis',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -337,8 +337,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_features',
-			'rankflow_seo_enable_seo_score',
+			'mpseo_features',
+			'mpseo_enable_seo_score',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -347,8 +347,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_features',
-			'rankflow_seo_enable_schema',
+			'mpseo_features',
+			'mpseo_enable_schema',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -357,8 +357,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_features',
-			'rankflow_seo_focus_keyword',
+			'mpseo_features',
+			'mpseo_focus_keyword',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -367,8 +367,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_features',
-			'rankflow_seo_readability_analysis',
+			'mpseo_features',
+			'mpseo_readability_analysis',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -378,8 +378,8 @@ class RankFlow_SEO_Settings
 
 		// Social settings - SEPARATE GROUP.
 		register_setting(
-			'rankflow_seo_social',
-			'rankflow_seo_og_tags',
+			'mpseo_social',
+			'mpseo_og_tags',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -388,8 +388,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_social',
-			'rankflow_seo_twitter_cards',
+			'mpseo_social',
+			'mpseo_twitter_cards',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -398,8 +398,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_social',
-			'rankflow_seo_default_og_image',
+			'mpseo_social',
+			'mpseo_default_og_image',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -408,8 +408,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_social',
-			'rankflow_seo_twitter_username',
+			'mpseo_social',
+			'mpseo_twitter_username',
 			array(
 				'type' => 'string',
 				'default' => '',
@@ -419,8 +419,8 @@ class RankFlow_SEO_Settings
 
 		// Site Connections settings.
 		register_setting(
-			'rankflow_seo_site_connections',
-			'rankflow_seo_ahrefs_verification',
+			'mpseo_site_connections',
+			'mpseo_ahrefs_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_ahrefs_key'),
@@ -429,8 +429,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_site_connections',
-			'rankflow_seo_baidu_verification',
+			'mpseo_site_connections',
+			'mpseo_baidu_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_verification_code'),
@@ -439,8 +439,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_site_connections',
-			'rankflow_seo_bing_verification',
+			'mpseo_site_connections',
+			'mpseo_bing_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_verification_code'),
@@ -449,8 +449,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_site_connections',
-			'rankflow_seo_google_verification',
+			'mpseo_site_connections',
+			'mpseo_google_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_verification_code'),
@@ -459,8 +459,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_site_connections',
-			'rankflow_seo_pinterest_verification',
+			'mpseo_site_connections',
+			'mpseo_pinterest_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_verification_code'),
@@ -469,8 +469,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_site_connections',
-			'rankflow_seo_yandex_verification',
+			'mpseo_site_connections',
+			'mpseo_yandex_verification',
 			array(
 				'type' => 'string',
 				'sanitize_callback' => array($this, 'sanitize_verification_code'),
@@ -480,8 +480,8 @@ class RankFlow_SEO_Settings
 
 		// Advanced settings.
 		register_setting(
-			'rankflow_seo_advanced',
-			'rankflow_seo_noindex_archives',
+			'mpseo_advanced',
+			'mpseo_noindex_archives',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -490,8 +490,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_advanced',
-			'rankflow_seo_remove_stopwords',
+			'mpseo_advanced',
+			'mpseo_remove_stopwords',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -500,8 +500,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_advanced',
-			'rankflow_seo_breadcrumbs',
+			'mpseo_advanced',
+			'mpseo_breadcrumbs',
 			array(
 				'type' => 'boolean',
 				'default' => false,
@@ -510,8 +510,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_advanced',
-			'rankflow_seo_api_timeout',
+			'mpseo_advanced',
+			'mpseo_api_timeout',
 			array(
 				'type' => 'integer',
 				'default' => 30,
@@ -520,8 +520,8 @@ class RankFlow_SEO_Settings
 		);
 
 		register_setting(
-			'rankflow_seo_advanced',
-			'rankflow_seo_cache_duration',
+			'mpseo_advanced',
+			'mpseo_cache_duration',
 			array(
 				'type' => 'integer',
 				'default' => 3600,
@@ -536,33 +536,33 @@ class RankFlow_SEO_Settings
 	public function display_plugin_settings_page()
 	{
 		?>
-		<div class="wrap rankflow-seo-settings">
-			<?php require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
+		<div class="wrap mpseo-settings">
+			<?php require_once MPSEO_PLUGIN_DIR . 'admin/partials/header.php'; ?>
 
 			<nav class="nav-tab-wrapper">
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=general"
 					class="nav-tab <?php echo esc_attr('general' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
-					<?php esc_html_e('General', 'rankflow-seo'); ?>
+					<span class="dashicons dashicons-admin-settings"></span> <?php esc_html_e('General', 'metapilot-smart-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=api"
 					class="nav-tab <?php echo esc_attr('api' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
-					<?php esc_html_e('AI API', 'rankflow-seo'); ?>
+					<span class="dashicons dashicons-cloud"></span> <?php esc_html_e('AI API', 'metapilot-smart-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=features"
 					class="nav-tab <?php echo esc_attr('features' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
-					<?php esc_html_e('Features', 'rankflow-seo'); ?>
+					<span class="dashicons dashicons-screenoptions"></span> <?php esc_html_e('Features', 'metapilot-smart-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=social"
 					class="nav-tab <?php echo esc_attr('social' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
-					<?php esc_html_e('Social Media', 'rankflow-seo'); ?>
+					<span class="dashicons dashicons-share"></span> <?php esc_html_e('Social Media', 'metapilot-smart-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=site-connections"
 					class="nav-tab <?php echo esc_attr('site-connections' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
-					<?php esc_html_e('Site Connections', 'rankflow-seo'); ?>
+					<span class="dashicons dashicons-admin-links"></span> <?php esc_html_e('Site Connections', 'metapilot-smart-seo'); ?>
 				</a>
 				<a href="?page=<?php echo esc_attr($this->plugin_name); ?>-settings&tab=advanced"
 					class="nav-tab <?php echo esc_attr('advanced' === $this->active_tab ? 'nav-tab-active' : ''); ?>">
-					<?php esc_html_e('Advanced', 'rankflow-seo'); ?>
+					<span class="dashicons dashicons-admin-tools"></span> <?php esc_html_e('Advanced', 'metapilot-smart-seo'); ?>
 				</a>
 			</nav>
 
@@ -601,85 +601,70 @@ class RankFlow_SEO_Settings
 	 */
 	private function render_general_tab()
 	{
+		$mpseo_post_types         = get_post_types(array('public' => true), 'objects');
+		$mpseo_enabled_post_types = get_option('mpseo_post_types', array('post', 'page'));
+		$mpseo_separators         = array('-', '–', '—', '|', '/', '::', '>', '·');
+		$mpseo_current_sep        = get_option('mpseo_title_separator', '-');
 		?>
 		<form method="post" action="options.php">
 			<?php
-			settings_fields('rankflow_seo_general');
-			do_settings_sections('rankflow_seo_general');
+			settings_fields('mpseo_general');
+			do_settings_sections('mpseo_general');
 			?>
-			<table class="form-table">
-				<tr>
-					<th scope="row">
-						<label><?php esc_html_e('Enable for Post Types', 'rankflow-seo'); ?></label>
-					</th>
-					<td>
-						<?php
-						$rankflow_seo_post_types = get_post_types(array('public' => true), 'objects');
-						$rankflow_seo_enabled_post_types = get_option('rankflow_seo_post_types', array('post', 'page'));
 
-						foreach ($rankflow_seo_post_types as $rankflow_seo_post_type) {
-							if ('attachment' === $rankflow_seo_post_type->name) {
-								continue;
-							}
-							?>
-							<label class="rankflow-seo-label-block">
-								<input type="checkbox" name="rankflow_seo_post_types[]"
-									value="<?php echo esc_attr($rankflow_seo_post_type->name); ?>" <?php checked(in_array($rankflow_seo_post_type->name, $rankflow_seo_enabled_post_types, true)); ?>>
-								<?php echo esc_html($rankflow_seo_post_type->label); ?>
-							</label>
-							<?php
-						}
-						?>
-						<p class="description">
-							<?php esc_html_e('Select which post types should have AI SEO meta boxes.', 'rankflow-seo'); ?>
-						</p>
-					</td>
-				</tr>
+			<!-- Post Types -->
+			<div class="mpseo-section-card">
+				<h2 class="mpseo-section-title"><?php esc_html_e('Post Types', 'metapilot-smart-seo'); ?></h2>
+				<p class="mpseo-section-desc"><?php esc_html_e('Select which post types should have SEO meta boxes.', 'metapilot-smart-seo'); ?></p>
+				<div class="post-type-list">
+					<?php foreach ($mpseo_post_types as $mpseo_post_type) : ?>
+						<?php if ('attachment' === $mpseo_post_type->name) continue; ?>
+						<label>
+							<input type="checkbox" name="mpseo_post_types[]"
+								value="<?php echo esc_attr($mpseo_post_type->name); ?>"
+								<?php checked(in_array($mpseo_post_type->name, $mpseo_enabled_post_types, true)); ?>>
+							<span><?php echo esc_html($mpseo_post_type->label); ?></span>
+						</label>
+					<?php endforeach; ?>
+				</div>
+			</div>
 
-				<tr>
-					<th scope="row">
-						<label for="title_separator"><?php esc_html_e('Title Separator', 'rankflow-seo'); ?></label>
-					</th>
-					<td>
-						<select name="rankflow_seo_title_separator" id="title_separator">
-							<?php
-							$rankflow_seo_separators = array('-', '–', '—', '|', '/', '::', '<', '>');
-							$rankflow_seo_current = get_option('rankflow_seo_title_separator', '-');
-							foreach ($rankflow_seo_separators as $rankflow_seo_sep) {
-								?>
-								<option value="<?php echo esc_attr($rankflow_seo_sep); ?>" <?php selected($rankflow_seo_current, $rankflow_seo_sep); ?>>
-									<?php echo esc_html($rankflow_seo_sep); ?>
-								</option>
-								<?php
-							}
-							?>
-						</select>
-						<p class="description">
-							<?php esc_html_e('Choose separator for page titles.', 'rankflow-seo'); ?>
-						</p>
-					</td>
-				</tr>
+			<!-- Title Settings -->
+			<div class="mpseo-section-card">
+				<h2 class="mpseo-section-title"><?php esc_html_e('Title Settings', 'metapilot-smart-seo'); ?></h2>
+				<p class="mpseo-section-desc"><?php esc_html_e('Configure how your page titles appear in search results.', 'metapilot-smart-seo'); ?></p>
 
-				<tr>
-					<th scope="row">
-						<label for="homepage_title"><?php esc_html_e('Homepage Title', 'rankflow-seo'); ?></label>
-					</th>
-					<td>
-						<input type="text" id="homepage_title" name="rankflow_seo_homepage_title"
-							value="<?php echo esc_attr(get_option('rankflow_seo_homepage_title')); ?>" class="regular-text">
-					</td>
-				</tr>
+				<h3><?php esc_html_e('Title Separator', 'metapilot-smart-seo'); ?></h3>
+				<div class="mpseo-sep-buttons">
+					<?php foreach ($mpseo_separators as $mpseo_sep) : ?>
+					<button type="button" class="mpseo-sep-btn <?php echo $mpseo_current_sep === $mpseo_sep ? 'selected' : ''; ?>"
+						data-value="<?php echo esc_attr($mpseo_sep); ?>"><?php echo esc_html($mpseo_sep); ?></button>
+					<?php endforeach; ?>
+				</div>
+				<input type="hidden" name="mpseo_title_separator" id="mpseo_title_separator" value="<?php echo esc_attr($mpseo_current_sep); ?>">
+				<p class="description"><?php esc_html_e('This separator appears between page title and site name.', 'metapilot-smart-seo'); ?></p>
 
-				<tr>
-					<th scope="row">
-						<label for="homepage_description"><?php esc_html_e('Homepage Description', 'rankflow-seo'); ?></label>
-					</th>
-					<td>
-						<textarea id="homepage_description" name="rankflow_seo_homepage_description" rows="3"
-							class="large-text"><?php echo esc_textarea(get_option('rankflow_seo_homepage_description')); ?></textarea>
-					</td>
-				</tr>
-			</table>
+				<table class="form-table" style="margin-top:20px">
+					<tr>
+						<th scope="row">
+							<label for="homepage_title"><?php esc_html_e('Homepage Title', 'metapilot-smart-seo'); ?></label>
+						</th>
+						<td>
+							<input type="text" id="homepage_title" name="mpseo_homepage_title"
+								value="<?php echo esc_attr(get_option('mpseo_homepage_title')); ?>" class="regular-text">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="homepage_description"><?php esc_html_e('Homepage Description', 'metapilot-smart-seo'); ?></label>
+						</th>
+						<td>
+							<textarea id="homepage_description" name="mpseo_homepage_description" rows="3"
+								class="large-text"><?php echo esc_textarea(get_option('mpseo_homepage_description')); ?></textarea>
+						</td>
+					</tr>
+				</table>
+			</div>
 
 			<?php submit_button(); ?>
 		</form>
@@ -691,7 +676,7 @@ class RankFlow_SEO_Settings
 	 */
 	private function render_api_tab()
 	{
-		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-api.php';
+		require_once MPSEO_PLUGIN_DIR . 'admin/views/settings-api.php';
 	}
 
 	/**
@@ -699,7 +684,7 @@ class RankFlow_SEO_Settings
 	 */
 	private function render_features_tab()
 	{
-		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-features.php';
+		require_once MPSEO_PLUGIN_DIR . 'admin/views/settings-features.php';
 	}
 
 	/**
@@ -707,7 +692,7 @@ class RankFlow_SEO_Settings
 	 */
 	private function render_social_tab()
 	{
-		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-social.php';
+		require_once MPSEO_PLUGIN_DIR . 'admin/views/settings-social.php';
 	}
 
 	/**
@@ -715,7 +700,7 @@ class RankFlow_SEO_Settings
 	 */
 	private function render_site_connections_tab()
 	{
-		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-site-connections.php';
+		require_once MPSEO_PLUGIN_DIR . 'admin/views/settings-site-connections.php';
 	}
 
 	/**
@@ -723,7 +708,7 @@ class RankFlow_SEO_Settings
 	 */
 	private function render_advanced_tab()
 	{
-		require_once RANKFLOW_SEO_PLUGIN_DIR . 'admin/views/settings-advanced.php';
+		require_once MPSEO_PLUGIN_DIR . 'admin/views/settings-advanced.php';
 	}
 
 	/**
@@ -770,8 +755,8 @@ class RankFlow_SEO_Settings
 		}
 
 		// If user pasted full meta tag, extract the content value.
-		if (preg_match('/content=["\']([^"\']+)["\']/i', $input, $rankflow_seo_matches)) {
-			return sanitize_text_field($rankflow_seo_matches[1]);
+		if (preg_match('/content=["\']([^"\']+)["\']/i', $input, $mpseo_matches)) {
+			return sanitize_text_field($mpseo_matches[1]);
 		}
 
 		// Otherwise just sanitize and return.
@@ -795,8 +780,8 @@ class RankFlow_SEO_Settings
 		}
 
 		// If user pasted full script tag, extract the data-key value.
-		if (preg_match('/data-key=["\']([^"\']+)["\']/i', $input, $rankflow_seo_matches)) {
-			return sanitize_text_field($rankflow_seo_matches[1]);
+		if (preg_match('/data-key=["\']([^"\']+)["\']/i', $input, $mpseo_matches)) {
+			return sanitize_text_field($mpseo_matches[1]);
 		}
 
 		// Otherwise just sanitize and return.
@@ -819,14 +804,14 @@ class RankFlow_SEO_Settings
 			return;
 		}
 
-		$ahrefs_key = get_option('rankflow_seo_ahrefs_verification', '');
+		$ahrefs_key = get_option('mpseo_ahrefs_verification', '');
 
 		if (empty($ahrefs_key)) {
 			return;
 		}
 
 		wp_enqueue_script(
-			'rankflow-seo-ahrefs-analytics',
+			'mpseo-ahrefs-analytics',
 			'https://analytics.ahrefs.com/analytics.js',
 			array(),
 			'1.0.0',
@@ -844,11 +829,11 @@ class RankFlow_SEO_Settings
 	 */
 	public static function add_ahrefs_script_attributes($tag, $handle, $src)
 	{
-		if ('rankflow-seo-ahrefs-analytics' !== $handle) {
+		if ('mpseo-ahrefs-analytics' !== $handle) {
 			return $tag;
 		}
 
-		$ahrefs_key = get_option('rankflow_seo_ahrefs_verification', '');
+		$ahrefs_key = get_option('mpseo_ahrefs_verification', '');
 
 		if (empty($ahrefs_key)) {
 			return $tag;
@@ -877,34 +862,34 @@ class RankFlow_SEO_Settings
 
 		// Note: Ahrefs is now handled via enqueue_ahrefs_analytics() method.
 
-		$rankflow_seo_verifications = array(
+		$mpseo_verifications = array(
 			'baidu' => array(
-				'option' => 'rankflow_seo_baidu_verification',
+				'option' => 'mpseo_baidu_verification',
 				'name' => 'baidu-site-verification',
 			),
 			'bing' => array(
-				'option' => 'rankflow_seo_bing_verification',
+				'option' => 'mpseo_bing_verification',
 				'name' => 'msvalidate.01',
 			),
 			'google' => array(
-				'option' => 'rankflow_seo_google_verification',
+				'option' => 'mpseo_google_verification',
 				'name' => 'google-site-verification',
 			),
 			'pinterest' => array(
-				'option' => 'rankflow_seo_pinterest_verification',
+				'option' => 'mpseo_pinterest_verification',
 				'name' => 'p:domain_verify',
 			),
 			'yandex' => array(
-				'option' => 'rankflow_seo_yandex_verification',
+				'option' => 'mpseo_yandex_verification',
 				'name' => 'yandex-verification',
 			),
 		);
 
-		foreach ($rankflow_seo_verifications as $rankflow_seo_key => $rankflow_seo_verification) {
-			$rankflow_seo_code = get_option($rankflow_seo_verification['option'], '');
+		foreach ($mpseo_verifications as $mpseo_key => $mpseo_verification) {
+			$mpseo_code = get_option($mpseo_verification['option'], '');
 
-			if (!empty($rankflow_seo_code)) {
-				echo '<meta name="' . esc_attr($rankflow_seo_verification['name']) . '" content="' . esc_attr($rankflow_seo_code) . '" />' . "\n";
+			if (!empty($mpseo_code)) {
+				echo '<meta name="' . esc_attr($mpseo_verification['name']) . '" content="' . esc_attr($mpseo_code) . '" />' . "\n";
 			}
 		}
 	}

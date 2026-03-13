@@ -1,33 +1,33 @@
 /**
  * Frontend styles (if needed)
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/assets/css
+ * @package    MPSEO
+ * @subpackage MPSEO/assets/css
  */
 
 /* Breadcrumbs (if enabled) */
-.rankflow-seo-breadcrumbs {
+.mpseo-breadcrumbs {
 	font-size: 14px;
 	color: #646970;
 	margin: 20px 0;
 	padding: 10px 0;
 }
 
-.rankflow-seo-breadcrumbs a {
+.mpseo-breadcrumbs a {
 	color: #2271b1;
 	text-decoration: none;
 }
 
-.rankflow-seo-breadcrumbs a:hover {
+.mpseo-breadcrumbs a:hover {
 	text-decoration: underline;
 }
 
-.rankflow-seo-breadcrumbs .separator {
+.mpseo-breadcrumbs .separator {
 	margin: 0 8px;
 	color: #646970;
 }
 
-.rankflow-seo-breadcrumbs .current {
+.mpseo-breadcrumbs .current {
 	color: #1d2327;
 	font-weight: 600;
 }

@@ -2,8 +2,8 @@
 /**
  * Site Connections Settings Tab View
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/admin/views
+ * @package    MPSEO
+ * @subpackage MPSEO/admin/views
  * @author     Strativ AB
  */
 
@@ -13,142 +13,142 @@ if (!defined('ABSPATH')) {
 }
 
 // Get current settings.
-$rankflow_seo_ahrefs_code = get_option('rankflow_seo_ahrefs_verification', '');
-$rankflow_seo_baidu_code = get_option('rankflow_seo_baidu_verification', '');
-$rankflow_seo_bing_code = get_option('rankflow_seo_bing_verification', '');
-$rankflow_seo_google_code = get_option('rankflow_seo_google_verification', '');
-$rankflow_seo_pinterest_code = get_option('rankflow_seo_pinterest_verification', '');
-$rankflow_seo_yandex_code = get_option('rankflow_seo_yandex_verification', '');
+$mpseo_ahrefs_code = get_option('mpseo_ahrefs_verification', '');
+$mpseo_baidu_code = get_option('mpseo_baidu_verification', '');
+$mpseo_bing_code = get_option('mpseo_bing_verification', '');
+$mpseo_google_code = get_option('mpseo_google_verification', '');
+$mpseo_pinterest_code = get_option('mpseo_pinterest_verification', '');
+$mpseo_yandex_code = get_option('mpseo_yandex_verification', '');
 ?>
 
-<div class="rankflow-seo-site-connections-tab">
-    <h2><?php esc_html_e('Site Connections', 'rankflow-seo'); ?></h2>
+<div class="mpseo-site-connections-tab">
+    <h2><?php esc_html_e('Site Connections', 'metapilot-smart-seo'); ?></h2>
 
-    <p class="description rankflow-seo-description">
-        <?php esc_html_e('Connect your site with analytics tools and verify ownership with search engines. Add your tracking IDs and verification codes below.', 'rankflow-seo'); ?>
+    <p class="description mpseo-description">
+        <?php esc_html_e('Connect your site with analytics tools and verify ownership with search engines. Add your tracking IDs and verification codes below.', 'metapilot-smart-seo'); ?>
     </p>
 
-    <hr class="rankflow-seo-divider-20">
+    <hr class="mpseo-divider-20">
 
     <form method="post" action="options.php">
-        <?php settings_fields('rankflow_seo_site_connections'); ?>
+        <?php settings_fields('mpseo_site_connections'); ?>
 
         <!-- Webmaster Verification Section -->
-        <div class="rankflow-seo-section">
-            <h3><?php esc_html_e('Webmaster Verification', 'rankflow-seo'); ?></h3>
-            <p class="description rankflow-seo-mb-20">
-                <?php esc_html_e('Verify your site with search engines. You can paste the full meta tag or just the verification code.', 'rankflow-seo'); ?>
+        <div class="mpseo-section-card">
+            <h3><?php esc_html_e('Webmaster Verification', 'metapilot-smart-seo'); ?></h3>
+            <p class="description mpseo-mb-20">
+                <?php esc_html_e('Verify your site with search engines. You can paste the full meta tag or just the verification code.', 'metapilot-smart-seo'); ?>
             </p>
 
             <!-- Google -->
-            <div class="rankflow-seo-connection-field">
-                <label for="rankflow_seo_google_verification">
-                    <strong><?php esc_html_e('Google Search Console', 'rankflow-seo'); ?></strong>
+            <div class="mpseo-connection-field">
+                <label for="mpseo_google_verification">
+                    <strong><?php esc_html_e('Google Search Console', 'metapilot-smart-seo'); ?></strong>
                 </label>
-                <input type="text" id="rankflow_seo_google_verification" name="rankflow_seo_google_verification"
-                    value="<?php echo esc_attr($rankflow_seo_google_code); ?>" class="widefat"
-                    placeholder="<?php esc_attr_e('Add verification code', 'rankflow-seo'); ?>">
+                <input type="text" id="mpseo_google_verification" name="mpseo_google_verification"
+                    value="<?php echo esc_attr($mpseo_google_code); ?>" class="widefat"
+                    placeholder="<?php esc_attr_e('Add verification code', 'metapilot-smart-seo'); ?>">
                 <p class="description">
                     <?php
                     printf(
                         /* translators: %s: Google Search console link */
-                        esc_html__('Get your verification code in %s.', 'rankflow-seo'),
-                        '<a href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer">' . esc_html__('Google Search Console', 'rankflow-seo') . '</a>'
+                        esc_html__('Get your verification code in %s.', 'metapilot-smart-seo'),
+                        '<a href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer">' . esc_html__('Google Search Console', 'metapilot-smart-seo') . '</a>'
                     );
                     ?>
                 </p>
             </div>
 
             <!-- Bing -->
-            <div class="rankflow-seo-connection-field">
-                <label for="rankflow_seo_bing_verification">
-                    <strong><?php esc_html_e('Bing Webmaster Tools', 'rankflow-seo'); ?></strong>
+            <div class="mpseo-connection-field">
+                <label for="mpseo_bing_verification">
+                    <strong><?php esc_html_e('Bing Webmaster Tools', 'metapilot-smart-seo'); ?></strong>
                 </label>
-                <input type="text" id="rankflow_seo_bing_verification" name="rankflow_seo_bing_verification"
-                    value="<?php echo esc_attr($rankflow_seo_bing_code); ?>" class="widefat"
-                    placeholder="<?php esc_attr_e('Add verification code', 'rankflow-seo'); ?>">
+                <input type="text" id="mpseo_bing_verification" name="mpseo_bing_verification"
+                    value="<?php echo esc_attr($mpseo_bing_code); ?>" class="widefat"
+                    placeholder="<?php esc_attr_e('Add verification code', 'metapilot-smart-seo'); ?>">
                 <p class="description">
                     <?php
                     printf(
                         /* translators: %s: Bing Webmaster tools link */
-                        esc_html__('Get your verification code in %s.', 'rankflow-seo'),
-                        '<a href="https://www.bing.com/webmasters" target="_blank" rel="noopener noreferrer">' . esc_html__('Bing Webmaster Tools', 'rankflow-seo') . '</a>'
+                        esc_html__('Get your verification code in %s.', 'metapilot-smart-seo'),
+                        '<a href="https://www.bing.com/webmasters" target="_blank" rel="noopener noreferrer">' . esc_html__('Bing Webmaster Tools', 'metapilot-smart-seo') . '</a>'
                     );
                     ?>
                 </p>
             </div>
 
             <!-- Yandex -->
-            <div class="rankflow-seo-connection-field">
-                <label for="rankflow_seo_yandex_verification">
-                    <strong><?php esc_html_e('Yandex Webmaster', 'rankflow-seo'); ?></strong>
+            <div class="mpseo-connection-field">
+                <label for="mpseo_yandex_verification">
+                    <strong><?php esc_html_e('Yandex Webmaster', 'metapilot-smart-seo'); ?></strong>
                 </label>
-                <input type="text" id="rankflow_seo_yandex_verification" name="rankflow_seo_yandex_verification"
-                    value="<?php echo esc_attr($rankflow_seo_yandex_code); ?>" class="widefat"
-                    placeholder="<?php esc_attr_e('Add verification code', 'rankflow-seo'); ?>">
+                <input type="text" id="mpseo_yandex_verification" name="mpseo_yandex_verification"
+                    value="<?php echo esc_attr($mpseo_yandex_code); ?>" class="widefat"
+                    placeholder="<?php esc_attr_e('Add verification code', 'metapilot-smart-seo'); ?>">
                 <p class="description">
                     <?php
                     printf(
                         /* translators: %s: Yandex Webmaster tools link */
-                        esc_html__('Get your verification code in %s.', 'rankflow-seo'),
-                        '<a href="https://webmaster.yandex.com/sites/" target="_blank" rel="noopener noreferrer">' . esc_html__('Yandex Webmaster', 'rankflow-seo') . '</a>'
+                        esc_html__('Get your verification code in %s.', 'metapilot-smart-seo'),
+                        '<a href="https://webmaster.yandex.com/sites/" target="_blank" rel="noopener noreferrer">' . esc_html__('Yandex Webmaster', 'metapilot-smart-seo') . '</a>'
                     );
                     ?>
                 </p>
             </div>
 
             <!-- Baidu -->
-            <div class="rankflow-seo-connection-field">
-                <label for="rankflow_seo_baidu_verification">
-                    <strong><?php esc_html_e('Baidu Webmaster', 'rankflow-seo'); ?></strong>
+            <div class="mpseo-connection-field">
+                <label for="mpseo_baidu_verification">
+                    <strong><?php esc_html_e('Baidu Webmaster', 'metapilot-smart-seo'); ?></strong>
                 </label>
-                <input type="text" id="rankflow_seo_baidu_verification" name="rankflow_seo_baidu_verification"
-                    value="<?php echo esc_attr($rankflow_seo_baidu_code); ?>" class="widefat"
-                    placeholder="<?php esc_attr_e('Add verification code', 'rankflow-seo'); ?>">
+                <input type="text" id="mpseo_baidu_verification" name="mpseo_baidu_verification"
+                    value="<?php echo esc_attr($mpseo_baidu_code); ?>" class="widefat"
+                    placeholder="<?php esc_attr_e('Add verification code', 'metapilot-smart-seo'); ?>">
                 <p class="description">
                     <?php
                     printf(
                         /* translators: %s: Baidu Webmaster tools link */
-                        esc_html__('Get your verification code in %s.', 'rankflow-seo'),
-                        '<a href="https://ziyuan.baidu.com/site/index" target="_blank" rel="noopener noreferrer">' . esc_html__('Baidu Webmaster', 'rankflow-seo') . '</a>'
+                        esc_html__('Get your verification code in %s.', 'metapilot-smart-seo'),
+                        '<a href="https://ziyuan.baidu.com/site/index" target="_blank" rel="noopener noreferrer">' . esc_html__('Baidu Webmaster', 'metapilot-smart-seo') . '</a>'
                     );
                     ?>
                 </p>
             </div>
 
             <!-- Pinterest -->
-            <div class="rankflow-seo-connection-field">
-                <label for="rankflow_seo_pinterest_verification">
-                    <strong><?php esc_html_e('Pinterest', 'rankflow-seo'); ?></strong>
+            <div class="mpseo-connection-field">
+                <label for="mpseo_pinterest_verification">
+                    <strong><?php esc_html_e('Pinterest', 'metapilot-smart-seo'); ?></strong>
                 </label>
-                <input type="text" id="rankflow_seo_pinterest_verification" name="rankflow_seo_pinterest_verification"
-                    value="<?php echo esc_attr($rankflow_seo_pinterest_code); ?>" class="widefat"
-                    placeholder="<?php esc_attr_e('Add verification code', 'rankflow-seo'); ?>">
+                <input type="text" id="mpseo_pinterest_verification" name="mpseo_pinterest_verification"
+                    value="<?php echo esc_attr($mpseo_pinterest_code); ?>" class="widefat"
+                    placeholder="<?php esc_attr_e('Add verification code', 'metapilot-smart-seo'); ?>">
                 <p class="description">
                     <?php
                     printf(
                         /* translators: %s: Pinterest link */
-                        esc_html__('Claim your site over at %s.', 'rankflow-seo'),
-                        '<a href="https://www.pinterest.com/settings/claim" target="_blank" rel="noopener noreferrer">' . esc_html__('Pinterest', 'rankflow-seo') . '</a>'
+                        esc_html__('Claim your site over at %s.', 'metapilot-smart-seo'),
+                        '<a href="https://www.pinterest.com/settings/claim" target="_blank" rel="noopener noreferrer">' . esc_html__('Pinterest', 'metapilot-smart-seo') . '</a>'
                     );
                     ?>
                 </p>
             </div>
 
             <!-- Ahrefs -->
-            <div class="rankflow-seo-connection-field">
-                <label for="rankflow_seo_ahrefs_verification">
-                    <strong><?php esc_html_e('Ahrefs Analytics', 'rankflow-seo'); ?></strong>
+            <div class="mpseo-connection-field">
+                <label for="mpseo_ahrefs_verification">
+                    <strong><?php esc_html_e('Ahrefs Analytics', 'metapilot-smart-seo'); ?></strong>
                 </label>
-                <input type="text" id="rankflow_seo_ahrefs_verification" name="rankflow_seo_ahrefs_verification"
-                    value="<?php echo esc_attr($rankflow_seo_ahrefs_code); ?>" class="widefat"
-                    placeholder="<?php esc_attr_e('e.g., ddiIjj8TPYy6yVSuq5lQ0w', 'rankflow-seo'); ?>">
+                <input type="text" id="mpseo_ahrefs_verification" name="mpseo_ahrefs_verification"
+                    value="<?php echo esc_attr($mpseo_ahrefs_code); ?>" class="widefat"
+                    placeholder="<?php esc_attr_e('e.g., ddiIjj8TPYy6yVSuq5lQ0w', 'metapilot-smart-seo'); ?>">
                 <p class="description">
                     <?php
                     printf(
                         /* translators: %s: Ahrefs link */
-                        esc_html__('Enter your Ahrefs analytics data-key from %s.', 'rankflow-seo'),
-                        '<a href="https://ahrefs.com/webmaster-tools" target="_blank" rel="noopener noreferrer">' . esc_html__('Ahrefs Webmaster Tools', 'rankflow-seo') . '</a>'
+                        esc_html__('Enter your Ahrefs analytics data-key from %s.', 'metapilot-smart-seo'),
+                        '<a href="https://ahrefs.com/webmaster-tools" target="_blank" rel="noopener noreferrer">' . esc_html__('Ahrefs Webmaster Tools', 'metapilot-smart-seo') . '</a>'
                     );
                     ?>
                 </p>
@@ -156,7 +156,6 @@ $rankflow_seo_yandex_code = get_option('rankflow_seo_yandex_verification', '');
         </div>
 
         <!-- Submit -->
-        <?php submit_button(__('Save Settings', 'rankflow-seo')); ?>
+        <?php submit_button(__('Save Settings', 'metapilot-smart-seo')); ?>
     </form>
 </div>
-

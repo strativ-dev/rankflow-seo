@@ -1,5 +1,5 @@
-=== RankFlow SEO ===
-Contributors: wpstrativ, joystrativ, shuvostrativ, sayed24, redwanstrativ 
+=== Metapilot Smart SEO ===
+Contributors: wpstrativ, joystrativ, shuvostrativ, sayed24, redwanstrativ, mariumstrativ
 Tags: seo, ai seo, schema markup, xml sitemap, redirects
 Requires at least: 5.8
 Tested up to: 6.9
@@ -8,11 +8,11 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Professional AI-powered SEO plugin with advanced meta generation, content analysis, schema markup, XML sitemaps, redirects, and robots.txt editor.
+AI-powered SEO plugin with meta generation, content analysis, schema markup, XML sitemaps, redirect manager, and robots.txt editor.
 
 == Description ==
 
-RankFlow SEO is a comprehensive, professional-grade SEO plugin for WordPress that combines AI-powered optimization with essential SEO tools. Whether you're a beginner or an SEO expert, RankFlow SEO provides everything you need to improve your search engine rankings.
+Metapilot Smart SEO is a comprehensive, professional-grade SEO plugin for WordPress that combines AI-powered optimization with essential SEO tools. Whether you're a beginner or an SEO expert, Metapilot Smart SEO provides everything you need to improve your search engine rankings.
 
 = AI-Powered Meta Generation =
 
@@ -25,14 +25,14 @@ Generate SEO-optimized meta titles and descriptions using cutting-edge AI techno
 
 = Content Analysis =
 
-Comprehensive analysis to ensure your content is fully optimized:
+Comprehensive real-time analysis to ensure your content is fully optimized:
 
-* **17 SEO checks** covering all ranking factors
+* **17 SEO checks** covering all major ranking factors
 * **8 readability checks** for better user engagement
 * **Focus keyword analysis** including density and placement
 * **Structure analysis** for headings, links, and images
-* Yoast-style tabbed interface with color-coded scores
-* Real-time analysis as you type
+* Tabbed interface with color-coded scores
+* Live analysis as you write
 
 = XML Sitemap =
 
@@ -66,7 +66,7 @@ Full control over search engine crawling:
 
 = Schema Markup Generator =
 
-Add structured data to improve rich snippets in search results:
+Add structured data to improve rich snippets in search results.
 
 **14 Schema Types Supported:**
 
@@ -113,7 +113,7 @@ Optimize how your content appears when shared:
 * Open Graph meta tags for Facebook and LinkedIn
 * Twitter Card meta tags
 * Custom social images per post
-* Preview how posts appear when shared
+* Default fallback image for posts without a featured image
 
 = Additional Features =
 
@@ -189,32 +189,32 @@ This plugin optionally loads the Ahrefs Analytics script on your website's homep
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/rankflow-seo/` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/metapilot-smart-seo/` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Go to **RankFlow SEO → Settings** to configure the plugin.
+3. Go to **Metapilot Smart SEO → Settings** to configure the plugin.
 4. (Optional) Enter your AI API key for AI-powered features.
 5. Start optimizing your content!
 
 = AI Provider Setup =
 
-1. Navigate to **RankFlow SEO → Settings → AI API**
+1. Navigate to **Metapilot Smart SEO → Settings → AI API**
 2. Select your AI provider (Anthropic Claude or Google Gemini)
 3. Enter your API key
 4. Save settings
 
 = Sitemap Configuration =
 
-1. Go to **RankFlow SEO → XML Sitemap**
-2. Enable or disable sitemap generation
+1. Go to **Metapilot Smart SEO → XML Sitemap**
+2. Enable sitemap generation
 3. Configure included post types
 4. Set posts per sitemap page
 5. View your sitemap at yoursite.com/sitemap_index.xml
 
 = Schema Setup =
 
-1. Go to **RankFlow SEO → Schema**
+1. Go to **Metapilot Smart SEO → Schema**
 2. Click "Add Schema"
-3. Select schema type from dropdown
+3. Select schema type from the dropdown
 4. Fill in the required fields
 5. Configure display rules
 6. Save your schema
@@ -223,19 +223,19 @@ This plugin optionally loads the Ahrefs Analytics script on your website's homep
 
 = Do I need an API key to use this plugin? =
 
-An API key is only required for AI-powered meta generation features. All other features including XML sitemaps, redirects, schema markup, and robots.txt editor work without an API key.
+An API key is only required for AI-powered meta generation features. All other features including XML sitemaps, redirects, schema markup, and the robots.txt editor work without an API key.
 
 = Which AI provider should I choose? =
 
-Both providers work excellently. Anthropic Claude excels at natural, engaging language, while Google Gemini is Google's powerful AI offering. Choose based on your preference or existing subscriptions.
+Both providers work excellently. Anthropic Claude excels at natural, engaging language, while Google Gemini is Google's own powerful AI. Choose based on your preference or existing subscriptions.
 
-= Does RankFlow SEO work with custom post types? =
+= Does Metapilot Smart SEO work with custom post types? =
 
-Yes! You can enable RankFlow SEO for any public custom post type in the settings. The plugin will add meta boxes and include them in sitemaps.
+Yes! You can enable Metapilot Smart SEO for any public custom post type in the settings. The plugin will add the SEO meta box and include custom post types in sitemaps.
 
 = Will this plugin conflict with other SEO plugins? =
 
-We recommend deactivating other SEO plugins (like Yoast SEO or Rank Math) before using RankFlow SEO to avoid conflicts and duplicate meta tags.
+We recommend deactivating other SEO plugins before using Metapilot Smart SEO to avoid conflicts and duplicate meta tags.
 
 = Can I show different schemas on different pages? =
 
@@ -243,10 +243,10 @@ Yes! Each schema you create has flexible display rules. You can target specific 
 
 = How do I verify my site with Google Search Console? =
 
-1. Go to **RankFlow SEO → Settings → Site Connections**
+1. Go to **Metapilot Smart SEO → Settings → Site Connections**
 2. Paste your Google verification code or the full meta tag
 3. Save settings
-4. Verify in Google Search Console
+4. Complete verification in Google Search Console
 
 = Is the sitemap automatically updated? =
 
@@ -254,7 +254,7 @@ Yes! The sitemap is dynamically generated and always reflects your current conte
 
 = Can I block AI crawlers from scraping my content? =
 
-Yes! Go to **RankFlow SEO → Robots.txt** and use the one-click buttons to block AI crawlers like GPTBot, ChatGPT-User, ClaudeBot, and many others.
+Yes! Go to **Metapilot Smart SEO → Robots.txt** and use the one-click buttons to block AI crawlers like GPTBot, ChatGPT-User, ClaudeBot, and many others.
 
 = Does the plugin support multilingual sites? =
 
@@ -266,8 +266,8 @@ For support questions, please use the WordPress.org support forum for this plugi
 
 == Screenshots ==
 
-1. Dashboard - Overview of your site's SEO status
-2. Meta Box - AI-powered meta generation with live preview
+1. Dashboard - Overview of your site's SEO status and active modules
+2. Meta Box - AI-powered meta generation with live SERP preview
 3. SEO Analysis - Comprehensive checks with color-coded scores
 4. Schema Generator - Easy-to-use interface with 14 schema types
 5. Redirect Manager - Create and manage redirects with 404 monitoring
@@ -281,7 +281,7 @@ For support questions, please use the WordPress.org support forum for this plugi
 * Initial release
 * AI-powered meta generation supporting Anthropic Claude and Google Gemini
 * Content analysis with 17 SEO checks and 8 readability checks
-* XML Sitemap generation with exclude options
+* XML Sitemap generation with post type and taxonomy support
 * Redirect Manager with 301/302 support and 404 monitoring
 * Robots.txt Editor with AI crawler and SEO bot blocking
 * Schema Generator with 14 schema types and flexible display rules
@@ -292,24 +292,22 @@ For support questions, please use the WordPress.org support forum for this plugi
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of RankFlow SEO. Install to start optimizing your WordPress site with AI-powered SEO tools.
+Initial release of Metapilot Smart SEO. Install to start optimizing your WordPress site with AI-powered SEO tools.
 
 == Privacy Policy ==
 
-RankFlow SEO respects your privacy:
+Metapilot Smart SEO respects your privacy:
 
 * The plugin does not collect any personal data from your visitors.
-* If you use AI features, your content is sent to your chosen AI provider (Anthropic or Google) for processing. Please review their privacy policies.
-* Webmaster verification codes are stored locally in your WordPress database.
-* 404 logs store only URLs and timestamps, no visitor personal information.
+* If you use AI features, your content is sent to your chosen AI provider (Anthropic or Google) for processing. Please review their privacy policies linked in the External Services section above.
+* Webmaster verification codes are stored locally in your WordPress database only.
+* 404 logs store only URLs and timestamps — no visitor personal information is collected.
 
 == Credits ==
 
-Developed by Strativ AB.
+Developed by [Strativ AB](https://strativ.se).
 
-== Additional Notes ==
-
-= Minimum Requirements =
+== Minimum Requirements ==
 
 * WordPress 5.8 or higher
 * PHP 7.4 or higher
@@ -319,6 +317,3 @@ Developed by Strativ AB.
 
 * PHP 8.0 or higher for best performance
 * HTTPS enabled site
-* Modern browser for admin interface
-
-For more information and documentation, visit the plugin settings page after installation.

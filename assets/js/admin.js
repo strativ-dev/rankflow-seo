@@ -1,8 +1,8 @@
 /**
  * Admin functionality
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/assets/js
+ * @package    MPSEO
+ * @subpackage MPSEO/assets/js
  */
 
 (function ($) {
@@ -56,7 +56,7 @@
 		initTooltips() {
 			$('[data-tooltip]').each(function () {
 				const tooltip = $('<span>')
-					.addClass('rankflow-seo-tooltip')
+					.addClass('mpseo-tooltip')
 					.text($(this).data('tooltip'));
 
 				$(this).append(tooltip);
@@ -78,7 +78,7 @@
 		 */
 		showLoading(message = 'Processing...') {
 			const overlay = $('<div>')
-				.addClass('rankflow-seo-loading-overlay')
+				.addClass('mpseo-loading-overlay')
 				.html(`
 					<div class="loading-content">
 						<div class="spinner is-active"></div>
@@ -93,8 +93,8 @@
 		 * Hide loading overlay
 		 */
 		hideLoading() {
-			$('.rankflow-seo-loading-overlay').fadeOut(() => {
-				$('.rankflow-seo-loading-overlay').remove();
+			$('.mpseo-loading-overlay').fadeOut(() => {
+				$('.mpseo-loading-overlay').remove();
 			});
 		}
 
@@ -116,7 +116,7 @@
 		 */
 		showToast(message, type = 'info') {
 			const toast = $('<div>')
-				.addClass('rankflow-seo-toast toast-' + type)
+				.addClass('mpseo-toast toast-' + type)
 				.text(message);
 
 			$('body').append(toast);
@@ -135,9 +135,9 @@
 	/**
 	 * Utility functions
 	 */
-	window.RankflowSeo = window.RankflowSeo || {};
+	window.Mpseo = window.Mpseo || {};
 
-	window.RankflowSeo.Utils = {
+	window.Mpseo.Utils = {
 		/**
 		 * Format number with commas
 		 */
@@ -193,7 +193,7 @@
 	 * Initialize on document ready
 	 */
 	$(document).ready(function () {
-		window.RankflowSeo.Admin = new AdminHandler();
+		window.Mpseo.Admin = new AdminHandler();
 	});
 
 })(jQuery);

@@ -2,11 +2,11 @@
 /**
  * Schema markup generator.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/core
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/core
  * @author     Strativ AB
  */
-class RankFlow_SEO_Schema_Generator
+class MPSEO_Schema_Generator
 {
 
 	/**
@@ -49,7 +49,7 @@ class RankFlow_SEO_Schema_Generator
 		}
 
 		// Add description
-		$description = get_post_meta($post_id, '_rankflow_seo_description', true);
+		$description = get_post_meta($post_id, '_mpseo_description', true);
 		if (!empty($description)) {
 			$schema['description'] = $description;
 		}
@@ -74,7 +74,7 @@ class RankFlow_SEO_Schema_Generator
 			'dateModified' => get_the_modified_date('c', $post_id),
 		);
 
-		$description = get_post_meta($post_id, '_rankflow_seo_description', true);
+		$description = get_post_meta($post_id, '_mpseo_description', true);
 		if (!empty($description)) {
 			$schema['description'] = $description;
 		}
@@ -117,7 +117,7 @@ class RankFlow_SEO_Schema_Generator
 			array(
 				'@type' => 'ListItem',
 				'position' => 1,
-				'name' => __('Home', 'rankflow-seo'),
+				'name' => __('Home', 'metapilot-smart-seo'),
 				'item' => home_url(),
 			),
 		);

@@ -2,8 +2,8 @@
 /**
  * Cache utility.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/utils
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/utils
  * @author     Strativ AB
  */
 
@@ -13,15 +13,15 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class RankFlow_SEO_Cache
+ * Class MPSEO_Cache
  */
-class RankFlow_SEO_Cache
+class MPSEO_Cache
 {
 
 	/**
 	 * Cache prefix.
 	 */
-	const PREFIX = 'rankflow_seo_';
+	const PREFIX = 'mpseo_';
 
 	/**
 	 * Default expiration (24 hours).

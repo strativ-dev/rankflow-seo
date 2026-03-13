@@ -1,205 +1,212 @@
-=== RankFlow SEO ===
-Contributors: wpstrativ, joystrativ, shuvostrativ, sayed24, redwanstrativ
-Tags: seo, ai, meta tags, schema, optimization
-Requires at least: 5.8
-Tested up to: 6.9
-Requires PHP: 7.4
-Stable tag: 1.0.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+# Metapilot Smart SEO
 
-Professional AI SEO plugin with advanced meta generation, content analysis, schema markup, sitemaps, redirects, and robots.txt editor.
+AI-powered SEO plugin for WordPress — meta generation, content analysis, schema markup, XML sitemaps, redirect manager, and robots.txt editor.
 
-== Description ==
+[![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue)](https://wordpress.org)
+[![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple)](https://php.net)
+[![License](https://img.shields.io/badge/License-GPLv2%2B-green)](https://www.gnu.org/licenses/gpl-2.0.html)
+[![Version](https://img.shields.io/badge/Version-1.0.0-orange)](https://wordpress.org/plugins/metapilot-smart-seo/)
 
-# RankFlow SEO
-
-Professional AI-powered SEO plugin for WordPress with advanced meta generation, content analysis, schema markup, XML sitemaps, redirects, and robots.txt editor.
-
-![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue)
-![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple)
-![License](https://img.shields.io/badge/License-GPLv2-green)
-![Version](https://img.shields.io/badge/Version-1.0.0-orange)
+---
 
 ## Features
 
-### 🤖 AI-Powered Meta Generation
-- Generate SEO-optimized meta titles and descriptions using AI
-- Support for **Anthropic Claude** and **Google Gemini**
-- One-click generation with smart analysis
-- Bulk generation support
+### AI-Powered Meta Generation
 
-### 📊 Content Analysis
-| Feature | Checks |
-|---------|--------|
-| SEO Analysis | 17 comprehensive checks |
-| Readability | 8 checks |
-| Focus Keyword | Density, placement, optimization |
-| Structure | Headings, links, images |
+- Generate SEO-optimized meta titles and descriptions with one click
+- Supports **Anthropic Claude** and **Google Gemini**
+- Bulk generation for multiple posts
+- Auto-generate on save option
 
-- Yoast-style tabbed interface with color-coded scores
-- Real-time analysis as you type
+### Content Analysis
 
-### 🗺️ XML Sitemap
-- Automatic sitemap generation at `/sitemap_index.xml`
-- Separate sitemaps for posts, pages, and categories
-- Exclude specific posts/pages from sitemap
-- Auto-redirect `/sitemap.xml` to `/sitemap_index.xml`
-- Ping search engines on content updates
+- 17 SEO checks covering all major ranking factors
+- 8 readability checks for better user engagement
+- Focus keyword analysis (density, placement, prominence)
+- Real-time analysis as you write
+- Color-coded scores with actionable suggestions
 
-### 🔄 Redirect Manager
-- Create 301 (permanent) and 302 (temporary) redirects
-- 404 error monitoring and logging
-- One-click redirect from 404 logs
-- CSV export of redirects and 404 logs
-- Regex support for advanced redirects
+### XML Sitemap
 
-### 🤖 Robots.txt Editor
-- Virtual robots.txt generation (no file needed)
-- **One-click block AI crawlers:**
-  - GPTBot, ChatGPT-User, Google-Extended, ClaudeBot, Claude-Web
-  - Bytespider, Omgilibot, FacebookBot, Diffbot, Applebot-Extended
-  - PerplexityBot, cohere-ai, CCBot
-- **One-click block aggressive SEO bots:**
-  - AhrefsBot, SemrushBot, MJ12bot, DotBot, BLEXBot
-  - SearchmetricsBot, PetalBot, MegaIndex, and more
+- Automatic sitemap at `/sitemap_index.xml`
+- Separate sitemaps per post type and taxonomy
+- Configurable posts per page
+- Auto-ping Google and Bing on content updates
+- Include/exclude specific post types, taxonomies, and authors
+
+### Redirect Manager
+
+- 301 (permanent) and 302 (temporary) redirects
+- Automatic 404 error logging and monitoring
+- One-click redirect creation from 404 logs
+- Regex pattern support for advanced rules
+- CSV import/export
+
+### Robots.txt Editor
+
+- Virtual robots.txt (no physical file needed)
+- One-click block for 13+ AI crawlers (GPTBot, ClaudeBot, ChatGPT-User, etc.)
+- One-click block for aggressive SEO bots (AhrefsBot, SemrushBot, etc.)
 - Custom rules editor with syntax reference
 - Live preview with copy to clipboard
 
-### 📋 Schema Markup Generator
+### Schema Markup Generator
 
-**14 Schema Types Supported:**
+14 schema types with flexible display rules:
 
-| Schema Type | Key Fields |
-|-------------|------------|
-| Local Business | Name, Address, Hours, Geo, Price Range |
-| Organization | Name, Logo, Founders, Contact |
-| Person | Name, Job Title, Works For, Social |
-| Website | Name, Search Action, Language |
-| Article | Headline, Author, Publisher, Dates |
-| Product | Name, Price, Availability, Rating |
-| Services | Name, description, provider, area served, price |
-| FAQ Page | Question/Answer pairs |
-| How To | Steps, Tools, Supplies, Time |
-| Event | Date, Venue, Tickets, Performer |
-| Recipe | Ingredients, Instructions, Nutrition |
-| Video | Title, Duration, Thumbnail |
-| Breadcrumb | Navigation path |
-| Software App | Category, OS, Rating, Download |
+| Schema Type    | Schema Type          |
+| -------------- | -------------------- |
+| Local Business | Organization         |
+| Person         | Website              |
+| Article        | Product              |
+| Service        | FAQ Page             |
+| How To         | Event                |
+| Recipe         | Video                |
+| Breadcrumb     | Software Application |
 
-**Display Rules:**
-- All Pages (default)
-- Homepage Only
-- Specific Post Types
-- Only Specific Pages/Posts (include)
-- All Except Specific Pages/Posts (exclude)
+Display rules: all pages, homepage only, specific post types, include/exclude by ID.
 
-### 🔗 Site Connections
-Webmaster tools verification for:
+### Social Media
+
+- Open Graph meta tags (Facebook, LinkedIn)
+- Twitter Card meta tags
+- Custom social image per post
+- Default fallback OG image
+
+### Site Connections
+
 - Google Search Console
 - Bing Webmaster Tools
 - Baidu Webmaster
 - Yandex Webmaster
 - Pinterest
-- Ahrefs
+- Ahrefs Analytics
 
-Smart paste detection - extracts verification codes from full meta tags.
+Smart paste — automatically extracts verification codes from full meta tag strings.
 
-### 📱 Social Media
-- Open Graph meta tags (Facebook, LinkedIn)
-- Twitter Card meta tags
-- Custom social images per post
-- Preview how posts appear when shared
-
-### 🎯 Additional Features
-- Search engine preview (Google SERP simulator)
-- Custom post type support
-- Advanced options per post (noindex, nofollow, canonical)
-- Clean, modern admin interface
-- WordPress coding standards compliant
+---
 
 ## Installation
 
-1. Upload the plugin files to `/wp-content/plugins/rankflow-seo/`
-2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Go to **RankFlow SEO → Settings**
-4. Configure your AI API key
-5. Start optimizing your content!
+**Via WordPress Admin**
 
-## Configuration
+1. Go to **Plugins → Add New**
+2. Search for "Metapilot Smart SEO"
+3. Click **Install Now** then **Activate**
 
-### AI Provider Setup
+**Manual Installation**
 
-1. Navigate to **RankFlow SEO → Settings**
-2. Select your AI provider (Anthropic or Google)
-3. Enter your API key
-4. Save settings
+1. Download the plugin zip
+2. Upload to `/wp-content/plugins/metapilot-smart-seo/`
+3. Activate via **Plugins** screen
 
-### Sitemap Configuration
+**After Activation**
 
-1. Go to **RankFlow SEO → Settings → Sitemap**
-2. Enable/disable sitemap generation
-3. Configure included post types
-4. Set posts per sitemap page
+1. Navigate to **Metapilot Smart SEO → Settings**
+2. (Optional) Add your AI API key under **Settings → AI API**
+3. Configure XML Sitemap, Schema, and other modules as needed
 
-### Schema Setup
-
-1. Go to **RankFlow SEO → Schema**
-2. Click **"Add Schema"**
-3. Select schema type from dropdown
-4. Fill in the dynamic fields
-5. Configure display rules
-6. Save
+---
 
 ## Requirements
 
-- WordPress 5.8 or higher
-- PHP 7.4 or higher
-- API key from Anthropic or Google (for AI features)
+| Requirement | Minimum | Recommended |
+| ----------- | ------- | ----------- |
+| WordPress   | 5.8     | Latest      |
+| PHP         | 7.4     | 8.0+        |
+| MySQL       | 5.6     | 8.0+        |
 
-## Screenshots
+An AI API key (Anthropic or Google) is only needed for the AI meta generation feature. All other features work without one.
 
-1. **Meta Box** - AI-powered meta generation with preview
-2. **SEO Analysis** - 17 checks with color-coded scores
-3. **Schema Generator** - Repeater interface with display rules
-4. **Robots.txt Editor** - Live preview with copy function
-5. **Redirect Manager** - 301/302 redirects with 404 monitor
+---
 
-## Frequently Asked Questions
+## External Services
 
-**Do I need an API key?**
-Yes, for AI features. Other features (sitemap, redirects, schema) work without an API key.
+This plugin optionally connects to external services. All connections are opt-in and documented in `readme.txt`.
 
-**Which AI provider should I choose?**
-Both work excellently. Claude excels at natural language, Gemini is Google's powerful offering.
+| Service              | Purpose                          | When                              |
+| -------------------- | -------------------------------- | --------------------------------- |
+| Anthropic Claude API | AI meta generation               | Only on explicit user action      |
+| Google Gemini API    | AI meta generation               | Only on explicit user action      |
+| Google Sitemap Ping  | Notify Google of sitemap updates | On publish/update (if enabled)    |
+| Bing Sitemap Ping    | Notify Bing of sitemap updates   | On publish/update (if enabled)    |
+| Ahrefs Analytics     | Site analytics/verification      | Homepage only (if key configured) |
 
-**Does it work with custom post types?**
-Yes! Enable RankFlow SEO for any public post type.
+---
 
-**Will it conflict with other SEO plugins?**
-We recommend deactivating other SEO plugins to avoid conflicts.
+## File Structure
 
-**Can I show different schemas on different pages?**
-Yes! Each schema has display rules for targeting specific pages, post types, or exclusions.
+```
+metapilot-smart-seo/
+├── admin/                          # Admin-facing functionality
+│   ├── class-admin.php             # Script/style enqueue, notices
+│   ├── class-settings.php          # Settings pages and registration
+│   ├── class-metabox.php           # Post editor meta box
+│   ├── class-schema-admin.php      # Schema management
+│   ├── class-redirect-admin.php    # Redirect and 404 admin
+│   ├── class-sitemap-admin.php     # Sitemap settings admin
+│   ├── partials/                   # Reusable admin partials
+│   └── views/                     # Full admin page views
+├── includes/                       # Core plugin classes
+│   ├── class-metapilot-smart-seo.php  # Main plugin class and loader
+│   ├── class-loader.php
+│   ├── class-robots-txt.php
+│   ├── api/                        # AI provider integrations
+│   ├── redirects/
+│   ├── sitemap/
+│   └── utils/
+├── public/                         # Frontend functionality
+│   ├── class-public.php
+│   ├── class-schema-output.php
+│   └── partials/
+├── assets/
+│   ├── css/
+│   └── js/
+├── languages/                      # Translation files (.pot)
+├── metapilot-smart-seo.php         # Main plugin file
+├── readme.txt                      # WordPress.org readme
+└── uninstall.php
+```
+
+---
+
+## Coding Standards
+
+The plugin follows [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/):
+
+- All input sanitized with appropriate `sanitize_*()` functions
+- All output escaped with `esc_html()`, `esc_attr()`, `esc_url()`, `wp_kses()`
+- All forms and AJAX handlers use nonce verification
+- All DB queries use `$wpdb->prepare()`
+- Proper capability checks on all admin actions
+
+---
 
 ## Changelog
 
 ### 1.0.0
+
 - Initial release
-- AI-powered meta generation (Claude, Gemini)
-- Content analysis (17 SEO + 8 readability checks)
-- XML Sitemap with exclude option
-- Redirect Manager with 404 monitoring
-- Robots.txt Editor with AI/bot blocking
-- Schema Generator (14 types) with display rules
-- Site Connections (6 webmaster tools)
-- Open Graph & Twitter Cards
-- Search engine preview
+- AI-powered meta generation supporting Anthropic Claude and Google Gemini
+- Content analysis with 17 SEO checks and 8 readability checks
+- XML Sitemap generation with post type and taxonomy support
+- Redirect Manager with 301/302 support and 404 monitoring
+- Robots.txt Editor with AI crawler and SEO bot blocking
+- Schema Generator with 14 schema types and flexible display rules
+- Site Connections for 6 webmaster tools
+- Open Graph and Twitter Card meta tags
+- Search engine preview (SERP simulator)
+
+---
 
 ## License
 
-This plugin is licensed under the GPLv2 or later.
+[GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
+
+---
 
 ## Credits
 
-Developed by Strativ
+Developed by [Strativ AB](https://strativ.se)
+
+Contributors: wpstrativ, joystrativ, shuvostrativ, sayed24, redwanstrativ, mariumstrativ

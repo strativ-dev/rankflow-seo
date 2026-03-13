@@ -2,11 +2,11 @@
 /**
  * Data sanitization.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/utils
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/utils
  * @author     Strativ AB
  */
-class RankFlow_SEO_Sanitizer
+class MPSEO_Sanitizer
 {
 
 	/**

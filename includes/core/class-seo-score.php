@@ -2,11 +2,11 @@
 /**
  * SEO score calculator.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/core
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/core
  * @author     Strativ AB
  */
-class RankFlow_SEO_SEO_Score
+class MPSEO_SEO_Score
 {
 
 	/**
@@ -59,7 +59,7 @@ class RankFlow_SEO_SEO_Score
 	 */
 	private function score_meta_title($post_id)
 	{
-		$title = get_post_meta($post_id, '_rankflow_seo_title', true);
+		$title = get_post_meta($post_id, '_mpseo_title', true);
 
 		if (empty($title)) {
 			return 0;
@@ -86,7 +86,7 @@ class RankFlow_SEO_SEO_Score
 	 */
 	private function score_meta_description($post_id)
 	{
-		$description = get_post_meta($post_id, '_rankflow_seo_description', true);
+		$description = get_post_meta($post_id, '_mpseo_description', true);
 
 		if (empty($description)) {
 			return 0;
@@ -135,7 +135,7 @@ class RankFlow_SEO_SEO_Score
 	 */
 	private function score_focus_keyword($post_id, $content)
 	{
-		$keyword = get_post_meta($post_id, '_rankflow_seo_focus_keyword', true);
+		$keyword = get_post_meta($post_id, '_mpseo_focus_keyword', true);
 
 		if (empty($keyword)) {
 			return 0;
@@ -146,13 +146,13 @@ class RankFlow_SEO_SEO_Score
 		$content_lower = strtolower(wp_strip_all_tags($content));
 
 		// Keyword in meta title
-		$meta_title = get_post_meta($post_id, '_rankflow_seo_title', true);
+		$meta_title = get_post_meta($post_id, '_mpseo_title', true);
 		if (!empty($meta_title) && stripos($meta_title, $keyword) !== false) {
 			$score += 5;
 		}
 
 		// Keyword in meta description
-		$meta_desc = get_post_meta($post_id, '_rankflow_seo_description', true);
+		$meta_desc = get_post_meta($post_id, '_mpseo_description', true);
 		if (!empty($meta_desc) && stripos($meta_desc, $keyword) !== false) {
 			$score += 5;
 		}
@@ -324,25 +324,25 @@ class RankFlow_SEO_SEO_Score
 		if ($score >= 80) {
 			return array(
 				'status' => 'good',
-				'label' => __('Excellent', 'rankflow-seo'),
+				'label' => __('Excellent', 'metapilot-smart-seo'),
 				'color' => '#46b450',
 			);
 		} elseif ($score >= 60) {
 			return array(
 				'status' => 'ok',
-				'label' => __('Good', 'rankflow-seo'),
+				'label' => __('Good', 'metapilot-smart-seo'),
 				'color' => '#ffb900',
 			);
 		} elseif ($score >= 40) {
 			return array(
 				'status' => 'needs_improvement',
-				'label' => __('Needs Improvement', 'rankflow-seo'),
+				'label' => __('Needs Improvement', 'metapilot-smart-seo'),
 				'color' => '#f56e28',
 			);
 		} else {
 			return array(
 				'status' => 'poor',
-				'label' => __('Poor', 'rankflow-seo'),
+				'label' => __('Poor', 'metapilot-smart-seo'),
 				'color' => '#dc3232',
 			);
 		}

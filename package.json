@@ -1,12 +1,12 @@
 {
-  "name": "rankflow-seo",
+  "name": "metapilot-smart-seo",
   "version": "1.0.0",
   "description": "Professional AI-powered SEO plugin for WordPress",
   "main": "index.js",
   "scripts": {
     "test": "phpunit",
     "build": "echo 'No build step required'",
-    "zip": "zip -r rankflow-seo.zip . -x '*.git*' 'node_modules/*' 'vendor/*' 'tests/*'"
+    "zip": "zip -r metapilot-smart-seo.zip . -x '*.git*' 'node_modules/*' 'vendor/*' 'tests/*'"
   },
   "repository": {
     "type": "git",

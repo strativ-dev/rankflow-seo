@@ -2,8 +2,8 @@
 /**
  * Schema markup output.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/public/partials
+ * @package    MPSEO
+ * @subpackage MPSEO/public/partials
  *
  * @var WP_Post $post Post object.
  */
@@ -12,38 +12,38 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-$rankflow_seo_schema_data = array();
+$mpseo_schema_data = array();
 
 // Article schema for posts.
 if ('post' === $post->post_type) {
-	$rankflow_seo_schema_data[] = $this->schema_generator->generate_article_schema($post->ID);
+	$mpseo_schema_data[] = $this->schema_generator->generate_article_schema($post->ID);
 } else {
 	// WebPage schema for pages.
-	$rankflow_seo_schema_data[] = $this->schema_generator->generate_webpage_schema($post->ID);
+	$mpseo_schema_data[] = $this->schema_generator->generate_webpage_schema($post->ID);
 }
 
 // Add breadcrumb schema if enabled.
-if (get_option('rankflow_seo_breadcrumbs', false)) {
-	$rankflow_seo_schema_data[] = $this->schema_generator->generate_breadcrumb_schema($post->ID);
+if (get_option('mpseo_breadcrumbs', false)) {
+	$mpseo_schema_data[] = $this->schema_generator->generate_breadcrumb_schema($post->ID);
 }
 
 // Organization schema for homepage.
 if (is_front_page()) {
-	$rankflow_seo_schema_data[] = $this->schema_generator->generate_organization_schema();
+	$mpseo_schema_data[] = $this->schema_generator->generate_organization_schema();
 }
 
 // Filter to allow customization.
-$rankflow_seo_schema_data = apply_filters('rankflow_seo_schema_data', $rankflow_seo_schema_data, $post->ID);
+$mpseo_schema_data = apply_filters('mpseo_schema_data', $mpseo_schema_data, $post->ID);
 
-if (!empty($rankflow_seo_schema_data)):
+if (!empty($mpseo_schema_data)):
 	?>
-	<!-- RankFlow SEO Schema Markup -->
+	<!-- Metapilot Smart SEO Schema Markup -->
 	<?php
 	wp_print_inline_script_tag(
-		wp_json_encode($rankflow_seo_schema_data, JSON_HEX_TAG | JSON_HEX_AMP),
+		wp_json_encode($mpseo_schema_data, JSON_HEX_TAG | JSON_HEX_AMP),
 		array('type' => 'application/ld+json')
 	);
 	?>
-	<!-- /RankFlow SEO Schema Markup -->
+	<!-- /Metapilot Smart SEO Schema Markup -->
 	<?php
 endif;

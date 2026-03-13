@@ -1,5 +1,5 @@
 /**
- * RankFlow SEO - Admin Views Consolidated Scripts
+ * Metapilot Smart SEO - Admin Views Consolidated Scripts
  * 
  * This file contains all JavaScript that was previously inline in PHP view files.
  * Properly enqueued via wp_enqueue_script() in class-admin.php
@@ -18,7 +18,7 @@
         }
 
         /* Confirm dialogs - replaces all inline onclick="return confirm(...)" */
-        $(document).on('click', '.rankflow-seo-confirm', function(e) {
+        $(document).on('click', '.mpseo-confirm', function(e) {
             var message = $(this).data('confirm');
             if (message && !window.confirm(message)) {
                 e.preventDefault();
@@ -27,7 +27,7 @@
         });
 
         /* Days filter auto-submit - replaces inline onchange="this.form.submit()" */
-        $(document).on('change', '.rankflow-seo-days-filter', function() {
+        $(document).on('change', '.mpseo-days-filter', function() {
             $(this).closest('form').submit();
         });
 
@@ -92,54 +92,54 @@
                 e.preventDefault();
                 if (defaultOgFrame) { defaultOgFrame.open(); return; }
                 defaultOgFrame = wp.media({
-                    title: rankflowSeoViewsData.strings.selectDefaultOgImage || 'Select Default OG Image',
-                    button: { text: rankflowSeoViewsData.strings.useThisImage || 'Use this image' },
+                    title: mpseoViewsData.strings.selectDefaultOgImage || 'Select Default OG Image',
+                    button: { text: mpseoViewsData.strings.useThisImage || 'Use this image' },
                     multiple: false,
                     library: { type: 'image' }
                 });
                 defaultOgFrame.on('select', function() {
                     var attachment = defaultOgFrame.state().get('selection').first().toJSON();
-                    $('#rankflow_seo_default_og_image').val(attachment.url);
+                    $('#mpseo_default_og_image').val(attachment.url);
                     $('#default_og_image_preview').html('<img src="' + attachment.url + '" alt=""><button type="button" class="default-og-image-remove" id="default_og_image_remove"><span class="dashicons dashicons-no-alt"></span></button>');
                 });
                 defaultOgFrame.open();
             });
             $(document).on('click', '#default_og_image_remove', function(e) {
                 e.preventDefault();
-                $('#rankflow_seo_default_og_image').val('');
+                $('#mpseo_default_og_image').val('');
                 $('#default_og_image_preview').empty();
             });
         }
 
         /* From: admin/views/metabox.php */
         var ogImageFrame;
-        if ($('#rankflow_seo_og_image_upload').length) {
-            $('#rankflow_seo_og_image_upload').on('click', function(e) {
+        if ($('#mpseo_og_image_upload').length) {
+            $('#mpseo_og_image_upload').on('click', function(e) {
                 e.preventDefault();
                 if (ogImageFrame) { ogImageFrame.open(); return; }
                 ogImageFrame = wp.media({
-                    title: rankflowSeoViewsData.strings.selectOgImage || 'Select Open Graph Image',
-                    button: { text: rankflowSeoViewsData.strings.useThisImage || 'Use this image' },
+                    title: mpseoViewsData.strings.selectOgImage || 'Select Open Graph Image',
+                    button: { text: mpseoViewsData.strings.useThisImage || 'Use this image' },
                     multiple: false,
                     library: { type: 'image' }
                 });
                 ogImageFrame.on('select', function() {
                     var attachment = ogImageFrame.state().get('selection').first().toJSON();
-                    $('#rankflow_seo_og_image').val(attachment.url);
-                    $('#rankflow_seo_og_image_preview').html('<img src="' + attachment.url + '" alt=""><button type="button" class="og-image-remove" id="rankflow_seo_og_image_remove"><span class="dashicons dashicons-no-alt"></span></button>');
+                    $('#mpseo_og_image').val(attachment.url);
+                    $('#mpseo_og_image_preview').html('<img src="' + attachment.url + '" alt=""><button type="button" class="og-image-remove" id="mpseo_og_image_remove"><span class="dashicons dashicons-no-alt"></span></button>');
                     updateSearchPreviewImage(attachment.url);
                 });
                 ogImageFrame.open();
             });
-            $(document).on('click', '#rankflow_seo_og_image_remove', function(e) {
+            $(document).on('click', '#mpseo_og_image_remove', function(e) {
                 e.preventDefault();
-                $('#rankflow_seo_og_image').val('');
-                $('#rankflow_seo_og_image_preview').empty();
+                $('#mpseo_og_image').val('');
+                $('#mpseo_og_image_preview').empty();
                 updateSearchPreviewImage('');
             });
             $(document).on('click', '#remove-post-thumbnail', function() {
                 setTimeout(function() {
-                    if (!$('#rankflow_seo_og_image').val()) { updateSearchPreviewImage(''); }
+                    if (!$('#mpseo_og_image').val()) { updateSearchPreviewImage(''); }
                 }, 500);
             });
         }
@@ -155,7 +155,7 @@
                 if ($featuredImg.length && $featuredImg.attr('src')) {
                     $wrapper.html('<div class="preview-image"><img src="' + $featuredImg.attr('src') + '" alt=""></div>');
                 } else {
-                    $wrapper.html('<div class="preview-image preview-no-image"><span class="dashicons dashicons-format-image"></span><span>' + (rankflowSeoViewsData.strings.noImage || 'No image') + '</span></div>');
+                    $wrapper.html('<div class="preview-image preview-no-image"><span class="dashicons dashicons-format-image"></span><span>' + (mpseoViewsData.strings.noImage || 'No image') + '</span></div>');
                 }
             }
         }
@@ -194,25 +194,30 @@
                 var $btn = $(this);
                 if (navigator.clipboard && window.isSecureContext) {
                     navigator.clipboard.writeText(content).then(function() {
-                        $btn.text(rankflowSeoViewsData.strings.copied || 'Copied!');
-                        setTimeout(function() { $btn.text(rankflowSeoViewsData.strings.copyToClipboard || 'Copy to Clipboard'); }, 2000);
+                        $btn.text(mpseoViewsData.strings.copied || 'Copied!');
+                        setTimeout(function() { $btn.text(mpseoViewsData.strings.copyToClipboard || 'Copy to Clipboard'); }, 2000);
                     });
                 }
             });
         }
 
         /* From: admin/views/settings-sitemap.php */
-        if ($('#ping-sitemap').length) {
-            $('#ping-sitemap').on('click', function() {
+        if ($('#flush-sitemap-cache').length) {
+            $('#flush-sitemap-cache').on('click', function() {
                 var $btn = $(this);
-                $btn.prop('disabled', true).text(rankflowSeoViewsData.strings.pinging || 'Pinging...');
+                var originalText = $btn.text();
+                $btn.prop('disabled', true).text(mpseoViewsData.strings.pinging || 'Flushing...');
                 $.ajax({
-                    url: rankflowSeoViewsData.ajaxUrl,
+                    url: mpseoViewsData.ajaxUrl,
                     type: 'POST',
-                    data: { action: 'rankflow_seo_ping_sitemap', nonce: rankflowSeoViewsData.nonce },
+                    data: { action: 'mpseo_flush_sitemap', nonce: mpseoViewsData.nonce },
                     success: function(response) {
-                        $btn.prop('disabled', false).text(rankflowSeoViewsData.strings.pingSitemap || 'Ping Search Engines');
-                        alert(response.success ? (rankflowSeoViewsData.strings.pingSuccess || 'Sitemap pinged successfully!') : (response.data || 'Error'));
+                        $btn.prop('disabled', false).text(originalText);
+                        alert(response.success ? (response.data && response.data.message ? response.data.message : 'Sitemap cache flushed!') : (response.data && response.data.message ? response.data.message : 'Error'));
+                    },
+                    error: function() {
+                        $btn.prop('disabled', false).text(originalText);
+                        alert('AJAX error — please try again.');
                     }
                 });
             });
@@ -225,15 +230,15 @@
             var $schemaItem = $select.closest('.schema-item');
             
             // Hide all conditional rows
-            $schemaItem.find('.post-types-row, .include-row, .exclude-row').addClass('rankflow-seo-hidden');
+            $schemaItem.find('.post-types-row, .include-row, .exclude-row').addClass('mpseo-hidden');
             
             // Show the appropriate row based on selection
             if (value === 'post_types') {
-                $schemaItem.find('.post-types-row').removeClass('rankflow-seo-hidden');
+                $schemaItem.find('.post-types-row').removeClass('mpseo-hidden');
             } else if (value === 'include') {
-                $schemaItem.find('.include-row').removeClass('rankflow-seo-hidden');
+                $schemaItem.find('.include-row').removeClass('mpseo-hidden');
             } else if (value === 'exclude') {
-                $schemaItem.find('.exclude-row').removeClass('rankflow-seo-hidden');
+                $schemaItem.find('.exclude-row').removeClass('mpseo-hidden');
             }
         }
 
@@ -256,9 +261,9 @@
             var $noSchemasMessage = $('.no-schemas-message');
 
             if ($schemasContainer.find('.schema-item').length > 0) {
-                $noSchemasMessage.addClass('rankflow-seo-hidden');
+                $noSchemasMessage.addClass('mpseo-hidden');
             } else {
-                $noSchemasMessage.removeClass('rankflow-seo-hidden');
+                $noSchemasMessage.removeClass('mpseo-hidden');
             }
         }
 
@@ -275,6 +280,15 @@
 
         // Initialize on page load
         updateNoSchemasMessage();
+
+        /* ===== Settings Title Separator Button Group ===== */
+        if ($('.mpseo-sep-buttons').length) {
+            $(document).on('click', '.mpseo-sep-btn', function() {
+                $('.mpseo-sep-btn').removeClass('selected');
+                $(this).addClass('selected');
+                $('#mpseo_title_separator').val($(this).data('value'));
+            });
+        }
 
     });
 })(jQuery);

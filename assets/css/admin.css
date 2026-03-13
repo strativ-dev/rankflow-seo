@@ -1,25 +1,25 @@
 /**
  * Admin styles
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/assets/css
+ * @package    MPSEO
+ * @subpackage MPSEO/assets/css
  */
 
 /* General Admin Styles */
-.rankflow-seo-admin {
+.mpseo-admin {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
 }
 
 
 /* Plugin Header */
-.rankflow-seo-header {
+.mpseo-header {
 	background: #fff;
 	border-bottom: 1px solid #ddd;
 	padding: 20px;
 	margin: 0 -20px 20px -20px;
 }
 
-.rankflow-seo-header h1 {
+.mpseo-header h1 {
 	font-size: 28px;
 	font-weight: 600;
 	color: #23282d;
@@ -234,8 +234,8 @@ input:checked + .toggle-slider:before {
 
 
 /* Redirect Tables */
-.rankflow-seo-redirects .wp-list-table,
-.rankflow-seo-404-monitor .wp-list-table {
+.mpseo-redirects .wp-list-table,
+.mpseo-404-monitor .wp-list-table {
     margin-top: 20px;
 }
 
@@ -374,4 +374,171 @@ input:checked + .toggle-slider:before {
 .remove-category-btn .dashicons,
 .remove-service-btn .dashicons {
     vertical-align: middle;
+}
+
+/* ===== Dashboard SEO Modules ===== */
+.mpseo-modules-section {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 24px;
+    margin: 20px 0;
+}
+
+.mpseo-modules-section > h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: #1d2327;
+}
+
+.mpseo-modules-section .mpseo-modules-desc {
+    color: #646970;
+    font-size: 13px;
+    margin: 0 0 24px 0;
+}
+
+.mpseo-modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.mpseo-module-card {
+    border: 1px solid #ddd;
+    border-left: 4px solid #4caf50;
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+.mpseo-module-card.module-inactive {
+    border-left-color: #c3c4c7;
+}
+
+.mpseo-module-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.mpseo-module-icon {
+    width: 44px;
+    height: 44px;
+    background: #e05a1e;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mpseo-module-icon .dashicons {
+    color: #fff;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    line-height: 1;
+}
+
+/* Green toggle for module cards */
+.mpseo-module-card .toggle-switch input:checked + .toggle-slider {
+    background-color: #4caf50;
+}
+
+.mpseo-module-active-icon {
+    width: 26px;
+    height: 26px;
+    background: #4caf50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.mpseo-module-active-icon .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    line-height: 1;
+    color: #fff;
+}
+
+.mpseo-module-inactive-icon {
+    width: 26px;
+    height: 26px;
+    background: #c3c4c7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.mpseo-module-inactive-icon .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    line-height: 1;
+    color: #fff;
+}
+
+.mpseo-module-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+    color: #1d2327;
+}
+
+.mpseo-module-desc {
+    font-size: 13px;
+    color: #646970;
+    margin: 0 0 14px 0;
+    line-height: 1.5;
+}
+
+.mpseo-module-status {
+    background: #f7f7f7;
+    border: 1px solid #e2e4e7;
+    border-radius: 4px;
+    padding: 7px 12px;
+    font-size: 13px;
+    color: #1d2327;
+    margin-bottom: 14px;
+}
+
+.mpseo-module-status strong {
+    font-weight: 600;
+}
+
+.mpseo-module-link {
+    color: #2271b1;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: auto;
+}
+
+.mpseo-module-link:hover {
+    color: #135e96;
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 1200px) {
+    .mpseo-modules-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .mpseo-modules-grid {
+        grid-template-columns: 1fr;
+    }
 }

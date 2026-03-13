@@ -2,7 +2,7 @@
 /**
  * Fired when the plugin is uninstalled.
  *
- * @package    RankFlow_SEO
+ * @package    MPSEO
  * @author     Strativ AB
  */
 
@@ -16,53 +16,53 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
  *
  * @since 1.0.0
  */
-function rankflow_seo_delete_options()
+function mpseo_delete_options()
 {
 	$options = array(
-		'rankflow_seo_api_provider',
-		'rankflow_seo_api_key',
-		'rankflow_seo_auto_generate',
-		'rankflow_seo_enable_content_analysis',
-		'rankflow_seo_enable_seo_score',
-		'rankflow_seo_enable_schema',
-		'rankflow_seo_focus_keyword',
-		'rankflow_seo_readability_analysis',
-		'rankflow_seo_og_tags',
-		'rankflow_seo_twitter_cards',
-		'rankflow_seo_post_types',
-		'rankflow_seo_title_separator',
-		'rankflow_seo_homepage_title',
-		'rankflow_seo_homepage_description',
-		'rankflow_seo_404_monitoring',
-		'rankflow_seo_404_retention',
-		'rankflow_seo_db_version',
+		'mpseo_api_provider',
+		'mpseo_api_key',
+		'mpseo_auto_generate',
+		'mpseo_enable_content_analysis',
+		'mpseo_enable_seo_score',
+		'mpseo_enable_schema',
+		'mpseo_focus_keyword',
+		'mpseo_readability_analysis',
+		'mpseo_og_tags',
+		'mpseo_twitter_cards',
+		'mpseo_post_types',
+		'mpseo_title_separator',
+		'mpseo_homepage_title',
+		'mpseo_homepage_description',
+		'mpseo_404_monitoring',
+		'mpseo_404_retention',
+		'mpseo_db_version',
 		// Sitemap options.
-		'rankflow_seo_sitemap_enabled',
-		'rankflow_seo_sitemap_entries_per_page',
-		'rankflow_seo_sitemap_include_images',
-		'rankflow_seo_sitemap_include_taxonomies',
-		'rankflow_seo_sitemap_include_authors',
-		'rankflow_seo_sitemap_ping_search_engines',
-		'rankflow_seo_sitemap_post_types',
-		'rankflow_seo_sitemap_taxonomies',
+		'mpseo_sitemap_enabled',
+		'mpseo_sitemap_entries_per_page',
+		'mpseo_sitemap_include_images',
+		'mpseo_sitemap_include_taxonomies',
+		'mpseo_sitemap_include_authors',
+		'mpseo_sitemap_ping_search_engines',
+		'mpseo_sitemap_post_types',
+		'mpseo_sitemap_taxonomies',
 		// Site connections options.
-		'rankflow_seo_ahrefs_verification',
-		'rankflow_seo_baidu_verification',
-		'rankflow_seo_bing_verification',
-		'rankflow_seo_google_verification',
-		'rankflow_seo_pinterest_verification',
-		'rankflow_seo_yandex_verification',
+		'mpseo_ahrefs_verification',
+		'mpseo_baidu_verification',
+		'mpseo_bing_verification',
+		'mpseo_google_verification',
+		'mpseo_pinterest_verification',
+		'mpseo_yandex_verification',
 		// Robots.txt options.
-		'rankflow_seo_robots_enabled',
-		'rankflow_seo_robots_custom_rules',
-		'rankflow_seo_robots_include_sitemap',
-		'rankflow_seo_robots_block_ai',
-		'rankflow_seo_robots_block_bad_bots',
-		'rankflow_seo_robots_disallow_wp_admin',
-		'rankflow_seo_robots_disallow_wp_includes',
-		'rankflow_seo_robots_allow_ajax',
-		'rankflow_seo_robots_disallow_search',
-		'rankflow_seo_robots_sitemap_urls',
+		'mpseo_robots_enabled',
+		'mpseo_robots_custom_rules',
+		'mpseo_robots_include_sitemap',
+		'mpseo_robots_block_ai',
+		'mpseo_robots_block_bad_bots',
+		'mpseo_robots_disallow_wp_admin',
+		'mpseo_robots_disallow_wp_includes',
+		'mpseo_robots_allow_ajax',
+		'mpseo_robots_disallow_search',
+		'mpseo_robots_sitemap_urls',
 	);
 
 	foreach ($options as $option) {
@@ -78,24 +78,24 @@ function rankflow_seo_delete_options()
  *
  * @since 1.0.0
  */
-function rankflow_seo_delete_post_meta()
+function mpseo_delete_post_meta()
 {
 	global $wpdb;
 
 	$meta_keys = array(
-		'_rankflow_seo_title',
-		'_rankflow_seo_description',
-		'_rankflow_seo_keywords',
-		'_rankflow_seo_focus_keyword',
-		'_rankflow_seo_og_title',
-		'_rankflow_seo_og_description',
-		'_rankflow_seo_twitter_title',
-		'_rankflow_seo_twitter_description',
-		'_rankflow_seo_robots',
-		'_rankflow_seo_canonical',
-		'_rankflow_seo_score',
-		'_rankflow_seo_content_analysis',
-		'_rankflow_seo_auto_generate',
+		'_mpseo_title',
+		'_mpseo_description',
+		'_mpseo_keywords',
+		'_mpseo_focus_keyword',
+		'_mpseo_og_title',
+		'_mpseo_og_description',
+		'_mpseo_twitter_title',
+		'_mpseo_twitter_description',
+		'_mpseo_robots',
+		'_mpseo_canonical',
+		'_mpseo_score',
+		'_mpseo_content_analysis',
+		'_mpseo_auto_generate',
 	);
 
 	// Build placeholders for prepared statement.
@@ -119,14 +119,14 @@ function rankflow_seo_delete_post_meta()
  *
  * @since 1.0.0
  */
-function rankflow_seo_delete_tables()
+function mpseo_delete_tables()
 {
 	global $wpdb;
 
 	$tables = array(
-		$wpdb->prefix . 'rankflow_seo_analysis',
-		$wpdb->prefix . 'rankflow_seo_redirects',
-		$wpdb->prefix . 'rankflow_seo_404_logs',
+		$wpdb->prefix . 'mpseo_analysis',
+		$wpdb->prefix . 'mpseo_redirects',
+		$wpdb->prefix . 'mpseo_404_logs',
 	);
 
 	foreach ($tables as $table) {
@@ -140,7 +140,7 @@ function rankflow_seo_delete_tables()
  *
  * @since 1.0.0
  */
-function rankflow_seo_delete_transients()
+function mpseo_delete_transients()
 {
 	global $wpdb;
 
@@ -151,17 +151,17 @@ function rankflow_seo_delete_transients()
 			"DELETE FROM {$wpdb->options} 
 			WHERE option_name LIKE %s 
 			OR option_name LIKE %s",
-			'%\_transient\_rankflow\_seo\_%',
-			'%\_transient\_timeout\_rankflow\_seo\_%'
+			'%\_transient\_mpseo\_%',
+			'%\_transient\_timeout\_mpseo\_%'
 		)
 	);
 }
 
 // Run uninstall cleanup.
-rankflow_seo_delete_options();
-rankflow_seo_delete_post_meta();
-rankflow_seo_delete_tables();
-rankflow_seo_delete_transients();
+mpseo_delete_options();
+mpseo_delete_post_meta();
+mpseo_delete_tables();
+mpseo_delete_transients();
 
 // Clear any cached data.
 wp_cache_flush();

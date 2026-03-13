@@ -2,11 +2,11 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/admin
+ * @package    MPSEO
+ * @subpackage MPSEO/admin
  * @author     Strativ AB
  */
-class RankFlow_SEO_Admin
+class MPSEO_Admin
 {
 
 	/**
@@ -46,12 +46,12 @@ class RankFlow_SEO_Admin
 		// Load on all post edit screens and plugin settings page.
 		if (
 			in_array($hook, array('post.php', 'post-new.php'), true) ||
-			strpos($hook, 'rankflow-seo') !== false
+			strpos($hook, 'metapilot-smart-seo') !== false
 		) {
 
 			wp_enqueue_style(
 				$this->plugin_name . '-admin',
-				RANKFLOW_SEO_PLUGIN_URL . 'assets/css/admin.css',
+				MPSEO_PLUGIN_URL . 'assets/css/admin.css',
 				array(),
 				$this->version,
 				'all'
@@ -59,8 +59,16 @@ class RankFlow_SEO_Admin
 
 			wp_enqueue_style(
 				$this->plugin_name . '-metabox',
-				RANKFLOW_SEO_PLUGIN_URL . 'assets/css/metabox.css',
+				MPSEO_PLUGIN_URL . 'assets/css/metabox.css',
 				array(),
+				$this->version,
+				'all'
+			);
+
+			wp_enqueue_style(
+				$this->plugin_name . '-settings',
+				MPSEO_PLUGIN_URL . 'assets/css/settings.css',
+				array($this->plugin_name . '-admin'),
 				$this->version,
 				'all'
 			);
@@ -68,7 +76,7 @@ class RankFlow_SEO_Admin
 			// Admin views styles - consolidated from inline styles.
 			wp_enqueue_style(
 				$this->plugin_name . '-admin-views',
-				RANKFLOW_SEO_PLUGIN_URL . 'assets/css/admin-views.css',
+				MPSEO_PLUGIN_URL . 'assets/css/admin-views.css',
 				array($this->plugin_name . '-admin'),
 				$this->version,
 				'all'
@@ -88,7 +96,7 @@ class RankFlow_SEO_Admin
 
 			wp_enqueue_script(
 				$this->plugin_name . '-character-counter',
-				RANKFLOW_SEO_PLUGIN_URL . 'assets/js/character-counter.js',
+				MPSEO_PLUGIN_URL . 'assets/js/character-counter.js',
 				array('jquery'),
 				$this->version,
 				true
@@ -96,7 +104,7 @@ class RankFlow_SEO_Admin
 
 			wp_enqueue_script(
 				$this->plugin_name . '-metabox',
-				RANKFLOW_SEO_PLUGIN_URL . 'assets/js/metabox.js',
+				MPSEO_PLUGIN_URL . 'assets/js/metabox.js',
 				array('jquery', $this->plugin_name . '-character-counter'),
 				$this->version,
 				true
@@ -104,7 +112,7 @@ class RankFlow_SEO_Admin
 
 			wp_enqueue_script(
 				$this->plugin_name . '-admin',
-				RANKFLOW_SEO_PLUGIN_URL . 'assets/js/admin.js',
+				MPSEO_PLUGIN_URL . 'assets/js/admin.js',
 				array('jquery', 'wp-util'),
 				$this->version,
 				true
@@ -114,27 +122,27 @@ class RankFlow_SEO_Admin
 			$post_id = get_the_ID();
 			wp_localize_script(
 				$this->plugin_name . '-metabox',
-				'rankflowSeoData',
+				'mpseoData',
 				array(
 					'ajaxUrl' => admin_url('admin-ajax.php'),
-					'nonce' => wp_create_nonce('rankflow_seo_nonce'),
+					'nonce' => wp_create_nonce('mpseo_nonce'),
 					'postId' => $post_id ? $post_id : 0,
 					'strings' => array(
-						'generating' => __('Generating...', 'rankflow-seo'),
-						'analyzing' => __('Analyzing content...', 'rankflow-seo'),
-						'success' => __('Successfully generated!', 'rankflow-seo'),
-						'error' => __('An error occurred. Please try again.', 'rankflow-seo'),
-						'noContent' => __('Please add content first.', 'rankflow-seo'),
-						'confirmRegenerate' => __('This will replace existing meta tags. Continue?', 'rankflow-seo'),
+						'generating' => __('Generating...', 'metapilot-smart-seo'),
+						'analyzing' => __('Analyzing content...', 'metapilot-smart-seo'),
+						'success' => __('Successfully generated!', 'metapilot-smart-seo'),
+						'error' => __('An error occurred. Please try again.', 'metapilot-smart-seo'),
+						'noContent' => __('Please add content first.', 'metapilot-smart-seo'),
+						'confirmRegenerate' => __('This will replace existing meta tags. Continue?', 'metapilot-smart-seo'),
 					),
 				)
 			);
 		}
 
-		if (strpos($hook, 'rankflow-seo') !== false) {
+		if (strpos($hook, 'metapilot-smart-seo') !== false) {
 			wp_enqueue_script(
 				$this->plugin_name . '-settings',
-				RANKFLOW_SEO_PLUGIN_URL . 'assets/js/settings.js',
+				MPSEO_PLUGIN_URL . 'assets/js/settings.js',
 				array('jquery'),
 				$this->version,
 				true
@@ -143,10 +151,10 @@ class RankFlow_SEO_Admin
 			// Localize for settings page too.
 			wp_localize_script(
 				$this->plugin_name . '-settings',
-				'rankflowSeoData',
+				'mpseoData',
 				array(
 					'ajaxUrl' => admin_url('admin-ajax.php'),
-					'nonce' => wp_create_nonce('rankflow_seo_nonce'),
+					'nonce' => wp_create_nonce('mpseo_nonce'),
 				)
 			);
 		}
@@ -155,11 +163,11 @@ class RankFlow_SEO_Admin
 		// Load on all post edit screens and plugin settings pages.
 		if (
 			in_array($hook, array('post.php', 'post-new.php'), true) ||
-			strpos($hook, 'rankflow-seo') !== false
+			strpos($hook, 'metapilot-smart-seo') !== false
 		) {
 			wp_enqueue_script(
 				$this->plugin_name . '-admin-views',
-				RANKFLOW_SEO_PLUGIN_URL . 'assets/js/admin-views.js',
+				MPSEO_PLUGIN_URL . 'assets/js/admin-views.js',
 				array('jquery'),
 				$this->version,
 				true
@@ -168,21 +176,21 @@ class RankFlow_SEO_Admin
 			// Localize for admin-views.js
 			wp_localize_script(
 				$this->plugin_name . '-admin-views',
-				'rankflowSeoViewsData',
+				'mpseoViewsData',
 				array(
 					'ajaxUrl' => admin_url('admin-ajax.php'),
-					'nonce' => wp_create_nonce('rankflow_seo_nonce'),
+					'nonce' => wp_create_nonce('mpseo_nonce'),
 					'strings' => array(
-						'selectOgImage' => __('Select Open Graph Image', 'rankflow-seo'),
-						'selectDefaultOgImage' => __('Select Default OG Image', 'rankflow-seo'),
-						'useThisImage' => __('Use this image', 'rankflow-seo'),
-						'removeImage' => __('Remove image', 'rankflow-seo'),
-						'noImage' => __('No image', 'rankflow-seo'),
-						'copied' => __('Copied!', 'rankflow-seo'),
-						'copyToClipboard' => __('Copy to Clipboard', 'rankflow-seo'),
-						'pinging' => __('Pinging...', 'rankflow-seo'),
-						'pingSitemap' => __('Ping Search Engines', 'rankflow-seo'),
-						'pingSuccess' => __('Sitemap pinged successfully!', 'rankflow-seo'),
+						'selectOgImage' => __('Select Open Graph Image', 'metapilot-smart-seo'),
+						'selectDefaultOgImage' => __('Select Default OG Image', 'metapilot-smart-seo'),
+						'useThisImage' => __('Use this image', 'metapilot-smart-seo'),
+						'removeImage' => __('Remove image', 'metapilot-smart-seo'),
+						'noImage' => __('No image', 'metapilot-smart-seo'),
+						'copied' => __('Copied!', 'metapilot-smart-seo'),
+						'copyToClipboard' => __('Copy to Clipboard', 'metapilot-smart-seo'),
+						'pinging' => __('Pinging...', 'metapilot-smart-seo'),
+						'pingSitemap' => __('Ping Search Engines', 'metapilot-smart-seo'),
+						'pingSuccess' => __('Sitemap pinged successfully!', 'metapilot-smart-seo'),
 					),
 				)
 			);
@@ -202,8 +210,8 @@ class RankFlow_SEO_Admin
 	{
 		$settings_link = sprintf(
 			'<a href="%s">%s</a>',
-			admin_url('admin.php?page=rankflow-seo'),
-			__('Settings', 'rankflow-seo')
+			admin_url('admin.php?page=metapilot-smart-seo'),
+			__('Settings', 'metapilot-smart-seo')
 		);
 
 		array_unshift($links, $settings_link);
@@ -217,28 +225,28 @@ class RankFlow_SEO_Admin
 	public function show_admin_notices()
 	{
 		// Check if API key is configured.
-		$api_key = get_option('rankflow_seo_api_key');
+		$api_key = get_option('mpseo_api_key');
 
 		if (empty($api_key) && current_user_can('manage_options')) {
 			$this->render_notice(
 				sprintf(
 					/* translators: %s: URL to the API settings page */
-					__('RankFlow SEO requires an API key to function. <a href="%s">Configure it now</a>.', 'rankflow-seo'),
-					admin_url('admin.php?page=rankflow-seo&tab=api')
+					__('Metapilot Smart SEO requires an API key to function. <a href="%s">Configure it now</a>.', 'metapilot-smart-seo'),
+					admin_url('admin.php?page=metapilot-smart-seo&tab=api')
 				),
 				'warning'
 			);
 		}
 
 		// Show activation notice.
-		if (get_transient('rankflow_seo_activation_redirect')) {
-			delete_transient('rankflow_seo_activation_redirect');
+		if (get_transient('mpseo_activation_redirect')) {
+			delete_transient('mpseo_activation_redirect');
 
 			$this->render_notice(
 				sprintf(
 					/* translators: %s: URL to the plugin settings page */
-					__('Thank you for installing RankFlow SEO! <a href="%s">Get started</a> by configuring your settings.', 'rankflow-seo'),
-					admin_url('admin.php?page=rankflow-seo')
+					__('Thank you for installing Metapilot Smart SEO! <a href="%s">Get started</a> by configuring your settings.', 'metapilot-smart-seo'),
+					admin_url('admin.php?page=metapilot-smart-seo')
 				),
 				'success',
 				true
@@ -294,7 +302,7 @@ class RankFlow_SEO_Admin
 			$this->render_notice(
 				sprintf(
 					/* translators: %s: comma-separated list of conflicting plugin names */
-					__('RankFlow SEO has detected conflicting SEO plugins: %s. For best results, please deactivate them.', 'rankflow-seo'),
+					__('Metapilot Smart SEO has detected conflicting SEO plugins: %s. For best results, please deactivate them.', 'metapilot-smart-seo'),
 					implode(', ', $conflicts)
 				),
 				'warning',

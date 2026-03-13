@@ -1,5 +1,5 @@
 /**
- * RankFlow SEO Schema Admin JavaScript
+ * Metapilot Smart SEO Schema Admin JavaScript
  *
  * Handles dynamic schema form functionality
  */
@@ -12,7 +12,7 @@
         schemaTypes: {},
 
         init: function () {
-            this.schemaTypes = rankflowSeoSchema.schemaTypes || {};
+            this.schemaTypes = mpseoSchema.schemaTypes || {};
             this.schemaIndex = $('.schema-item').length;
 
             this.bindEvents();
@@ -31,7 +31,7 @@
             // Delete schema
             $(document).on('click', '.schema-delete', function (e) {
                 e.stopPropagation();
-                if (confirm(rankflowSeoSchema.confirmDelete)) {
+                if (confirm(mpseoSchema.confirmDelete)) {
                     self.deleteSchema($(this).closest('.schema-item'));
                 }
             });
@@ -255,7 +255,7 @@
                 if (!fields.hasOwnProperty(fieldKey)) continue;
 
                 var field = fields[fieldKey];
-                var fieldName = 'rankflow_seo_schemas[' + index + '][data][' + fieldKey + ']';
+                var fieldName = 'mpseo_schemas[' + index + '][data][' + fieldKey + ']';
                 var fieldId = 'schema_' + index + '_' + fieldKey;
 
                 html += '<div class="schema-field">';
@@ -293,7 +293,7 @@
                 case 'image':
                     html = '<div class="image-field-wrapper">';
                     html += '<input type="url" id="' + id + '" name="' + name + '" class="widefat image-url-input" placeholder="' + placeholder + '">';
-                    html += '<button type="button" class="button select-image">' + rankflowSeoSchema.selectImage + '</button>';
+                    html += '<button type="button" class="button select-image">' + mpseoSchema.selectImage + '</button>';
                     html += '</div>';
                     break;
 
@@ -345,9 +345,9 @@
             var $input = $button.siblings('.image-url-input');
 
             var mediaUploader = wp.media({
-                title: rankflowSeoSchema.selectImage,
+                title: mpseoSchema.selectImage,
                 button: {
-                    text: rankflowSeoSchema.useImage
+                    text: mpseoSchema.useImage
                 },
                 multiple: false
             });
@@ -504,7 +504,7 @@
                 $item.find('[name]').each(function () {
                     var name = $(this).attr('name');
                     if (name) {
-                        name = name.replace(/rankflow_seo_schemas\[\d+\]/, 'rankflow_seo_schemas[' + newIndex + ']');
+                        name = name.replace(/mpseo_schemas\[\d+\]/, 'mpseo_schemas[' + newIndex + ']');
                         $(this).attr('name', name);
                     }
                 });

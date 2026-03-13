@@ -2,8 +2,8 @@
 /**
  * Readability analyzer.
  *
- * @package    RankFlow_SEO
- * @subpackage RankFlow_SEO/includes/core
+ * @package    MPSEO
+ * @subpackage MPSEO/includes/core
  * @author     Strativ AB
  */
 
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-class RankFlow_SEO_Readability
+class MPSEO_Readability
 {
 
 	/**
@@ -250,19 +250,19 @@ class RankFlow_SEO_Readability
 	private function get_grade_level($score)
 	{
 		if ($score >= 90) {
-			return __('5th grade (Very Easy)', 'rankflow-seo');
+			return __('5th grade (Very Easy)', 'metapilot-smart-seo');
 		} elseif ($score >= 80) {
-			return __('6th grade (Easy)', 'rankflow-seo');
+			return __('6th grade (Easy)', 'metapilot-smart-seo');
 		} elseif ($score >= 70) {
-			return __('7th grade (Fairly Easy)', 'rankflow-seo');
+			return __('7th grade (Fairly Easy)', 'metapilot-smart-seo');
 		} elseif ($score >= 60) {
-			return __('8th-9th grade (Standard)', 'rankflow-seo');
+			return __('8th-9th grade (Standard)', 'metapilot-smart-seo');
 		} elseif ($score >= 50) {
-			return __('10th-12th grade (Fairly Difficult)', 'rankflow-seo');
+			return __('10th-12th grade (Fairly Difficult)', 'metapilot-smart-seo');
 		} elseif ($score >= 30) {
-			return __('College (Difficult)', 'rankflow-seo');
+			return __('College (Difficult)', 'metapilot-smart-seo');
 		} else {
-			return __('College Graduate (Very Difficult)', 'rankflow-seo');
+			return __('College Graduate (Very Difficult)', 'metapilot-smart-seo');
 		}
 	}
 
@@ -286,7 +286,7 @@ class RankFlow_SEO_Readability
 				'type' => 'warning',
 				'message' => sprintf(
 					/* translators: %s: readability score number */
-					esc_html__('Readability score is %s. Consider using shorter sentences and simpler words.', 'rankflow-seo'),
+					esc_html__('Readability score is %s. Consider using shorter sentences and simpler words.', 'metapilot-smart-seo'),
 					$score
 				),
 			);
@@ -299,7 +299,7 @@ class RankFlow_SEO_Readability
 				'type' => 'warning',
 				'message' => sprintf(
 					/* translators: %s: average sentence length number */
-					esc_html__('Average sentence length is %s words. Try to use shorter sentences (under 20 words).', 'rankflow-seo'),
+					esc_html__('Average sentence length is %s words. Try to use shorter sentences (under 20 words).', 'metapilot-smart-seo'),
 					$sentence_length
 				),
 			);
@@ -311,7 +311,7 @@ class RankFlow_SEO_Readability
 				'type' => 'info',
 				'message' => sprintf(
 					/* translators: %d: number of long sentences */
-					esc_html__('%d sentences are very long. Consider breaking them up.', 'rankflow-seo'),
+					esc_html__('%d sentences are very long. Consider breaking them up.', 'metapilot-smart-seo'),
 					$analysis['long_sentences']
 				),
 			);
@@ -321,7 +321,7 @@ class RankFlow_SEO_Readability
 		if ($analysis['transition_words'] < 2) {
 			$recommendations[] = array(
 				'type' => 'info',
-				'message' => __('Use more transition words to improve flow (however, therefore, furthermore, etc.).', 'rankflow-seo'),
+				'message' => __('Use more transition words to improve flow (however, therefore, furthermore, etc.).', 'metapilot-smart-seo'),
 			);
 		}
 
