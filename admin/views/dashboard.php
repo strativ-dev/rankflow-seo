@@ -186,7 +186,7 @@ $mpseo_404_count = (int) $wpdb->get_var(
 						<div class="mpseo-module-status">
 							<?php
 							/* translators: %d: number of active redirects */
-							printf( esc_html__( 'Active redirects: %d', 'metapilot-smart-seo' ), $mpseo_redirect_count );
+							printf( esc_html__( 'Active redirects: %d', 'metapilot-smart-seo' ), (int) $mpseo_redirect_count );
 							?>
 						</div>
 						<a href="<?php echo esc_url( admin_url( 'admin.php?page=metapilot-smart-seo-redirects' ) ); ?>" class="mpseo-module-link"><?php esc_html_e( 'Settings', 'metapilot-smart-seo' ); ?> &rsaquo;</a>
@@ -203,7 +203,7 @@ $mpseo_404_count = (int) $wpdb->get_var(
 						<div class="mpseo-module-status">
 							<?php
 							/* translators: %d: number of 404 errors in last 7 days */
-							printf( esc_html__( 'Errors (7 days): %d', 'metapilot-smart-seo' ), $mpseo_404_count );
+							printf( esc_html__( 'Errors (7 days): %d', 'metapilot-smart-seo' ), (int) $mpseo_404_count );
 							?>
 						</div>
 						<a href="<?php echo esc_url( admin_url( 'admin.php?page=metapilot-smart-seo-404-monitor' ) ); ?>" class="mpseo-module-link"><?php esc_html_e( 'Settings', 'metapilot-smart-seo' ); ?> &rsaquo;</a>
